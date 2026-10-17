@@ -38,12 +38,12 @@ const items = [
 const before = structuredClone(items);
 const summary = summarizeTrip(items);
 assert.deepEqual({ total: summary.total, plannedDays: summary.plannedDays, unplanned: summary.unplanned }, { total: 9, plannedDays: 2, unplanned: 5 });
-assert.ok(summary.categories.some(group => group.label === '2 restaurants'));
-assert.ok(summary.categories.some(group => group.label === '2 museums'));
-assert.ok(summary.categories.some(group => group.label === '1 park'));
+assert.ok(summary.categories.some(group => group.label === '3 restaurants and cafes'));
+assert.ok(summary.categories.some(group => group.label === '2 museums and cultural places'));
+assert.ok(summary.categories.some(group => group.label === '1 park or nature spot'));
 assert.ok(summary.categories.some(group => group.label === '1 beach'));
 assert.ok(summary.categories.some(group => group.label === '1 sight'));
-assert.ok(summary.categories.some(group => group.label === '1 place · cafe'));
+assert.ok(summary.categories.some(group => group.label === '1 other place'));
 assert.equal(summary.categories.reduce((sum, group) => sum + group.count, 0), items.length);
 assert.deepEqual(items, before, 'Summary must not change loaded items');
 const moved = items.map(item => item.id === 'e' ? { ...item, day: 2 } : item);
@@ -51,7 +51,7 @@ assert.equal(summarizeTrip(moved).plannedDays, 3);
 assert.equal(summarizeTrip(moved).unplanned, 4);
 const removed = items.filter(item => item.id !== 'a');
 assert.equal(summarizeTrip(removed).total, 8);
-assert.ok(summarizeTrip(removed).categories.some(group => group.label === '1 restaurant'));
+assert.ok(summarizeTrip(removed).categories.some(group => group.label === '2 restaurants and cafes'));
 const cleared = items.map(item => ({ ...item, day: null }));
 assert.equal(summarizeTrip(cleared).plannedDays, 0);
 assert.equal(summarizeTrip(cleared).unplanned, 9);
@@ -63,10 +63,10 @@ assert.match(html, /Trip summary/);
 assert.match(html, /Total places/);
 assert.match(html, /Days planned/);
 assert.match(html, /Unplanned places/);
-assert.match(html, /2 restaurants/);
+assert.match(html, /3 restaurants and cafes/);
 assert.match(html, /lucide-utensils/);
 assert.match(html, /lucide-tree-pine/);
-for (const style of Object.values(categoryStyles)) {
+for (const style of summary.categories.map(group => getCategoryStyle(group.category))) {
   assert.ok(html.includes(`color:${style.color}`));
   assert.ok(html.includes(`background-color:${style.backgroundColor}`));
 }

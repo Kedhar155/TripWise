@@ -2,7 +2,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Compass } from "lucide-react";
-import { categories, type Category, type Place } from "@/lib/types";
+import type { Place } from "@/lib/types";
+import type { Category } from "@/lib/categories";
+import { CategoryFilter } from "./category-filter";
 import { message, request } from "@/lib/client-api";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { Feedback } from "./feedback";
@@ -15,7 +17,8 @@ type Results = { places: Place[]; city: { name: string } };
 export function Explore() {
   const [draft, setDraft] = useState("");
   const [city, setCity] = useState("");
-  const [category, setCategory] = useState<Category>("all");
+  const [selected, setSelected] = useState<Category[]>([]);
+  const category = selected.length ? selected.join(",") : "all";
   const [sort, setSort] = useState("distance");
   const [results, setResults] = useState<Results | null>(null);
   const [loading, setLoading] = useState(false);
@@ -53,7 +56,7 @@ export function Explore() {
       </div>
     </section>
     <div className="mt-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2"><div><label htmlFor="category" className="mb-2 block text-sm font-semibold">Category</label><select id="category" className="field w-full" value={category} onChange={e => { if (city) begin(); setCategory(e.target.value as Category); }}>{Object.entries(categories).map(([value,label]) => <option key={value} value={value}>{label}</option>)}</select></div><div><label htmlFor="sort" className="mb-2 block text-sm font-semibold">Sort by</label><select id="sort" className="field w-full" value={sort} onChange={e => { if (city) begin(); setSort(e.target.value); }}><option value="distance">Distance from city center</option><option value="name">Name (A–Z)</option></select></div></div>
+      <div className="grid gap-4 sm:grid-cols-2"><CategoryFilter selected={selected} onChange={value => { if (value.join(",") === selected.join(",")) return; if (city) begin(); setSelected(value); }}/><div><label htmlFor="sort" className="mb-2 block text-sm font-semibold">Sort by</label><select id="sort" className="field w-full" value={sort} onChange={e => { if (city) begin(); setSort(e.target.value); }}><option value="distance">Distance from city center</option><option value="name">Name (A–Z)</option></select></div></div>
     </div>
     <section aria-label="Search results" aria-busy={loading} className="mt-8">
       {loading && <PlaceSkeletons />}

@@ -1,0 +1,900 @@
+{
+  "sampledAt": "2026-10-17T14:55:37.274Z",
+  "samples": [
+    {
+      "city": "Chennai",
+      "requested": "tourism,catering.restaurant,catering.cafe,leisure.park,entertainment.museum",
+      "count": 100,
+      "categories": {
+        "tourism": 20,
+        "tourism.attraction": 19,
+        "tourism.attraction.artwork": 18,
+        "tourism.attraction.artwork.statue": 18,
+        "catering": 66,
+        "catering.restaurant": 47,
+        "leisure": 14,
+        "leisure.park": 14,
+        "tourism.sights": 1,
+        "tourism.sights.square": 1,
+        "catering.cafe": 19,
+        "catering.cafe.coffee": 4,
+        "catering.cafe.coffee_shop": 4,
+        "vegetarian": 6,
+        "catering.restaurant.indian": 2,
+        "catering.restaurant.regional": 2,
+        "commercial": 2,
+        "commercial.food_and_drink": 2,
+        "commercial.food_and_drink.confectionery": 2,
+        "vegetarian.only": 4,
+        "tourism.attraction.viewpoint": 1,
+        "building": 3,
+        "building.catering": 3,
+        "wheelchair": 2,
+        "wheelchair.yes": 1,
+        "wheelchair.limited": 1,
+        "internet_access": 1
+      },
+      "examples": [
+        {
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.statue"
+          ]
+        },
+        {
+          "name": "George Frederick Samuel Robinson, 1st Marquess of Ripon",
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.statue"
+          ]
+        },
+        {
+          "name": "Pitti Theagaraya Chetty",
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.statue"
+          ]
+        },
+        {
+          "name": "Andhra Bhavan",
+          "categories": [
+            "catering",
+            "catering.restaurant"
+          ]
+        },
+        {
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.statue"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Chennai",
+      "requested": "entertainment,commercial,accommodation,natural,beach",
+      "count": 100,
+      "categories": {
+        "accommodation": 100,
+        "accommodation.hotel": 70,
+        "internet_access": 6,
+        "internet_access.free": 2,
+        "accommodation.motel": 1,
+        "building": 43,
+        "building.accommodation": 43,
+        "accommodation.guest_house": 20,
+        "accommodation.apartment": 1,
+        "accommodation.hostel": 8,
+        "internet_access.for_customers": 1,
+        "wheelchair": 1,
+        "wheelchair.yes": 1
+      },
+      "examples": [
+        {
+          "name": "The Park Avenue Hotel",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "internet_access",
+            "internet_access.free"
+          ]
+        },
+        {
+          "name": "White Park",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel"
+          ]
+        },
+        {
+          "name": "MATHI RESIDENCY",
+          "categories": [
+            "accommodation",
+            "accommodation.motel",
+            "internet_access",
+            "internet_access.free"
+          ]
+        },
+        {
+          "name": "Grand Oliver",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel"
+          ]
+        },
+        {
+          "name": "Greens Suite",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Chennai",
+      "requested": "commercial",
+      "count": 100,
+      "categories": {
+        "commercial": 100,
+        "commercial.shopping_mall": 1,
+        "service": 7,
+        "service.beauty": 3,
+        "service.beauty.hairdresser": 2,
+        "commercial.tickets_and_lottery": 3,
+        "commercial.food_and_drink": 4,
+        "commercial.food_and_drink.drinks": 1,
+        "commercial.clothing": 8,
+        "commercial.clothing.clothes": 7,
+        "commercial.health_and_beauty": 2,
+        "commercial.health_and_beauty.cosmetics": 1,
+        "catering": 1,
+        "catering.restaurant": 1,
+        "catering.restaurant.regional": 1,
+        "commercial.food_and_drink.confectionery": 1,
+        "vegetarian": 1,
+        "vegetarian.only": 1,
+        "service.travel_agency": 2,
+        "building": 2,
+        "building.commercial": 2,
+        "commercial.books": 2,
+        "commercial.supermarket": 4,
+        "commercial.department_store": 4,
+        "commercial.food_and_drink.fruit_and_vegetable": 1,
+        "wheelchair": 2,
+        "wheelchair.yes": 2,
+        "commercial.convenience": 3,
+        "commercial.food_and_drink.seafood": 1,
+        "service.vehicle": 1,
+        "service.vehicle.repair": 1,
+        "service.vehicle.repair.motorcycle": 1,
+        "commercial.clothing.shoes": 1,
+        "commercial.elektronics": 6,
+        "service.cleaning": 1,
+        "service.cleaning.dry_cleaning": 1,
+        "commercial.jewelry": 49,
+        "commercial.houseware_and_hardware": 3,
+        "commercial.houseware_and_hardware.hardware_and_tools": 1,
+        "commercial.furniture_and_interior": 1,
+        "commercial.clothing.underwear": 1,
+        "commercial.bag": 2,
+        "commercial.wedding": 1,
+        "commercial.stationery": 1,
+        "commercial.hobby": 1,
+        "commercial.hobby.sewing_and_knitting": 1,
+        "service.beauty.spa": 1
+      },
+      "examples": [
+        {
+          "name": "Lily Pond Shopping Complex",
+          "categories": [
+            "commercial",
+            "commercial.shopping_mall"
+          ]
+        },
+        {
+          "name": "Royal Saloon",
+          "categories": [
+            "commercial",
+            "service",
+            "service.beauty",
+            "service.beauty.hairdresser"
+          ]
+        },
+        {
+          "name": "Chennai Central Reservation Centre",
+          "categories": [
+            "commercial",
+            "commercial.tickets_and_lottery"
+          ]
+        },
+        {
+          "name": "Water Vending Machine",
+          "categories": [
+            "commercial",
+            "commercial.food_and_drink",
+            "commercial.food_and_drink.drinks"
+          ]
+        },
+        {
+          "name": "Ramraj Cotton",
+          "categories": [
+            "commercial",
+            "commercial.clothing",
+            "commercial.clothing.clothes"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Paris",
+      "requested": "tourism,catering.restaurant,catering.cafe,leisure.park,entertainment.museum",
+      "count": 100,
+      "categories": {
+        "entertainment": 2,
+        "entertainment.museum": 2,
+        "fee": 3,
+        "tourism": 25,
+        "tourism.sights": 2,
+        "tourism.sights.archaeological_site": 1,
+        "man_made": 1,
+        "tourism.attraction": 24,
+        "tourism.sights.memorial": 1,
+        "tourism.sights.memorial.milestone": 1,
+        "wheelchair": 24,
+        "wheelchair.yes": 12,
+        "tourism.attraction.artwork": 20,
+        "tourism.attraction.artwork.statue": 3,
+        "tourism.attraction.artwork.sculpture": 2,
+        "tourism.attraction.artwork.mural": 1,
+        "no_access": 2,
+        "catering": 71,
+        "catering.cafe": 17,
+        "tourism.attraction.viewpoint": 1,
+        "catering.restaurant": 54,
+        "catering.restaurant.french": 5,
+        "catering.restaurant.pizza": 3,
+        "wheelchair.limited": 12,
+        "catering.restaurant.italian": 4,
+        "internet_access": 4,
+        "internet_access.free": 2,
+        "leisure": 3,
+        "leisure.park": 3,
+        "catering.restaurant.japanese": 1,
+        "catering.cafe.tea": 1,
+        "vegan": 1,
+        "vegetarian": 2,
+        "vegetarian.only": 1,
+        "catering.restaurant.turkish": 1,
+        "catering.restaurant.steak_house": 1,
+        "catering.restaurant.seafood": 2,
+        "catering.cafe.crepe": 1,
+        "catering.restaurant.greek": 4,
+        "heritage": 1,
+        "catering.restaurant.asian": 3,
+        "catering.restaurant.vietnamese": 1,
+        "catering.restaurant.mediterranean": 1,
+        "halal": 1
+      },
+      "examples": [
+        {
+          "name": "Crypte Archéologique du Parvis Notre-Dame",
+          "categories": [
+            "entertainment",
+            "entertainment.museum",
+            "fee",
+            "tourism",
+            "tourism.sights",
+            "tourism.sights.archaeological_site"
+          ]
+        },
+        {
+          "name": "Point zéro des Routes de France",
+          "categories": [
+            "man_made",
+            "tourism",
+            "tourism.attraction",
+            "tourism.sights",
+            "tourism.sights.memorial",
+            "tourism.sights.memorial.milestone",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        },
+        {
+          "name": "Notre-Dame de Paris",
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.statue"
+          ]
+        },
+        {
+          "name": "Charlemagne et ses leudes",
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.sculpture",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        },
+        {
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.mural"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Paris",
+      "requested": "entertainment,commercial,accommodation,natural,beach",
+      "count": 100,
+      "categories": {
+        "accommodation": 100,
+        "accommodation.hotel": 96,
+        "building": 47,
+        "building.accommodation": 47,
+        "building.residential": 18,
+        "wheelchair": 22,
+        "wheelchair.yes": 18,
+        "building.catering": 1,
+        "catering": 1,
+        "catering.bar": 1,
+        "wheelchair.limited": 4,
+        "internet_access": 11,
+        "internet_access.free": 6,
+        "accommodation.guest_house": 1,
+        "accommodation.hostel": 1,
+        "accommodation.apartment": 2,
+        "access_limited": 1,
+        "access_limited.private": 1,
+        "public_transport.subway.entrance": 1
+      },
+      "examples": [
+        {
+          "name": "Hôtel Esmerelda",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation"
+          ]
+        },
+        {
+          "name": "Hôtel Notre-Dame",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation",
+            "building.residential"
+          ]
+        },
+        {
+          "name": "Hôtel Les Rives de Notre-Dame",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation",
+            "building.residential"
+          ]
+        },
+        {
+          "name": "Melia Paris Notre Dame",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation"
+          ]
+        },
+        {
+          "name": "Henri IV rive gauche",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Paris",
+      "requested": "commercial",
+      "count": 100,
+      "categories": {
+        "commercial": 100,
+        "commercial.gift_and_souvenir": 51,
+        "wheelchair": 23,
+        "wheelchair.limited": 9,
+        "wheelchair.yes": 14,
+        "commercial.books": 8,
+        "commercial.tickets_and_lottery": 2,
+        "commercial.jewelry": 5,
+        "commercial.convenience": 4,
+        "commercial.outdoor_and_sport": 1,
+        "commercial.florist": 2,
+        "commercial.marketplace": 1,
+        "commercial.food_and_drink": 5,
+        "commercial.food_and_drink.confectionery": 1,
+        "commercial.hobby": 2,
+        "commercial.hobby.art": 2,
+        "commercial.food_and_drink.bakery": 3,
+        "commercial.food_and_drink.chocolate": 1,
+        "commercial.furniture_and_interior": 1,
+        "commercial.health_and_beauty": 4,
+        "commercial.health_and_beauty.cosmetics": 3,
+        "commercial.clothing": 2,
+        "commercial.clothing.clothes": 2,
+        "service": 5,
+        "service.beauty": 3,
+        "service.beauty.hairdresser": 2,
+        "commercial.toy_and_game": 1,
+        "service.travel_agency": 1,
+        "service.tailor": 1,
+        "service.beauty.spa": 1,
+        "commercial.smoking": 1
+      },
+      "examples": [
+        {
+          "name": "Galerie Notre Dame",
+          "categories": [
+            "commercial",
+            "commercial.gift_and_souvenir",
+            "wheelchair",
+            "wheelchair.limited"
+          ]
+        },
+        {
+          "name": "À Lutèce",
+          "categories": [
+            "commercial",
+            "commercial.gift_and_souvenir"
+          ]
+        },
+        {
+          "name": "Manal Souvenirs",
+          "categories": [
+            "commercial",
+            "commercial.gift_and_souvenir"
+          ]
+        },
+        {
+          "name": "Aux chimères de Notre-Dame",
+          "categories": [
+            "commercial",
+            "commercial.gift_and_souvenir"
+          ]
+        },
+        {
+          "name": "Notre-Dame Cadeaux",
+          "categories": [
+            "commercial",
+            "commercial.gift_and_souvenir",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Tokyo",
+      "requested": "tourism,catering.restaurant,catering.cafe,leisure.park,entertainment.museum",
+      "count": 100,
+      "categories": {
+        "catering": 90,
+        "catering.cafe": 26,
+        "catering.cafe.coffee": 12,
+        "catering.cafe.coffee_shop": 12,
+        "wheelchair": 38,
+        "wheelchair.yes": 34,
+        "tourism": 7,
+        "tourism.attraction": 7,
+        "catering.restaurant": 64,
+        "tourism.attraction.artwork": 2,
+        "tourism.attraction.artwork.statue": 1,
+        "entertainment": 3,
+        "entertainment.museum": 3,
+        "catering.restaurant.japanese": 12,
+        "catering.restaurant.ramen": 4,
+        "catering.restaurant.curry": 3,
+        "catering.restaurant.german": 1,
+        "catering.restaurant.sushi": 4,
+        "catering.restaurant.barbecue": 2,
+        "internet_access": 7,
+        "wheelchair.limited": 4,
+        "catering.restaurant.mexican": 3,
+        "catering.restaurant.italian": 2,
+        "catering.restaurant.chinese": 6,
+        "building": 2,
+        "building.public_and_civil": 1,
+        "building.tourism": 1,
+        "fee": 1,
+        "catering.restaurant.spanish": 1,
+        "catering.restaurant.friture": 3,
+        "vegan": 2,
+        "vegetarian": 1,
+        "catering.restaurant.noodle": 2,
+        "no_fee": 1,
+        "no_fee.no": 1,
+        "tourism.attraction.viewpoint": 3,
+        "tourism.attraction.artwork.sculpture": 1,
+        "catering.restaurant.french": 1,
+        "building.catering": 1,
+        "catering.cafe.ice_cream": 1,
+        "catering.ice_cream": 1,
+        "commercial": 1,
+        "commercial.food_and_drink": 1,
+        "commercial.food_and_drink.bakery": 1
+      },
+      "examples": [
+        {
+          "name": "Brooklyn Roasting Company Tokyo International Forum",
+          "categories": [
+            "catering",
+            "catering.cafe",
+            "catering.cafe.coffee",
+            "catering.cafe.coffee_shop",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        },
+        {
+          "name": "Tokyo International Forum",
+          "categories": [
+            "tourism",
+            "tourism.attraction"
+          ]
+        },
+        {
+          "name": "東天紅",
+          "categories": [
+            "catering",
+            "catering.restaurant"
+          ]
+        },
+        {
+          "name": "神戸屋ダイニング",
+          "categories": [
+            "catering",
+            "catering.cafe",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        },
+        {
+          "name": "太田道灌像",
+          "categories": [
+            "tourism",
+            "tourism.attraction",
+            "tourism.attraction.artwork",
+            "tourism.attraction.artwork.statue"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Tokyo",
+      "requested": "entertainment,commercial,accommodation,natural,beach",
+      "count": 100,
+      "categories": {
+        "accommodation": 100,
+        "accommodation.hotel": 96,
+        "building": 48,
+        "building.accommodation": 48,
+        "wheelchair": 34,
+        "wheelchair.yes": 33,
+        "wheelchair.limited": 1,
+        "internet_access": 26,
+        "internet_access.free": 9,
+        "internet_access.for_customers": 4,
+        "vegan": 1,
+        "accommodation.apartment": 3,
+        "building.commercial": 1,
+        "building.office": 1,
+        "accommodation.hostel": 1
+      },
+      "examples": [
+        {
+          "name": "パシフィックセンチュリープレイス丸の内",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        },
+        {
+          "name": "ザ・ペニンシュラ東京",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        },
+        {
+          "name": "Muji Hotel",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel"
+          ]
+        },
+        {
+          "name": "ザ・ゲートホテル東京 by HULIC",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel"
+          ]
+        },
+        {
+          "name": "東京ステーションホテル",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "wheelchair",
+            "wheelchair.yes"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Tokyo",
+      "requested": "commercial",
+      "count": 0,
+      "categories": {},
+      "examples": []
+    },
+    {
+      "city": "Dubai",
+      "requested": "tourism,catering.restaurant,catering.cafe,leisure.park,entertainment.museum",
+      "count": 100,
+      "categories": {
+        "catering": 54,
+        "catering.restaurant": 47,
+        "catering.restaurant.chinese": 3,
+        "catering.restaurant.indian": 14,
+        "internet_access": 3,
+        "catering.restaurant.arab": 1,
+        "catering.restaurant.pakistani": 1,
+        "building": 5,
+        "building.catering": 1,
+        "leisure": 2,
+        "leisure.park": 2,
+        "catering.cafe": 7,
+        "tourism": 32,
+        "tourism.attraction": 32,
+        "tourism.attraction.artwork": 25,
+        "tourism.attraction.artwork.sculpture": 17,
+        "access": 1,
+        "access.yes": 1,
+        "vegan": 2,
+        "vegetarian": 6,
+        "catering.restaurant.nepalese": 2,
+        "entertainment": 12,
+        "entertainment.museum": 12,
+        "fee": 6,
+        "wheelchair": 9,
+        "wheelchair.yes": 6,
+        "halal": 1,
+        "wheelchair.limited": 3,
+        "no_fee": 1,
+        "no_fee.no": 1,
+        "vegetarian.only": 2,
+        "building.tourism": 4,
+        "building.residential": 1,
+        "tourism.attraction.viewpoint": 2,
+        "catering.restaurant.african": 1,
+        "internet_access.free": 1,
+        "tourism.attraction.artwork.mural": 3
+      },
+      "examples": [
+        {
+          "name": "Kris bay",
+          "categories": [
+            "catering",
+            "catering.restaurant"
+          ]
+        },
+        {
+          "name": "Kris bay",
+          "categories": [
+            "catering",
+            "catering.restaurant"
+          ]
+        },
+        {
+          "name": "Ghantoot Star",
+          "categories": [
+            "catering",
+            "catering.restaurant",
+            "catering.restaurant.chinese",
+            "catering.restaurant.indian",
+            "internet_access"
+          ]
+        },
+        {
+          "name": "بيت الوكيل",
+          "categories": [
+            "catering",
+            "catering.restaurant",
+            "catering.restaurant.arab"
+          ]
+        },
+        {
+          "name": "مطعم كراتشي دبر",
+          "categories": [
+            "catering",
+            "catering.restaurant",
+            "catering.restaurant.pakistani"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Dubai",
+      "requested": "entertainment,commercial,accommodation,natural,beach",
+      "count": 100,
+      "categories": {
+        "accommodation": 100,
+        "accommodation.hotel": 88,
+        "building": 33,
+        "building.accommodation": 33,
+        "internet_access": 30,
+        "wheelchair": 22,
+        "wheelchair.limited": 20,
+        "accommodation.hostel": 4,
+        "internet_access.free": 2,
+        "accommodation.guest_house": 2,
+        "accommodation.apartment": 4,
+        "accommodation.motel": 2,
+        "internet_access.for_customers": 2,
+        "wheelchair.yes": 2
+      },
+      "examples": [
+        {
+          "name": "فندق أمباسادور",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation"
+          ]
+        },
+        {
+          "name": "The George Hotel",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "internet_access",
+            "wheelchair",
+            "wheelchair.limited"
+          ]
+        },
+        {
+          "name": "Astoria Hotel",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel",
+            "building",
+            "building.accommodation",
+            "internet_access"
+          ]
+        },
+        {
+          "name": "نزل بارجيل التراثي",
+          "categories": [
+            "accommodation",
+            "accommodation.hostel",
+            "building",
+            "building.accommodation"
+          ]
+        },
+        {
+          "name": "Hotel wescott",
+          "categories": [
+            "accommodation",
+            "accommodation.hotel"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Dubai",
+      "requested": "commercial",
+      "count": 100,
+      "categories": {
+        "commercial": 100,
+        "commercial.clothing": 13,
+        "commercial.clothing.clothes": 12,
+        "commercial.jewelry": 2,
+        "commercial.elektronics": 3,
+        "commercial.convenience": 10,
+        "wheelchair": 2,
+        "wheelchair.limited": 2,
+        "commercial.supermarket": 9,
+        "commercial.clothing.shoes": 1,
+        "commercial.department_store": 1,
+        "service": 5,
+        "service.travel_agency": 2,
+        "service.beauty": 1,
+        "service.beauty.hairdresser": 1,
+        "service.vehicle": 1,
+        "service.vehicle.repair": 1,
+        "service.vehicle.repair.car": 1,
+        "commercial.houseware_and_hardware": 1,
+        "commercial.hobby": 3,
+        "commercial.hobby.sewing_and_knitting": 3,
+        "service.cleaning": 1,
+        "service.cleaning.laundry": 1,
+        "commercial.food_and_drink": 4,
+        "commercial.food_and_drink.fruit_and_vegetable": 4,
+        "commercial.outdoor_and_sport": 3,
+        "commercial.outdoor_and_sport.fishing": 2,
+        "commercial.furniture_and_interior": 1
+      },
+      "examples": [
+        {
+          "name": "Accurate Edge",
+          "categories": [
+            "commercial",
+            "commercial.clothing",
+            "commercial.clothing.clothes"
+          ]
+        },
+        {
+          "name": "Silver Trading",
+          "categories": [
+            "commercial",
+            "commercial.jewelry"
+          ]
+        },
+        {
+          "name": "ClickTalk General Trading",
+          "categories": [
+            "commercial",
+            "commercial.elektronics"
+          ]
+        },
+        {
+          "name": "السوق القديم بر دبي",
+          "categories": [
+            "commercial",
+            "commercial.convenience",
+            "wheelchair",
+            "wheelchair.limited"
+          ]
+        },
+        {
+          "name": "Reyhan Grocery",
+          "categories": [
+            "commercial",
+            "commercial.supermarket"
+          ]
+        }
+      ]
+    }
+  ]
+}

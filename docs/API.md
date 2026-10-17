@@ -7,7 +7,9 @@ All responses are JSON and use `Cache-Control: no-store`. Credentials stay on th
 `GET /api/places?city=Chennai&category=museums&sort=distance`
 
 - `city`: required, 2–120 characters after trimming. Add country to disambiguate.
-- `category`: `all` (default), `attractions`, `restaurants`, `cafes`, `parks`, `museums`.
+- `category`: `all` (default), or one or more comma-separated main category IDs: `sights`, `museums`, `parks`, `restaurants`, `beaches`, `entertainment`, `shopping`, `accommodation`, `other`. Example: `category=museums,parks`. Repeated `category` parameters are also accepted. Empty/unknown entries and mixing `all` with specific categories return 400. Old `attractions` and `cafes` URLs remain accepted as aliases for `sights` and `restaurants`.
+- `src/lib/categories.ts` defines labels, icons, colors, Geoapify query prefixes, aliases, and classification priority. All tags on a place are considered; specialized groups take priority over broader groups. Unknown/missing tags become `other`. Category strings in responses are these main IDs. Existing saved raw category strings are mapped by the same catalog when displayed; no database migration is required.
+- The server requests only the selected groups' Geoapify prefixes, then removes overlapping results classified outside the selection (for example, museums from an Entertainment-only query). Other searches practical amenities, rentals, and services, and is the display fallback for any unmatched place; it does not query every possible Geoapify category. All includes the union of this catalog's query prefixes.
 - `sort`: `distance` (default) or `name`.
 - Returns `{ places, city, meta }`. Searches inside the resolved city boundary. Returns up to 100 places, sorting this result set. Distance is straight-line meters from the city center, not the visitor's location or a driving distance.
 - An unknown city returns 404; a city with no matching places returns 200 with an empty array.

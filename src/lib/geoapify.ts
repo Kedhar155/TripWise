@@ -1,15 +1,7 @@
 import "server-only";
 import { ApiError, placeId } from "./api";
-import { categories, type Category, type Place } from "./types";
-
-const filters: Record<Category, string> = {
-  all: "tourism,catering.restaurant,catering.cafe,leisure.park,entertainment.museum",
-  attractions: "tourism",
-  restaurants: "catering.restaurant",
-  cafes: "catering.cafe",
-  parks: "leisure.park",
-  museums: "entertainment.museum",
-};
+import type { Place } from "./types";
+import { categoryEntries, geoapifyCategories, getCategoryKey, parseCategory, type Category } from "./categories";
 type Properties = {
   place_id?: string; name?: string; formatted?: string; address_line1?: string;
   lat?: number; lon?: number; categories?: string[]; distance?: number;
@@ -37,14 +29,17 @@ async function geo(path: string, params: Record<string, string>): Promise<GeoDat
 
 export function query(params: URLSearchParams) {
   const city = params.get("city")?.trim();
-  const category = params.get("category") ?? "all";
+  const values = params.getAll("category").flatMap(value => value.split(","));
+  if (!values.length) values.push("all");
   const sort = params.get("sort") ?? "distance";
   if (!city || city.length < 2 || city.length > 120 || /[\u0000-\u001f]/.test(city)) {
     throw new ApiError(400, "INVALID_CITY", "Enter a city name between 2 and 120 characters.");
   }
-  if (!Object.hasOwn(categories, category)) throw new ApiError(400, "INVALID_CATEGORY", "Choose a supported place category.");
+  if (values.some(value => value !== "all" && !parseCategory(value))) throw new ApiError(400, "INVALID_CATEGORY", "Choose supported place categories, or All.");
+  if (values.includes("all") && values.length !== 1) throw new ApiError(400, "INVALID_CATEGORY", "Choose All on its own, or select specific categories.");
+  const selected: Category[] = values[0] === "all" ? categoryEntries.map(([key]) => key) : [...new Set(values.map(value => parseCategory(value)!))];
   if (sort !== "name" && sort !== "distance") throw new ApiError(400, "INVALID_SORT", "Sort must be name or distance.");
-  return { city, category: category as Category, sort };
+  return { city, selected, sort };
 }
 
 function normalize(p: Properties): Place | null {
@@ -56,7 +51,7 @@ function normalize(p: Properties): Place | null {
     id: p.place_id,
     name: (p.name ?? p.address_line1 ?? "Unnamed place").slice(0, 300),
     address: (p.formatted ?? p.address_line1 ?? "Address unavailable").slice(0, 1000),
-    category: (p.categories?.[0] ?? "tourism").slice(0, 100),
+    category: getCategoryKey(p.categories ?? []),
     latitude: p.lat!, longitude: p.lon!,
     website: validWebsite, phone: p.contact?.phone ?? raw?.phone,
     openingHours: p.opening_hours ?? raw?.opening_hours,
@@ -70,20 +65,22 @@ function distance(lat1: number, lon1: number, lat2: number, lon2: number) {
 }
 
 export async function searchPlaces(params: URLSearchParams) {
-  const { city, category, sort } = query(params);
+  const { city, selected, sort } = query(params);
   const resolved = await geo("/v1/geocode/search", { text: city, type: "city", format: "json", limit: "1" });
   const center = resolved.results?.[0];
   if (!center?.place_id || !Number.isFinite(center.lat) || !Number.isFinite(center.lon)) {
     throw new ApiError(404, "CITY_NOT_FOUND", "City not found. Try a city name with its country.");
   }
   const data = await geo("/v2/places", {
-    categories: filters[category], filter: `place:${center.place_id}`,
+    categories: geoapifyCategories(selected), filter: `place:${center.place_id}`,
     bias: `proximity:${center.lon},${center.lat}`, limit: "100",
   });
   const seen = new Set<string>();
   const places = (data.features ?? []).flatMap(({ properties }) => {
     const place = normalize(properties);
-    if (!place || seen.has(place.id)) return [];
+    // Geoapify tags overlap (e.g. entertainment includes museums). Keep only
+    // the selected main groups after classification, before returning results.
+    if (!place || !selected.includes(place.category as Category) || seen.has(place.id)) return [];
     seen.add(place.id);
     return [{ ...place, distance: distance(center.lat!, center.lon!, place.latitude, place.longitude) }];
   });

@@ -344,3 +344,34 @@ Live verification: PASS
 - Evidence: docs/extras/release-live-weather.png, release-live-trip.png, release-live-phone.png, and release-live-site.png.
 
 All six extras are now live at https://tripwise-lime.vercel.app. No further application changes were required after the tested release.
+
+## Search rework - Change 1: shared categories (17 October 2026)
+
+Starting point:
+- Read progress and preserved completed work. Saved the clean starting state as checkpoint commit 360ab1e and created the user-requested search-rework branch.
+- This change is local only. The current white/teal look, page layout, weather, and day planning are preserved.
+
+Completed:
+- Sampled actual Geoapify responses for Chennai, Paris, Tokyo, and Dubai before deciding the mapping. Saved 12 sample summaries covering 1,100 returned places, raw category frequencies, and example tag arrays in docs/search-rework/category-samples.json. Sampling is repeatable with node scripts/sample-categories.mjs.
+- Observed tourism/artwork/viewpoints, catering/restaurants/cafes, leisure/parks, accommodation/hotels, and commercial/shop tags, alongside non-category metadata such as building, wheelchair, vegetarian, and internet access. Some places have several overlapping tags; using only the first tag loses useful detail.
+- Added src/lib/categories.ts as the single catalog for nine main groups: Sights and Tourism, Museums and Culture, Parks and Nature, Restaurants and Cafes, Beaches, Entertainment, Shopping, Accommodation, and Other. Each entry owns its label, icon, colors, Geoapify prefixes, legacy aliases, and matching priority.
+- Search and details now classify all returned tags into exactly one main ID. Specific groups take priority over broader overlapping tags; unknown or missing tags map to Other. Existing saved raw category strings use the same mapping when displayed; no database migration is needed.
+- Explore cards, Details, My Trip badges, and trip-summary groups all use the catalog. The old category-style module only re-exports it; it contains no separate definitions.
+- Replaced the single-choice category select with a matching icon/checklist dropdown. Multiple groups can be selected. All clears specific choices; clearing the last group returns to All. Escape closes it and returns focus; outside click or leaving the control also closes it. Selecting All again does not leave search stuck loading.
+- The browser sends selected main IDs to the server. The server validates them, builds the Geoapify query from only those groups, deduplicates results, and excludes overlapping places classified outside the selection. Legacy attractions/cafes API URLs remain valid aliases. Updated docs/API.md.
+- Other searches amenities, rentals, and services, and is also the fallback for unmatched tags. Geoapify requires explicit query categories, so Other does not mean fetching every possible category. All queries the union of this catalog. The existing 100-result cap remains; overlap filtering may leave fewer than 100 results.
+
+Validation: PASS
+- npm run lint; npm run typecheck; npm run build -- --webpack (including TypeScript).
+- node scripts/test-categories.mjs: all nine definitions, real sample mapping, rendered labels/icons/colors, tag-order independence, overlap priority, unknown/missing fallback, invalid/mixed-All input, repeated/comma-separated selections, legacy aliases, upstream query prefixes, and server-side overlap filtering.
+- Summary, weather, visitor, client-error, and API-error test scripts passed. Summary tests now verify cafes join restaurants and unmatched categories join Other.
+- Full real-service API regression: all 59 checks passed, including search, both sorts, details, save/list refresh persistence, duplicate handling, visitor isolation, day updates, and removal. Evidence: docs/search-rework/change-1-api-tests.md.
+- Thirteen real searches across Chennai, Paris, Tokyo, and Dubai covered all nine options plus combined choices and All. Every returned category belonged to the requested selection, name sorting held, and IDs were unique. Chennai museums returned 16; museums plus parks returned 10 museums/90 nature places; Paris shopping returned 100; Tokyo accommodation returned 100; Dubai beaches returned 5. Evidence: docs/search-rework/category-search-tests.json.
+- Geoapify directly returned no commercial places for the currently resolved Tokyo boundary; the app correctly returned an empty list for Tokyo shopping. Tokyo Other was also empty. Empty results are accepted; tests separately require populated known searches. Paris shopping verifies the populated shopping case.
+- Browser at http://127.0.0.1:3020: selected Museums and Culture plus Parks and Nature for Chennai; compared all 100 card labels/icons with the filter options and found zero mismatches. Paris Restaurants and Cafes showed 100 cards with that label. Dubai All also had 100 cards and zero icon/option mismatches.
+- Browser opened Amma Museum Details, verified the main badge, added it, opened My Trip, refreshed, and confirmed the saved item/category and summary remained. Removed only this disposable test item, refreshed, and verified the empty trip and hidden summary. The API suite likewise removed only its own temporary rows.
+- Phone widths 390 and 320: the dropdown remained within the page, with scrollable choices and no horizontal overflow (375/375 and 305/305 content/scroll widths). Multi-selection, Escape, All reset, and repeated All click passed. Evidence: docs/search-rework/change-1-phone.png. Viewport restored after testing.
+- Source/document/browser-bundle secret scan, all-Git-object secret scan, and git diff --check passed. Keys remain ignored in .env.local; no secrets printed.
+- Local browser/network access initially required running the preview outside the sandbox; approved local preview runs on port 3020. An initial preview started before the build had finished; restarting after the successful build resolved its missing build-output error.
+
+Change 1 complete. No files deleted, no outside-project installs, no push, and no deployment. Changes 2-4 remain for the user's separate instructions.

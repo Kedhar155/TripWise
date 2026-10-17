@@ -19,4 +19,3 @@ export async function request<T>(url: string, options: RequestInit = {}, persona
   return data;
 }
 export function message(error: unknown) { return error instanceof Error ? error.message : "Something went wrong. Please try again."; }
-export function categoryLabel(value: string) { return value.split(".").at(-1)!.replaceAll("_", " "); }
