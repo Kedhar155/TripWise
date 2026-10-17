@@ -20,7 +20,7 @@ export function SearchCombobox({ id, label, value, placeholder, options, disable
   return <div className="relative min-w-0" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
     <label htmlFor={id} className="mb-2 block text-sm font-semibold">{label}</label>
     <div className="relative">
-      <input id={id} role="combobox" aria-autocomplete="list" aria-expanded={open && !disabled} aria-controls={`${id}-options`} aria-activedescendant={open && active >= 0 && options[active] ? `${id}-option-${active}` : undefined} aria-describedby={`${id}-note`} autoComplete="off" maxLength={120} disabled={disabled} value={value} placeholder={placeholder} className="field w-full pr-9 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500"
+      <input id={id} role="combobox" aria-autocomplete="list" aria-expanded={open && !disabled} aria-controls={`${id}-options`} aria-activedescendant={open && active >= 0 && options[active] ? `${id}-option-${active}` : undefined} aria-describedby={`${id}-note`} autoComplete="off" maxLength={120} disabled={disabled} value={value} placeholder={placeholder} className="field h-13 w-full pr-9 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500"
         onFocus={() => setOpen(true)} onChange={event => { onChange(event.target.value); setOpen(true); setActive(-1); }}
         onKeyDown={event => {
           if (event.key === "Escape") { setOpen(false); setActive(-1); }

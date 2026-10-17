@@ -1,0 +1,114 @@
+[
+  {
+    "desktop": {
+      "client": 1265,
+      "doneVisible": false,
+      "filters": [
+        {
+          "height": 52,
+          "top": 636.5750122070312
+        },
+        {
+          "height": 52,
+          "top": 636.5750122070312
+        },
+        {
+          "height": 52,
+          "top": 636.5750122070312
+        }
+      ],
+      "inputs": [
+        {
+          "height": 52,
+          "top": 435.7875061035156
+        },
+        {
+          "height": 52,
+          "top": 435.7875061035156
+        },
+        {
+          "height": 52,
+          "top": 435.7875061035156
+        }
+      ],
+      "scroll": 1265
+    }
+  },
+  {
+    "resultOrder": {
+      "card": 639.1000366210938,
+      "chips": 571.1000366210938,
+      "count": 535.1000366210938
+    }
+  },
+  {
+    "wide": {
+      "filterTops": [
+        334.1750183105469,
+        334.1750183105469,
+        334.1750183105469
+      ],
+      "scroll": 1425,
+      "width": 1425
+    }
+  },
+  {
+    "phoneCollapsed": {
+      "expanded": "false",
+      "filtersDisplay": "none",
+      "inputTops": [
+        112.38750457763672,
+        232.375,
+        324.3625183105469
+      ],
+      "scroll": 375,
+      "width": 375
+    }
+  },
+  {
+    "smallOpen": {
+      "filtersDisplay": "grid",
+      "scroll": 305,
+      "width": 305
+    }
+  },
+  {
+    "draftsPreserved": {
+      "city": "Chennai, TN, India",
+      "country": "India",
+      "name": "Eiffel Tower"
+    }
+  },
+  {
+    "nameSearch": "2 Eiffel Tower cards; no country/city required"
+  },
+  {
+    "namePanel": {
+      "display": "grid",
+      "options": [
+        "Best match",
+        "Name A to Z",
+        "Name Z to A",
+        "Category (grouped)"
+      ],
+      "scroll": 305,
+      "width": 305,
+      "withinExists": false
+    }
+  },
+  {
+    "tripFlow": "Paris Eiffel Tower Details, add, refresh persistence, removal, refresh empty state PASS"
+  },
+  {
+    "keyboardTabs": true,
+    "oneVisibleForm": true,
+    "phoneFiltersApplyAndClose": true,
+    "phoneDoneRestoresFocus": true,
+    "clearAll": true,
+    "bothValidationMessages": true,
+    "finalParis": "99 results at 5 km; Museums + Parks, Category grouped"
+  },
+  {
+    "duplicateIds": []
+  }
+]

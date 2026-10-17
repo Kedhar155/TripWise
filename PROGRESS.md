@@ -435,3 +435,29 @@ Validation: PASS
 - Source/document/browser-bundle secret scan, all-Git-object secret scan, and git diff --check passed; .env.local remains ignored. No saved key or password was printed or committed.
 
 Change 3 complete on search-rework. Local production preview: http://127.0.0.1:3023. No files deleted, no outside-project installs, no push, and no deployment. Change 4 remains for the user's separate instructions.
+
+## Search rework - Change 4: a tidy Explore layout (17 October 2026)
+
+Completed:
+- Read progress first and continued on search-rework. Consolidated the search tools into one white panel below the existing teal hero banner.
+- Added Search by location and Search by place name tabs. Only the active form is visible. Tabs support click, Left/Right arrows, Home/End, and normal Tab navigation. Typed country/city/name drafts remain when switching; the previous result display clears until the next search so the tab and results do not conflict.
+- Aligned Country, City, and Search in one desktop row; the name tab has a matching name/Search row. Kept the popular-city shortcuts under the location inputs. Labels stay short: Country, City, Place name, Search, Category, Within, Sort by.
+- Placed category icons, Within, and Sort by in one desktop filter row inside the same panel. All inputs/dropdowns and Search buttons are 52px tall with matching edges. Long category selections truncate inside the control while the dropdown and removable chips show their full labels.
+- On phones, stacked the inputs and hid the filters behind a Filters button with an active count. The button opens an inline panel with the existing controls and a Done button; Done closes it and returns focus to Filters. The name tab shows only relevant filters. Controls are rendered once, with no duplicate IDs.
+- Moved active filter chips out of the tools panel and directly below the results header/count. Chips and Clear all remain available when the phone filter panel is closed. Existing cards and category groupings retain their look.
+- Source changes are limited to presentation in four components: Explore, LocationSearch, CategoryFilter, and SearchCombobox. Confirmed with git diff --exit-code HEAD -- src/lib src/app/api supabase that data helpers, sorting rules, API routes, and database/schema code are unchanged. No dependencies or data-source behavior were changed.
+
+Validation: PASS
+- Final npm run lint, npm run typecheck, and npm run build -- --webpack (including TypeScript). Existing sorting, categories, search/cache, trip summary, weather, visitor, client-error, and API-error test scripts passed.
+- Caught and fixed a phone-only Done button that was initially visible on desktop because the shared button display style overrode the responsive utility. Also matched native select heights to text boxes. Final desktop measurements confirmed both input and filter rows share identical top edges and 52px heights; Done is hidden on desktop.
+- Browser tested 320px, 390px, 768px, and 1440px layouts, plus the original 1265px desktop. Measured no horizontal overflow: 305/305, 375/375, 753/753, and 1425/1425 client/scroll widths. At tablet width, the category label stays inside its control; all filter heights remain 52px. Restored the original viewport after testing.
+- Browser verified only one tab panel and one Search button are visible; keyboard tab switching preserves India/Chennai and the Eiffel Tower name draft. Country still enables City only after selection; short/missing input validation stays visible within the active form.
+- Real location search: India > Chennai autocomplete, Museums, 5 km, Name A to Z returned 11 cards. Verified result count appears before chips, followed by cards. Phone Filters initially collapsed; opening it allowed multiple categories, 10 km, and Farthest first; Done closed it and focused Filters. The updated result count was 100. Clear all continued to work outside the closed panel.
+- Real name search: Eiffel Tower returned 2 cards without country/city. The phone panel offered only the relevant category/name/grouping controls, with no Within, distance sorts, or unsupported Most details option. Category grouping and its removable chip worked.
+- Browser opened the Paris Eiffel Tower card, loaded Details, added it, opened My Trip, refreshed to confirm Tour Eiffel remained saved, removed only that disposable item, refreshed, and confirmed the empty-trip message. No pre-existing user trip items were changed. Browser warning/error log was empty.
+- Existing full real-service API regression: all 59 requests passed, including search/sorts/details, save/fresh-read persistence, duplicate handling, visitor isolation, day changes, removal, and empty trips. Evidence: docs/search-rework/change-4-regression-tests.md. No API or data-code changes were needed.
+- Final desktop preview: Paris, Museums + Parks, 5 km, Category grouped returned 99 cards. Search tabs, aligned input/filter rows, the count, removable chips, and group headings were visually inspected together.
+- Evidence: docs/search-rework/change-4-layout-checks.json, change-4-desktop.png, change-4-phone.png (name results with collapsed filters), and change-4-location-phone.png (hero and stacked location form).
+- Source/document/browser-bundle secret scan, all-Git-object secret scan, and git diff --check passed. .env.local remains ignored; no saved keys or passwords printed or committed.
+
+All four requested search-rework changes are complete, tested, and committed individually on search-rework. Latest local production preview: http://127.0.0.1:3024. No files deleted, no outside-project installs, no merge, no push, and no deployment. The branch is ready for review.

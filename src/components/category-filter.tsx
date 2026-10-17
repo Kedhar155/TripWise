@@ -22,8 +22,8 @@ export function CategoryFilter({ selected, onChange }: { selected: Category[]; o
     if (event.key === "Escape") { setOpen(false); trigger.current?.focus(); }
   }} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
     <span id="category-label" className="mb-2 block text-sm font-semibold">Category</span>
-    <button ref={trigger} type="button" className="field flex w-full items-center gap-2 text-left" aria-labelledby="category-label category-selection" aria-expanded={open} aria-controls="category-options" onClick={() => setOpen(value => !value)}>
-      <Icon size={17} aria-hidden="true"/><span id="category-selection" className="flex-1">{label}</span><ChevronDown size={17} aria-hidden="true"/>
+    <button ref={trigger} type="button" className="field flex h-13 w-full items-center gap-2 text-left" title={label} aria-labelledby="category-label category-selection" aria-expanded={open} aria-controls="category-options" onClick={() => setOpen(value => !value)}>
+      <Icon size={17} className="shrink-0" aria-hidden="true"/><span id="category-selection" className="min-w-0 flex-1 truncate">{label}</span><ChevronDown size={17} className="shrink-0" aria-hidden="true"/>
     </button>
     {open && <fieldset id="category-options" className="absolute inset-x-0 top-full z-20 mt-2 max-h-96 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 shadow-lg">
       <legend className="sr-only">Choose categories</legend>
