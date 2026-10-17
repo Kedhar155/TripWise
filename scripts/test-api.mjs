@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 
 const base = process.env.TEST_BASE_URL ?? 'http://127.0.0.1:3003';
 const visitor = randomUUID();
@@ -71,10 +72,10 @@ try {
   if (savedOther) await call('/api/itinerary/' + savedOther.id, { method: 'DELETE', headers: headers(other) });
   const escape = value => String(value).replaceAll('|', '\\|').replaceAll('\n', ' ');
   const report = [
-    '# TripWise Phase B — API test evidence', '',
+    '# TripWise — API test evidence', '',
     `Run: ${new Date().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })} IST.`,
     `Server: ${base}. Overall integration assertions: ${completed ? 'PASS' : 'FAILED / incomplete'}.`, '',
-    'These are real HTTP requests against the local site, using Geoapify and the Supabase database. Only newly generated test visitors and their temporary records are used. No credentials are included.', '',
+    'These are real HTTP requests against the server above, using Geoapify and the Supabase database. Only newly generated test visitors and their temporary records are used. No credentials are included.', '',
     '## Repeat the checks', '',
     'In one PowerShell window inside the project, run `npm run start -- --hostname 127.0.0.1 --port 3003` after a successful build, unless the preview is already running. In another window:', '',
     '```powershell', 'node scripts/test-api.mjs', 'node scripts/test-errors.mjs', '```', '',
@@ -88,6 +89,7 @@ try {
     'These PowerShell curl commands record the actual inputs, including disposable test IDs. Deleted row IDs cannot be replayed as successful deletions; rerun the script to repeat the complete sequence with fresh IDs.', '',
     ...results.flatMap((r, i) => [`### ${i + 1}. ${r.method} — HTTP ${r.actual}`, '', '```powershell', r.command, '```', '', `Result: ${r.summary}`, '']),
   ].join('\n');
-  await writeFile(new URL('../API_TESTS.md', import.meta.url), report);
-  console.log(`Saved API_TESTS.md: ${results.length} HTTP checks; integration ${completed ? 'PASS' : 'incomplete'}`);
+  const reportPath = process.env.TEST_REPORT_PATH ?? 'API_TESTS.md';
+  await writeFile(resolve(process.cwd(), reportPath), report);
+  console.log(`Saved ${reportPath}: ${results.length} HTTP checks; integration ${completed ? 'PASS' : 'incomplete'}`);
 }

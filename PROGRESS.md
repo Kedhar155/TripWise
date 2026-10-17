@@ -110,3 +110,25 @@ Validation:
 - Initial sandbox preview/build restrictions and a pre-existing development server prevented preview startup; final production preview runs at http://127.0.0.1:3006 with normal process permissions.
 - Browser tests used simulated add/remove responses; no database records or files deleted. No push, deployment, or outside-project installation performed. Keys remain ignored in .env.local.
 - Phase D complete. GitHub push and deployment remain approval-gated.
+
+## Phase E - Public repository and live deployment (17 October 2026)
+
+Completed:
+- Received explicit approval to push and deploy, including use of the existing `SUPABASE_SECRET_KEY` setting in place of the requested service-role variable name. The app already reads this secret-key name.
+- Pushed the complete committed project history to the public repository: https://github.com/Kedhar155/TripWise (branch `main`). Local `master` tracks `origin/main`.
+- Confirmed `.env.local` is ignored, absent from the pushed tree, and absent throughout Git history. The only tracked environment template is the blank `.env.example`.
+- Installed Vercel CLI inside this project without changing package.json or package-lock.json. Kept CLI login and project data inside ignored `.vercel/`.
+- Created `markan2/tripwise` in the existing Hobby workspace and deployed with the CLI. Live production site: https://tripwise-lime.vercel.app.
+- Added `GEOAPIFY_API_KEY`, `SUPABASE_URL`, and `SUPABASE_SECRET_KEY` to production as sensitive settings, without printing their values. Added `.vercelignore` to exclude environment files and local login data from uploads.
+- Updated README with the live link, repository, environment names, and deployment notes. Added an optional report output path to the existing API checker so the earlier Phase B evidence stays intact.
+
+Validation:
+- Vercel production build and TypeScript checks: PASS using the default Next.js build. All five API routes and three page routes deployed successfully.
+- Anonymous production API checks: all 28 HTTP requests PASS, covering validation, Chennai museums, both sorts, details, save/list persistence, duplicate 409, separate visitors, cross-visitor removal protection, removal, and missing/unknown 400/404 responses. Evidence: docs/phase-e/API_TESTS.md.
+- Browser live flow: Chennai museum filter returned 16 places; distance and A-Z sorting worked; opened Amma Museum; saved it; refreshed My Trip and confirmed it remained; removed that test place and refreshed to confirm the empty state.
+- Browser error/loading checks: loading messages observed; unknown city showed the clear error with Retry; a new Chennai search recovered successfully.
+- Live phone check at 390px: no horizontal overflow (375px content/client width, 375px scroll width). Desktop layout inspected; viewport restored. Evidence: docs/phase-e/phone.png, saved-trip.png, and live-site.png. Live site left open.
+- Current source/document/browser-bundle secret scan PASS. Saved credential values also absent from all local Git objects and history. No user files or user trip records deleted; only disposable test records were removed.
+- Final lint and whitespace checks PASS. Anonymous homepage HTTP 200; private `/.env.local` and `/.vercel/cli/auth.json` URLs both HTTP 404.
+- Automatic GitHub-to-Vercel deployment is not connected because Vercel requires its GitHub app installation. The requested public push and CLI production deployment are complete; future updates can use the CLI.
+- Phase E complete.
