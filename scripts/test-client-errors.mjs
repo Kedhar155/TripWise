@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import ts from 'typescript';
+const moduleUrl = source => `data:text/javascript;base64,${Buffer.from(ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText).toString('base64')}`;
+const visitor = moduleUrl(await readFile('src/lib/visitor.ts', 'utf8'));
+const source = (await readFile('src/lib/client-api.ts', 'utf8')).replace('"./visitor"', JSON.stringify(visitor));
+const { request, RequestError } = await import(moduleUrl(source));
+globalThis.fetch = async () => new Response('<html>Bad gateway</html>', { status: 502 });
+await assert.rejects(request('/test'), /Could not read the response/);
+globalThis.fetch = async () => { throw new TypeError('Private network details'); };
+await assert.rejects(request('/test'), /Could not connect/);
+globalThis.fetch = async () => Response.json({ error: { message: 'Already saved' } }, { status: 409 });
+await assert.rejects(request('/test'), error => error instanceof RequestError && error.status === 409);
+const originalTimeout = AbortSignal.timeout;
+AbortSignal.timeout = () => AbortSignal.abort(new DOMException('Timeout', 'TimeoutError'));
+globalThis.fetch = async (_url, options) => { options.signal.throwIfAborted(); return Response.json({}); };
+await assert.rejects(request('/test', { signal: new AbortController().signal }), /Could not connect/);
+AbortSignal.timeout = originalTimeout;
+console.log('PASS: readable invalid-response/network errors, duplicate status, and timeout with a caller signal.');
+

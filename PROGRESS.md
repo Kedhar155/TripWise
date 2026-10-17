@@ -91,3 +91,22 @@ Validation:
 - Preview: http://127.0.0.1:3005. The initial sandbox preview could not be reached; an approved preview outside the sandbox enabled browser testing.
 - Only the place created for the requested add/remove test was removed. No files are removed in the final changes. No push or deployment performed.
 - Phase C complete. Broader phone/desktop checks and final documentation remain Phase 4; GitHub/Vercel remain approval-gated.
+
+## Phase D - Feedback and responsive polish (17 October 2026)
+
+Completed:
+- Added consistent, touch-friendly Retry buttons for search, details, trip reads, saved-status checks, and failed add/remove actions.
+- Duplicate saves now explain that the place is already in My Trip and no duplicate was added. Failed removals keep the item visible; a 404 removal reconciles an already-removed item.
+- Added shared route loading and unexpected-error fallbacks using this installed Next.js version's retry API.
+- All client reads now have a 30-second timeout even when navigation cancellation is supplied; unreadable responses show a friendly message.
+- Narrow navigation wraps cleanly, controls remain tappable, and long names/addresses stay within cards. No new product features or dependencies.
+
+Validation:
+- Final lint, production webpack build (including TypeScript), separate typecheck, client error tests, visitor tests, and secret scan: PASS.
+- Browser checked Explore, details, and My Trip at requested widths 320, 768, and 1440; also real Chennai search at 390. No horizontal overflow in measured phone/detail/trip views. Long names and addresses wrap correctly.
+- Local fixture proxy verified loading on all three pages, service errors with Retry on all three, empty search, empty trip, missing optional detail fields, search/details/saved-status recovery, failed save, duplicate 409 feedback, failed removal retaining the item, and successful removal Retry.
+- Actual Geoapify search returned 16 Chennai museums on the phone preview. Screenshot: docs/phase-d/phone.jpg.
+- Added scripts/preview-states.mjs for repeatable visual failure checks without contacting live services; change .next/qa-state.txt as documented in the script. This is a local QA tool, not an app route.
+- Initial sandbox preview/build restrictions and a pre-existing development server prevented preview startup; final production preview runs at http://127.0.0.1:3006 with normal process permissions.
+- Browser tests used simulated add/remove responses; no database records or files deleted. No push, deployment, or outside-project installation performed. Keys remain ignored in .env.local.
+- Phase D complete. GitHub push and deployment remain approval-gated.
