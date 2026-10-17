@@ -59,3 +59,14 @@ Run, test, fix, update this file, and commit at the end of every phase. Ask befo
 - Existing production build was reused; no application code or dependencies changed.
 - Exact schema remains in supabase/migrations/001_itinerary.sql. Supabase location: project > SQL Editor > New query > paste schema > Run. Already applied; no repeat is needed.
 - No files or database records deleted, no push, and no deployment. Phase A complete; later UI work remains separate.
+
+## Phase B - API verification and submission evidence (17 October 2026)
+- Read progress first and reviewed all five existing endpoints against the installed Next.js route guide. No endpoint rewrite was needed.
+- Reused the running production preview at http://127.0.0.1:3003; homepage returned HTTP 200 with TripWise content.
+- Re-ran real Geoapify and Supabase integration checks: all 28 HTTP requests passed, including Chennai museums (16 results), name/distance order, place details, add, fresh list, duplicate 409, visitor isolation, removal, and invalid/missing input 400/404.
+- Added an invalid deletion-ID check and automatic API_TESTS.md generation with actual commands, response summaries, expected/actual statuses, and repeat instructions.
+- Separate error checks passed for 400/404/409/500 formatting and private-error redaction. The 500 check is isolated, not a forced live-service outage.
+- Lint and TypeScript checks passed. Existing production build reused because application code did not change.
+- Extended the secret scan to include API_TESTS.md and PROGRESS.md; .env.local remains ignored.
+- Removed only temporary database rows created by the requested removal tests; no files deleted. No push or deployment.
+- Phase B complete. Browser localStorage, functional screens, and phone testing remain in the later UI phase.

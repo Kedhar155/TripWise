@@ -15,4 +15,9 @@ async function scan(dir) {
  }
 }
 for (const dir of ['src','scripts','docs','supabase','.next/static']) await scan(dir);
+for (const file of ['API_TESTS.md', 'PROGRESS.md']) {
+ const text = await readFile(file, 'utf8');
+ checked++;
+ if (secrets.some(secret => text.includes(secret))) throw new Error('Private credential found; content withheld.');
+}
 console.log(`PASS: no saved secret values in ${checked} source, documentation, test, and browser-bundle files.`);
