@@ -304,3 +304,43 @@ Release gates:
 - Deploy to Vercel: separate approval still required after the push.
 - After approved deployment, verify the presence of GEOAPIFY_API_KEY, SUPABASE_URL, and SUPABASE_SECRET_KEY without printing their values; open and test the live full flow; repeat the repository/history checks; update this file with the deployed link and what is live.
 - Existing public site remains https://tripwise-lime.vercel.app with the earlier Phase E version. The extras release has not been merged, pushed, or deployed.
+
+## Extras release - Approved merge, public push, and live deployment (17 October 2026)
+
+Live site: https://tripwise-lime.vercel.app
+Deployed application commit: 7046cd2411b6eaa1f9999c52c11687c0cae763ca (main).
+Deployment: https://tripwise-9syl9owp6-markan2.vercel.app
+Vercel deployment ID: dpl_4WP7v5zdAJJe7MhG2xKq89KswSw1 (READY, production).
+
+Approvals and release:
+- Received the user's separate yes for each stage: local merge, push to public GitHub, and production deployment.
+- Created local main tracking origin/main and fast-forwarded it exactly to tested extras commit 7046cd2. Re-ran the production webpack build and TypeScript on main: PASS. No merge commit or code changes were introduced.
+- Pushed main to https://github.com/Kedhar155/TripWise and verified the remote main hash matches 7046cd2 exactly.
+- Restored the Vercel CLI inside this project with --no-save --package-lock=false; dependency files remained unchanged. Used the existing ignored .vercel/cli login and existing markan2/tripwise project.
+- Deployed tested commit 7046cd2 with the CLI. Vercel's default production build (Turbopack) and TypeScript passed; the production alias now serves the extras release.
+- These deployment notes and verification artifacts are a documentation-only follow-up to the deployed commit. A separate yes is still required before pushing this follow-up commit; no second deployment is needed for documentation.
+
+What is live:
+- Shared category icons and readable colored badges on Explore, Details, and My Trip.
+- Teal Explore banner with its search form and Paris/Tokyo/Goa/Dubai/London shortcuts.
+- Gentle card hover effects, card-shaped loading skeletons, Sonner success/error toasts, and the responsive shared footer with data credits.
+- Destination weather fetched in the browser from Open-Meteo: current Celsius conditions/icon, next three days of highs/lows, loading/retry/failure behavior, and attribution.
+- Day-wise My Trip planning with Unplanned, days 1-14, dropdown moves, empty-day hints, and visitor-scoped PATCH updates. The nullable day column is already applied in Supabase.
+- Live trip summary with total places, distinct occupied days, unplanned places, and shared category badges; updates immediately from the loaded items.
+
+Production configuration and security: PASS
+- After deployment, Vercel env ls production confirmed GEOAPIFY_API_KEY, SUPABASE_URL, and SUPABASE_SECRET_KEY are all present as Secret settings for Production with values Hidden. No values were retrieved or printed.
+- Public homepage HTTP 200; /.env.local and /.vercel/cli/auth.json HTTP 404.
+- Current source/document/browser-bundle secret scan and all-object Git history scan passed. Known saved keys and credential patterns were absent; private environment files were absent from the tracked repository/history; .env.local remains ignored. .vercelignore excludes environment files, local login data, and Git metadata from uploads.
+
+Live verification: PASS
+- Full anonymous real-service API suite: all 59 HTTP checks passed, including search, both sorts, details, add/list persistence, duplicate handling, visitor isolation, PATCH day bounds/body/UUID validation, null/empty clearing, day persistence, and removal. Evidence: docs/extras/release-live-api-tests.md.
+- First integration run was interrupted by a transient network connection reset; its two disposable rows were cleaned up successfully. A fresh rerun completed all 59 checks.
+- Opened the public production link in the browser and confirmed the new hero/footer/day-planning UI. The browser trip started empty.
+- Searched Chennai museums with A-Z sorting and verified 16 results in alphabetical order. Opened Amma Museum Details; observed weather loading and a friendly timeout state. Retry recovered to live 26°C/drizzle and three forecast days, while Add to Trip remained usable.
+- Added the test place and observed success feedback and summary 1 total / 0 planned days / 1 unplanned. Added Day 2, moved it there, observed toast and summary 1/1/0, refreshed, and confirmed the saved item, day assignment, and summary persisted.
+- At 390px phone width, no horizontal overflow (375px content/scroll). Moved back to Unplanned and observed immediate summary 1/0/1; removed the test place, refreshed, and confirmed the existing empty state and hidden summary. Viewport restored; browser warning/error log empty.
+- Only disposable test rows were removed. No pre-existing user trip records changed. The live Explore page was left open.
+- Evidence: docs/extras/release-live-weather.png, release-live-trip.png, release-live-phone.png, and release-live-site.png.
+
+All six extras are now live at https://tripwise-lime.vercel.app. No further application changes were required after the tested release.

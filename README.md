@@ -14,7 +14,9 @@ Stack: Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui conventions, Supa
 
 API credentials stay on the server. Each browser receives a random visitor ID stored in localStorage. Trips are saved in Supabase without login. A visitor ID is not a substitute for authentication for sensitive data.
 
-City search, category filtering, sorting, place details, and saved trips are complete. See [PROGRESS.md](PROGRESS.md) for the phase history, [docs/API.md](docs/API.md) for API details, and [docs/phase-e/API_TESTS.md](docs/phase-e/API_TESTS.md) for the 28 passing production checks.
+All six extras are live: category icons/colors, a teal search banner with popular-city shortcuts, card hover effects/loading skeletons/toasts/footer, current weather and a three-day forecast, day-wise planning, and a trip summary. Search, filters, sorting, saving, day moves, removal, and refresh persistence are verified on the public site. See [PROGRESS.md](PROGRESS.md) for release history, [docs/API.md](docs/API.md) for API details, and [live API checks](docs/extras/release-live-api-tests.md) for all 59 passing production requests.
+
+The deployed application comes from tested commit `7046cd2` on `main`; the deployment notes and screenshots are recorded afterward. Empty day headings stay in this browser; saved places and day assignments stay in Supabase.
 
 ## Hosting
 
@@ -26,7 +28,7 @@ To repeat production API checks in PowerShell:
 
 ```powershell
 $env:TEST_BASE_URL='https://tripwise-lime.vercel.app'
-$env:TEST_REPORT_PATH='docs/phase-e/API_TESTS.md'
+$env:TEST_REPORT_PATH='docs/extras/release-live-api-tests.md'
 node scripts/test-api.mjs
 ```
 
