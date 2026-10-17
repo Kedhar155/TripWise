@@ -440,3 +440,47 @@ HTTP 200
 ```
 
 <!-- END SEARCH REWORK 2 -->
+
+## Search rework: sorting and distance filters (Change 3)
+
+Verified on the local preview at http://127.0.0.1:3023: 56 new real HTTP requests and 237 ordering/grouping assertions passed. The existing 59-request integration suite also passed, including Details, add, fresh itinerary reads, duplicate/visitor isolation, day updates, removal, and empty-trip persistence.
+
+Repeat: `node scripts/test-sort-filters-api.mjs` (optional TEST_BASE_URL override). Evidence: `docs/search-rework/change-3-sort-filter-tests.json`; regression evidence: `docs/search-rework/change-3-regression-tests.md`; browser sort evidence: `docs/search-rework/change-3-browser-sorts.json`.
+
+- City sort IDs: `relevance` (default), `distance`, `distance-desc`, `name`, `name-desc`, `category`, `details`.
+- Name search supports the same non-distance sorts. Unsupported name distance/radius requests return 400.
+- `within=1`, `5`, `10`, or `25` filters city results by kilometers from the city center. Missing within means Any distance; the website's initial default is 5 km.
+- The browser sorts locally using the shared helper, preserving the original response for Best match. It hides sorts that lack data, renders Category groups, and shows removable category/radius/sort chips with Clear all. Sorting never removes records.
+- The real matrix crossed Chennai and Paris with All, Museums, and Parks + Restaurants at all four radii plus Any distance; every available sort was checked on each response. Name queries Central Park, Eiffel Tower, and Museum were checked with All, Parks, and Museums + Parks. Each applicable server sort was also checked directly against the corresponding real result set.
+
+Examples (response excerpts):
+
+```http
+GET /api/places?city=Chennai&category=museums&within=5&sort=name-desc
+```
+
+HTTP 200. The recorded real search returned 11 museum/culture places inside 5 km; names sort Z to A.
+
+```json
+{ "meta": { "count": 11, "within": 5, "distanceFrom": "city center" } }
+```
+
+```http
+GET /api/places?city=Chennai&category=museums&within=1
+```
+
+HTTP 200 with `places: []` and count 0. Increasing the radius returned 11 at 5 km, 13 at 10 km, and 16 at 25 km. This empty result was expected, not a sorting failure.
+
+```http
+GET /api/places/search?name=Central%20Park&sort=category
+```
+
+HTTP 200 with 11 matches. The browser rendered Entertainment (1) and Parks and Nature (10); it offered Best match, both name directions, and Category, with no distance or Most details option for that response.
+
+```http
+GET /api/places?city=Paris&within=2
+GET /api/places/search?name=Park&sort=distance-desc
+GET /api/places/search?name=Park&within=5
+```
+
+Each returned HTTP 400 with a clear INVALID_WITHIN or INVALID_SORT message. Blank/non-whitelisted radius values are also rejected before an upstream request.

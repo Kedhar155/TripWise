@@ -3,6 +3,7 @@ import { ApiError, placeId } from "./api";
 import type { Place } from "./types";
 import { categoryEntries, geoapifyCategories, getCategoryKey, parseCategory, type Category } from "./categories";
 import { isCountryCode } from "./countries";
+import { isPlaceSort, sortPlaces, withinOptions } from "./place-sorting";
 type Properties = {
   place_id?: string; name?: string; formatted?: string; address_line1?: string;
   lat?: number; lon?: number; categories?: string[]; category?: string; distance?: number;
@@ -39,7 +40,10 @@ function selectedCategories(params: URLSearchParams): Category[] {
 
 export function query(params: URLSearchParams) {
   const city = params.get("city")?.trim();
-  const sort = params.get("sort") ?? "distance";
+  const sort = params.get("sort") ?? "relevance";
+  const withinValue = params.get("within");
+  if (withinValue !== null && !withinOptions.some(value => String(value) === withinValue)) throw new ApiError(400, "INVALID_WITHIN", "Within must be 1, 5, 10, or 25 km.");
+  const within = withinValue === null ? undefined : Number(withinValue);
   const country = params.has("country") ? countryCode(params.get("country")) : undefined;
   const cityId = params.has("cityId") ? placeId(params.get("cityId")) : undefined;
   if (cityId && !country) throw new ApiError(400, "INVALID_COUNTRY", "Choose a country for this city.");
@@ -47,8 +51,8 @@ export function query(params: URLSearchParams) {
     throw new ApiError(400, "INVALID_CITY", `Enter a city name between ${country ? 3 : 2} and 120 characters.`);
   }
   const selected = selectedCategories(params);
-  if (sort !== "name" && sort !== "distance") throw new ApiError(400, "INVALID_SORT", "Sort must be name or distance.");
-  return { city, country, cityId, selected, sort };
+  if (!isPlaceSort(sort)) throw new ApiError(400, "INVALID_SORT", "Choose a supported sort option.");
+  return { city, country, cityId, selected, sort, within };
 }
 
 function normalize(p: Properties): Place | null {
@@ -74,7 +78,7 @@ function distance(lat1: number, lon1: number, lat2: number, lon2: number) {
 }
 
 export async function searchPlaces(params: URLSearchParams) {
-  const { city, country, cityId, selected, sort } = query(params);
+  const { city, country, cityId, selected, sort, within } = query(params);
   const resolved = cityId
     ? await geo("/v2/place-details", { id: cityId, features: "details" }, 86400)
     : await geo("/v1/geocode/search", { text: city, type: "city", format: "json", limit: "1", ...(country ? { filter: `countrycode:${country}` } : {}) });
@@ -84,7 +88,7 @@ export async function searchPlaces(params: URLSearchParams) {
     throw new ApiError(404, "CITY_NOT_FOUND", "City not found. Try a city name with its country.");
   }
   const data = await geo("/v2/places", {
-    categories: geoapifyCategories(selected), filter: `place:${cityId ?? center.place_id}`,
+    categories: geoapifyCategories(selected), filter: `place:${cityId ?? center.place_id}${within === undefined ? "" : `|circle:${center.lon},${center.lat},${within * 1000}`}`,
     bias: `proximity:${center.lon},${center.lat}`, limit: "100",
   });
   const seen = new Set<string>();
@@ -94,12 +98,15 @@ export async function searchPlaces(params: URLSearchParams) {
     // the selected main groups after classification, before returning results.
     if (!place || !selected.includes(place.category as Category) || seen.has(place.id)) return [];
     seen.add(place.id);
-    return [{ ...place, distance: distance(center.lat!, center.lon!, place.latitude, place.longitude) }];
+    const meters = distance(center.lat!, center.lon!, place.latitude, place.longitude);
+    // Also enforce the displayed center-to-place distance: Geoapify can measure
+    // from the nearest edge of a large park rather than its displayed point.
+    if (within !== undefined && meters > within * 1000) return [];
+    return [{ ...place, distance: meters }];
   });
-  places.sort(sort === "name" ? (a, b) => a.name.localeCompare(b.name, "en") : (a, b) => a.distance - b.distance || a.name.localeCompare(b.name, "en"));
   return {
-    places, city: { name: center.formatted ?? city, latitude: center.lat, longitude: center.lon },
-    meta: { limit: 100, count: places.length, distanceFrom: "city center", attribution: "Powered by Geoapify | © OpenStreetMap contributors" },
+    places: sortPlaces(places, sort), city: { name: center.formatted ?? city, latitude: center.lat, longitude: center.lon },
+    meta: { limit: 100, count: places.length, within: within ?? null, distanceFrom: "city center", attribution: "Powered by Geoapify | © OpenStreetMap contributors" },
   };
 }
 
@@ -144,7 +151,8 @@ export async function searchPlaceNames(params: URLSearchParams) {
   const name = searchText(params.get("name"), "place name");
   const selected = selectedCategories(params);
   const sort = params.get("sort") ?? "relevance";
-  if (sort !== "name" && sort !== "relevance") throw new ApiError(400, "INVALID_SORT", "Sort must be name or relevance for a worldwide search.");
+  if (!isPlaceSort(sort) || sort === "distance" || sort === "distance-desc") throw new ApiError(400, "INVALID_SORT", "Choose a non-distance sort for a worldwide search.");
+  if (params.has("within")) throw new ApiError(400, "INVALID_WITHIN", "Within distance is available for location searches only.");
   // Geocoding amenity search accepts a name without a spatial constraint.
   // Disabling the default IP-country bias keeps this search worldwide.
   const data = await geo("/v1/geocode/search", { text: name.toLowerCase(), type: "amenity", bias: "countrycode:none", lang: "en", format: "json", limit: "20" }, 3600);
@@ -164,6 +172,5 @@ export async function searchPlaceNames(params: URLSearchParams) {
     catch { return place; } // A missing optional category must not hide a match.
   }));
   const filtered = enriched.filter(place => selected.includes(place.category as Category));
-  if (sort === "name") filtered.sort((a, b) => a.name.localeCompare(b.name, "en"));
-  return { places: filtered, query: name, meta: { limit: 20, count: filtered.length, distanceFrom: null, attribution: "Powered by Geoapify | © OpenStreetMap contributors" } };
+  return { places: sortPlaces(filtered, sort), query: name, meta: { limit: 20, count: filtered.length, distanceFrom: null, attribution: "Powered by Geoapify | © OpenStreetMap contributors" } };
 }

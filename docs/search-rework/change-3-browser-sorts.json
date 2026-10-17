@@ -1,0 +1,71 @@
+{
+  "location": [
+    {
+      "choice": "distance",
+      "cards": 100,
+      "first": "Point zéro des Routes de France",
+      "changed": true
+    },
+    {
+      "choice": "distance-desc",
+      "cards": 100,
+      "first": "Boulevard Saint-Germain",
+      "changed": true
+    },
+    {
+      "choice": "name",
+      "cards": 100,
+      "first": "75004 Paris",
+      "changed": true
+    },
+    {
+      "choice": "name-desc",
+      "cards": 100,
+      "first": "Villa d'Estrées",
+      "changed": true
+    },
+    {
+      "choice": "category",
+      "cards": 100,
+      "first": "Albe Hôtel Saint-Michel",
+      "changed": true
+    },
+    {
+      "choice": "details",
+      "cards": 100,
+      "first": "Tours de Notre-Dame",
+      "changed": true
+    },
+    {
+      "choice": "relevance",
+      "cards": 100,
+      "first": "Point zéro des Routes de France",
+      "changed": false
+    }
+  ],
+  "name": [
+    {
+      "value": "name",
+      "cards": 11,
+      "groups": []
+    },
+    {
+      "value": "name-desc",
+      "cards": 11,
+      "groups": []
+    },
+    {
+      "value": "category",
+      "cards": 11,
+      "groups": [
+        "Entertainment (1)",
+        "Parks and Nature (10)"
+      ]
+    },
+    {
+      "value": "relevance",
+      "cards": 11,
+      "groups": []
+    }
+  ]
+}
