@@ -279,3 +279,28 @@ Evidence:
 - docs/extras/final-empty-trip-phone.png
 
 All six extras are verified together. Current teal style is preserved. No merge, push, or deployment was performed.
+
+## Extras release - Local verification and merge readiness (17 October 2026)
+
+Completed before release approval:
+- Read PROGRESS.md first and confirmed extras is the active branch with the six finished features.
+- Rebuilt the production app and ran the full requested local flow at http://127.0.0.1:3018. No broken behavior was found; no application or API fixes were needed.
+- Added scripts/check-git-secrets.mjs to check tracked files, ignored .env.local status, all local Git objects (including dangling objects), known saved credentials, and recognizable secret/JWT patterns without printing values or object contents.
+- Fetched origin/main for a read-only merge-readiness comparison. At this check, origin/main had no commits missing from extras. The local baseline branch is named master; no local main exists yet. The approved merge step can create local main tracking origin/main and fast-forward it to the tested extras commit.
+
+Validation: PASS
+- npm run lint and production webpack build, including TypeScript.
+- Weather, summary, visitor, client error, and API error test scripts.
+- All 59 real HTTP integration checks, including day PATCH input validation, visitor isolation, save/list/day persistence, clearing, and removal. Evidence: docs/extras/release-local-api-tests.md.
+- Browser searched Chennai museums in A-Z order (16 results), opened Amma Museum, loaded current 27°C/thunderstorms plus next-three-day highs/lows, added it into Unplanned, and observed summary 1 total / 0 planned days / 1 unplanned.
+- Added Day 2 and moved the item there; success toast and summary 1/1/0 appeared. Refreshed and confirmed the assignment and summary persisted. Removed the disposable test place, refreshed, and confirmed the existing empty-trip message and hidden summary.
+- Phone width 390px: no horizontal overflow (375px content/scroll). Browser warning/error log empty. Viewport restored. Only disposable test records were removed.
+- Current source/document/browser-bundle secret scan and full Git-object scan passed; saved keys and private environment files were absent from tracked files and history. .env.local is ignored. No secret values printed.
+- git diff --check passed. Screenshots: docs/extras/release-local-weather.png and release-local-trip.png.
+
+Release gates:
+- Merge extras into local main: pending the user's explicit yes.
+- Push main to public GitHub: separate approval still required after the merge.
+- Deploy to Vercel: separate approval still required after the push.
+- After approved deployment, verify the presence of GEOAPIFY_API_KEY, SUPABASE_URL, and SUPABASE_SECRET_KEY without printing their values; open and test the live full flow; repeat the repository/history checks; update this file with the deployed link and what is live.
+- Existing public site remains https://tripwise-lime.vercel.app with the earlier Phase E version. The extras release has not been merged, pushed, or deployed.
