@@ -167,3 +167,23 @@ Validation:
 - Desktop and phone layouts visually inspected at 390px and 320px. No horizontal overflow: measured content/scroll widths were 375/375 and 305/305 respectively. Input and button stack on phones, chips wrap, and banner text remains readable. Temporary viewport override reset afterward.
 - Saved docs/extras/feature-2-desktop.png and feature-2-phone.png. Local preview: http://127.0.0.1:3010. Initial sandbox build output permissions required the approved build outside the sandbox.
 - Feature 2 complete on extras.
+
+## Extras - Feature 3 of 6: Hover, skeletons, toasts, and footer (17 October 2026)
+
+Completed:
+- Added a gentle 3px lift and soft teal shadow to Explore and My Trip cards with 200ms transitions on hover-capable devices.
+- Replaced visible loading text on Explore and My Trip with shared card-shaped skeletons, including a grid for search and rows for saved places. Screen readers still receive loading announcements.
+- Installed Sonner and added a shared shadcn-style Toaster in the root layout. Added, already-saved, and removed states now show the requested popup messages. Read, add, remove, and page failures show clear error toasts; read errors retain retry buttons and failed mutations retain usable action buttons.
+- Added a shared responsive footer on every page with TripWise, a short line, Explore/My Trip links, and linked Geoapify, OpenStreetMap contributors, and Open-Meteo credits.
+- Hover and skeleton animations respect reduced-motion preferences. Preserved the existing teal design, data helpers, database behavior, and API routes. No push or deployment.
+- Extended only the local QA proxy with configurable preview ports and a failed-save scenario for repeatable UI verification.
+
+Validation:
+- Final lint and production webpack build (including TypeScript): PASS. Existing visitor, client error, API error, secret scan, and whitespace checks: PASS.
+- Real-service API regression: all 28 HTTP checks PASS. Evidence: docs/extras/feature-3-api-tests.md.
+- Browser on port 3011: Chennai museum search returned 16 places; card transition styles verified; opened Amma Museum, added it and observed "Added to your trip", refreshed Details and observed "Already in your trip", refreshed My Trip and confirmed persistence, removed it and observed "Removed from your trip", refreshed again and confirmed the empty state. Only disposable test records were removed.
+- Local fixture browser on port 3012: visually checked and captured Explore and My Trip skeletons; verified search/trip error toasts and retry controls, recovery from a failed trip read, failed removal retaining the item with an enabled Remove button, failed saving retaining an enabled Add button, and duplicate HTTP 409 showing "Already in your trip".
+- Footer and all three credits observed on Explore, Details, and My Trip. Phone layout measured without horizontal overflow at requested widths 390px (375/375 content/scroll) and 320px (305/305). Full phone screenshot inspected; viewport override reset.
+- Evidence: docs/extras/feature-3-add-toast.png, feature-3-explore-skeleton.png, feature-3-trip-skeleton.png, and feature-3-phone-footer.png.
+- Sonner installation required approved network access after sandbox DNS failure. Local production and fixture previews use ports 3011 and 3012.
+- Feature 3 complete on extras.
