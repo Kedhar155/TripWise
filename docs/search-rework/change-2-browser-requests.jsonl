@@ -1,0 +1,12 @@
+{"time":1792251237055,"path":"/api/cities?country=in&q=chenn"}
+{"time":1792251248897,"path":"/api/places?city=Chennai%2C+India&country=in&cityId=qa-city&category=all&sort=distance"}
+{"time":1792251259673,"path":"/api/cities?country=in&q=err"}
+{"time":1792251259832,"path":"/api/places/search?name=Eiffel+Tower&category=all&sort=relevance"}
+{"time":1792251280142,"path":"/api/cities?country=in&q=err"}
+{"time":1792251280255,"path":"/api/places/search?name=Eiffel+Tower&category=all&sort=relevance"}
+{"time":1792251302030,"path":"/api/cities?country=in&q=nocity"}
+{"time":1792251302176,"path":"/api/places/search?name=Eiffel+Tower&category=all&sort=relevance"}
+{"time":1792251302478,"path":"/api/places?city=Paris&country=fr&category=all&sort=distance"}
+{"time":1792251314809,"path":"/api/places?city=Paris&country=fr&category=all&sort=distance"}
+{"time":1792251325320,"path":"/api/places?city=Paris&country=fr&category=all&sort=distance"}
+{"time":1792251327944,"path":"/api/places/search?name=Eiffel+Tower&category=all&sort=relevance"}

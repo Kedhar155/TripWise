@@ -1,0 +1,264 @@
+[
+  {
+    "text": "Eiffel Tower",
+    "results": [
+      {
+        "name": "Eiffel Tower",
+        "address": "Eiffel Tower, 5 Avenue Anatole France, 75007 Paris, France",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.6205937724353116,
+          "popularity": 9.995467104553104,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "5112386d21235b024059effbdc75db6d4840f00102f901747f4c0000000000c0020192030c45696666656c20546f776572",
+        "latitude": 48.8582599,
+        "longitude": 2.2945006
+      },
+      {
+        "name": "Eiffel Tower",
+        "address": "Eiffel Tower, Improvement District No. 9, AB, Canada",
+        "category": "natural.mountain.peak",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.16000999999999999,
+          "popularity": 0.6069408966095624,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "51d7a3703d0a0f5dc05909f9a067b3aa4940f00103f90139b34ba000000000c0020192030c45696666656c20546f776572",
+        "latitude": 51.3336,
+        "longitude": -116.235
+      }
+    ]
+  },
+  {
+    "text": "Taj Mahal",
+    "results": [
+      {
+        "name": "Taj Mahal",
+        "address": "Taj Mahal, Taj East Gate Road, Taj Ganj, Agra - 282004, UP, India",
+        "category": "tourism.attraction",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.5806402151874025,
+          "popularity": 1.5618508010536936,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "519fa7a6c9b182534059020ea14acd2c3b40f00102f901c1f95d1600000000c0020192030954616a204d6168616c",
+        "latitude": 27.1750075,
+        "longitude": 78.0421013
+      },
+      {
+        "name": "Taj Mahal",
+        "address": "Taj Mahal, SH62, Taj Ganj, Agra - 282004, UP, India",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.1679799034751623,
+          "popularity": 1.308273916399266,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "51d6cff6434782534059daad65321c2b3b40f00103f90198f63b9202000000c0020192030954616a204d6168616c",
+        "latitude": 27.168399,
+        "longitude": 78.0355997
+      }
+    ]
+  },
+  {
+    "text": "zzzxxyyqqqnonexistentplace",
+    "results": []
+  },
+  {
+    "text": "Eifel Tower",
+    "results": [
+      {
+        "name": "Eifel tower",
+        "address": "Eifel tower, Svobody Street, Поділ, Khmelnytskyi, 29001, Ukraine",
+        "category": "tourism.attraction.artwork",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.00006215533684286286,
+          "popularity": 7.7204422986495675,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "514b34924e6efd3a40598828cbb50db64840f00103f9019e09654b02000000c0020192030b456966656c20746f776572",
+        "latitude": 49.4222934,
+        "longitude": 26.9899644
+      }
+    ]
+  },
+  {
+    "text": "Central Park",
+    "results": [
+      {
+        "name": "Central Park",
+        "address": "Central Park, New York, NY 11025, United States of America",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.6120006106572555,
+          "popularity": 8.318476413761061,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "51cf51a280c87d52c059a5daa7e331644440f00102f90128fe7f1900000000c0020192030c43656e7472616c205061726b",
+        "latitude": 40.7827725,
+        "longitude": -73.9653627
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Chapel Street, Cowdenbeath, KY4 9QQ, United Kingdom",
+        "category": "sport.stadium",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.45193253717945325,
+          "popularity": 3.8032158032764065,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "51c295a24beec60ac059cdf56c0cf00d4c40f00102f9019bca830b00000000c0020192030c43656e7472616c205061726b",
+        "latitude": 56.1088882,
+        "longitude": -3.3471342
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Downtown, Winnipeg, MB R3B 3B6, Canada",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.3479646975901272,
+          "popularity": 5.4234802418510615,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "5122122add824958c059184cb2c4b9f24840f00102f90172dfe20000000000c0020192030c43656e7472616c205061726b",
+        "latitude": 49.8962942,
+        "longitude": -97.1486123
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Prado, Havana, Cuba",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.32901661879114147,
+          "popularity": 5.108313569981904,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "517dea58a5f49654c059bd361b2b31233740f00102f9016e446c0100000000c0020192030c43656e7472616c205061726b",
+        "latitude": 23.137469,
+        "longitude": -82.358682
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Old Fourth Ward, Atlanta, GA, United States of America",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.2836220396951343,
+          "popularity": 6.621315723861655,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "5100e14389161855c05986f8d1ba57e24040f00102f901b6a1120200000000c0020192030c43656e7472616c205061726b",
+        "latitude": 33.7683023,
+        "longitude": -84.3763755
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, 1340, Louisville, KY 40208, United States of America",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.23648094285300414,
+          "popularity": 5.614209150456673,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "512f0acc54d27055c0598feb95687f1d4340f00102f901fbb88c0300000000c0020192030c43656e7472616c205061726b",
+        "latitude": 38.2304507,
+        "longitude": -85.7628376
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Metrotown, Burnaby, BC, Canada",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.23648094285300414,
+          "popularity": 5.928840845847325,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "513f1d8f1928c15ec059ef39b01c219d4840f00102f901967b610100000000c0020192030c43656e7472616c205061726b",
+        "latitude": 49.227573,
+        "longitude": -123.0180725
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Bakersfield, CA, United States of America",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.19938740066310082,
+          "popularity": 2.6081439746573114,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "51ce380d5185c05dc0597c5006fd3bb04140f00102f9011544950300000000c0020192030c43656e7472616c205061726b",
+        "latitude": 35.3768307,
+        "longitude": -119.008137
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Pennycross, Plymouth, ENG, United Kingdom",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.23992860907835414,
+          "popularity": 5.943825827713895,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "510fd253e4109910c059ad57ec8a74314940f00102f90194fbf30100000000c0020192030c43656e7472616c205061726b",
+        "latitude": 50.3863691,
+        "longitude": -4.1494785
+      },
+      {
+        "name": "Central Park",
+        "address": "Central Park, Wallasey, CH44 0BS, United Kingdom",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.21584611680957558,
+          "popularity": 6.582793187681694,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "id": "517a41fadcbf4808c059d817bfdf1eb54a40f00102f901293f370900000000c0020192030c43656e7472616c205061726b",
+        "latitude": 53.4150047,
+        "longitude": -3.0355222
+      },
+      {
+        "name": "Garfield Park",
+        "address": "Garfield Park, 100, Chicago, IL 60624, United States of America",
+        "category": "leisure.park",
+        "type": "amenity",
+        "rank": {
+          "importance": 0.3501849283177136,
+          "popularity": 5.3196695164468535,
+          "confidence": 0,
+          "match_type": "full_match"
+        },
+        "id": "51b6ab4665f9ed55c059f5b5d37bcff04440f00101f901da3c370100000000c0020192030d4761726669656c64205061726b",
+        "latitude": 41.8813319,
+        "longitude": -87.7183469
+      }
+    ]
+  }
+]

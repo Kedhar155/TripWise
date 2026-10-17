@@ -16,6 +16,22 @@ All responses are JSON and use `Cache-Control: no-store`. Credentials stay on th
 
 `GET /api/places/[id]` returns `{ place }`. Keep the original search ID when saving. Geoapify sometimes encodes a different centroid in its detail response; the API preserves the requested ID.
 
+### Country and city search
+
+`GET /api/cities?country=fr&q=Par` returns `{ cities: [{ id, name, label, country }] }`. Country must be a lowercase code in the fixed 249-entry offline list at `src/lib/countries.ts`. The browser searches that list locally; it makes no country-list API request. City suggestions use Geoapify Autocomplete with `type=city`, `filter=countrycode:<code>`, English labels, and a six-result limit. Responses are deduplicated and checked against the country. Missing/invalid country or a query outside 3–120 characters returns 400.
+
+The browser waits 400 ms after typing, makes no city request before three characters, cancels obsolete reads, and caches normalized country/query combinations for 10 minutes (at most 100 entries). The server opts into Next's persistent fetch cache for 24 hours. Only successful upstream responses are cached. Country changes clear the city and cancel pending suggestions. An empty city list returns 200; service problems use the existing safe 500 response.
+
+The existing places route accepts optional `country` and `cityId` parameters. A selected suggestion supplies its exact ID and label: `/api/places?city=Paris%2C%20France&country=fr&cityId=<id>&category=museums,parks&sort=name`. The server resolves that boundary's details, checks its country, and uses the selected ID as the Places boundary filter. City details are cached for 24 hours. A different country returns 400 `CITY_COUNTRY_MISMATCH`. A cityId requires a valid country. Country-scoped city text must be at least three characters. Old city-only calls keep their original two-character minimum and behavior. Popular-city shortcuts set the corresponding country and retain their direct-search behavior.
+
+### Worldwide place names
+
+`GET /api/places/search?name=Eiffel%20Tower` returns `{ places, query, meta }`, with the same Place fields used by city results, Details, and Add to Trip. `name` must be 3–120 characters; empty/short input returns 400. `category` accepts the shared selections above. `sort` accepts `relevance` (default) or `name`. Up to 20 distinct matches from the service are displayed; a common name can return multiple cards. Empty matches return 200 with `places: []` and the UI says “No places found, try a different name”. No city is invented and no city-center distance is shown for worldwide results.
+
+Chosen service: [Geoapify Forward Geocoding](https://apidocs.geoapify.com/docs/geocoding/forward-geocoding/) with `text`, `type=amenity`, and `bias=countrycode:none`. It supports named-place lookup without an area. The [Places name filter](https://apidocs.geoapify.com/docs/places/) requires category and spatial context, which the worldwide form does not have. Name responses are cached upstream for one hour. Geocoding's singular `category` and Places' `categories` array both use the shared main-category catalog. Missing category tags get an optional cached details lookup; if that fails the card keeps Other. Category selections filter the returned matches on the server because geocoding has no category filter. Opening Details/saving still resolves the actual place on the server, and preserves the original geocoding ID; venue names can use the local language (e.g. Eiffel Tower becomes Tour Eiffel in Details/My Trip).
+
+All Geoapify calls, including suggestions and name searches, live in the server-only library and are reached through TripWise routes. Browser code never receives the key. New route examples and recorded responses are in `API_TESTS.md` and `docs/search-rework/change-2-api-tests.md`.
+
 ## My Trip
 
 Every itinerary request requires an `x-visitor-id` header containing a random v4 UUID. The frontend will create it once with `crypto.randomUUID()` and store it in localStorage.

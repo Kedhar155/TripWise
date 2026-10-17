@@ -1,0 +1,103 @@
+import assert from 'node:assert/strict';
+import { readFileSync, existsSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { resolve, dirname } from 'node:path';
+import ts from 'typescript';
+const require = createRequire(import.meta.url);
+const cache = new Map();
+function load(file) {
+  file = resolve(file);
+  if (cache.has(file)) return cache.get(file);
+  const { outputText } = ts.transpileModule(readFileSync(file, 'utf8'), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } });
+  const compiled = { exports: {} };
+  new Function('require', 'module', 'exports', outputText)(id => {
+    if (id === 'server-only') return {};
+    if (!id.startsWith('.') && !id.startsWith('@/')) return require(id);
+    const base = id.startsWith('@/') ? resolve('src', id.slice(2)) : resolve(dirname(file), id);
+    return load(['.ts', '.tsx'].map(ext => base + ext).find(existsSync));
+  }, compiled, compiled.exports);
+  cache.set(file, compiled.exports);
+  return compiled.exports;
+}
+const { countries } = load('src/lib/countries.ts');
+const { suggestCities, searchPlaceNames, searchPlaces, query } = load('src/lib/geoapify.ts');
+const { citySuggestions, cityQuery, cityDebounceMs } = load('src/lib/city-suggestions.ts');
+assert.equal(countries.length, 249);
+assert.equal(new Set(countries.map(c => c.code)).size, 249);
+assert.equal(cityQuery('', 'Paris'), null);
+assert.equal(cityQuery('fr', 'Pa'), null);
+assert.equal(cityQuery('fr', ' PAR ').get('q'), 'par');
+assert.ok(cityDebounceMs >= 300 && cityDebounceMs <= 600);
+const previousFetch = globalThis.fetch;
+const previousKey = process.env.GEOAPIFY_API_KEY;
+const previousNow = Date.now;
+process.env.GEOAPIFY_API_KEY = 'test-placeholder';
+const calls = [];
+let mode = 'ready';
+const p = (place_id, extra = {}) => ({ place_id, lat: 48, lon: 2, name: place_id, ...extra });
+globalThis.fetch = async (url, options) => {
+  const parsed = new URL(url, 'http://localhost');
+  calls.push({ url: parsed, options });
+  if (mode === 'error') return Response.json({}, { status: 500 });
+  if (parsed.pathname === '/api/cities') return Response.json({ cities: [{ id: 'paris', name: 'Paris', label: 'Paris, France', country: parsed.searchParams.get('country') }] });
+  if (parsed.pathname.endsWith('/autocomplete')) return Response.json({ results: mode === 'empty' ? [] : [p('paris', { country_code: 'fr', city: 'Paris' }), p('wrong-country', { country_code: 'us' }), p('paris', { country_code: 'fr' })] });
+  if (parsed.pathname.includes('place-details')) return Response.json({ features: [{ properties: p('changed-centroid-id', { country_code: 'fr', categories: ['tourism.sights'] }) }] });
+  if (parsed.pathname === '/v2/places') return Response.json({ features: [{ properties: p('museum', { categories: ['entertainment.museum'] }) }] });
+  return Response.json({ results: mode === 'empty' ? [] : [p('famous', { category: 'leisure.park' }), p('missing-category'), p('famous', { category: 'leisure.park' })] });
+};
+try {
+  for (const params of ['country=xx&q=Par', 'country=FR&q=Par', 'q=Par', 'country=fr&q=Pa', 'country=fr&q=']) {
+    await assert.rejects(suggestCities(new URLSearchParams(params)), e => e.status === 400);
+  }
+  for (const name of ['', 'a', 'ab', 'x'.repeat(121), 'abc\n']) await assert.rejects(searchPlaceNames(new URLSearchParams({ name })), e => e.status === 400);
+  assert.equal(calls.length, 0, 'Invalid input must not spend credits');
+  const cities = await suggestCities(new URLSearchParams('country=fr&q=PAR'));
+  assert.deepEqual(cities.cities.map(c => c.id), ['paris']);
+  assert.equal(calls.at(-1).url.searchParams.get('type'), 'city');
+  assert.equal(calls.at(-1).url.searchParams.get('filter'), 'countrycode:fr');
+  assert.equal(calls.at(-1).options.cache, 'force-cache');
+  assert.equal(calls.at(-1).options.next.revalidate, 86400);
+  const names = await searchPlaceNames(new URLSearchParams('name=Famous%20Place'));
+  assert.deepEqual(names.places.map(p => p.category), ['parks', 'sights']);
+  assert.equal(names.places[1].id, 'missing-category', 'Original search ID remains stable after category lookup');
+  const nameCall = calls.find(c => c.url.searchParams.get('type') === 'amenity');
+  assert.equal(nameCall.url.searchParams.get('bias'), 'countrycode:none');
+  assert.equal(nameCall.url.searchParams.has('filter'), false);
+  assert.equal(nameCall.options.next.revalidate, 3600);
+  const filtered = await searchPlaceNames(new URLSearchParams('name=Famous%20Place&category=parks'));
+  assert.deepEqual(filtered.places.map(p => p.category), ['parks']);
+  const selected = await searchPlaces(new URLSearchParams('city=Paris&country=fr&cityId=city&category=museums'));
+  assert.equal(selected.places[0].category, 'museums');
+  assert.equal(calls.at(-1).url.searchParams.get('filter'), 'place:city');
+  await assert.rejects(searchPlaces(new URLSearchParams('city=Paris&country=jp&cityId=city')), e => e.status === 400);
+  assert.throws(() => query(new URLSearchParams('city=Paris&cityId=city')), e => e.status === 400);
+  assert.throws(() => query(new URLSearchParams('city=Pa&country=fr')), e => e.status === 400);
+  mode = 'empty';
+  assert.deepEqual((await suggestCities(new URLSearchParams('country=fr&q=Par'))).cities, []);
+  assert.deepEqual((await searchPlaceNames(new URLSearchParams('name=madeup'))).places, []);
+  mode = 'error';
+  await assert.rejects(suggestCities(new URLSearchParams('country=fr&q=Par')), e => e.status === 500 && !e.message.includes('test-placeholder'));
+  await assert.rejects(searchPlaceNames(new URLSearchParams('name=madeup')), e => e.status === 500);
+  mode = 'ready';
+  calls.length = 0;
+  const signal = new AbortController().signal;
+  await citySuggestions('fr', 'Pa', signal);
+  assert.equal(calls.length, 0);
+  await citySuggestions('fr', 'Par', signal);
+  await citySuggestions('fr', ' PAR ', signal);
+  assert.equal(calls.length, 1, 'Normalized repeated query uses browser cache');
+  await citySuggestions('us', 'Par', signal);
+  assert.equal(calls.length, 2, 'Country is part of cache key');
+  const now = Date.now(); Date.now = () => now + 11 * 60 * 1000;
+  await citySuggestions('fr', 'Par', signal);
+  assert.equal(calls.length, 3, 'Expired suggestion cache refreshes');
+  mode = 'error';
+  await assert.rejects(citySuggestions('fr', 'Mar', signal));
+  mode = 'ready';
+  await citySuggestions('fr', 'Mar', signal);
+  assert.equal(calls.length, 5, 'Failed response is not cached');
+} finally {
+  globalThis.fetch = previousFetch; Date.now = previousNow;
+  if (previousKey === undefined) delete process.env.GEOAPIFY_API_KEY; else process.env.GEOAPIFY_API_KEY = previousKey;
+}
+console.log('PASS: offline countries, minimum input, country restrictions, city-ID preservation, worldwide name matches, categories, deduplication, missing-category enrichment, empty/error handling, private errors, and cache lifetime/isolation/retry.');

@@ -10,6 +10,7 @@ export type Place = {
   phone?: string;
   openingHours?: string;
 };
+export type CitySuggestion = { id: string; name: string; label: string; country: string };
 export type ItineraryItem = {
   id: string;
   visitor_id: string;

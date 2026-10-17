@@ -316,3 +316,127 @@ Response:
   }
 }
 ```
+
+<!-- BEGIN SEARCH REWORK 2 -->
+## Search rework: country/city and worldwide place-name search
+
+Verified against http://127.0.0.1:3021: 32 real HTTP requests PASS. Full responses: [change-2-api-tests.md](docs/search-rework/change-2-api-tests.md).
+
+Repeat: `node scripts/test-search-api.mjs` (default local port 3021; override TEST_BASE_URL if needed).
+
+- `GET /api/cities?country=fr&q=Par`: country is a lowercase code from src/lib/countries.ts; q must be 3–120 characters. Suggestions are country-restricted, deduplicated, and cached upstream for 24 hours. Browser waits 400 ms and caches repeats for 10 minutes.
+- `GET /api/places?city=Paris&country=fr&cityId=<suggestion-id>&category=museums,parks&sort=name`: existing route extended with optional country and cityId. City IDs require a country and must resolve inside that country; old city-only requests remain supported.
+- `GET /api/places/search?name=Eiffel%20Tower`: worldwide Geocoding amenity search, no country/city required, up to 20 matches with shared Place fields and category mapping. Supports category selections and sort=relevance (default) or name. No invented city-center distances. Empty name/under three characters returns 400; no matches returns 200 with places: [].
+
+### Example: GET /api/places/search?name=ab
+
+HTTP 400
+
+```json
+{
+  "error": {
+    "code": "INVALID_SEARCH",
+    "message": "Enter a place name between 3 and 120 characters."
+  }
+}
+```
+
+### Example: GET /api/cities?country=fr&q=Par
+
+HTTP 200
+
+```json
+{
+  "cities": [
+    {
+      "id": "517808e3a7718f024059852f0219f06d4840f00101f901141d000000000000c002059203055061726973",
+      "name": "Paris",
+      "label": "Paris, France",
+      "country": "fr"
+    },
+    {
+      "id": "5194a2957b81c9024059ece5d2533f6d4840f00103f90189b90f0100000000c002089203055061726973",
+      "name": "Paris",
+      "label": "Paris, IDF, France",
+      "country": "fr"
+    },
+    {
+      "id": "512ead86c43d36024059ee9aeb8f8b6e4840f00101f9012d25000000000000c0020592031331367468204172726f6e64697373656d656e74",
+      "name": "Paris",
+      "label": "16th Arrondissement, Paris, France",
+      "country": "fr"
+    },
+    {
+      "id": "5145717d0ee2a9024059f57695ffda6c4840f00101f9013725000000000000c00205920312367468204172726f6e64697373656d656e74",
+      "name": "Paris",
+      "label": "6th Arrondissement, Paris, France",
+      "country": "fr"
+    },
+    {
+      "id": "51d034176eaf7b0240590fcb0b55d66f4840f00101f9018851000000000000c0020592031b387468204172726f6e64697373656d656e74206f66205061726973",
+      "name": "Paris",
+      "label": "8th Arrondissement of Paris, Paris, France",
+      "country": "fr"
+    },
+    {
+      "id": "51aa8251499d8002405954e81780a16d4840f00101f9013125000000000000c00205920312377468204172726f6e64697373656d656e74",
+      "name": "Paris",
+      "label": "7th Arrondissement, Paris, France",
+      "country": "fr"
+    }
+  ]
+}
+```
+
+### Example: GET /api/places/search?name=Eiffel+Tower
+
+HTTP 200
+
+```json
+{
+  "places": [
+    {
+      "id": "5112386d21235b024059effbdc75db6d4840f00102f901747f4c0000000000c0020192030c45696666656c20546f776572",
+      "name": "Eiffel Tower",
+      "address": "Eiffel Tower, 5 Avenue Anatole France, 75007 Paris, France",
+      "category": "sights",
+      "latitude": 48.8582599,
+      "longitude": 2.2945006
+    },
+    {
+      "id": "51d7a3703d0a0f5dc05909f9a067b3aa4940f00103f90139b34ba000000000c0020192030c45696666656c20546f776572",
+      "name": "Eiffel Tower",
+      "address": "Eiffel Tower, Improvement District No. 9, AB, Canada",
+      "category": "parks",
+      "latitude": 51.3336,
+      "longitude": -116.235
+    }
+  ],
+  "query": "Eiffel Tower",
+  "meta": {
+    "limit": 20,
+    "count": 2,
+    "distanceFrom": null,
+    "attribution": "Powered by Geoapify | © OpenStreetMap contributors"
+  }
+}
+```
+
+### Example: GET /api/places/search?name=zzzxxyyqqqnonexistentplace
+
+HTTP 200
+
+```json
+{
+  "places": [],
+  "query": "zzzxxyyqqqnonexistentplace",
+  "meta": {
+    "limit": 20,
+    "count": 0,
+    "distanceFrom": null,
+    "attribution": "Powered by Geoapify | © OpenStreetMap contributors"
+  }
+}
+```
+
+<!-- END SEARCH REWORK 2 -->
