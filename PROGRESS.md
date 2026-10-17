@@ -187,3 +187,22 @@ Validation:
 - Evidence: docs/extras/feature-3-add-toast.png, feature-3-explore-skeleton.png, feature-3-trip-skeleton.png, and feature-3-phone-footer.png.
 - Sonner installation required approved network access after sandbox DNS failure. Local production and fixture previews use ports 3011 and 3012.
 - Feature 3 complete on extras.
+
+## Extras - Feature 4 of 6: Destination weather (17 October 2026)
+
+Completed:
+- Added a self-contained weather box to Destination Details. Chose a direct browser request to the public Open-Meteo forecast API; no key, new server route, or existing API changes are needed.
+- Uses the place latitude/longitude, destination-local timezone, current Celsius temperature, WMO condition description and Lucide icon, and the next three days of high/low temperatures (excluding today).
+- Added loading skeletons, a small friendly failure message with Retry weather, a 12-second timeout, cancellation when leaving the page, and validation of incomplete responses. Weather loading/failure does not block place details or trip actions.
+- Hides the entire box for missing, nonnumeric, or out-of-range coordinates, while accepting valid zero coordinates. Added the linked credit "Weather data by Open-Meteo.com" inside the box.
+- Kept all other product behavior and styles unchanged. No dependencies, API routes, database changes, push, or deployment.
+- API reference: https://open-meteo.com/en/docs (current variables, daily highs/lows, timezone=auto, and WMO weather codes).
+
+Validation:
+- Final lint and production webpack build (including TypeScript): PASS. Visitor, client error, saved-secret, and whitespace checks: PASS.
+- node scripts/test-weather.mjs: PASS for absent/invalid/zero coordinates, hidden component rendering, zero temperatures, next-three-day parsing, missing/null data, all documented WMO codes, unknown-code fallback, night conditions, request parameters/timezone, HTTP/JSON/network errors, cancellation, and rendered loading/error/ready panels with credit and Retry.
+- Existing real-service integration checks: all 28 HTTP requests PASS. Evidence: docs/extras/feature-4-api-tests.md.
+- Live browser: searched Chennai museums, opened Amma Museum, observed weather loading then a friendly timeout state; Retry weather recovered to live 28°C/drizzle and three forecast days. A separate direct Open-Meteo request also returned HTTP 200 with current and daily data.
+- Added the test place while weather was still loading, refreshed My Trip to confirm persistence, removed it, and refreshed again to confirm an empty trip. Only disposable test records were removed.
+- Desktop weather layout visually inspected. Phone at 390px showed all three forecast days with no horizontal overflow (375px content and scroll widths). Saved docs/extras/feature-4-weather-desktop.png and feature-4-weather-phone.png. Viewport override reset.
+- Local production preview: http://127.0.0.1:3013. Feature 4 complete on extras.
