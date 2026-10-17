@@ -42,7 +42,7 @@ Validation:
 - Frontend integration and phone testing remain phase 3/4. No push or deployment performed.
 
 ## Remaining phases (one at a time)
-3. City search, category filter, name/distance sort, place details, My Trip, random localStorage visitor ID, loading/empty/error feedback, and persistence checks.
+3. Completed in Phase C below: city search, category filter, name/distance sort, place details, My Trip, random localStorage visitor ID, loading/empty/error feedback, and persistence checks.
 4. Phone and desktop testing, final polish, documentation. Optional weather only if time permits.
 5. GitHub push and Vercel deployment only after explicit approval.
 
@@ -70,3 +70,24 @@ Run, test, fix, update this file, and commit at the end of every phase. Ask befo
 - Extended the secret scan to include API_TESTS.md and PROGRESS.md; .env.local remains ignored.
 - Removed only temporary database rows created by the requested removal tests; no files deleted. No push or deployment.
 - Phase B complete. Browser localStorage, functional screens, and phone testing remain in the later UI phase.
+
+## Phase C - Explore, destination details, and saved trips (17 October 2026)
+
+Completed:
+- Replaced the foundation placeholder with Explore: city search, six category choices, name/distance sorting, and responsive place cards.
+- Added /places/[id] with address, available hours/contact/website, map link, Add to Trip, saved feedback, and a My Trip link.
+- Added /trip with database-backed saved places, removal, loading/retry feedback, and an empty-trip message.
+- Added a random UUID saved as tripwise.visitor-id in localStorage and sent in the existing visitor header. Invalid stored IDs are repaired; blocked storage shows a helpful message.
+- Kept the white/teal design, shared navigation, visible keyboard focus, labeled fields, screen-reader status messages, and Geoapify/OpenStreetMap attribution.
+- Reused the finished APIs and database. No new dependencies or optional weather added.
+
+Validation:
+- Lint and TypeScript checks: PASS. Initial production build passed. A later Turbopack rebuild hit a CSS-worker process error, including outside the sandbox; final production build PASS with the supported `npm run build -- --webpack` fallback. Use that command if the local Turbopack worker error recurs.
+- Browser flow against real services: Chennai museums returned 16 places; distance order and A–Z order verified; opened Amma Museum and saved it; navigated to My Trip and refreshed; saved item remained; removed that test item and refreshed; empty trip remained.
+- Unknown city showed the clear city-not-found error; a subsequent Chennai search recovered successfully. Loading messages observed during search, details, and trip reads.
+- Desktop saved-trip layout visually inspected. At 390px viewport, Explore, destination details, and empty My Trip layouts visually inspected; details had no horizontal overflow (375px content/client width with scrollbar).
+- node scripts/test-visitor.mjs: PASS for UUID format, repeated-visit persistence, separate storage, malformed ID repair, and blocked-storage feedback.
+- Secret scan passed; .env.local remains ignored. No credentials printed or included in browser code.
+- Preview: http://127.0.0.1:3005. The initial sandbox preview could not be reached; an approved preview outside the sandbox enabled browser testing.
+- Only the place created for the requested add/remove test was removed. No files are removed in the final changes. No push or deployment performed.
+- Phase C complete. Broader phone/desktop checks and final documentation remain Phase 4; GitHub/Vercel remain approval-gated.
