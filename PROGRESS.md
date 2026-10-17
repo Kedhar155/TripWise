@@ -22,11 +22,26 @@ Validation:
 - Mobile layout uses responsive classes; actual mobile viewport testing remains for the functional UI phase.
 - npm audit reports five high-severity development dependency findings, all through braces -> micromatch -> fast-glob -> Next ESLint plugin. Suggested automated fix downgrades the Next ESLint config to v14; not applied because it mismatches Next v16. Review a compatible upstream fix before final delivery.
 
-## Waiting for user
-Fill GEOAPIFY_API_KEY, SUPABASE_URL, and SUPABASE_SECRET_KEY in .env.local, then say they are ready. Never paste keys into chat or commit them. A legacy Supabase service_role key can be used as the value of SUPABASE_SECRET_KEY if a new secret key is unavailable.
+## Phase 2 - Database and API (17 October 2026)
+Completed:
+- User confirmed keys are ready. Checked only presence and service statuses; no secret values printed.
+- Verified Geoapify city lookup and Supabase access.
+- Created public.itinerary in the connected TripWise project, with all requested columns, unique visitor/place constraint, coordinate checks, and visitor/date index.
+- Enabled row-level security and restricted direct browser table access. All itinerary queries use the server key and visitor ID.
+- Implemented GET /api/places, GET /api/places/[id], GET/POST /api/itinerary, DELETE /api/itinerary/[id].
+- Added input checks, bounded JSON bodies, request timeouts, no-store responses, safe 400/404/409/500 errors, and API documentation.
+- Search supports city boundaries, six category options, and name/distance sorting for up to 100 results. Distances are meters from city center.
+- Fixed a real Geoapify mismatch: details may return a different centroid-encoded ID; the requested search ID stays stable.
+
+Validation:
+- Production build, lint, and TypeScript checks: PASS.
+- Live integration checks: PASS for invalid inputs, empty itinerary, Chennai museums, both sorts, unknown city/place, detail lookup, save/load persistence, duplicate 409, two-visitor isolation, cross-visitor delete 404, removal, and missing item 404.
+- Error checks: PASS for 400/404/409/500 mapping and removal of unexpected private error details.
+- Test records were removed using only their random test visitor IDs and row IDs; no user records or files deleted.
+- Local production preview: http://127.0.0.1:3003.
+- Frontend integration and phone testing remain phase 3/4. No push or deployment performed.
 
 ## Remaining phases (one at a time)
-2. Database schema with unique (visitor_id, place_id), server-only credentials, and validated API routes: GET /api/places, GET /api/places/[id], GET/POST /api/itinerary, DELETE /api/itinerary/[id]. Clear 400/404/409/500 errors.
 3. City search, category filter, name/distance sort, place details, My Trip, random localStorage visitor ID, loading/empty/error feedback, and persistence checks.
 4. Phone and desktop testing, final polish, documentation. Optional weather only if time permits.
 5. GitHub push and Vercel deployment only after explicit approval.
