@@ -11,6 +11,7 @@ import { ErrorFeedback } from "./error-feedback";
 import { PlaceSkeletons } from "./place-skeletons";
 import { CategoryBadge } from "./category-badge";
 import { Card } from "./ui/card";
+import { TripSummary } from "./trip-summary";
 
 function dayStorageKey() { return `tripwise.day-count.${getVisitorId()}`; }
 
@@ -96,6 +97,7 @@ export function Trip() {
     <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">My Trip</h1>
     <p className="mt-5 mb-8 max-w-xl leading-7 text-slate-600">Your favorite places, all in one place. Saved for this browser, even after a refresh. Clearing browser data starts a new trip.</p>
     {loading ? <PlaceSkeletons trip /> : error ? <ErrorFeedback title="Could not load your trip" detail={error} onRetry={() => { setLoading(true); setError(""); setAttempt(a => a + 1); }} /> : <>
+      <TripSummary items={items} />
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p role="status" className="text-sm text-teal-800">{`${items.length} saved ${items.length === 1 ? "place" : "places"}`}</p>
         <div><button className="button" onClick={addDay} disabled={dayCount >= MAX_TRIP_DAYS}><Plus size={16} aria-hidden="true" />Add day</button><p className="mt-2 text-xs text-slate-500">{dayCount >= MAX_TRIP_DAYS ? "Maximum of 14 days reached." : "Plan up to 14 days."}</p></div>

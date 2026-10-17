@@ -227,3 +227,22 @@ Validation:
 - Desktop and phone layout visually inspected. No horizontal overflow at widths 390px (375/375 content/scroll) and 320px (305/305); phone controls stack vertically. Viewport restored.
 - Evidence: docs/extras/feature-5-planned-desktop.png, feature-5-phone.png, and feature-5-failed-move.png.
 - Feature 5 complete on extras.
+
+## Extras - Feature 6 of 6: Trip summary (17 October 2026)
+
+Completed:
+- Added a responsive summary card near the top of My Trip with total places, distinct occupied days, unplanned places, and a category breakdown.
+- Days planned counts only days containing a place; added but empty day headings do not inflate the total.
+- Calculates directly from the already-loaded items on each render. Move/remove success updates the existing items state and the summary immediately, with no new API request, summary endpoint, or database change.
+- Reused CategoryBadge and the single shared category icon/color mapping. Added singular/plural names to that mapping and normalized known subcategories into shared totals, such as restaurants and museums. Other data categories retain their labels with the existing fallback icon/color.
+- Hides the summary for an empty trip and preserves the existing blank-canvas message and day-planning behavior.
+- Kept teal styling and all existing API routes unchanged. No dependency changes, push, or deployment.
+
+Validation:
+- Production webpack build (including TypeScript), lint, weather tests, visitor tests, client error tests, saved-secret scan, and whitespace checks: PASS.
+- node scripts/test-trip-summary.mjs: PASS for total counts, distinct occupied days, unplanned places, normalized category totals, singular/plural labels, shared rendered icons/colors, recalculation after moves/removals, source-item immutability, empty-trip hiding, and rendered summary content.
+- All 59 real-service API regression checks PASS, including the existing PATCH validation/persistence/isolation coverage. Evidence: docs/extras/feature-6-api-tests.md.
+- Browser port 3016: searched Chennai museums and saved Amma Museum; observed summary 1 place/0 days/1 unplanned. Moved it to Day 1 and observed 1/1/0 immediately. Added Chennai Government Museum and observed 2/1/1; moved both onto Day 1 and confirmed only one planned day; added an empty Day 2 without inflating the count; moved the second place to Day 2 and observed 2/2/0. Refresh preserved these values.
+- Moved the second place back to Unplanned and observed 2/1/1; removed the first place and observed 1/0/1, including the category count changing from 2 to 1. Removed the final place and confirmed the summary disappeared and the existing empty message remained; refresh kept it hidden. Only disposable test records were removed.
+- Desktop and phone summary layouts visually inspected. No horizontal overflow at widths 390px (375/375 content/scroll) and 320px (305/305). Viewport restored. Evidence: docs/extras/feature-6-summary-desktop.png and feature-6-summary-phone.png.
+- Feature 6 complete on extras. All six requested extras are complete and committed individually; nothing has been pushed or deployed.
