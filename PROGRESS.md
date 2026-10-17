@@ -47,3 +47,15 @@ Validation:
 5. GitHub push and Vercel deployment only after explicit approval.
 
 Run, test, fix, update this file, and commit at the end of every phase. Ask before deleting files or installing outside this project.
+
+## Phase A - Existing foundation rechecked (17 October 2026)
+- Read prior progress first; preserved completed foundation and API work.
+- Confirmed Next.js, TypeScript, Tailwind, shadcn/ui setup, and Supabase dependency already exist.
+- Confirmed src/lib/supabase.ts is server-only and reads private environment settings.
+- Read the existing Supabase itinerary table successfully (HTTP 200, exact row count 0).
+- Local preview at http://127.0.0.1:3003 returned HTTP 200 with TripWise content.
+- Itinerary route returned HTTP 200 with an empty items list using its required visitor header; missing header returned the expected 400.
+- Lint, TypeScript checks, and saved-secret scan passed; .env.local is ignored by Git.
+- Existing production build was reused; no application code or dependencies changed.
+- Exact schema remains in supabase/migrations/001_itinerary.sql. Supabase location: project > SQL Editor > New query > paste schema > Run. Already applied; no repeat is needed.
+- No files or database records deleted, no push, and no deployment. Phase A complete; later UI work remains separate.
