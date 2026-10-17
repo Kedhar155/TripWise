@@ -246,3 +246,36 @@ Validation:
 - Moved the second place back to Unplanned and observed 2/1/1; removed the first place and observed 1/0/1, including the category count changing from 2 to 1. Removed the final place and confirmed the summary disappeared and the existing empty message remained; refresh kept it hidden. Only disposable test records were removed.
 - Desktop and phone summary layouts visually inspected. No horizontal overflow at widths 390px (375/375 content/scroll) and 320px (305/305). Viewport restored. Evidence: docs/extras/feature-6-summary-desktop.png and feature-6-summary-phone.png.
 - Feature 6 complete on extras. All six requested extras are complete and committed individually; nothing has been pushed or deployed.
+
+## Extras - Final full-flow verification (17 October 2026)
+
+Completed:
+- Re-read progress and confirmed the working branch is extras with a clean starting tree.
+- Ran the requested full walkthrough against a fresh local production preview at http://127.0.0.1:3017 using real Geoapify, Open-Meteo, and Supabase services.
+- No broken behavior was found, so no application or API changes were needed. Saved final verification evidence and this progress update for the requested commit.
+
+Browser walkthrough: PASS
+1. Searched Chennai with All places and received the Chennai results heading.
+2. Changed the filter to Museums and received 16 museum results, initially in distance order.
+3. Switched to Name (A-Z) and verified the complete visible result-name list is alphabetically sorted; Amma Museum appeared first.
+4. Opened Amma Museum Details and observed weather loading followed by live 28°C/rain showers, the next three days of high/low forecasts, and the Open-Meteo credit. Details and trip controls remained available.
+5. Added the place, observed the success toast, and opened My Trip. The new item was Unplanned and summary values were 1 total / 0 planned days / 1 unplanned.
+6. Moved it to Day 1, observed the toast and immediate summary 1/1/0; added Day 2, moved it there, refreshed, and confirmed the assignment, empty Day 1, and summary persisted.
+7. At 390px phone width, moved it back to Unplanned and observed summary 1/0/1 immediately. No horizontal overflow: content and scroll widths were both 375px.
+8. Removed the test place, observed the existing empty-trip message and hidden summary, refreshed, and confirmed the item stayed removed. Empty day headings remained available as designed. Restored the browser viewport.
+9. Browser warning/error log was empty. Only the disposable test place was removed; no user itinerary records were changed.
+
+Other validation: PASS
+- npm run lint.
+- npm run build -- --webpack, including TypeScript.
+- node scripts/test-weather.mjs, test-trip-summary.mjs, test-visitor.mjs, test-client-errors.mjs, and test-errors.mjs.
+- Existing API integration suite: all 59 real HTTP checks, including search/sorts/details, save/list persistence, duplicate handling, day PATCH validation and visitor isolation, clearing days, and removal. Evidence: docs/extras/final-api-tests.md.
+- Saved-secret scan and git diff --check.
+
+Evidence:
+- docs/extras/final-search.png
+- docs/extras/final-details-weather.png
+- docs/extras/final-planned-trip.png
+- docs/extras/final-empty-trip-phone.png
+
+All six extras are verified together. Current teal style is preserved. No merge, push, or deployment was performed.
