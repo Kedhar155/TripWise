@@ -132,3 +132,20 @@ Validation:
 - Final lint and whitespace checks PASS. Anonymous homepage HTTP 200; private `/.env.local` and `/.vercel/cli/auth.json` URLs both HTTP 404.
 - Automatic GitHub-to-Vercel deployment is not connected because Vercel requires its GitHub app installation. The requested public push and CLI production deployment are complete; future updates can use the CLI.
 - Phase E complete.
+
+## Extras - Feature 1 of 6: Category icons and colors (17 October 2026)
+
+Completed:
+- Added src/lib/category-style.ts as the reusable source for category icons and foreground/background colors: landmarks for sights and museums, tree for parks, utensils for restaurants, umbrella for beaches, and a neutral map pin fallback.
+- Handles friendly category names and dotted Geoapify categories, including more specific subcategories.
+- Added one shared CategoryBadge component to Explore cards, Details, and My Trip. Category text remains visible; decorative icons are hidden from screen readers.
+- Preserved the teal layout, existing filters, and all API routes. No new dependencies, push, or deployment.
+
+Validation:
+- Lint and production webpack build (including TypeScript): PASS. Existing visitor, client error, and secret checks: PASS.
+- Verified all six color pairs numerically: contrast ranges from 6.81:1 to 9.45:1, above the 4.5:1 target for small text. Checked friendly names, dotted categories, nested categories, and unknown/empty fallbacks.
+- Existing real-service API integration checks: all 28 HTTP requests PASS, including search, both sorts, details, add, fresh-list persistence, duplicate prevention, visitor isolation, and removal. Evidence: docs/extras/feature-1-api-tests.md.
+- Browser flow on local production preview port 3009: searched Chennai museums (16 results), opened Amma Museum, added it, refreshed My Trip and confirmed persistence, removed it, refreshed again and confirmed the empty trip. Visually inspected Details and saved My Trip. Evidence: docs/extras/feature-1-saved-trip.png.
+- Existing API sometimes returns broad categories such as building or entertainment for museums. Those use the requested default badge; no category is guessed from a place name and no API data was changed.
+- Sandbox networking prevented browser/integration access to the initial preview; the approved local preview outside the sandbox enabled all checks. Only disposable test trip records were removed.
+- Feature 1 complete on extras.
