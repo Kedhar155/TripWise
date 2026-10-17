@@ -16,18 +16,19 @@ async function call(path, options = {}, expected = 200) {
   const summary = data.error ? `${data.error.code}: ${data.error.message}`
     : data.places ? `${data.places.length} places; first: ${data.places[0]?.name ?? 'none'}`
     : data.items ? `${data.items.length} saved items`
-    : data.item ? `Saved: ${data.item.name}`
+    : data.item ? `${options.method === 'PATCH' ? 'Updated' : 'Saved'}: ${data.item.name}; day: ${data.item.day ?? 'Unplanned'}`
     : data.place ? `Details: ${data.place.name}` : `Removed test item: ${data.deleted}`;
   const command = [`curl.exe -s -i -X ${options.method ?? 'GET'} "${base}${path}"`];
   for (const [name, value] of Object.entries(options.headers ?? {})) command.push(`-H '${name}: ${value}'`);
   if (options.body) command.push(`--data-raw '${options.body}'`);
-  results.push({ path, method: options.method ?? 'GET', expected, actual: response.status, summary, command: command.join(' ') });
+  results.push({ path, method: options.method ?? 'GET', expected, actual: response.status, summary, command: command.join(' '), response: options.method === 'PATCH' ? data : undefined });
   assert.equal(response.status, expected, `${options.method ?? 'GET'} ${path}: expected ${expected}, received ${response.status} (${data.error?.code ?? ''})`);
   assert.equal(response.headers.get('cache-control'), 'no-store');
   return data;
 }
 const headers = (id = visitor) => ({ 'x-visitor-id': id, 'content-type': 'application/json' });
 const post = (place_id, id = visitor) => ({ method: 'POST', headers: headers(id), body: JSON.stringify({ place_id }) });
+const patch = (day, id = visitor) => ({ method: 'PATCH', headers: headers(id), body: JSON.stringify({ day }) });
 try {
   for (const path of ['/api/places', '/api/places?city=a', '/api/places?city=Chennai&category=invalid', '/api/places?city=Chennai&sort=invalid', '/api/places/bad%21']) await call(path, {}, 400);
   await call('/api/itinerary', {}, 400);
@@ -52,6 +53,7 @@ try {
   const detail = await call('/api/places/' + encodeURIComponent(placeId));
   assert.equal(detail.place.id, placeId);
   saved = (await call('/api/itinerary', post(placeId), 201)).item;
+  assert.equal(saved.day, null, 'New places start Unplanned');
   await call('/api/itinerary', post(placeId), 409);
   const reload = await call('/api/itinerary', { headers: headers() });
   assert.ok(reload.items.some(item => item.id === saved.id));
@@ -60,6 +62,30 @@ try {
   savedOther = (await call('/api/itinerary', post(placeId, other), 201)).item;
   assert.notEqual(saved.id, savedOther.id);
   console.log('PASS: details, database persistence, duplicate 409, and visitor isolation');
+  const itemPath = '/api/itinerary/' + saved.id;
+  await call(itemPath, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: '{"day":1}' }, 400);
+  await call(itemPath, patch(1, 'invalid'), 400);
+  await call('/api/itinerary/not-a-uuid', patch(1), 400);
+  await call(itemPath, { method: 'PATCH', headers: headers(), body: '{broken' }, 400);
+  await call(itemPath, { method: 'PATCH', headers: headers(), body: '[]' }, 400);
+  await call(itemPath, { method: 'PATCH', headers: { 'x-visitor-id': visitor }, body: '{"day":1}' }, 400);
+  for (const day of [0, -1, 15, 1.5, '1', ' ', true, {}, [], undefined]) await call(itemPath, patch(day), 400);
+  await call(itemPath, patch(1, other), 404);
+  await call('/api/itinerary/' + randomUUID(), patch(1), 404);
+  for (const day of [1, 14, 2, 2]) {
+    const updated = (await call(itemPath, patch(day))).item;
+    assert.equal(updated.day, day);
+    assert.equal(updated.visitor_id, visitor);
+    assert.equal(updated.place_id, saved.place_id);
+    const fresh = (await call('/api/itinerary', { headers: headers() })).items.find(item => item.id === saved.id);
+    assert.equal(fresh.day, day, 'Planned day survives a fresh GET');
+  }
+  assert.equal((await call(itemPath, patch(null))).item.day, null);
+  assert.equal((await call(itemPath, patch(1))).item.day, 1);
+  assert.equal((await call(itemPath, patch(''))).item.day, null);
+  assert.equal((await call('/api/itinerary', { headers: headers() })).items.find(item => item.id === saved.id).day, null);
+  assert.equal((await call('/api/itinerary', { headers: headers(other) })).items.find(item => item.id === savedOther.id).day, null, 'Another visitor is unchanged');
+  console.log('PASS: PATCH whole-day validation, 1/14 boundaries, null/empty clearing, persistence, idempotence, and visitor isolation');
   await call('/api/itinerary/' + saved.id, { method: 'DELETE', headers: headers() });
   await call('/api/itinerary/' + saved.id, { method: 'DELETE', headers: headers() }, 404);
   saved = undefined;
@@ -84,10 +110,10 @@ try {
     '| # | Request | Expected | Actual | Result | Response summary |',
     '| --- | --- | --- | --- | --- | --- |',
     ...results.map((r, i) => `| ${i + 1} | ${r.method} ${r.path} | ${r.expected} | ${r.actual} | ${r.expected === r.actual ? 'PASS' : 'FAIL'} | ${escape(r.summary)} |`), '',
-    'Additional assertions: nonempty Chennai museum search; name and distance order; stable detail ID; saved item present in a new GET request; duplicate rejected; second visitor initially empty; same place allowed for separate visitors; another visitor cannot remove the first visitor\'s item; empty list after removal; no-store on every response.', '',
+    'Additional assertions: nonempty Chennai museum search; name and distance order; stable detail ID; saved item present in a new GET request; duplicate rejected; second visitor initially empty; same place allowed for separate visitors; another visitor cannot remove or update the first visitor\'s item; new places start Unplanned; PATCH accepts whole days 1–14, null, and empty string; invalid/missing input returns 400; absent/other-visitor items return 404; day changes and clearing persist in fresh reads; empty list after removal; no-store on every response.', '',
     '## Exact requests from this run', '',
     'These PowerShell curl commands record the actual inputs, including disposable test IDs. Deleted row IDs cannot be replayed as successful deletions; rerun the script to repeat the complete sequence with fresh IDs.', '',
-    ...results.flatMap((r, i) => [`### ${i + 1}. ${r.method} — HTTP ${r.actual}`, '', '```powershell', r.command, '```', '', `Result: ${r.summary}`, '']),
+    ...results.flatMap((r, i) => [`### ${i + 1}. ${r.method} — HTTP ${r.actual}`, '', '```powershell', r.command, '```', '', `Result: ${r.summary}`, '', ...(r.response ? ['Response:', '', '```json', JSON.stringify(r.response, null, 2), '```', ''] : [])]),
   ].join('\n');
   const reportPath = process.env.TEST_REPORT_PATH ?? 'API_TESTS.md';
   await writeFile(resolve(process.cwd(), reportPath), report);

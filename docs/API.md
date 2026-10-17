@@ -21,6 +21,19 @@ Every itinerary request requires an `x-visitor-id` header containing a random v4
 - `GET /api/itinerary`: returns `{ items }`, newest first.
 - `POST /api/itinerary`: send `Content-Type: application/json` and `{ "place_id": "<Geoapify place ID>" }`. Returns 201 with `{ item }`. Place fields are fetched from Geoapify on the server. Client-supplied names and coordinates are not trusted.
 - `DELETE /api/itinerary/[id]`: use the saved itinerary row UUID, not its place ID. Returns `{ deleted: "<row UUID>" }`. Both the row ID and visitor ID must match.
+- `PATCH /api/itinerary/[id]`: send `Content-Type: application/json` and `{ "day": 2 }` to plan a place. Accepts a whole number from 1 through 14; `{ "day": null }` or `{ "day": "" }` moves it to Unplanned. Returns 200 with `{ item }`, including its nullable `day`. Missing/invalid day, visitor ID, item ID, or body returns 400. A missing item or one belonging to another visitor returns 404. Only `day` is updated. New places default to `day: null`.
+
+Example (replace the disposable v4 UUIDs with your visitor and saved row IDs):
+
+```http
+PATCH /api/itinerary/11111111-1111-4111-8111-111111111111
+x-visitor-id: 22222222-2222-4222-8222-222222222222
+Content-Type: application/json
+
+{"day":2}
+```
+
+Response: HTTP 200, `{ "item": { "id": "11111111-1111-4111-8111-111111111111", "day": 2, ... } }` (all other saved item fields are returned unchanged). Full responses from real test requests are saved in `docs/extras/feature-5-api-tests.md`.
 
 ## Errors
 
@@ -38,6 +51,8 @@ Upstream errors and request URLs are not returned or logged because they can con
 ## Database and access
 
 Schema: `supabase/migrations/001_itinerary.sql`. Applied to the connected TripWise Supabase project on 17 October 2026. The table has the requested columns, coordinate checks, a unique `(visitor_id, place_id)` constraint, and an index for visitor/date lookups.
+
+Day planning adds the nullable integer column with `supabase/migrations/002_itinerary_day.sql`. Empty day headings are stored in this browser per visitor; place assignments are stored in Supabase. The UI shows Unplanned first, then Days 1–14 in order.
 
 Row-level security is enabled. Browser roles have no table privileges; only the server credential is used. Every itinerary route filters by the visitor ID. A visitor ID acts as a bearer identifier, not a login: anyone who obtains it can access that trip, and clearing localStorage loses the browser's link to it. Do not use this no-login design for sensitive travel records.
 

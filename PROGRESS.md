@@ -206,3 +206,24 @@ Validation:
 - Added the test place while weather was still loading, refreshed My Trip to confirm persistence, removed it, and refreshed again to confirm an empty trip. Only disposable test records were removed.
 - Desktop weather layout visually inspected. Phone at 390px showed all three forecast days with no horizontal overflow (375px content and scroll widths). Saved docs/extras/feature-4-weather-desktop.png and feature-4-weather-phone.png. Viewport override reset.
 - Local production preview: http://127.0.0.1:3013. Feature 4 complete on extras.
+
+## Extras - Feature 5 of 6: Day-wise trip planning (17 October 2026)
+
+Completed:
+- Received explicit authorization to run the database change. Used the signed-in TripWise Supabase SQL Editor to run exactly `alter table itinerary add column day integer;`; Supabase confirmed success. Saved the matching migration in supabase/migrations/002_itinerary_day.sql and evidence in docs/extras/feature-5-sql.png.
+- Added PATCH /api/itinerary/[id] alongside the existing DELETE handler. It checks visitor and row UUIDs, accepts a whole day 1-14 or null/empty string, updates only day, returns 400 for invalid input, and returns 404 for an absent/other-visitor item.
+- New and existing unassigned places use NULL (Unplanned); POST remains unchanged and the database supplies the NULL default.
+- My Trip now shows Unplanned at the top and numbered day sections in ascending order. Every item has a labeled dropdown, with success/error toasts for moves. Failed moves keep the previous assignment and re-enable the dropdown.
+- Added Add day up to a maximum of 14 and hints on empty days. Empty day headings are remembered in localStorage per visitor; place assignments persist in Supabase and reconstruct all needed headings on a fresh load.
+- Updated the item type, API documentation, API_TESTS.md with an actual PATCH request/response, and the integration checker with day validation, persistence, and isolation coverage.
+- Preserved teal styling, category badges, card hover, skeletons, toasts, shared footer, and weather. Existing GET/POST/DELETE behavior is unchanged. No push or deployment.
+
+Validation:
+- Production webpack build (including TypeScript), lint, weather tests, visitor tests, client error tests, API error tests, secret scan, and whitespace checks: PASS.
+- Expanded real-service integration suite: all 59 HTTP checks PASS. Includes new places starting Unplanned; days 1 and 14; repeated updates; fresh-list day persistence; null/empty clearing; invalid types, bounds, fractions, missing values, malformed body, visitor/row IDs; missing item 404; another visitor's update blocked with 404. Existing search, sorts, details, duplicate checks, isolation, and removal still pass. Full requests and responses: docs/extras/feature-5-api-tests.md.
+- Browser port 3014: searched Chennai museums, saved Amma Museum into Unplanned, added Day 2, moved the place to Day 2 with success toast, refreshed and confirmed it remained there; added empty Day 3 and refreshed to confirm it remained visible; moved back to Unplanned with toast and verified after refresh.
+- Browser added days through Day 14 and confirmed Add day disabled; moved the place to Day 14, removed it from that section, refreshed and confirmed an empty trip with empty day headings retained. Only disposable test records removed.
+- Controlled failure on local fixture port 3015 showed the error toast, kept the item in Unplanned, and left the dropdown usable.
+- Desktop and phone layout visually inspected. No horizontal overflow at widths 390px (375/375 content/scroll) and 320px (305/305); phone controls stack vertically. Viewport restored.
+- Evidence: docs/extras/feature-5-planned-desktop.png, feature-5-phone.png, and feature-5-failed-move.png.
+- Feature 5 complete on extras.

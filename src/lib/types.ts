@@ -29,4 +29,5 @@ export type ItineraryItem = {
   latitude: number;
   longitude: number;
   created_at: string;
+  day: number | null;
 };

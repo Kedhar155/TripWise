@@ -280,3 +280,39 @@ curl.exe -s -i -X DELETE "http://127.0.0.1:3003/api/itinerary/e5cc5538-bd8c-450f
 ```
 
 Result: Removed test item: e5cc5538-bd8c-450f-b415-89df923823a0
+
+
+## Feature 5 - Day planning PATCH (17 October 2026)
+
+PASS: all 59 local integration HTTP checks, including the existing search/add/list/remove checks and new PATCH validation, persistence, boundary, and visitor-isolation checks. Full evidence: [feature-5-api-tests.md](docs/extras/feature-5-api-tests.md).
+
+`PATCH /api/itinerary/[id]` requires a saved row UUID, `x-visitor-id`, and JSON content type. `day` must be a whole number 1–14, `null`, or an empty string. Missing/invalid input returns 400; an absent item or another visitor's item returns 404. Newly saved places return `day: null`.
+
+The example below records a real successful request and response using disposable test IDs. The test item has since been removed; run the checker with a fresh test visitor to repeat it.
+
+### Example: set Day 2
+
+```powershell
+curl.exe -s -i -X PATCH "http://127.0.0.1:3014/api/itinerary/88c8f568-90db-42d0-8bc9-3c03f3bc3ca8" -H 'x-visitor-id: d584080a-4e3b-4ca9-bd16-deb8760a4d0a' -H 'content-type: application/json' --data-raw '{"day":2}'
+```
+
+Result: Updated: Madras High Court Museum; day: 2
+
+Response:
+
+```json
+{
+  "item": {
+    "id": "88c8f568-90db-42d0-8bc9-3c03f3bc3ca8",
+    "visitor_id": "d584080a-4e3b-4ca9-bd16-deb8760a4d0a",
+    "place_id": "51f86d64725712544059aa2c5787142c2a40f00102f90170bdce41000000009203184d6164726173204869676820436f757274204d757365756d",
+    "name": "Madras High Court Museum",
+    "address": "Madras High Court Museum, North Fort Road, Zone 5 Royapuram, Chennai - 600009, Tamil Nadu, India",
+    "category": "building",
+    "latitude": 13.0860973,
+    "longitude": 80.2865932,
+    "created_at": "2026-10-17T11:38:13.732205+00:00",
+    "day": 2
+  }
+}
+```
