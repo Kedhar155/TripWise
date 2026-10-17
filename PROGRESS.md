@@ -461,3 +461,26 @@ Validation: PASS
 - Source/document/browser-bundle secret scan, all-Git-object secret scan, and git diff --check passed. .env.local remains ignored; no saved keys or passwords printed or committed.
 
 All four requested search-rework changes are complete, tested, and committed individually on search-rework. Latest local production preview: http://127.0.0.1:3024. No files deleted, no outside-project installs, no merge, no push, and no deployment. The branch is ready for review.
+
+## Search rework - Final phone walkthrough (17 October 2026)
+
+Completed:
+- Read progress and continued on search-rework. Ran the requested full walkthrough locally, without merging, pushing, or deploying.
+- Found and fixed one timing issue in Details: opening View My Trip immediately after Add could read the trip before saving finished. That link now shows Wait for saving to finish, announces that it is unavailable, and blocks activation until the save finishes. The normal link returns afterward. No redesign or API/database changes.
+- Added an isolated slow-save scenario to the existing local preview helper. Verified an eight-second simulated save: the link was unavailable, clicking it kept Details open, and the normal link returned after completion. This scenario does not contact Geoapify or Supabase.
+- Let the category, search, and sort test scripts write separate reports through TEST_REPORT_PATH, preserving the evidence from the four completed changes.
+
+Validation: PASS
+- Production build (npm run build -- --webpack), lint, and TypeScript checks passed. Read the installed Next Link guide before the fix; confirmed the built browser files contain the fix.
+- Real API suites: 59 general regression checks, 32 country/name-search checks, 13 category searches, and 56 sort/filter requests with 237 independent order/group checks passed. Reports are docs/search-rework/final-regression-tests.md, final-search-tests.md, final-category-tests.json, and final-sort-filter-tests.json. The category/sort matrix ran on port 3024; the final search and general suites ran on the rebuilt preview at 3025. API/data code did not change.
+- India/Chennai, France/Paris, and Japan/Tokyo country-restricted suggestions and searches passed. Famous names Eiffel Tower and Taj Mahal returned two matches each; Central Park returned eleven; a made-up name returned none; Eifel Tower returned one actual similarly named place. Invalid/short inputs returned clear 400 errors. Details, duplicate 409, missing 404, private 500 errors, save/read persistence, visitor separation, day changes, and removal passed.
+- On an actual 390 x 844 phone viewport, used Country > India > Chennai suggestions, searched, selected Museums, sorted by name, opened Amma Museum, and added it. Day 1 and Day 2 moves worked; refresh kept Day 2. Empty day sections did not increase Days planned. Moving back to Unplanned and removing the disposable item updated the summary correctly; a fresh empty trip hid the summary.
+- Phone Explore controls: tested All and each of the nine individual categories in Paris. Every returned badge matched both the label and icon of a category option, including Other (80 matches). Museums + Parks worked together. Paris Beaches was correctly empty; the separate real Dubai Beaches API check returned five places. Tested available name-result icons too; no unmatched category icons.
+- All seven location sorts worked through the phone controls. Checked visible alphabetical/distance order, grouping totals, unchanged IDs/counts, and exact restoration of Best match. Most details moved Tours de Notre-Dame first; the independent API matrix verified its contact-field scores. Central Park exposed only Best match, both name orders, and Category; exercised all four. Within and unsupported sorts were hidden for name results.
+- Tested the default 5 km, 1/10/25 km, and removing the radius. Phone radius checks found no out-of-range distances; the API matrix crossed all five distance states with category selections in Chennai and Paris. Removed category, distance, and sort chips independently. Clear all worked with the phone panel closed and reset All / Any distance / Best match with no chips.
+- Final rebuilt-site phone flow: Eiffel Tower search > Paris result Details > Add > completed-save link > My Trip. Tour Eiffel appeared with the shared Sights badge. Day 1, summary 1 total / 1 planned day / 0 unplanned, and refresh all passed. Removed only this test item; refresh confirmed the empty trip and hidden summary. No pre-existing trip rows changed.
+- Checked 390px and 320px phone widths: no horizontal overflow (375/375 and 305/305 client/scroll widths), including long place names and My Trip. Restored the original window size. Browser warning/error log was empty.
+- Existing sorting, category, search/cache, summary, weather, visitor, client-error, and API-error checks passed. Secret scans and whitespace checks passed; .env.local remains ignored.
+- Evidence: final-browser-checks.json, final-phone.png, final-trip-phone.png, and final-save-wait.png in docs/search-rework/. Updated API_TESTS.md with repeat instructions and report links.
+
+Final local production preview: http://127.0.0.1:3025. No files deleted, no outside-project installs, no merge, no push, and no deployment. All walkthrough test trip items were removed.

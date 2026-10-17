@@ -1,7 +1,7 @@
 // Local-only visual QA proxy. No requests reach Supabase or Geoapify.
 // Run: node scripts/preview-states.mjs (production preview on port 3006).
 // Set a scenario: Set-Content .next/qa-state.txt error
-// Scenarios: ready, loading, empty, error, duplicate, save-error, mutation-error, missing.
+// Scenarios: ready, loading, slow-save, empty, error, duplicate, save-error, mutation-error, missing.
 // Optional: PREVIEW_UPSTREAM_PORT and PREVIEW_PORT select isolated local ports.
 import http from 'node:http';
 import { readFile, appendFile } from 'node:fs/promises';
@@ -12,9 +12,10 @@ http.createServer(async (req, res) => {
     if (process.env.SEARCH_QA_LOG) await appendFile('.next/search-qa-requests.jsonl', JSON.stringify({ time: Date.now(), path: req.url }) + '\n');
     const mode = (await readFile('.next/qa-state.txt', 'utf8').catch(() => 'ready')).trim();
     if (mode === 'loading') await new Promise(resolve => setTimeout(resolve, 2500));
+    if (mode === 'slow-save' && req.method === 'POST') await new Promise(resolve => setTimeout(resolve, 8000));
     const mutation = req.method !== 'GET';
     let status = 200;
-    let data = req.url.startsWith('/api/places?') ? { city: { name: 'Chennai, India' }, places: mode === 'empty' ? [] : [place] } : req.url.startsWith('/api/places/') ? { place } : { items: ['empty', 'duplicate', 'save-error'].includes(mode) ? [] : [item] };
+    let data = req.url.startsWith('/api/places?') ? { city: { name: 'Chennai, India' }, places: mode === 'empty' ? [] : [place] } : req.url.startsWith('/api/places/') ? { place } : { items: ['empty', 'duplicate', 'save-error', 'slow-save'].includes(mode) ? [] : [item] };
     if (req.url.startsWith('/api/cities?')) {
       const country = new URL(req.url, 'http://localhost').searchParams.get('country');
       data = { cities: mode === 'empty' ? [] : [{ id: 'qa-city', name: 'Chennai', label: 'Chennai, India', country }] };

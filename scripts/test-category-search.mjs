@@ -23,4 +23,4 @@ for (const [city, category] of cases) {
   results.push({ city, category, count: data.places.length, groups });
   console.log(`PASS ${city} / ${category}: ${data.places.length} places; ${JSON.stringify(groups)}`);
 }
-await writeFile('docs/search-rework/category-search-tests.json', JSON.stringify({ testedAt: new Date().toISOString(), results }, null, 2) + '\n');
+await writeFile(process.env.TEST_REPORT_PATH ?? 'docs/search-rework/category-search-tests.json', JSON.stringify({ testedAt: new Date().toISOString(), results }, null, 2) + '\n');

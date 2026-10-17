@@ -484,3 +484,42 @@ GET /api/places/search?name=Park&within=5
 ```
 
 Each returned HTTP 400 with a clear INVALID_WITHIN or INVALID_SORT message. Blank/non-whitelisted radius values are also rejected before an upstream request.
+
+## Final search-rework regression - 17 October 2026
+
+PASS: all requested phone flows and 160 API cases across four suites; sorting adds 237 independent order/group checks. Latest rebuilt local site: http://127.0.0.1:3025. Only disposable test visitors/items were changed and removed. No merge, push, or deployment.
+
+| Suite | Result | Evidence |
+| --- | --- | --- |
+| Original routes, Details, saves, duplicates, visitor separation, day planning, refresh/read, removal, errors | 59 HTTP checks passed | [Full regression](docs/search-rework/final-regression-tests.md) |
+| Country/city for India, France, Japan; famous, common, misspelled, nonexistent names; validation; name Details/save/remove | 32 HTTP checks passed | [Search responses](docs/search-rework/final-search-tests.md) |
+| Every category and combined categories across Chennai, Paris, Tokyo, Dubai | 13 real searches passed | [Category counts](docs/search-rework/final-category-tests.json) |
+| All available sorts, all radius choices, category combinations, grouping and conditional options | 56 HTTP requests and 237 order/group checks passed | [Sort/filter matrix](docs/search-rework/final-sort-filter-tests.json) |
+| Phone controls, icons, chips, Details, days, summary, refresh and removal | Passed at 390px and 320px without horizontal overflow | [Browser checks](docs/search-rework/final-browser-checks.json) |
+
+Examples and their full real responses remain in the linked search/general reports:
+
+- `GET /api/cities?country=fr&q=Par`: 200 with suggestions restricted to France; repeated results stable.
+- `GET /api/places?city=Chennai&category=museums&within=1`: 200 with an empty places list; 5/10/25 km returned 11/13/16 museums respectively.
+- `GET /api/places/search?name=Eiffel%20Tower`: 200 with two matches, both usable in Details and My Trip.
+- `GET /api/places/search?name=zzzxxyyqqqnonexistentplace`: 200 with an empty places list and the helpful empty-state message in the UI.
+- `GET /api/places/search?name=ab`: 400 with INVALID_SEARCH and a clear minimum-input message.
+- `GET /api/places/search?name=Park&sort=distance-desc` and `GET /api/places?city=Paris&within=2`: 400 with INVALID_SORT / INVALID_WITHIN.
+
+The category/sort matrix used the existing production preview at port 3024. The final search/general suites used the rebuilt site at port 3025. Only the Details save link changed; API and database behavior stayed the same. The link waits during saving so opening My Trip cannot outrun that save through the Details link. An isolated eight-second slow-save preview verified blocked activation and restoration; the real Eiffel Tower add/plan/refresh/remove flow passed afterward.
+
+To repeat without replacing earlier phase reports, run these from the project after starting a successful production build:
+
+```powershell
+$env:TEST_BASE_URL='http://127.0.0.1:3025'
+$env:TEST_REPORT_PATH='docs/search-rework/final-regression-tests.md'
+node scripts/test-api.mjs
+$env:TEST_REPORT_PATH='docs/search-rework/final-search-tests.md'
+node scripts/test-search-api.mjs
+$env:TEST_REPORT_PATH='docs/search-rework/final-category-tests.json'
+node scripts/test-category-search.mjs
+$env:TEST_REPORT_PATH='docs/search-rework/final-sort-filter-tests.json'
+node scripts/test-sort-filters-api.mjs
+```
+
+The optional TEST_REPORT_PATH now preserves the older search examples in this file when the search suite runs. API errors and empty searches are expected cases, not test failures. Screenshots: [phone Explore](docs/search-rework/final-phone.png), [trip summary](docs/search-rework/final-trip-phone.png), [saving link](docs/search-rework/final-save-wait.png).

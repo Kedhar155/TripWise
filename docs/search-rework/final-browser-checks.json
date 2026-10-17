@@ -1,0 +1,276 @@
+{
+  "phone": {
+    "width": 390,
+    "height": 844
+  },
+  "categories": [
+    {
+      "category": "Sights and Tourism",
+      "count": 100,
+      "matched": true
+    },
+    {
+      "category": "Museums and Culture",
+      "count": 100,
+      "matched": true
+    },
+    {
+      "category": "Parks and Nature",
+      "count": 99,
+      "matched": true
+    },
+    {
+      "category": "Restaurants and Cafes",
+      "count": 100,
+      "matched": true
+    },
+    {
+      "category": "Beaches",
+      "count": 0,
+      "matched": true
+    },
+    {
+      "category": "Entertainment",
+      "count": 99,
+      "matched": true
+    },
+    {
+      "category": "Shopping",
+      "count": 100,
+      "matched": true
+    },
+    {
+      "category": "Accommodation",
+      "count": 99,
+      "matched": true
+    },
+    {
+      "category": "Other",
+      "count": 80,
+      "matched": true
+    }
+  ],
+  "sorts": [
+    {
+      "mode": "location",
+      "sort": "distance",
+      "passed": true,
+      "count": 100,
+      "groups": [],
+      "first": "Point zéro des Routes de France"
+    },
+    {
+      "mode": "location",
+      "sort": "distance-desc",
+      "passed": true,
+      "count": 100,
+      "groups": [],
+      "first": "Boulevard Saint-Germain"
+    },
+    {
+      "mode": "location",
+      "sort": "name",
+      "passed": true,
+      "count": 100,
+      "groups": [],
+      "first": "75004 Paris"
+    },
+    {
+      "mode": "location",
+      "sort": "name-desc",
+      "passed": true,
+      "count": 100,
+      "groups": [],
+      "first": "Villa d'Estrées"
+    },
+    {
+      "mode": "location",
+      "sort": "category",
+      "passed": true,
+      "count": 100,
+      "groups": [
+        "Accommodation (24)",
+        "Entertainment (3)",
+        "Parks and Nature (9)",
+        "Restaurants and Cafes (1)",
+        "Sights and Tourism (63)"
+      ],
+      "first": "Albe Hôtel Saint-Michel"
+    },
+    {
+      "mode": "location",
+      "sort": "details",
+      "passed": true,
+      "count": 100,
+      "groups": [],
+      "first": "Tours de Notre-Dame"
+    },
+    {
+      "mode": "location",
+      "sort": "relevance",
+      "passed": true,
+      "count": 100,
+      "groups": [],
+      "first": "Point zéro des Routes de France"
+    },
+    {
+      "mode": "name",
+      "sort": "relevance",
+      "count": 11,
+      "passed": true
+    },
+    {
+      "mode": "name",
+      "sort": "name",
+      "count": 11,
+      "passed": true
+    },
+    {
+      "mode": "name",
+      "sort": "name-desc",
+      "count": 11,
+      "passed": true
+    },
+    {
+      "mode": "name",
+      "sort": "category",
+      "count": 11,
+      "passed": true
+    }
+  ],
+  "distances": [
+    {
+      "within": 1,
+      "count": 53,
+      "passed": true
+    },
+    {
+      "within": 10,
+      "count": 100,
+      "passed": true
+    },
+    {
+      "within": 25,
+      "count": 100,
+      "passed": true
+    }
+  ],
+  "trip": [
+    {
+      "step": "one unplanned",
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nPlaces by category\n1 Museum Or Cultural Place"
+    },
+    {
+      "step": "Day 1 plus empty Day 2",
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n1\nUnplanned places\n0\nPlaces by category\n1 Museum Or Cultural Place"
+    },
+    {
+      "step": "Day 2 refreshed",
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n1\nUnplanned places\n0\nPlaces by category\n1 Museum Or Cultural Place",
+      "day": "Day 2 (selected option verified in page state)"
+    },
+    {
+      "step": "returned to Unplanned",
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nPlaces by category\n1 Museum Or Cultural Place"
+    },
+    {
+      "step": "removed and refreshed",
+      "empty": true,
+      "summaryHidden": true
+    }
+  ],
+  "catalog": [
+    {
+      "icon": "lucide-map-pin",
+      "label": "All"
+    },
+    {
+      "icon": "lucide-landmark",
+      "label": "Sights and Tourism"
+    },
+    {
+      "icon": "lucide-landmark",
+      "label": "Museums and Culture"
+    },
+    {
+      "icon": "lucide-tree-pine",
+      "label": "Parks and Nature"
+    },
+    {
+      "icon": "lucide-utensils",
+      "label": "Restaurants and Cafes"
+    },
+    {
+      "icon": "lucide-umbrella",
+      "label": "Beaches"
+    },
+    {
+      "icon": "lucide-drama",
+      "label": "Entertainment"
+    },
+    {
+      "icon": "lucide-shopping-bag",
+      "label": "Shopping"
+    },
+    {
+      "icon": "lucide-bed-double",
+      "label": "Accommodation"
+    },
+    {
+      "icon": "lucide-map-pin",
+      "label": "Other"
+    }
+  ],
+  "saveFix": {
+    "disabled": "true",
+    "normalLinkRestored": true,
+    "earlyActivationBlocked": true,
+    "stayedOnDetails": true
+  },
+  "chips": {
+    "afterRemovingParks": "Museums and Culture\nWithin 1 km\nName Z to A\nClear all",
+    "clearAll": {
+      "category": "All",
+      "within": "all",
+      "sort": "relevance",
+      "chips": null
+    }
+  },
+  "name": {
+    "count": 11,
+    "options": [
+      "relevance",
+      "name",
+      "name-desc",
+      "category"
+    ],
+    "withinHidden": true,
+    "iconsMatch": true,
+    "shortMessage": true,
+    "emptyMessage": true
+  },
+  "finalTrip": {
+    "initialSummary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nPlaces by category\n1 Sight",
+    "afterRefresh": {
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n1\nUnplanned places\n0\nPlaces by category\n1 Sight",
+      "selectedDay": "Day 1"
+    },
+    "removedAndRefreshed": {
+      "empty": true,
+      "summaryHidden": true
+    }
+  },
+  "layout": [
+    {
+      "width": 390,
+      "client": 375,
+      "scroll": 375
+    },
+    {
+      "width": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  ],
+  "browserLogs": []
+}

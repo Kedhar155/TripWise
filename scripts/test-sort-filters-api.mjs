@@ -77,5 +77,5 @@ for(const option of availableSorts(names.places)) {
   assert.deepEqual(data.places.map(p=>p.id),verify(names.places,option.value).map(p=>p.id));
 }
 for(const path of ['/api/places?city=Paris&within=0','/api/places?city=Paris&within=2','/api/places?city=Paris&within=5.0','/api/places/search?name=Park&within=5','/api/places/search?name=Park&sort=distance-desc']) await call(path,400);
-await writeFile('docs/search-rework/change-3-sort-filter-tests.json',JSON.stringify({testedAt:new Date().toISOString(),requests,orderChecks,evidence},null,2)+'\n');
+await writeFile(process.env.TEST_REPORT_PATH ?? 'docs/search-rework/change-3-sort-filter-tests.json',JSON.stringify({testedAt:new Date().toISOString(),requests,orderChecks,evidence},null,2)+'\n');
 console.log(`PASS: ${requests} real API requests; ${orderChecks} independent ordering/grouping checks; default, radius, categories, clears, conditional options, and validation.`);
