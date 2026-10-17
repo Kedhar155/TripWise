@@ -7,6 +7,8 @@ import { message, request } from "@/lib/client-api";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { Feedback } from "./feedback";
 import { CategoryBadge } from "./category-badge";
+const popularCities = ["Paris", "Tokyo", "Goa", "Dubai", "London"];
+
 type Results = { places: Place[]; city: { name: string } };
 export function Explore() {
   const [draft, setDraft] = useState("");
@@ -26,12 +28,31 @@ export function Explore() {
     return () => controller.abort();
   }, [city, category, sort, attempt]);
   function begin() { setError(""); setResults(null); setLoading(true); }
+  function searchCity(value: string) {
+    const nextCity = value.trim();
+    if (nextCity.length < 2) { setError("Enter a city name with at least 2 characters."); return; }
+    begin(); setCity(nextCity); setAttempt(a => a + 1);
+  }
   return <>
-    <section className="py-8 sm:py-14"><p className="eyebrow">Small plans. Great adventures.</p><h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">A new city.<br/><span className="text-teal-700">Your kind of journey.</span></h1><p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">Find places worth a detour. Save your favorites and make room for discovery.</p></section>
-    <form onSubmit={e => { e.preventDefault(); if (draft.trim().length < 2) { setError("Enter a city name with at least 2 characters."); return; } begin(); setCity(draft.trim()); setAttempt(a => a + 1); }} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-      <label htmlFor="city" className="mb-2 block text-sm font-semibold">Where would you like to go?</label><div className="flex flex-col gap-3 sm:flex-row"><input id="city" required minLength={2} maxLength={120} value={draft} onChange={e => setDraft(e.target.value)} placeholder="Try Chennai, India" className="field flex-1"/><button className="button" type="submit">Search places <ArrowUpRight size={17} aria-hidden="true"/></button></div>
-      <div className="mt-5 grid gap-4 sm:grid-cols-2"><div><label htmlFor="category" className="mb-2 block text-sm font-semibold">Category</label><select id="category" className="field w-full" value={category} onChange={e => { if (city) begin(); setCategory(e.target.value as Category); }}>{Object.entries(categories).map(([value,label]) => <option key={value} value={value}>{label}</option>)}</select></div><div><label htmlFor="sort" className="mb-2 block text-sm font-semibold">Sort by</label><select id="sort" className="field w-full" value={sort} onChange={e => { if (city) begin(); setSort(e.target.value); }}><option value="distance">Distance from city center</option><option value="name">Name (A–Z)</option></select></div></div>
-    </form>
+    <section aria-labelledby="explore-heading" className="mt-6 rounded-3xl bg-linear-to-br from-teal-900 to-teal-700 px-5 py-8 text-white sm:mt-8 sm:px-10 sm:py-12">
+      <p className="text-xs font-semibold uppercase tracking-widest text-teal-100">Small plans. Great adventures.</p>
+      <h1 id="explore-heading" className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">Plan your next trip</h1>
+      <p className="mt-4 max-w-xl text-base leading-7 text-teal-50 sm:text-lg">Find places worth a detour. Save your favorites and make room for discovery.</p>
+      <form onSubmit={e => { e.preventDefault(); searchCity(draft); }} className="mt-7 rounded-2xl bg-white p-4 text-slate-800 shadow-sm sm:p-5">
+        <label htmlFor="city" className="mb-2 block text-sm font-semibold">Where would you like to go?</label>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <input id="city" required minLength={2} maxLength={120} value={draft} onChange={e => setDraft(e.target.value)} placeholder="Try Chennai, India" className="field flex-1"/>
+          <button className="button" type="submit">Search places <ArrowUpRight size={17} aria-hidden="true"/></button>
+        </div>
+      </form>
+      <div className="mt-5 flex flex-wrap items-center gap-2" role="group" aria-label="Popular cities">
+        <span className="mr-1 w-full text-sm font-medium text-teal-50 sm:w-auto">Popular cities</span>
+        {popularCities.map(name => <button key={name} type="button" onClick={() => { const query = name === "Goa" ? "Goa, India" : name; setDraft(query); searchCity(query); }} className="min-h-11 rounded-full border border-teal-200 bg-white px-4 py-2 text-sm font-semibold text-teal-800 transition-colors hover:bg-teal-50 focus-visible:outline-white">{name}</button>)}
+      </div>
+    </section>
+    <div className="mt-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+      <div className="grid gap-4 sm:grid-cols-2"><div><label htmlFor="category" className="mb-2 block text-sm font-semibold">Category</label><select id="category" className="field w-full" value={category} onChange={e => { if (city) begin(); setCategory(e.target.value as Category); }}>{Object.entries(categories).map(([value,label]) => <option key={value} value={value}>{label}</option>)}</select></div><div><label htmlFor="sort" className="mb-2 block text-sm font-semibold">Sort by</label><select id="sort" className="field w-full" value={sort} onChange={e => { if (city) begin(); setSort(e.target.value); }}><option value="distance">Distance from city center</option><option value="name">Name (A–Z)</option></select></div></div>
+    </div>
     <section aria-label="Search results" aria-busy={loading} className="mt-8">
       {loading && <Feedback>Finding places for your next adventure…</Feedback>}
       {error && <Feedback error>{error}{city && <button className="retry" onClick={() => { begin(); setAttempt(a => a + 1); }}>Retry</button>}</Feedback>}

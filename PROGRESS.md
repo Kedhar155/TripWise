@@ -149,3 +149,21 @@ Validation:
 - Existing API sometimes returns broad categories such as building or entertainment for museums. Those use the requested default badge; no category is guessed from a place name and no API data was changed.
 - Sandbox networking prevented browser/integration access to the initial preview; the approved local preview outside the sandbox enabled all checks. Only disposable test trip records were removed.
 - Feature 1 complete on extras.
+
+## Extras - Feature 2 of 6: Explore hero banner (17 October 2026)
+
+Completed:
+- Added a large teal gradient banner with the heading "Plan your next trip", short supporting text, and the labeled city input and Search places button inside it.
+- Added Paris, Tokyo, Goa, Dubai, and London chips that fill the input and immediately run the same search function used by the form. Repeated clicks still re-run a search; category and sort choices remain in place.
+- Goa searches "Goa, India" to avoid resolving to the namesake city in the Philippines, which was discovered during real-service browser testing.
+- Phone layout stacks input and button vertically and wraps touch-friendly city chips. Kept existing category/sort controls immediately below the banner and preserved category badges, cards, Details, and My Trip.
+- No photo, dependency, API route, push, or deployment changes.
+
+Validation:
+- Final lint and production webpack build (including TypeScript): PASS. Existing visitor, client error, secret scan, and whitespace checks: PASS.
+- All 28 real-service API checks passed, covering search, both sorts, details, add, fresh-list persistence, duplicate handling, visitor isolation, and removal. Evidence: docs/extras/feature-2-api-tests.md.
+- Browser clicked all five city chips and verified results. Corrected Goa chip verified with results heading "Goa, India" in the final build. Typed Chennai search with Museums and A-Z sorting also returned results.
+- Browser opened Amma Museum, added it, refreshed My Trip to confirm persistence, removed it, and refreshed again to confirm the empty trip. Only the temporary test place was removed.
+- Desktop and phone layouts visually inspected at 390px and 320px. No horizontal overflow: measured content/scroll widths were 375/375 and 305/305 respectively. Input and button stack on phones, chips wrap, and banner text remains readable. Temporary viewport override reset afterward.
+- Saved docs/extras/feature-2-desktop.png and feature-2-phone.png. Local preview: http://127.0.0.1:3010. Initial sandbox build output permissions required the approved build outside the sandbox.
+- Feature 2 complete on extras.
