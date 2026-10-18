@@ -563,3 +563,33 @@ All requests below use the app's own origin. Geoapify credentials stay in server
 Repeatable checks: `node scripts/test-state-search.mjs` (isolated validation/cache/errors); `node scripts/test-state-search-api.mjs` (real local preview, defaults to port 3028; override TEST_BASE_URL). Real report: `docs/polish/change-5-state-api-tests.json` (33 requests, US/India/Germany); full trip regression: `docs/polish/change-5-api-tests.md` (59 requests).
 
 Geoapify references: [Autocomplete](https://apidocs.geoapify.com/docs/geocoding/address-autocomplete/), [Places boundary filters](https://apidocs.geoapify.com/docs/places/).
+
+
+## Polish change 6: saved locations and Trip Summary
+
+Applied in the existing TripWise Supabase project through SQL Editor on 18 October 2026:
+
+```sql
+alter table itinerary add column city text, add column state text, add column country text;
+```
+
+Migration source: `supabase/migrations/003_itinerary_location.sql`. Do not run it again on the already updated project. All three columns are nullable; existing rows are preserved with null locations. SQL Editor reported Success. No rows returned; evidence: `docs/polish/change-6-supabase.jpg`.
+
+`POST /api/itinerary` accepts optional `city`, `state`, `country` alongside `place_id`. Each may be omitted, null, or a string of at most 120 characters. Blank strings become null, surrounding/repeated spaces are normalized, and numbers/booleans/arrays/objects/control characters/oversized values return 400 INVALID_LOCATION before fetching Geoapify. The server still verifies the selected place; its non-null location fields take precedence over supplied metadata. Supplied valid text is a fallback when provider fields are missing. Details sends the place location data along with its ID; Explore cards still open the same Details endpoint, whose Place object includes those fields.
+
+```sh
+curl.exe -X POST "http://127.0.0.1:3029/api/itinerary" -H "Content-Type: application/json" -H "x-visitor-id: YOUR_VISITOR_UUID" --data-raw '{"place_id":"GEOAPIFY_PLACE_ID","city":"Chennai","state":"Tamil Nadu","country":"India"}'
+```
+
+`GET /api/itinerary` already selects all row columns and now returns city/state/country on each item; POST and PATCH item responses include them too. Omitted fields remain backwards compatible. A day move preserves locations. Visitor isolation, duplicate handling and removal behavior are unchanged.
+
+Trip Summary keeps existing total/day/unplanned/category counts. It adds nonzero distinct State/City counts and a compact list grouped by country then state, with state place totals and city counts. Identities include parents (Springfield in Illinois and Massachusetts are two cities); comparisons ignore case/repeated whitespace and preserve readable labels. Missing fields add no invented labels or counts. Country-only/legacy-null rows remain in total/day/category counts and stay out of the location lists. Long lists use a bounded, keyboard-scrollable region; updates derive from the current items immediately after successful move/remove.
+
+Repeatable validation:
+- `node scripts/test-trip-summary.mjs`: mixed legacy/new/partial locations, 2 countries, 4 states, 5 cities; parent-aware identity, normalization, counts, move/remove and hidden sections.
+- `node scripts/test-itinerary-location.mjs`: optional POST validation, no upstream calls on invalid text, server precedence, fallback text, nulls and legacy GET.
+- `node scripts/test-itinerary-location-api.mjs`: real database/Geoapify, 3 states across India/US; fresh GET metadata, nullable legacy-shaped test row, validation, PATCH and DELETE. Only its random visitor's disposable rows are created and removed. Override TEST_BASE_URL for another local server (default 3029).
+- `node scripts/preview-trip-locations.mjs`: local-only fixture at port 3030 forwarding app assets from 3029; `.next/location-qa-state.txt` selects mixed, legacy, long. No fixture API traffic reaches Supabase or Geoapify.
+- General suite: 59 successful requests in `docs/polish/change-6-api-tests.md`. Additional location report: `docs/polish/change-6-location-api-tests.json`.
+
+Backfill recommendation: reuse verified location data when an old saved place's Details is already fetched, filling only null fields for that visitor. This can avoid additional provider calls; no bulk backfill or automatic address guessing was performed in this change.

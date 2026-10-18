@@ -630,3 +630,27 @@ Validation:
 - Secret scans and git diff --check passed; keys remain server-only and private environment files remain ignored.
 
 Change 5 complete. Local updated preview: http://127.0.0.1:3028. No merge, push, or deployment. Changes 6-7 await separate instructions.
+
+
+## Polish - Change 6 of 7: saved trip states/cities (18 October 2026)
+
+Completed:
+- Read progress and installed Next route/CSS docs; continued on polish after 015e63a.
+- User explicitly authorized performing the SQL through the website, replacing the earlier manual-wait step. Opened the existing TripWise Supabase SQL Editor, created a separate query, pasted the exact requested ALTER TABLE, ran it and verified Success. No rows returned. Added nullable city/state/country without modifying existing rows or access rules. Screenshot: docs/polish/change-6-supabase.jpg; tracked migration 003_itinerary_location.sql.
+- POST accepts and validates optional city/state/country text (up to 120 chars, null/omitted allowed, blanks normalized; rejects types/control chars before spending provider credits). Kept server place verification and authoritative provider metadata; valid supplied metadata is a fallback for missing fields. Details passes its Place metadata when saving. Existing Explore cards open Details, which already fetches those metadata fields from Change 5; no new card button or loading flow was added.
+- Saved row inserts include locations. Existing GET select-all and PATCH responses return new columns; shared item type accepts nullable/missing fields. Old rows continue loading, moving and removing normally with nulls.
+- Summary retains total places, occupied days, Unplanned and category counts. Adds nonzero State/City totals and sorted Country > State > City grouping, with state place counts and city counts. Cities with the same name in different states remain separate. Case/spacing differences are normalized; missing data is omitted rather than guessed. Location section is hidden for legacy-only trips.
+- Location list is compact and capped at 256px with keyboard scrolling for long trips. Existing current-item state drives recalculation after successful moves/removals. Kept current colors/layout and added no dependencies.
+- Cheap backfill recommendation: fill null locations only when a saved place's verified Details data has already been fetched, reusing that response. Did not bulk-fetch old places or infer ambiguous locations from addresses.
+- Updated API_TESTS.md with applied SQL, request/response examples, validation, compatibility, counts and repeatable checks.
+
+Validation: PASS
+- Production webpack build including TypeScript, lint, typecheck, whitespace check, API error tests, extended summary tests, new isolated itinerary-location tests and secret/history scans.
+- Extended summary/rendering tests cover 2 countries, 4 states, 5 cities, repeated city names under different states, city/state totals, normalized labels, old/partial/null data, move/remove recalculation, immutability, hidden empty parts and scrollable markup.
+- Real new API tests save places from Tamil Nadu/Chennai, Karnataka/Bengaluru and Illinois/Springfield (3 states, 2 countries). POST and fresh GET match Details metadata. Created a disposable legacy-shaped row omitting location columns: nullable fields stay null and day moves work. Invalid types/length/control text reject; moves preserve metadata; removal/cleanup leave the test visitor empty. Evidence: docs/polish/change-6-location-api-tests.json.
+- All 59 general real-service API checks passed: search/Details/add/read persistence, duplicates/visitor isolation, day boundaries/clearing and removal. Evidence: docs/polish/change-6-api-tests.md.
+- Browser mixed fixture: 7 places including an old null-location place; 3 states/4 cities; India > Tamil Nadu shows Chennai (3), Madurai (1), plus Karnataka and US/Illinois. Moving updates planned/unplanned immediately without changing locations. Removing last US place immediately drops country group and counts to 2 states/3 cities. Legacy-only fixture hides all location parts while keeping previous summary. These fixtures make no provider/database calls.
+- Long-list browser fixture (40 states, 2 countries) remains 256px tall and scrolls via keyboard; PageDown moved it 224px. No horizontal overflow at 390px (375/375) or 320px (305/305). Temporary viewport reset. Screenshot: docs/polish/change-6-summary.jpg.
+- Real browser: Paris search > whole card > Details > Add Point zéro des Routes de France > My Trip shows France/Ile-de-France/Paris > Day 1 > refresh retains location and day > remove only disposable item > empty trip and summary hidden. Evidence: docs/polish/change-6-browser-checks.json.
+
+Change 6 complete. Local updated preview: http://127.0.0.1:3029. Supabase schema change is applied; application code remains local. No merge, push or Vercel deployment. Change 7 awaits separate instructions.

@@ -29,7 +29,7 @@ export function Destination({ id }: { id: string }) {
   }, [id, tripAttempt]);
   async function save() {
     setSaving(true); setTripError("");
-    try { await request("/api/itinerary", {method:"POST", body:JSON.stringify({place_id:id})}, true); setSaved(true); toast.success("Added to your trip"); }
+    try { await request("/api/itinerary", {method:"POST", body:JSON.stringify({place_id:id, city:place?.city, state:place?.state, country:place?.country})}, true); setSaved(true); toast.success("Added to your trip"); }
     catch(e) { if (e instanceof RequestError && e.status === 409) { setSaved(true); toast.info("Already in your trip"); } else toast.error("Could not add this place", { description: message(e) }); }
     finally { setSaving(false); }
   }

@@ -56,7 +56,7 @@ const cleared = items.map(item => ({ ...item, day: null }));
 assert.equal(summarizeTrip(cleared).plannedDays, 0);
 assert.equal(summarizeTrip(cleared).unplanned, 9);
 assert.equal(summarizeTrip([{ category: 'park', day: 15 }]).unplanned, 1);
-assert.deepEqual(summarizeTrip([]), { total: 0, plannedDays: 0, unplanned: 0, categories: [] });
+assert.deepEqual(summarizeTrip([]), { total: 0, plannedDays: 0, unplanned: 0, categories: [], stateCount: 0, cityCount: 0, locations: [] });
 assert.equal(TripSummary({ items: [] }), null);
 const html = renderToStaticMarkup(TripSummary({ items }));
 assert.match(html, /Trip summary/);
@@ -73,3 +73,31 @@ for (const style of summary.categories.map(group => getCategoryStyle(group.categ
 assert.equal(getCategoryStyle('catering.restaurant.italian'), categoryStyles.restaurants);
 assert.equal(getCategoryStyle('leisure.park'), categoryStyles.parks);
 console.log('PASS: totals, distinct occupied days, Unplanned count, grouped categories, singular/plural labels, shared icons/colors, move/remove recalculation, source immutability, empty-trip hiding, and summary rendering.');
+
+const located = [
+ ...items,
+ ...Array.from({ length: 3 }, () => ({ category: 'museums', day: null, country: 'India', state: 'Tamil Nadu', city: 'Chennai' })),
+ { category: 'parks', day: 1, country: ' India ', state: ' tamil   nadu ', city: 'Madurai' },
+ { category: 'parks', day: 1, country: 'India', state: 'Karnataka', city: 'Bengaluru' },
+ { category: 'sights', day: 2, country: 'United States', state: 'Illinois', city: 'Springfield' },
+ { category: 'sights', day: 2, country: 'United States', state: 'Massachusetts', city: 'Springfield' },
+ { category: 'parks', day: null, country: null, state: null, city: null },
+];
+const locatedBefore = structuredClone(located);
+const loc = summarizeTrip(located);
+assert.equal(loc.total, 17); assert.equal(loc.stateCount, 4); assert.equal(loc.cityCount, 5);
+const india = loc.locations.find(g => g.country === 'India');
+assert.equal(india.states.find(g => g.state === 'Tamil Nadu').count, 4);
+assert.equal(india.states.find(g => g.state === 'Tamil Nadu').cities.find(c => c.city === 'Chennai').count, 3);
+assert.deepEqual(located, locatedBefore);
+assert.deepEqual(summarizeTrip(located.map(i => ({...i, day: 3}))).locations, loc.locations, 'Moving days must not change locations');
+assert.equal(summarizeTrip(located.filter(i => i.state !== 'Illinois')).cityCount, 4);
+const locHtml = renderToStaticMarkup(TripSummary({items:located}));
+for(const text of ['Places by location','India','Tamil Nadu','Chennai (3), Madurai (1)','United States','States','Cities','max-h-64','overflow-y-auto']) assert.ok(locHtml.includes(text),text);
+assert.ok(!html.includes('Places by location'), 'Legacy-only trips hide location parts');
+assert.ok(!html.includes('>States<') && !html.includes('>Cities<'));
+const partialHtml = renderToStaticMarkup(TripSummary({items:[{category:'parks',day:null,city:'Chennai'}]}));
+assert.ok(partialHtml.includes('Chennai (1)')); assert.ok(!partialHtml.includes('>States<')); assert.ok(!partialHtml.includes('Unknown'));
+const rural = summarizeTrip([{category:'parks',day:null,country:'India',state:'Tamil Nadu'}]);
+assert.equal(rural.stateCount,1); assert.equal(rural.cityCount,0);
+console.log('PASS: multi-country/state/city identities, city counts, whitespace/case normalization, legacy/null/partial data, sorted groups, move/remove updates, hidden empty sections and scrollable list');

@@ -4,6 +4,14 @@ export class ApiError extends Error {
   }
 }
 
+export function optionalLocationText(value: unknown, field: string) {
+  if (value === undefined || value === null) return null;
+  if (typeof value !== "string" || value.length > 120 || /[\u0000-\u001f\u007f-\u009f]/.test(value)) {
+    throw new ApiError(400, "INVALID_LOCATION", `${field} must be text up to 120 characters, or null.`);
+  }
+  return value.trim().replace(/\s+/g, " ") || null;
+}
+
 export function json(data: unknown, status = 200) {
   return Response.json(data, { status, headers: { "Cache-Control": "no-store" } });
 }

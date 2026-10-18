@@ -16,6 +16,9 @@ export type Place = {
 export type StateSuggestion = { id: string; name: string; label: string; country: string };
 export type CitySuggestion = StateSuggestion & { state?: string };
 export type ItineraryItem = {
+  city?: string | null;
+  state?: string | null;
+  country?: string | null;
   id: string;
   visitor_id: string;
   place_id: string;

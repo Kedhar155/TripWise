@@ -1,0 +1,45 @@
+{
+  "migration": "Exact requested SQL run in TripWise Supabase SQL Editor; Success. No rows returned.",
+  "mixedFixture": {
+    "total": 7,
+    "states": 3,
+    "cities": 4,
+    "countries": [
+      "India",
+      "United States"
+    ],
+    "Tamil Nadu": "Chennai (3), Madurai (1)",
+    "legacyNullRow": "included in total/categories only"
+  },
+  "moveFixture": {
+    "plannedDays": 1,
+    "unplanned": 6,
+    "states": 3,
+    "cities": 4
+  },
+  "removeLastUSFixture": {
+    "total": 6,
+    "states": 2,
+    "cities": 3,
+    "United States": "group removed"
+  },
+  "legacyOnlyFixture": "total/category visible; States/Cities/location list hidden",
+  "longFixture": {
+    "rows": 40,
+    "countries": 2,
+    "regionHeight": 256,
+    "scrollHeightAt390": 2328,
+    "scrollHeightAt320": 3288,
+    "keyboardPageDownScrollTop": 224,
+    "overflowAt390": [
+      375,
+      375
+    ],
+    "overflowAt320": [
+      305,
+      305
+    ]
+  },
+  "realBrowserFlow": "Paris > Point zéro des Routes de France > Add > summary France / Ile-de-France / Paris > Day 1 > refresh retains location/day > remove own item > summary hidden",
+  "temporaryViewport": "reset"
+}
