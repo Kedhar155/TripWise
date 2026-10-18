@@ -1,0 +1,239 @@
+{
+  "viewports": [
+    {
+      "aside": "rgb(220, 232, 217)",
+      "card": "rgb(240, 223, 187)",
+      "client": 1265,
+      "page": "Details",
+      "scroll": 1265,
+      "width": 1280
+    },
+    {
+      "aside": "rgb(220, 232, 217)",
+      "card": "rgb(240, 223, 187)",
+      "client": 753,
+      "page": "Details",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "aside": "rgb(220, 232, 217)",
+      "card": "rgb(240, 223, 187)",
+      "client": 375,
+      "page": "Details",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "aside": "rgb(220, 232, 217)",
+      "card": "rgb(240, 223, 187)",
+      "client": 305,
+      "page": "Details",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "client": 1265,
+      "page": "Production Explore",
+      "scroll": 1265,
+      "width": 1280
+    },
+    {
+      "client": 753,
+      "page": "Production Explore",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "client": 375,
+      "page": "Production Explore",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "client": 305,
+      "page": "Production Explore",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "card": "rgb(240, 223, 187)",
+      "client": 375,
+      "page": "Refined My Trip",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "card": "rgb(240, 223, 187)",
+      "client": 305,
+      "page": "Refined My Trip",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "card": "rgb(240, 223, 187)",
+      "client": 753,
+      "page": "Refined My Trip",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "cardBackground": "rgb(240, 223, 187)",
+      "client": 1265,
+      "page": "Final production location results",
+      "scroll": 1265,
+      "width": 1280
+    },
+    {
+      "cardBackground": "rgb(240, 223, 187)",
+      "client": 753,
+      "page": "Final production location results",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "cardBackground": "rgb(240, 223, 187)",
+      "client": 375,
+      "page": "Final production location results",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "cardBackground": "rgb(240, 223, 187)",
+      "client": 305,
+      "page": "Final production location results",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "artHidden": "true",
+      "navUnblocked": true,
+      "page": "Header hit test in viewport",
+      "scrollY": 0,
+      "width": 1280
+    },
+    {
+      "artHidden": "true",
+      "navUnblocked": true,
+      "page": "Header hit test in viewport",
+      "scrollY": 0,
+      "width": 768
+    },
+    {
+      "artHidden": "true",
+      "navUnblocked": true,
+      "page": "Header hit test in viewport",
+      "scrollY": 0,
+      "width": 390
+    },
+    {
+      "artHidden": "true",
+      "navUnblocked": true,
+      "page": "Header hit test in viewport",
+      "scrollY": 0,
+      "width": 320
+    }
+  ],
+  "art": [
+    {
+      "compassAnimation": "30s linear infinite compass-rotate",
+      "compassTop": "12px",
+      "globeLeft": "-32px",
+      "meridians": [
+        "15s linear -5s infinite globe-meridian",
+        "15s linear -10s infinite globe-meridian",
+        "15s linear infinite globe-meridian"
+      ],
+      "pointerNone": true,
+      "stampRight": "12px",
+      "stampTop": "610px",
+      "transform": "matrix(-0.915021, 0.403405, -0.403405, -0.915021, 0, 0)",
+      "width": 1280
+    },
+    {
+      "compassAnimation": "30s linear infinite compass-rotate",
+      "compassTop": "12px",
+      "globeLeft": "-32px",
+      "meridians": [
+        "15s linear -5s infinite globe-meridian",
+        "15s linear -10s infinite globe-meridian",
+        "15s linear infinite globe-meridian"
+      ],
+      "pointerNone": true,
+      "stampRight": "12px",
+      "stampTop": "610px",
+      "transform": "matrix(-0.917816, 0.397007, -0.397007, -0.917816, 0, 0)",
+      "width": 768
+    },
+    {
+      "compassAnimation": "30s linear infinite compass-rotate",
+      "compassTop": "14px",
+      "globeLeft": "-46px",
+      "meridians": [
+        "15s linear -5s infinite globe-meridian",
+        "15s linear -10s infinite globe-meridian",
+        "15s linear infinite globe-meridian"
+      ],
+      "pointerNone": true,
+      "stampRight": "4px",
+      "stampTop": "740px",
+      "transform": "matrix(-0.921922, 0.387375, -0.387375, -0.921922, 0, 0)",
+      "width": 390
+    },
+    {
+      "compassAnimation": "30s linear infinite compass-rotate",
+      "compassTop": "14px",
+      "globeLeft": "-46px",
+      "meridians": [
+        "15s linear -5s infinite globe-meridian",
+        "15s linear -10s infinite globe-meridian",
+        "15s linear infinite globe-meridian"
+      ],
+      "pointerNone": true,
+      "stampRight": "4px",
+      "stampTop": "740px",
+      "transform": "matrix(-0.924607, 0.380922, -0.380922, -0.924607, 0, 0)",
+      "width": 320
+    }
+  ],
+  "flows": {
+    "add": {
+      "url": "/places/5112386d21235b024059effbdc75db6d4840f00102f901747f4c0000000000c0020192030c45696666656c20546f776572"
+    },
+    "dayAfterRefresh": "1",
+    "removedAfterRefresh": true,
+    "successToast": {
+      "background": "rgb(188, 231, 189)",
+      "color": "rgb(22, 62, 42)",
+      "h": 32,
+      "w": 32
+    },
+    "backRestored": true,
+    "refreshRestored": true,
+    "locationResults": 100
+  },
+  "productionCard": {
+    "address": "rgb(36, 61, 81)",
+    "background": "rgb(240, 223, 187)",
+    "title": "rgb(27, 58, 92)"
+  },
+  "artEnd": {
+    "compass": "matrix(0.999366, 0.0355901, -0.0355901, 0.999366, 0, 0)",
+    "meridians": [
+      {
+        "animation": "15s linear -5s infinite globe-meridian",
+        "transform": "matrix(-0.673458, 0, 0, 1, 0, 0)"
+      },
+      {
+        "animation": "15s linear -10s infinite globe-meridian",
+        "transform": "matrix(0.292513, 0, 0, 1, 0, 0)"
+      },
+      {
+        "animation": "15s linear infinite globe-meridian",
+        "transform": "matrix(0.972099, 0, 0, 1, 0, 0)"
+      }
+    ]
+  },
+  "console": [],
+  "probeNote": "Initial header/heading hit probes were offscreen because Ctrl+Home was sent while a field had focus. Replaced with explicit header-link focus and in-viewport checks."
+}

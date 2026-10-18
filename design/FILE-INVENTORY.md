@@ -260,3 +260,8 @@ Only src/app/globals.css is changed in the existing application source.
 - Styling fix: src/app/destination.css enlarges the existing View My Trip link tap area only.
 - Documentation/evidence: design/final/ contains the main diff stat, source/artwork/secret audit, existing-suite runner, API/unit reports, browser measurements and screenshots. PROGRESS.md records the final results.
 - All previously protected runtime logic remains unchanged from main.
+
+## Requested visual refinements
+- Styling: src/app/retro-refinements.css and its globals.css import.
+- Presentation markup: Explore hero in src/components/explore.tsx; existing decorative BackgroundArt moves to a page-wide layer in src/app/layout.tsx. No state, handlers, requests or SVG/animation changes.
+- Documentation/evidence: design/refinements/ and PROGRESS.md. Existing protected logic remains unchanged.

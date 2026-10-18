@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Ticket title",
+    "ink": "#1b3a5c",
+    "paper": "#f0dfbb",
+    "contrast": 8.85
+  },
+  {
+    "name": "Ticket address",
+    "ink": "#243d51",
+    "paper": "#f0dfbb",
+    "contrast": 8.58
+  },
+  {
+    "name": "Ticket stub",
+    "ink": "#1b3a5c",
+    "paper": "#dfc9a0",
+    "contrast": 7.2
+  },
+  {
+    "name": "Hero emphasis",
+    "ink": "#8a3b12",
+    "paper": "#f6ead0",
+    "contrast": 6.48
+  },
+  {
+    "name": "Details metadata",
+    "ink": "#79431e",
+    "paper": "#f8edda",
+    "contrast": 6.88
+  },
+  {
+    "name": "Success seal",
+    "ink": "#163e2a",
+    "paper": "#bce7bd",
+    "contrast": 8.71
+  }
+]

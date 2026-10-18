@@ -12,7 +12,6 @@ import { Feedback } from "./feedback";
 import { PlaceSkeletons } from "./place-skeletons";
 import { ErrorFeedback } from "./error-feedback";
 import { CategoryBadge } from "./category-badge";
-import { BackgroundArt } from "./background-art";
 import { LocationSearch } from "./location-search";
 import { readExploreSession, saveExploreSession, searchUrl, type ExploreSession, type LocationSearchValue, type Results, type Search } from "@/lib/explore-session";
 import { countries } from "@/lib/countries";
@@ -137,10 +136,13 @@ function RestoredExplore() {
   }
   return <div className="explore-page">
     <section aria-labelledby="explore-heading" className="mt-6 rounded-3xl bg-linear-to-br from-teal-900 to-teal-700 px-5 py-8 text-white sm:mt-8 sm:px-10 sm:py-12">
-      <BackgroundArt />
-      <p className="text-xs font-semibold uppercase tracking-widest text-teal-100">Small plans. Great adventures.</p>
-      <h1 id="explore-heading" className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">Where to next?</h1>
-      <p className="mt-4 max-w-xl text-base leading-7 text-teal-50 sm:text-lg">Find places worth a detour. Save your favorites and make room for discovery.</p>
+      <div className="hero-copy">
+        <p className="hero-kicker"><span aria-hidden="true">✦</span> Small plans. Great adventures.</p>
+        <h1 id="explore-heading">Where to <em>next?</em></h1>
+        <p className="hero-description">Find places worth a detour. Save your favorites and make room for discovery.</p>
+        <div className="retro-stripes" aria-hidden="true"><span /><span /><span /></div>
+      </div>
+      <p className="hero-edition" aria-hidden="true">A world of possibilities<br /><span>EXPLORE / 01</span></p>
     </section>
     <section aria-label="Search tools" className="mt-5">
       <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
