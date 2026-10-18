@@ -1,7 +1,7 @@
 # TripWise
 Travel planner for the AWS Student Builder Group recruitment project at VIT Chennai.
 
-Live site: [tripwise-lime.vercel.app](https://tripwise-lime.vercel.app)
+Live site: [tripwiseaws.vercel.app](https://tripwiseaws.vercel.app)
 
 Public repository: [Kedhar155/TripWise](https://github.com/Kedhar155/TripWise)
 
@@ -16,7 +16,7 @@ API credentials stay on the server. Each browser receives a random visitor ID st
 
 All six extras are live: category icons/colors, a teal search banner with popular-city shortcuts, card hover effects/loading skeletons/toasts/footer, current weather and a three-day forecast, day-wise planning, and a trip summary. Search, filters, sorting, saving, day moves, removal, and refresh persistence are verified on the public site. See [PROGRESS.md](PROGRESS.md) for release history, [docs/API.md](docs/API.md) for API details, and [live API checks](docs/extras/release-live-api-tests.md) for all 59 passing production requests.
 
-The deployed application comes from tested commit `7046cd2` on `main`; the deployment notes and screenshots are recorded afterward. Empty day headings stay in this browser; saved places and day assignments stay in Supabase.
+The deployed application comes from tested commit `6127f31` on `main`. Empty day headings stay in this browser; saved places and day assignments stay in Supabase.
 
 ## Hosting
 
@@ -27,9 +27,13 @@ The site was deployed with the Vercel CLI. Automatic deployment from GitHub is n
 To repeat production API checks in PowerShell:
 
 ```powershell
-$env:TEST_BASE_URL='https://tripwise-lime.vercel.app'
+$env:TEST_BASE_URL='https://tripwiseaws.vercel.app'
 $env:TEST_REPORT_PATH='docs/extras/release-live-api-tests.md'
 node scripts/test-api.mjs
 ```
 
 The checks use fresh random test visitors and remove only records created by that run.
+
+## Live website
+
+[Open TripWise — tripwiseaws.vercel.app](https://tripwiseaws.vercel.app)
