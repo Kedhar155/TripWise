@@ -538,3 +538,25 @@ Validation: PASS
 - Evidence: docs/polish/change-1-browser-checks.json. Local final preview: http://127.0.0.1:3026.
 
 Change 1 complete. No push, merge, or deployment. Changes 2-7 await separate instructions.
+
+
+## Polish - Change 2 of 7: full category-row interaction (18 October 2026)
+
+Completed:
+- Continued on polish after c53bbbd, with a clean starting tree. Read progress and the installed Next CSS guide before editing.
+- Each category, including All, now has an explicit checkbox/label association and a full-width native label. Clicking its checkbox, icon, label text, or empty row space activates the same native checkbox once. No extra row click handler or extra Tab stop was added.
+- Found the cause of text/icon clicks failing: the dropdown's blur handler could close it during a label click's temporary focus transition to the document, before native checkbox activation. It now closes on a known focus exit; the existing outside-pointer handler still closes clicks outside. This also supports a held pointer click without a timer race.
+- Added matching teal selected backgrounds/borders, hover colors, and a visible row focus ring. Rows are at least 44px tall, with wrapped labels allowed to grow on narrow phones. Visible checkbox state and row style both use the existing selection state.
+- Kept the existing single shared filter component for desktop and mobile. Tab/Shift+Tab and Space use native checkbox behavior; Escape and outside clicks still close the dropdown. All still clears individual selections, and removing the final category restores All.
+- Preserved the design, search restoration, APIs, database, weather, and trip flow. No new dependency or test-only product behavior.
+
+Validation: PASS
+- Final production webpack build (including TypeScript), lint, separate typecheck, category tests, Explore-session tests, whitespace and secret/history scans.
+- Desktop at 1440x900: all ten rows measured 44px tall and full panel width. Label, icon, checkbox, and far-right empty-space clicks toggled once each. All nine individual category rows toggled on/off. All reset, repeated All selection, last-category fallback, multiple selection, and selected/hover styles passed.
+- Keyboard on desktop and mobile: Tab reached All then Sights, Space toggled Sights on/off, and focus styling remained visible. Tab from the last category moved to Within and closed the dropdown. Escape and outside clicks worked.
+- Mobile Filters at 390x844: repeated checkbox/icon/text/empty-space and All/multiple-selection tests passed, with every row 44px tall. At 320x844, wrapped labels grew to about 57.6px; every row remained at least 44px. No horizontal overflow (305px client/scroll width). Temporary viewport override reset.
+- Real browser flow at phone width: Paris with Museums + Parks and 5km returned 99 results. Opened Square René Viviani Details, added it, moved it to Day 1, refreshed and confirmed Day 1, removed only that disposable item, refreshed and confirmed the empty trip. Returning to Explore retained both category selections from Change 1. Browser warning/error log was empty.
+- Full real-service API regression: all 59 HTTP checks passed, including search/details/add, fresh-read persistence, duplicate/visitor isolation, day changes and validation, and removal. API code was unchanged. Evidence: docs/polish/change-2-api-tests.md.
+- Browser evidence: docs/polish/change-2-browser-checks.json, change-2-desktop.jpg, and change-2-mobile.jpg.
+
+Change 2 complete. Local preview: http://127.0.0.1:3026. No merge, push, or deployment. Changes 3-7 await separate instructions.

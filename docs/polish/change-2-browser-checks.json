@@ -1,0 +1,62 @@
+{
+  "preview": "http://127.0.0.1:3026",
+  "desktop": {
+    "viewport": [
+      1440,
+      900
+    ],
+    "all_ten_row_heights_px": 44,
+    "row_width_px": 310.6625,
+    "label_icon_checkbox_empty_space_toggle_once": true,
+    "all_nine_categories_toggle_on_and_off": true,
+    "tab_order": [
+      "category-all",
+      "category-sights"
+    ],
+    "space_on_off": true,
+    "focus_ring": "2px teal",
+    "tab_from_last_checkbox": "within; dropdown closed",
+    "all_icon_and_empty_space": true,
+    "outside_click_closes": true
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "label_icon_checkbox_empty_space_toggle_once": true,
+    "keyboard_tab_space": true,
+    "all_reset": true,
+    "two_selected_rows": [
+      "Museums and Culture",
+      "Parks and Nature"
+    ],
+    "all_ten_row_heights_px": 44,
+    "selected_and_hover_colors_distinct": true
+  },
+  "narrow_phone": {
+    "viewport": [
+      320,
+      844
+    ],
+    "min_row_height_px": 44,
+    "wrapped_row_height_px": 57.6000023,
+    "client_width_px": 305,
+    "scroll_width_px": 305
+  },
+  "flow": {
+    "search": "Paris, Museums and Culture + Parks and Nature, 5 km: 99 results",
+    "details": "Square René Viviani",
+    "add": "PASS",
+    "move_day_1": "PASS",
+    "refresh_day_persistence": "PASS",
+    "remove_own_disposable_item": "PASS",
+    "refresh_empty_trip": "PASS"
+  },
+  "browser_warnings_errors": [],
+  "viewport_override_reset": true,
+  "screenshots": [
+    "change-2-desktop.jpg",
+    "change-2-mobile.jpg"
+  ]
+}
