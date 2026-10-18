@@ -1,22 +1,44 @@
-/* Selected Orange Airmail: one treatment for every category. */
+/* Textured & Shaded Retro Airline: one treatment for every category. */
 :is(.explore-page, .trip-page) .place-card {
   --ticket-paper: var(--card);
-  --ticket-band: var(--orange);
-  --ticket-stub: #245e59;
+  --ticket-stub: linear-gradient(95deg, #1b3a5c 0%, #21496e 55%, #235e63 100%);
 }
-.explore-page [aria-label="Search results"] .place-card { background: var(--ticket-paper); padding: 20px 20px 0 43px; }
-.explore-page .place-card > div:first-child { margin: 0; padding: 0; background: transparent; border: 0; border-radius: 0; }
-.explore-page .place-card > div:first-child > svg { color: #102a43; }
-.explore-page .place-card [data-slot="card-title"] { color: #102a43; font-size: 29px; }
-.explore-page .place-card [data-slot="card-description"] { color: #102a43; font-size: 14px; font-weight: 600; line-height: 1.8; }
-.explore-page .place-card > div:last-child { margin: auto -20px 0; padding: 13px 20px; border-top: 1px dashed #9a743b; background: var(--ticket-stub); }
-.explore-page .place-card > div:last-child :is(span, a) { color: var(--card); font-size: 13px; font-weight: bold; }
+.explore-page [aria-label="Search results"] .place-card { padding: 0 0 0 14px; }
+.explore-page .place-card > div:first-child { margin: 0; padding: 20px 20px 0; background: transparent; border: 0; border-radius: 0; gap: 10px; }
+/* This is the existing decorative SVG, not a new button or click target. */
+.explore-page .place-card > div:first-child > svg {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  color: #1b3a5c;
+  border-radius: 50%;
+  background: #fffbf2;
+  border: 1px solid rgba(27, 58, 92, 0.3);
+  box-shadow: 1px 1px 0 rgba(27, 58, 92, 0.2);
+}
+.explore-page .place-card [data-slot="card-title"] { padding: 0 20px; color: #1b3a5c; font-size: 29px; }
+.explore-page .place-card [data-slot="card-description"] { padding: 0 20px 6px; color: #102a43; font-size: 14px; font-weight: 600; line-height: 1.8; }
+.explore-page .place-card > div:last-child { margin: auto 0 0; padding: 13px 20px; background: var(--ticket-stub); }
+.explore-page .place-card > div:last-child :is(span, a) { color: #f6ead0; font: 12px/1.6 "Courier New", monospace; }
+.explore-page .place-card > div:last-child a {
+  color: #fffbf2;
+  border-bottom: 1px dashed #e8702a;
+  text-decoration: none;
+}
+.explore-page .place-card > div:last-child a > span[aria-hidden="true"] { color: inherit; }
+.explore-page .place-card:has(a:focus-visible) { outline: 3px solid var(--navy); outline-offset: 4px; }
 .explore-page .place-card .category-badge,
 .trip-page .place-card .category-badge,
 .destination-page .destination-card .category-badge {
-  color: var(--navy) !important;
-  background-color: #dceee5 !important;
-  border-color: var(--navy);
+  color: #1b3a5c !important;
+  background: linear-gradient(180deg, rgba(42, 157, 143, 0.16) 0%, rgba(42, 157, 143, 0.08) 100%) !important;
+  border: 1px solid rgba(42, 157, 143, 0.5);
+  box-shadow: 1px 1px 0 rgba(27, 58, 92, 0.18);
+  font: 11.5px/1.6 "Courier New", monospace;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .explore-page .place-card::before,
 .trip-page .place-card::before,
@@ -24,11 +46,29 @@
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
-  width: 23px;
-  background: var(--orange);
-  border-right: 1px dashed var(--navy);
-  border-radius: 3px 0 0 3px;
+  width: 14px;
+  background: linear-gradient(180deg, #f0803c 0%, #e8702a 45%, #a4622b 100%);
+  border-right: 1.5px dashed rgba(27, 58, 92, 0.55);
+  box-shadow: inset -2px 0 4px rgba(27, 58, 92, 0.18);
   pointer-events: none;
+}
+
+.explore-page [aria-label="Search results"] .place-card,
+.trip-page .place-card,
+.destination-page .destination-layout .destination-card {
+  background-color: #fffbf2;
+  background-image: radial-gradient(rgba(164, 98, 43, 0.11) 1px, transparent 1px), linear-gradient(155deg, #fffdf9 0%, #fbf2e0 65%, #f3e3c6 100%);
+  background-size: 10px 10px, 100% 100%;
+  border: 1.5px solid #1b3a5c;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 10px 22px -8px rgba(27, 58, 92, 0.2), 3px 3px 0 #1b3a5c;
+}
+.explore-page .place-card > div:last-child,
+.trip-page .place-card::after,
+.destination-page .destination-card::after {
+  border-top: 2px solid #e8702a;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Keep results with Filters, and give Sort By its own right-aligned group. */
@@ -50,9 +90,7 @@
 /* The whole ticket is the activator. Native controls stay independent. */
 .trip-page .place-card {
   position: relative;
-  background: var(--ticket-paper);
-  border: 1.5px solid var(--navy);
-  padding-left: 39px;
+  padding-left: 30px;
   cursor: grab;
   touch-action: pan-y;
   user-select: none;
@@ -74,7 +112,6 @@
   height: 18px;
   margin: 0 -16px -16px;
   background: var(--ticket-stub);
-  border-top: 1px dashed #9a743b;
   pointer-events: none;
 }
 
@@ -82,17 +119,14 @@
   --airmail-padding: clamp(20px, 3vw, 36px);
   position: relative;
   overflow: hidden;
-  background: var(--card);
-  border-top: 1.5px solid var(--navy);
-  padding-left: calc(var(--airmail-padding) + 23px);
+  padding-left: calc(var(--airmail-padding) + 14px);
 }
 .destination-page .destination-card::after {
   content: "";
   display: block;
   height: 24px;
   margin: 24px calc(0px - var(--airmail-padding)) calc(0px - var(--airmail-padding));
-  background: #245e59;
-  border-top: 1px dashed #9a743b;
+  background: linear-gradient(95deg, #1b3a5c 0%, #21496e 55%, #235e63 100%);
   pointer-events: none;
 }
 .destination-page .destination-meta { border-color: #9a743b; }
@@ -101,3 +135,17 @@
 .destination-page .destination-address { color: #102a43; font-size: 14px; font-weight: 600; }
 .destination-page .destination-meta dd { color: #102a43; font-weight: 600; }
 .destination-page [aria-label="Destination weather"] { background: var(--card); border-left-color: #245e59; }
+
+/* Preserve the existing action's shape, layout and saved/disabled states. */
+.destination-page .destination-aside > .button:not(:disabled) { background: var(--teal); color: #0d233b; }
+
+@media (hover: hover) {
+  .explore-page [aria-label="Search results"] .place-card:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 12px 24px -8px rgba(27, 58, 92, 0.24), 4px 4px 0 #1b3a5c;
+  }
+  .explore-page .place-card > div:last-child a:hover { color: #e8702a; border-bottom-style: solid; }
+  .destination-page .destination-aside > .button:not(:disabled):hover { background: #46b5a7; }
+}
+.explore-page [aria-label="Search results"] .place-card:active {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 6px 14px -8px rgba(27, 58, 92, 0.2), 1px 1px 0 #1b3a5c;
+}

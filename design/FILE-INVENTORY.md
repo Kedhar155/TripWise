@@ -275,3 +275,8 @@ Only src/app/globals.css is changed in the existing application source.
 - Styling/layout only: src/app/colorful-tickets.css replaces category-based ticket colors with shared cream/orange/teal stock, and matching Details with brown metadata panels.
 - No component, handler, drag sensor, API, data or settings changes in this step. Add/Back style and layout rules remain unchanged.
 - Documentation/evidence: design/airmail/ and PROGRESS.md. The earlier explicitly authorized whole-card dragging exception remains confined to the previous commit.
+
+## Textured & Shaded Retro Airline
+- Styling/layout only: src/app/colorful-tickets.css applies the specified paper texture, gradient stitched spine, badge/pin presentation, shaded footer, and matching Details with a teal Add action.
+- No component/content/props/handlers/API/data changes. Brown metadata and Back/Add positioning retained. Existing pin remains decorative.
+- Documentation/verification/screenshots: design/textured-airline/ and PROGRESS.md.

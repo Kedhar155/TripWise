@@ -1,0 +1,52 @@
+{
+  "viewports": [
+    {
+      "client": 305,
+      "page": "Details",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "client": 305,
+      "page": "My Trip",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "client": 320,
+      "page": "Explore",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "client": 390,
+      "page": "Explore",
+      "scroll": 390,
+      "width": 390
+    },
+    {
+      "client": 768,
+      "page": "Explore",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "client": 768,
+      "page": "Details",
+      "scroll": 768,
+      "width": 768
+    }
+  ],
+  "console": [],
+  "flows": [
+    "Paris location search: 100 results",
+    "Eiffel Tower name search: two results",
+    "Sort Name Z to A; navigation restores name query and sort",
+    "Filter Sights: one result; Details/Back retain filter; chip removal restores two",
+    "Details brown metadata preserved; Add button teal #2A9D8F",
+    "Add -> Day 1 -> refresh persists -> whole-card keyboard drag to Unplanned -> Remove -> refresh empty"
+  ],
+  "limits": [
+    "Physical touch and a new pointer-drag walkthrough not exercised; focused activation tests pass and interaction code is unchanged"
+  ]
+}
