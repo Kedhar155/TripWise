@@ -243,3 +243,9 @@ Only src/app/globals.css is changed in the existing application source.
 - Added src/app/explore.css; globals.css imports it.
 - Explicit presentation-only edits allowed by Step 2: Explore wrapper/heading; CategoryBadge class/data label; navigation/footer stripe markup and classes. No business logic changes.
 - Protected catalog/category matching and all API, lib, location, combobox, filter/state/handler code remain unchanged. Evidence: design/explore-step2/.
+
+## Requested Destination Step 3 presentation scope
+- Allowed new stylesheet: src/app/destination.css (imported by globals.css).
+- Explicit Destination presentation-only edits: style classes, decorative Back stub, coordinate display, empty-row markers. Data reads, save logic, state/effects and all handlers remain unchanged.
+- explore.css only shares its category palette selectors with Destination. WeatherBox, API/data/helper source remains protected and unchanged.
+- Documentation/evidence: design/details-step3/ and PROGRESS.md.

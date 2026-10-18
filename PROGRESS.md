@@ -766,3 +766,14 @@ Vercel deployment ID: dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz (READY, production).
 - Real phone flow: India/Tamil Nadu/Chennai suggestions, Museums+Parks, 10km, Name Z to A, whole-card Details, Back to Explore restores identical ordered 100 cards and all controls/chips. Name search Eiffel Tower, distance hidden, filter-empty/Clear all recovery, sort, Details/browser Back and refresh restore identical two results/query/sort. Narrow category menu rows remain >=44px.
 - No horizontal overflow at tested 390px (375/375) and 320px (305/305), including category menu. Desktop fixture inspected at 1265px. Final real browser warning/error log empty; viewport reset requested. Evidence/limits and screenshots: design/explore-step2/README.md.
 - Local preview http://127.0.0.1:3046. No push or deployment.
+
+## Retro redesign - requested Step 3: Destination Details (18 October 2026)
+- Added scoped src/app/destination.css: cream hard-shadow detail ticket, Georgia title, Courier address/category/coordinates and labels, dashed dividers, orange Add to Trip, and nav-style Back to Explore. Weather is a paper boarding-pass panel with orange edge and dashed forecast sections.
+- Destination gains presentation classes, decorative Back stub, numeric coordinate display, and data-empty markers for missing address/hours/phone/website/coordinates. Existing fallback expressions remain unchanged but empty rows are hidden by CSS. Zero coordinates remain valid.
+- Widened the existing category presentation selectors to include Destination; no category matching/catalog/icon change. Explore component and behavior unchanged.
+- Exact source checks (normalizing CRLF) PASS for all Destination imports/state/effects/read/save code and every event handler. WeatherBox, APIs and lib source unchanged.
+- Lint and production webpack build including TypeScript PASS. Weather/client-error/Explore-session suites PASS. All 59 real API regression checks PASS, including search, Details, add/persist, day changes and removal; test records cleaned up. Evidence design/details-step3/api-tests.md.
+- Real browser: Eiffel Tower search, Paris Details/weather, missing phone hidden, Add to Trip stays on Details, disabled saved state persists on refresh, Back restores identical two search results, My Trip move to Day 1 persists, own disposable place removed and refresh confirms empty trip.
+- Local fixture: missing hours/phone/website all hidden; long names/addresses wrap; eight-second save disables button/trip link and prevents navigation; Details and saved-status errors both recover with Retry. Fixture APIs do not reach real services.
+- No overflow at 390px (375/375), 320px (305/305) or reset 475px (475/475); viewport reset. Final real warning/error log empty. Secret/whitespace scans PASS. Screenshots and full checks: design/details-step3/README.md.
+- Local preview http://127.0.0.1:3048. No push or deployment.
