@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Compass, SlidersHorizontal, ChevronDown, X } from "lucide-react";
 import type { Place } from "@/lib/types";
 import { categories, type Category } from "@/lib/categories";
-import { availableSorts, defaultWithin, groupPlaces, sortPlaces, sortOptions, withinOptions, type PlaceSort } from "@/lib/place-sorting";
+import { availableSorts, groupPlaces, sortPlaces, sortOptions, withinOptions, type PlaceSort } from "@/lib/place-sorting";
 import { CategoryFilter } from "./category-filter";
 import { message, request } from "@/lib/client-api";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
@@ -12,25 +12,37 @@ import { Feedback } from "./feedback";
 import { PlaceSkeletons } from "./place-skeletons";
 import { ErrorFeedback } from "./error-feedback";
 import { CategoryBadge } from "./category-badge";
-import { LocationSearch, type LocationSearchValue } from "./location-search";
+import { LocationSearch } from "./location-search";
+import { readExploreSession, saveExploreSession, searchUrl, type ExploreSession, type LocationSearchValue, type Results, type Search } from "@/lib/explore-session";
+import { countries } from "@/lib/countries";
 const popularCities = [{ city: "Paris", country: "fr" }, { city: "Tokyo", country: "jp" }, { city: "Goa", country: "in" }, { city: "Dubai", country: "ae" }, { city: "London", country: "gb" }];
 
-type Results = { places: Place[]; city?: { name: string }; query?: string };
-type Search = { kind: "location"; value: LocationSearchValue } | { kind: "name"; name: string };
+const subscribe = () => () => {};
 export function Explore() {
-  const [mode, setMode] = useState<"location" | "name">("location");
-  const [filtersOpen, setFiltersOpen] = useState(false);
+  // Read session data after hydration, without mismatching the server HTML.
+  const hydrated = useSyncExternalStore(subscribe, () => true, () => false);
+  return hydrated ? <RestoredExplore /> : <div className="py-8"><PlaceSkeletons /></div>;
+}
+function RestoredExplore() {
+  const [initial] = useState(readExploreSession);
+  const [location, setLocation] = useState(initial.location);
+  const [locationVersion, setLocationVersion] = useState(0);
+  const [mode, setMode] = useState<"location" | "name">(initial.mode);
+  const [filtersOpen, setFiltersOpen] = useState(initial.filtersOpen);
   const filterTrigger = useRef<HTMLButtonElement>(null);
-  const [nameDraft, setNameDraft] = useState("");
+  const [nameDraft, setNameDraft] = useState(initial.nameDraft);
   const [nameError, setNameError] = useState("");
-  const [search, setSearch] = useState<Search | null>(null);
-  const [preset, setPreset] = useState<LocationSearchValue>();
-  const [selected, setSelected] = useState<Category[]>([]);
+  const [search, setSearch] = useState<Search | null>(initial.search);
+  const [selected, setSelected] = useState<Category[]>(initial.selected);
   const category = selected.length ? selected.join(",") : "all";
-  const [sort, setSort] = useState<PlaceSort>("relevance");
-  const [within, setWithin] = useState<number | null>(defaultWithin);
-  const [results, setResults] = useState<Results | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [sort, setSort] = useState<PlaceSort>(initial.sort);
+  const [within, setWithin] = useState<number | null>(initial.within);
+  const [results, setResults] = useState<Results | null>(initial.results);
+  const [loading, setLoading] = useState(!!initial.search);
+  const [resultsKey, setResultsKey] = useState(initial.resultsKey);
+  const cache = useRef({ key: initial.resultsKey, results: initial.results });
+  const restoreScroll = useRef<number | null>(initial.scrollY);
+  const snapshot = useRef<ExploreSession>(initial);
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
   const locationMode = search?.kind !== "name";
@@ -50,14 +62,44 @@ export function Explore() {
   useEffect(() => {
     if (!search) return;
     const controller = new AbortController();
-    const params = search.kind === "location"
-      ? new URLSearchParams({ ...search.value, category, sort: "relevance", ...(withinQuery === null ? {} : { within: String(withinQuery) }) })
-      : new URLSearchParams({ name: search.name, category, sort: "relevance" });
-    request<Results>(`${search.kind === "location" ? "/api/places" : "/api/places/search"}?${params}`, {signal:controller.signal})
-      .then(data => { if (!controller.signal.aborted) setResults(data); }).catch(e => { if (!controller.signal.aborted) setError(message(e)); })
+    const url = searchUrl(search, category, withinQuery);
+    if (attempt === 0 && cache.current.key === url && cache.current.results) {
+      setResults(cache.current.results); setResultsKey(url); setLoading(false);
+      return;
+    }
+    setLoading(true); setError("");
+    request<Results>(url, { signal: controller.signal })
+      .then(data => { if (!controller.signal.aborted) {
+        cache.current = { key: url, results: data };
+        setResults(data); setResultsKey(url);
+      } }).catch(e => { if (!controller.signal.aborted) setError(message(e)); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
   }, [search, category, withinQuery, attempt]);
+  useEffect(() => {
+    snapshot.current = { version: 1, mode, location, nameDraft, selected, sort, within, filtersOpen, search, results, resultsKey, scrollY: restoreScroll.current ?? window.scrollY };
+    saveExploreSession(snapshot.current);
+  }, [mode, location, nameDraft, selected, sort, within, filtersOpen, search, results, resultsKey]);
+  useEffect(() => {
+    const saveScroll = () => {
+      if (restoreScroll.current !== null) return;
+      snapshot.current = { ...snapshot.current, scrollY: window.scrollY };
+      saveExploreSession(snapshot.current);
+    };
+    window.addEventListener("scroll", saveScroll, { passive: true });
+    window.addEventListener("pagehide", saveScroll);
+    return () => { window.removeEventListener("scroll", saveScroll); window.removeEventListener("pagehide", saveScroll); };
+  }, []);
+  useEffect(() => {
+    if (loading || restoreScroll.current === null) return;
+    // Restore after cards have layout and after the router's scroll handling.
+    let second = 0;
+    const first = requestAnimationFrame(() => { second = requestAnimationFrame(() => {
+      window.scrollTo({ top: restoreScroll.current ?? 0, behavior: "instant" });
+      restoreScroll.current = null;
+    }); });
+    return () => { cancelAnimationFrame(first); cancelAnimationFrame(second); };
+  }, [loading]);
   function begin() { setError(""); setLoading(true); }
   function searchLocation(value: LocationSearchValue) {
     begin(); setSearch({ kind: "location", value });
@@ -72,11 +114,17 @@ export function Explore() {
     if (search && (selected.length || (locationMode && within !== null))) begin();
     setSelected([]); setWithin(null); setSort("relevance");
   }
+  function rememberDeparture() {
+    // Freeze before Next scrolls the outgoing page during navigation.
+    restoreScroll.current = window.scrollY;
+    snapshot.current = { ...snapshot.current, scrollY: window.scrollY };
+    saveExploreSession(snapshot.current);
+  }
   function cards(items: Place[]) {
     return <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map(place => <Card key={place.id} className="place-card min-w-0 gap-4">
       <div className="flex items-center justify-between"><CategoryBadge category={place.category} /><MapPin size={20} className="text-teal-700" aria-hidden="true"/></div>
       <CardTitle>{place.name}</CardTitle><CardDescription>{place.address}</CardDescription>
-      <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-sm"><span className="text-slate-500">{place.distance === undefined ? "" : `${(place.distance / 1000).toFixed(1)} km away`}</span><Link className="font-semibold text-teal-700" href={`/places/${encodeURIComponent(place.id)}`}>View details <span aria-hidden="true">↗</span><span className="sr-only"> for {place.name}</span></Link></div>
+      <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-sm"><span className="text-slate-500">{place.distance === undefined ? "" : `${(place.distance / 1000).toFixed(1)} km away`}</span><Link className="font-semibold text-teal-700" onNavigate={rememberDeparture} href={`/places/${encodeURIComponent(place.id)}`}>View details <span aria-hidden="true">↗</span><span className="sr-only"> for {place.name}</span></Link></div>
     </Card>)}</div>;
   }
   return <>
@@ -95,10 +143,10 @@ export function Explore() {
         {([{ value: "location", label: "Search by location" }, { value: "name", label: "Search by place name" }] as const).map(tab => <button key={tab.value} id={`search-tab-${tab.value}`} role="tab" type="button" aria-selected={mode === tab.value} aria-controls={`search-panel-${tab.value}`} tabIndex={mode === tab.value ? 0 : -1} onClick={() => switchMode(tab.value)} className={`min-h-12 rounded-xl px-3 py-2 text-sm font-semibold transition-colors sm:px-5 ${mode === tab.value ? "bg-white text-teal-800 shadow-sm" : "text-slate-600 hover:text-teal-800"}`}>{tab.label}</button>)}
       </div>
       <div id="search-panel-location" role="tabpanel" aria-labelledby="search-tab-location" hidden={mode !== "location"}>
-        <LocationSearch key={preset ? `${preset.country}:${preset.city}` : "custom"} preset={preset} onSearch={searchLocation}/>
+        <LocationSearch key={locationVersion} draft={location} onDraftChange={setLocation} onSearch={searchLocation}/>
         <div className="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Popular cities">
           <span className="mr-1 text-xs text-slate-500">Try</span>
-          {popularCities.map(value => <button key={value.city} type="button" onClick={() => { setPreset(value); searchLocation(value); }} className="min-h-10 rounded-full border border-teal-100 bg-teal-50/50 px-3 py-2 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-50">{value.city}</button>)}
+          {popularCities.map(value => <button key={value.city} type="button" onClick={() => { setLocationVersion(value => value + 1); setLocation({ countryText: countries.find(item => item.code === value.country)!.name, country: value.country, cityText: value.city, city: { id: "", name: value.city, label: value.city, country: value.country } }); searchLocation(value); }} className="min-h-10 rounded-full border border-teal-100 bg-teal-50/50 px-3 py-2 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-50">{value.city}</button>)}
         </div>
       </div>
       <div id="search-panel-name" role="tabpanel" aria-labelledby="search-tab-name" hidden={mode !== "name"}>

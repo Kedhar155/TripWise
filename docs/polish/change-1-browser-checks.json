@@ -1,0 +1,81 @@
+{
+  "preview": "http://127.0.0.1:3026",
+  "location": {
+    "country": "India",
+    "city": "Chennai, TN, India",
+    "categories": [
+      "Museums and Culture",
+      "Parks and Nature"
+    ],
+    "sort": "Name A to Z",
+    "distance": "5 km",
+    "results": 100,
+    "unchanged_result_order": true,
+    "scroll_pixels": {
+      "departure": 2400,
+      "back_to_explore": 2400,
+      "browser_back": 2400,
+      "refresh": 2400
+    }
+  },
+  "direct_details_without_session": "default location tab, empty country/city, scroll 0",
+  "name_cache_fixture": {
+    "name": "Eiffel Tower",
+    "restored_name_and_tab": true,
+    "back_to_explore": "PASS",
+    "browser_back": "PASS",
+    "refresh": "PASS",
+    "search_requests_across_all_returns": 1,
+    "fixture_errors_during_returns": true
+  },
+  "unfinished_search_refresh": {
+    "name": "Taj Mahal",
+    "loading_skeleton_observed": true,
+    "new_result_loaded": true
+  },
+  "trip_flow": {
+    "place": "Chetpat Eco Park",
+    "add": "PASS",
+    "move_day_1": "PASS",
+    "refresh_day_1": "PASS",
+    "remove_own_test_place": "PASS"
+  },
+  "fixture_request_log": [
+    {
+      "time": 1792293109822,
+      "path": "/api/places/qa-place"
+    },
+    {
+      "time": 1792293109839,
+      "path": "/api/itinerary"
+    },
+    {
+      "time": 1792293120393,
+      "path": "/api/places/search?name=Eiffel+Tower&category=all&sort=relevance"
+    },
+    {
+      "time": 1792293131226,
+      "path": "/api/places/qa-place"
+    },
+    {
+      "time": 1792293131227,
+      "path": "/api/itinerary"
+    },
+    {
+      "time": 1792293136590,
+      "path": "/api/places/qa-place"
+    },
+    {
+      "time": 1792293136591,
+      "path": "/api/itinerary"
+    },
+    {
+      "time": 1792293153017,
+      "path": "/api/places/search?name=Taj+Mahal&category=all&sort=relevance"
+    },
+    {
+      "time": 1792293153391,
+      "path": "/api/places/search?name=Taj+Mahal&category=all&sort=relevance"
+    }
+  ]
+}

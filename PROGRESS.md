@@ -512,3 +512,29 @@ Vercel deployment ID: dpl_DeNo7CbXVCGK1dGfMY3a7FodqrSc (READY, production).
 - Public browser leak scan passed across 17 live responses: the search response, Explore, My Trip, Details, and thirteen browser script files. The new repeatable scripts/check-live-secrets.mjs reads responses in memory, checks the saved credential values and credential patterns, and saves counts/status only; it never prints or saves credential values. Evidence: live-browser-secret-scan.json.
 - Secret/history scans passed before push and again after deployment. Private .env.local and Vercel auth files remain ignored. Lint and existing isolated client-error, 400/404/409/500 redaction, summary, and visitor checks passed; no live services were deliberately broken to simulate 500 errors.
 - Updated API_TESTS.md and saved all live reports. Verification notes and the new scan helper are a local follow-up commit; the deployed application remains exactly d118698. No second deployment or application fix was needed. All disposable live test trips are cleaned up.
+
+
+## Polish - Change 1 of 7: keep Explore searches (18 October 2026)
+
+Completed:
+- Read progress first. Starting checkpoint: e96f3a3; working branch: polish. No push or deployment authorized for this series.
+- Chose sessionStorage rather than query parameters: one tab-scoped snapshot preserves exact result data, unfinished drafts in both forms, and the scroll position together without adding a large results payload to the address or re-running searches on return.
+- Explore now remembers Country, the full selected City label/ID (including its state/region), place-name text, active tab, selected categories, sort, distance, phone filter-panel state, result order/content, and scroll position. This version has no separate State control; the existing city label includes the region, e.g. Chennai, TN, India.
+- Lifted location drafts into Explore so changing routes cannot lose them. Popular-city shortcuts still select/search the same destinations and clear stale suggestions/errors.
+- A versioned, single-result-set cache is matched to the exact search, categories, and radius. Matching results restore without a search request. Missing, unfinished, invalid, or mismatched result caches use the saved search and existing loading/error/retry UI. Sort remains local.
+- Save the scroll position before Details navigation can move the outgoing page; restore after the cards have layout. Back to Explore delegates scrolling to this restoration. Browser Back and refresh are supported too.
+- No saved session means default Explore, including when Details was opened directly. Unreadable storage is handled without breaking search; an in-memory fallback supports route navigation when browser storage is blocked/full (refresh persistence requires working sessionStorage).
+- Preserved the existing design, APIs, database, weather, and trip behavior. No dependencies added.
+
+Validation: PASS
+- Production webpack build (including TypeScript), lint, separate typecheck, and git diff --check. One intermediate build hit the known .next permission issue; the final build uses approved process permissions.
+- New node scripts/test-explore-session.mjs covers fresh-document session restoration, inactive drafts/region, tab, categories/sort/radius, results/scroll, malformed settings/cache, search identity, and blocked/full storage fallback.
+- Existing category, sorting, search/cache, trip-summary, weather, visitor, client-error, and API-error tests passed. Source/document/browser-bundle and Git-object secret scans passed; private environment files remain ignored and no secret values were printed.
+- Full real-service API regression: 59 HTTP checks passed, including search, details, add/read persistence, duplicates, visitor isolation, day assignment/clearing/validation, and removal. Evidence: docs/polish/change-1-api-tests.md.
+- Browser real-service search: India > Chennai, TN, India; Museums and Culture + Parks and Nature; 5 km; Name A to Z; 100 results. Back to Explore, browser Back, and refresh retained the controls/chips and identical ordered card list. Exact scroll position was 2400 pixels before leaving and after each return/refresh. Tested desktop and narrow layouts without a design change.
+- Browser direct Details in a new fixture session returned to default Explore (empty country/city, location tab, scroll 0).
+- Isolated fixture name search retained Eiffel Tower, its active name tab, and its result through both Back paths and refresh while the fixture returned errors. Request log confirmed exactly one name-search request across all returns. A refreshed unfinished Taj Mahal search showed loading skeletons and then the new result. Fixture requests do not contact Geoapify or Supabase.
+- Browser real trip flow: opened Chetpat Eco Park, added it, moved it to Day 1, refreshed and confirmed Day 1, removed only that disposable test item, refreshed and confirmed 0 saved places and no summary. Browser warning/error log was empty.
+- Evidence: docs/polish/change-1-browser-checks.json. Local final preview: http://127.0.0.1:3026.
+
+Change 1 complete. No push, merge, or deployment. Changes 2-7 await separate instructions.
