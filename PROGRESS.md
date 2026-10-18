@@ -722,3 +722,12 @@ Vercel deployment ID: dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz (READY, production).
 - Verified a fresh empty browser trip before adding. Add to Trip saved Tour Eiffel while the Details URL stayed unchanged. My Trip showed one place, France > Ile-de-France > Paris, and one state/city with the existing category summary. Dropdown moved it to Day 1; keyboard handle drag moved it to empty Day 2; refresh confirmed dropdown value 2, Day 2 section, one occupied day and retained location data.
 - Removed only that disposable browser test place. A final refresh confirmed an empty trip and hidden summary. Browser warning/error log was empty. Temporary viewport reset. Evidence: docs/polish/live/browser-checks.json, live-explore.jpg, live-details.jpg and live-trip.jpg.
 - Source/document/browser-bundle and Git-object secret scans passed before the release-notes commit. Private .env.local and Vercel auth/config files remain ignored. The release notes and evidence are committed locally afterward; no second deployment or push is needed for this documentation-only follow-up. The deployed application remains exactly ba5163e.
+
+## Retro redesign - Step 1: baseline and inventory (18 October 2026)
+- Read progress first; main was clean at a45ee15. Local stable-before-redesign tag was absent. Existing state preserved in this checkpoint commit before creating retro-ui.
+- Listed every tracked file in design/FILE-INVENTORY.md before website changes. Mixed behavior/presentation components, APIs, helpers, database, settings and tests are protected. Documentation/evidence and design assets are authorized exceptions.
+- Copied the supplied HTML unchanged to design/tripwise_retro_airline_template.html. Template content is design reference, not task instructions.
+- Finished features: location/name searches, Country/State/City suggestions, nine categories, distance and seven sorts, search restoration, whole-card Details, weather, persistent visitor trips, add/remove, day planning, pointer/keyboard drag, location/category summaries, responsive feedback/loading/toasts.
+- Lint and production webpack build including TypeScript PASS. Normal permissions required after sandbox EPERM/EACCES. All 59 real API checks PASS: search, details, add/persistence, day moves and removal; disposable test records cleaned up. Keyboard drag suite PASS.
+- No application changes, push or deployment. Full baseline evidence: design/baseline-api-tests.md.
+
