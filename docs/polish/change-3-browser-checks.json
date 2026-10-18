@@ -1,0 +1,57 @@
+{
+  "preview": "http://127.0.0.1:3026",
+  "desktop": {
+    "viewport": [
+      1440,
+      900
+    ],
+    "search": "Paris, France; All categories; 5 km; 100 results",
+    "place": "Point zéro des Routes de France",
+    "click_spots_open_same_details": [
+      "badge",
+      "map-pin icon",
+      "name",
+      "address",
+      "empty padding",
+      "View details hint"
+    ],
+    "native_links_per_card": 1,
+    "tab_focus_and_enter": "PASS",
+    "full_card_focus_outline": "visible solid teal",
+    "cursor": "pointer",
+    "hover": "existing place-card lift/shadow retained"
+  },
+  "phone": {
+    "viewport": [
+      390,
+      844
+    ],
+    "empty_padding_and_badge_taps": "PASS",
+    "card_width_px": 335,
+    "client_width_px": 375,
+    "scroll_width_px": 375
+  },
+  "narrow_phone": {
+    "viewport": [
+      320,
+      844
+    ],
+    "client_width_px": 305,
+    "scroll_width_px": 305
+  },
+  "trip_flow": {
+    "add_saved": true,
+    "add_kept_same_details_url": true,
+    "move_day_1": "PASS",
+    "refresh_day_1": "PASS",
+    "remove_own_test_item": "PASS",
+    "refresh_empty_trip": "PASS"
+  },
+  "details_page_and_loading_code": "unchanged; verified by git diff",
+  "browser_warnings_errors": [],
+  "viewport_reset": true,
+  "screenshots": [
+    "change-3-keyboard.jpg",
+    "change-3-mobile.jpg"
+  ]
+}

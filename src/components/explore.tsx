@@ -121,10 +121,10 @@ function RestoredExplore() {
     saveExploreSession(snapshot.current);
   }
   function cards(items: Place[]) {
-    return <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map(place => <Card key={place.id} className="place-card min-w-0 gap-4">
+    return <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map(place => <Card key={place.id} className="place-card relative min-w-0 cursor-pointer gap-4">
       <div className="flex items-center justify-between"><CategoryBadge category={place.category} /><MapPin size={20} className="text-teal-700" aria-hidden="true"/></div>
       <CardTitle>{place.name}</CardTitle><CardDescription>{place.address}</CardDescription>
-      <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-sm"><span className="text-slate-500">{place.distance === undefined ? "" : `${(place.distance / 1000).toFixed(1)} km away`}</span><Link className="font-semibold text-teal-700" onNavigate={rememberDeparture} href={`/places/${encodeURIComponent(place.id)}`}>View details <span aria-hidden="true">↗</span><span className="sr-only"> for {place.name}</span></Link></div>
+      <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-sm"><span className="text-slate-500">{place.distance === undefined ? "" : `${(place.distance / 1000).toFixed(1)} km away`}</span><Link className="font-semibold text-teal-700 after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none focus-visible:after:outline-3 focus-visible:after:outline-teal-600 focus-visible:after:outline-offset-4" onNavigate={rememberDeparture} href={`/places/${encodeURIComponent(place.id)}`}>View details <span aria-hidden="true">↗</span><span className="sr-only"> for {place.name}</span></Link></div>
     </Card>)}</div>;
   }
   return <>

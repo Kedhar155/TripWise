@@ -560,3 +560,25 @@ Validation: PASS
 - Browser evidence: docs/polish/change-2-browser-checks.json, change-2-desktop.jpg, and change-2-mobile.jpg.
 
 Change 2 complete. Local preview: http://127.0.0.1:3026. No merge, push, or deployment. Changes 3-7 await separate instructions.
+
+
+## Polish - Change 3 of 7: open Details from the whole place card (18 October 2026)
+
+Completed:
+- Read progress first and continued on polish after 16f88af. Read the installed Next Link guide before changing navigation.
+- Extended each Explore card's existing native Next Link across its entire card with an absolutely positioned pseudo-element. Badge, icon area, name, address, and empty padding all use the same Details URL. The visible View details hint remains in place.
+- Cards show a pointer cursor, retain the existing card hover lift/shadow and reduced-motion behavior, and show a teal outline around the card when its link has keyboard focus. One native link per card gives one Tab stop and Enter activation, with standard browser link behavior.
+- Kept the existing onNavigate scroll checkpoint on the link, so whole-card navigation retains the search/scroll restoration from Change 1. Both ordinary and category-grouped results share the same card renderer.
+- This version's Add to Trip button is on Details, not inside an Explore card. Left its standalone save action unchanged. No button was nested inside a link or given a card navigation handler.
+- Source changes are limited to two className updates in Explore. Details fetching/loading, destination code, API routes, trip actions, and styling elsewhere are unchanged. No dependency added or redesign.
+
+Validation: PASS
+- Final npm run build -- --webpack (including TypeScript), npm run lint, separate typecheck, existing category and Explore-session tests, secret/history scans, and git diff --check.
+- Desktop at 1440x900 with real Paris results: clicking the first card's badge, map-pin icon, name, address, empty padding, and View details hint each opened the same Point zéro des Routes de France Details page.
+- Native keyboard check: Tab from Clear all focused the first card's only link; the full-card focus outline was visible; Enter opened Details. Screenshot: docs/polish/change-3-keyboard.jpg.
+- Phone at 390x844: empty-padding and badge taps opened Details; native card focus remained visible. No overflow at 390px (375px client/scroll width) or 320px (305px client/scroll width). Restored the temporary viewport override. Screenshot: docs/polish/change-3-mobile.jpg.
+- Add to Trip saved the disposable test place while the Details URL stayed exactly unchanged, with no extra navigation. My Trip showed the saved place; moving it to Day 1, refreshing to confirm persistence, removing only that test item, and refreshing to the empty trip all passed. Browser warnings/errors: none.
+- Full real-service API regression: all 59 HTTP checks passed, including search/details, add/read persistence, duplicates and visitor isolation, day changes/validation/clearing, and removal. Report: docs/polish/change-3-api-tests.md. API code was unchanged.
+- git diff --exit-code confirmed no changes to destination.tsx, the Details page, or client request helpers. Browser evidence: docs/polish/change-3-browser-checks.json.
+
+Change 3 complete. Local preview: http://127.0.0.1:3026. No merge, push, or deployment. Changes 4-7 await separate instructions.
