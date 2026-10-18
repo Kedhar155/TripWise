@@ -1,0 +1,14 @@
+us [ 'Illinois' ]
+us [ 'Springfield, Illinois, United States' ]
+PASS us
+in [ 'Tamil Nadu' ]
+in [ 'Chennai, Tamil Nadu, India' ]
+PASS in
+de [ 'Bavaria' ]
+de [
+  'Munich, Bavaria, Germany',
+  'Munich, Bavaria, Germany',
+  'Munich, Bavaria, Germany'
+]
+PASS de
+PASS 33 state/city API checks

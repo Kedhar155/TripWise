@@ -1,0 +1,1 @@
+PASS: POST optional location type/length/control validation, null/blank handling, pre-fetch rejection, server metadata precedence, fallback text normalization, legacy GET nulls

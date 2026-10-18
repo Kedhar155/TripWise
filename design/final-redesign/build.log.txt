@@ -1,0 +1,39 @@
+
+> tripwise@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.4.2 (webpack)
+- Environments: .env.local
+✓ Running next.config took 21ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1564ms
+  Running TypeScript ...
+  Finished TypeScript in 2.7s ...
+  Collecting page data using 14 workers ...
+  Generating static pages using 14 workers (0/10) ...
+  Generating static pages using 14 workers (2/10) 
+  Generating static pages using 14 workers (4/10) 
+  Generating static pages using 14 workers (7/10) 
+✓ Generating static pages using 14 workers (10/10) in 698ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/cities
+├ ƒ /api/itinerary
+├ ƒ /api/itinerary/[id]
+├ ƒ /api/places
+├ ƒ /api/places/[id]
+├ ƒ /api/places/search
+├ ƒ /api/states
+├ ○ /design-system
+├ ƒ /places/[id]
+└ ○ /trip
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

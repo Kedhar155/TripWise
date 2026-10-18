@@ -1,0 +1,35 @@
+{
+  "base": "http://127.0.0.1:3055",
+  "results": [
+    {
+      "suite": "general",
+      "status": "PASS",
+      "report": "design/final-redesign/api/general.md"
+    },
+    {
+      "suite": "state",
+      "status": "PASS",
+      "report": "design/final-redesign/api/state.json"
+    },
+    {
+      "suite": "sort",
+      "status": "PASS",
+      "report": "design/final-redesign/api/sort.json"
+    },
+    {
+      "suite": "name",
+      "status": "PASS",
+      "report": "design/final-redesign/api/name.md"
+    },
+    {
+      "suite": "category",
+      "status": "PASS",
+      "report": "design/final-redesign/api/category.json"
+    },
+    {
+      "suite": "location",
+      "status": "PASS",
+      "report": "design/final-redesign/api/location.json"
+    }
+  ]
+}

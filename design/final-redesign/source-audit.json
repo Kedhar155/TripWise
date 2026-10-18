@@ -1,0 +1,60 @@
+{
+  "base": "a45ee15e8ab639dfbe438dbba7b8eab40a3a3a90",
+  "protectedChanges": [],
+  "authorizedDefaultChange": "defaultWithin: 5 -> null (Any distance); saved choices/query generation unchanged",
+  "componentExpressions": [
+    {
+      "file": "src/components/explore.tsx",
+      "calls": 124,
+      "eventHandlers": 18,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/destination.tsx",
+      "calls": 42,
+      "eventHandlers": 4,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/trip.tsx",
+      "calls": 81,
+      "eventHandlers": 7,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/navigation.tsx",
+      "calls": 2,
+      "eventHandlers": 0,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/category-badge.tsx",
+      "calls": 1,
+      "eventHandlers": 0,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/trip-summary.tsx",
+      "calls": 6,
+      "eventHandlers": 0,
+      "status": "PASS"
+    }
+  ],
+  "artwork": {
+    "completeSvgMarkup": "PASS (React spelling/unique IDs normalized)",
+    "completeCssRulesAndKeyframes": "PASS",
+    "baseTemplateMobileRules": "PASS",
+    "placement": "User-requested overrides retained in retro-refinements.css: compass behind navigation, globe left edge, stamp lower right; positions are intentionally not identical to template"
+  },
+  "authorizedDragChanges": [
+    "Card activator with control guards",
+    "Delayed touch sensor",
+    "Existing keyboard/day targets and day/remove handlers unchanged"
+  ],
+  "secretScan": {
+    "files": 421,
+    "savedKeys": "absent",
+    "credentialPatterns": "absent",
+    "privateEnvironmentFiles": "absent"
+  }
+}

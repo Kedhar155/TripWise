@@ -1,0 +1,111 @@
+{
+  "testedAt": "2026-10-18T17:57:38.390Z",
+  "results": [
+    {
+      "city": "Chennai",
+      "category": "all",
+      "count": 100,
+      "groups": {
+        "sights": 25,
+        "parks": 20,
+        "entertainment": 5,
+        "accommodation": 50
+      }
+    },
+    {
+      "city": "Chennai",
+      "category": "museums",
+      "count": 16,
+      "groups": {
+        "museums": 16
+      }
+    },
+    {
+      "city": "Chennai",
+      "category": "museums,parks",
+      "count": 100,
+      "groups": {
+        "museums": 10,
+        "parks": 90
+      }
+    },
+    {
+      "city": "Paris",
+      "category": "sights",
+      "count": 100,
+      "groups": {
+        "sights": 100
+      }
+    },
+    {
+      "city": "Paris",
+      "category": "restaurants",
+      "count": 100,
+      "groups": {
+        "restaurants": 100
+      }
+    },
+    {
+      "city": "Paris",
+      "category": "entertainment",
+      "count": 99,
+      "groups": {
+        "entertainment": 99
+      }
+    },
+    {
+      "city": "Paris",
+      "category": "shopping",
+      "count": 100,
+      "groups": {
+        "shopping": 100
+      }
+    },
+    {
+      "city": "Tokyo",
+      "category": "shopping",
+      "count": 0,
+      "groups": {}
+    },
+    {
+      "city": "Tokyo",
+      "category": "accommodation",
+      "count": 100,
+      "groups": {
+        "accommodation": 100
+      }
+    },
+    {
+      "city": "Tokyo",
+      "category": "other",
+      "count": 0,
+      "groups": {}
+    },
+    {
+      "city": "Dubai",
+      "category": "beaches",
+      "count": 5,
+      "groups": {
+        "beaches": 5
+      }
+    },
+    {
+      "city": "Dubai",
+      "category": "parks,restaurants",
+      "count": 43,
+      "groups": {
+        "parks": 43
+      }
+    },
+    {
+      "city": "Dubai",
+      "category": "all",
+      "count": 100,
+      "groups": {
+        "sights": 44,
+        "parks": 2,
+        "accommodation": 54
+      }
+    }
+  ]
+}

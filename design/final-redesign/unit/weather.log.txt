@@ -1,0 +1,1 @@
+PASS: hidden weather for absent/invalid coordinates, zero coordinates/temperatures, next-three-day parsing, missing data, WMO icons, destination timezone, request parameters, HTTP/JSON/network errors, and cancellation.

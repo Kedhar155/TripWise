@@ -289,3 +289,7 @@ Only src/app/globals.css is changed in the existing application source.
 - Styling/layout: src/app/sidebar-pass.css and globals.css import; colorful-tickets.css removes superseded teal sidebar action rules.
 - Presentation wrappers only: src/components/destination.tsx adds header/body/bookmark/footer containers. All state, handlers, requests and link guards remain exactly unchanged; main card/Back/brown metadata untouched.
 - Evidence/source comparison/API report/screenshots: design/sidebar-pass/ and PROGRESS.md.
+
+## Complete redesign final audit
+- No runtime source changes in this verification step. Full current branch-to-main file listing/stat, source and artwork audit, lint/build logs, API/unit reports, responsive/browser measurements and screenshots are in design/final-redesign/.
+- Explicit behavior exceptions to the initial styling-only plan remain the user-requested Any distance default and whole-card drag activation/touch sensor. API/database/fetching and saved-setting restoration implementations remain unchanged; details in the final audit README and PROGRESS.md.

@@ -1,0 +1,6 @@
+PASS: request validation and private no-store responses
+PASS: live Geoapify search, name/distance sorting, and missing city
+PASS: details, database persistence, duplicate 409, and visitor isolation
+PASS: PATCH whole-day validation, 1/14 boundaries, null/empty clearing, persistence, idempotence, and visitor isolation
+PASS: remove and missing item 404
+Saved design/final-redesign/api/general.md: 59 HTTP checks; integration PASS
