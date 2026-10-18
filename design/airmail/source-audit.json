@@ -1,0 +1,59 @@
+{
+  "base": "a45ee15e8ab639dfbe438dbba7b8eab40a3a3a90",
+  "protectedChanges": [],
+  "componentExpressions": [
+    {
+      "file": "src/components/explore.tsx",
+      "calls": 124,
+      "eventHandlers": 18,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/destination.tsx",
+      "calls": 42,
+      "eventHandlers": 4,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/trip.tsx",
+      "calls": 81,
+      "eventHandlers": 7,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/navigation.tsx",
+      "calls": 2,
+      "eventHandlers": 0,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/category-badge.tsx",
+      "calls": 1,
+      "eventHandlers": 0,
+      "status": "PASS"
+    },
+    {
+      "file": "src/components/trip-summary.tsx",
+      "calls": 6,
+      "eventHandlers": 0,
+      "status": "PASS"
+    }
+  ],
+  "artwork": {
+    "completeSvgMarkup": "PASS (React spelling/unique IDs normalized)",
+    "completeCssRulesAndKeyframes": "PASS",
+    "mobilePlacement": "PASS"
+  },
+  "authorizedDragChanges": [
+    "Card activator with control guards",
+    "Delayed touch sensor",
+    "Existing keyboard/day targets and day/remove handlers unchanged"
+  ],
+  "secretScan": {
+    "files": 346,
+    "savedKeys": "absent",
+    "credentialPatterns": "absent",
+    "privateEnvironmentFiles": "absent"
+  },
+  "currentStepComponents": "Byte-for-byte unchanged from the previous commit"
+}

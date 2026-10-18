@@ -1,0 +1,139 @@
+{
+  "viewports": [
+    {
+      "asideX": 20,
+      "backY": 200.1000061035156,
+      "cardRight": 284.8000183105469,
+      "cardY": 276.1000061035156,
+      "client": 305,
+      "metadata": [
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Opening hours"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Website"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Coordinates"
+        }
+      ],
+      "page": "Details",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "asideX": 20,
+      "backY": 200.1000061035156,
+      "cardRight": 355.20001220703125,
+      "cardY": 276.1000061035156,
+      "client": 375,
+      "metadata": [
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Opening hours"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Website"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Coordinates"
+        }
+      ],
+      "page": "Details",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "asideX": 20,
+      "backY": 168.10000610351562,
+      "cardRight": 732.7999877929688,
+      "cardY": 244.1000061035156,
+      "client": 753,
+      "metadata": [
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Opening hours"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Website"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Coordinates"
+        }
+      ],
+      "page": "Details",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "asideX": 825.7374877929688,
+      "backY": 168.60000610351562,
+      "cardRight": 801.7375259399414,
+      "cardY": 244.6000061035156,
+      "client": 1265,
+      "metadata": [
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Opening hours"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Website"
+        },
+        {
+          "fill": "rgb(244, 229, 198)",
+          "name": "Coordinates"
+        }
+      ],
+      "page": "Details",
+      "scroll": 1265,
+      "width": 1280
+    },
+    {
+      "client": 375,
+      "page": "My Trip",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "client": 305,
+      "page": "Explore",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "client": 390,
+      "page": "Explore",
+      "scroll": 390,
+      "width": 390
+    },
+    {
+      "client": 768,
+      "page": "Explore",
+      "scroll": 768,
+      "width": 768
+    }
+  ],
+  "console": [],
+  "flows": [
+    "Paris location search: 100 results",
+    "Eiffel Tower name search: two results with matching card colors across categories",
+    "Sort By Name Z to A",
+    "Sights filter: one result; Details and Back retain filter; removal restores two",
+    "Details hours/site/coordinates brown panels; phone hidden",
+    "Add Tour Eiffel; dropdown to Day 1; refresh persists Day 1",
+    "Whole-card keyboard drag Day 1 to Unplanned",
+    "Remove disposable Tour Eiffel; refresh confirms empty trip"
+  ],
+  "limits": [
+    "Physical touch long-press not exercised; existing focused touch activation tests pass",
+    "No new pointer drag walkthrough this step; component and event code byte-for-byte unchanged"
+  ]
+}

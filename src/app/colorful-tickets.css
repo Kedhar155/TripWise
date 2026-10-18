@@ -1,33 +1,35 @@
-/* Teal, orange and blue ticket stock, with ink that stays dark and legible. */
+/* Selected Orange Airmail: one treatment for every category. */
 :is(.explore-page, .trip-page) .place-card {
-  --ticket-paper: #e1eee5;
-  --ticket-band: var(--teal);
-  --ticket-stub: #c2e0d3;
-}
-:is(.explore-page, .trip-page) .place-card:has(:is([data-category="Sights and Tourism"], [data-category="Restaurants and Cafes"], [data-category="Entertainment"])) {
-  --ticket-paper: #fff0dc;
+  --ticket-paper: var(--card);
   --ticket-band: var(--orange);
-  --ticket-stub: #f8d5ab;
+  --ticket-stub: #245e59;
 }
-:is(.explore-page, .trip-page) .place-card:has(:is([data-category="Museums and Culture"], [data-category="Accommodation"])) {
-  --ticket-paper: #e4edf3;
-  --ticket-band: var(--navy);
-  --ticket-stub: #d0dee9;
-}
-:is(.explore-page, .trip-page) .place-card:has([data-category="Shopping"]) {
-  --ticket-paper: #faeacc;
-  --ticket-band: var(--orange);
-  --ticket-stub: #f8d5ab;
-}
-.explore-page [aria-label="Search results"] .place-card { background: var(--ticket-paper); }
-.explore-page .place-card > div:first-child { background: var(--ticket-band); border-bottom: 1px solid var(--navy); }
+.explore-page [aria-label="Search results"] .place-card { background: var(--ticket-paper); padding: 20px 20px 0 43px; }
+.explore-page .place-card > div:first-child { margin: 0; padding: 0; background: transparent; border: 0; border-radius: 0; }
 .explore-page .place-card > div:first-child > svg { color: #102a43; }
-.explore-page .place-card:has([data-category="Accommodation"]) > div:first-child > svg,
-.explore-page .place-card:has([data-category="Museums and Culture"]) > div:first-child > svg { color: var(--card); }
 .explore-page .place-card [data-slot="card-title"] { color: #102a43; font-size: 29px; }
 .explore-page .place-card [data-slot="card-description"] { color: #102a43; font-size: 14px; font-weight: 600; line-height: 1.8; }
-.explore-page .place-card > div:last-child { background: var(--ticket-stub); }
-.explore-page .place-card > div:last-child :is(span, a) { color: #102a43; font-size: 13px; font-weight: bold; }
+.explore-page .place-card > div:last-child { margin: auto -20px 0; padding: 13px 20px; border-top: 1px dashed #9a743b; background: var(--ticket-stub); }
+.explore-page .place-card > div:last-child :is(span, a) { color: var(--card); font-size: 13px; font-weight: bold; }
+.explore-page .place-card .category-badge,
+.trip-page .place-card .category-badge,
+.destination-page .destination-card .category-badge {
+  color: var(--navy) !important;
+  background-color: #dceee5 !important;
+  border-color: var(--navy);
+}
+.explore-page .place-card::before,
+.trip-page .place-card::before,
+.destination-page .destination-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 23px;
+  background: var(--orange);
+  border-right: 1px dashed var(--navy);
+  border-radius: 3px 0 0 3px;
+  pointer-events: none;
+}
 
 /* Keep results with Filters, and give Sort By its own right-aligned group. */
 .explore-page [aria-label="Result controls"] > p { order: 1; color: #102a43; font-weight: bold; }
@@ -47,8 +49,10 @@
 
 /* The whole ticket is the activator. Native controls stay independent. */
 .trip-page .place-card {
+  position: relative;
   background: var(--ticket-paper);
-  border-left: 6px solid var(--ticket-band);
+  border: 1.5px solid var(--navy);
+  padding-left: 39px;
   cursor: grab;
   touch-action: pan-y;
   user-select: none;
@@ -64,8 +68,36 @@
 .trip-page .place-card :is(select, button, a) { touch-action: auto; }
 .trip-page .place-card a { cursor: grab; }
 .trip-page .place-card :is(select, button) { cursor: pointer; }
+.trip-page .place-card::after {
+  content: "";
+  flex: 0 0 calc(100% + 32px);
+  height: 18px;
+  margin: 0 -16px -16px;
+  background: var(--ticket-stub);
+  border-top: 1px dashed #9a743b;
+  pointer-events: none;
+}
 
-.destination-page .destination-layout .destination-card { background: #e1eee5; border-top-color: var(--teal); }
-.destination-page .destination-meta > div { background: #fff0dc; border-color: #946229; }
+.destination-page .destination-layout .destination-card {
+  --airmail-padding: clamp(20px, 3vw, 36px);
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  border-top: 1.5px solid var(--navy);
+  padding-left: calc(var(--airmail-padding) + 23px);
+}
+.destination-page .destination-card::after {
+  content: "";
+  display: block;
+  height: 24px;
+  margin: 24px calc(0px - var(--airmail-padding)) calc(0px - var(--airmail-padding));
+  background: #245e59;
+  border-top: 1px dashed #9a743b;
+  pointer-events: none;
+}
+.destination-page .destination-meta { border-color: #9a743b; }
+.destination-page .destination-meta > div { background: #f4e5c6; border-color: #9a743b; }
+.destination-page .destination-meta dt { color: #65451f; }
 .destination-page .destination-address { color: #102a43; font-size: 14px; font-weight: 600; }
 .destination-page .destination-meta dd { color: #102a43; font-weight: 600; }
+.destination-page [aria-label="Destination weather"] { background: var(--card); border-left-color: #245e59; }
