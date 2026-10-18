@@ -1,0 +1,236 @@
+{
+  "url": "https://tripwise-lime.vercel.app",
+  "phone": {
+    "width": 390,
+    "height": 844
+  },
+  "sorts": [
+    {
+      "mode": "location",
+      "sort": "distance",
+      "count": 100,
+      "passed": true,
+      "first": "Point zéro des Routes de France",
+      "groups": []
+    },
+    {
+      "mode": "location",
+      "sort": "distance-desc",
+      "count": 100,
+      "passed": true,
+      "first": "Boulevard Saint-Germain",
+      "groups": []
+    },
+    {
+      "mode": "location",
+      "sort": "name",
+      "count": 100,
+      "passed": true,
+      "first": "75004 Paris",
+      "groups": []
+    },
+    {
+      "mode": "location",
+      "sort": "name-desc",
+      "count": 100,
+      "passed": true,
+      "first": "Villa d'Estrées",
+      "groups": []
+    },
+    {
+      "mode": "location",
+      "sort": "category",
+      "count": 100,
+      "passed": true,
+      "first": "Albe Hôtel Saint-Michel",
+      "groups": [
+        "Accommodation (24)",
+        "Entertainment (3)",
+        "Parks and Nature (9)",
+        "Restaurants and Cafes (1)",
+        "Sights and Tourism (63)"
+      ]
+    },
+    {
+      "mode": "location",
+      "sort": "details",
+      "count": 100,
+      "passed": true,
+      "first": "Tours de Notre-Dame",
+      "groups": []
+    },
+    {
+      "mode": "location",
+      "sort": "relevance",
+      "count": 100,
+      "passed": true,
+      "first": "Point zéro des Routes de France",
+      "groups": []
+    },
+    {
+      "mode": "name",
+      "sort": "relevance",
+      "count": 11,
+      "passed": true
+    },
+    {
+      "mode": "name",
+      "sort": "name",
+      "count": 11,
+      "passed": true
+    },
+    {
+      "mode": "name",
+      "sort": "name-desc",
+      "count": 11,
+      "passed": true
+    },
+    {
+      "mode": "name",
+      "sort": "category",
+      "count": 11,
+      "passed": true
+    }
+  ],
+  "trip": [
+    {
+      "step": "museum saved",
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nPlaces by category\n1 Museum Or Cultural Place"
+    },
+    {
+      "step": "museum Day 1 and empty Day 2",
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n1\nUnplanned places\n0\nPlaces by category\n1 Museum Or Cultural Place"
+    },
+    {
+      "step": "museum Day 1 plus tower Unplanned",
+      "summary": "Your trip at a glance\nTotal places\n2\nDays planned\n1\nUnplanned places\n1\nPlaces by category\n1 Museum Or Cultural Place\n1 Sight"
+    },
+    {
+      "step": "two occupied days",
+      "summary": "Your trip at a glance\nTotal places\n2\nDays planned\n2\nUnplanned places\n0\nPlaces by category\n1 Museum Or Cultural Place\n1 Sight"
+    },
+    {
+      "step": "tower moved back to Unplanned",
+      "summary": "Your trip at a glance\nTotal places\n2\nDays planned\n1\nUnplanned places\n1\nPlaces by category\n1 Museum Or Cultural Place\n1 Sight"
+    },
+    {
+      "step": "museum removed",
+      "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nPlaces by category\n1 Sight"
+    }
+  ],
+  "catalog": [
+    {
+      "icon": "lucide-map-pin",
+      "label": "All"
+    },
+    {
+      "icon": "lucide-landmark",
+      "label": "Sights and Tourism"
+    },
+    {
+      "icon": "lucide-landmark",
+      "label": "Museums and Culture"
+    },
+    {
+      "icon": "lucide-tree-pine",
+      "label": "Parks and Nature"
+    },
+    {
+      "icon": "lucide-utensils",
+      "label": "Restaurants and Cafes"
+    },
+    {
+      "icon": "lucide-umbrella",
+      "label": "Beaches"
+    },
+    {
+      "icon": "lucide-drama",
+      "label": "Entertainment"
+    },
+    {
+      "icon": "lucide-shopping-bag",
+      "label": "Shopping"
+    },
+    {
+      "icon": "lucide-bed-double",
+      "label": "Accommodation"
+    },
+    {
+      "icon": "lucide-map-pin",
+      "label": "Other"
+    }
+  ],
+  "location": {
+    "country": "India",
+    "city": "Chennai",
+    "museumsAt5km": 11,
+    "smallRadiusEmpty": true,
+    "recoveredAt5km": 11
+  },
+  "baselineTripEmpty": true,
+  "saveWaitVisible": true,
+  "cardIconsMatch": true,
+  "multiFilterCount": 99,
+  "clearAll": {
+    "category": "All",
+    "chips": null,
+    "sort": "relevance",
+    "within": "all"
+  },
+  "shortNameMessage": true,
+  "emptyNameMessage": true,
+  "nameOptions": [
+    "relevance",
+    "name",
+    "name-desc",
+    "category"
+  ],
+  "nameHidesWithin": true,
+  "nameIconsMatch": true,
+  "towerName": "Tour Eiffel",
+  "afterRefresh": {
+    "client": 305,
+    "days": [
+      {
+        "day": "1"
+      },
+      {
+        "day": "2"
+      }
+    ],
+    "scroll": 305,
+    "summary": [
+      {
+        "label": "Total places",
+        "value": "2"
+      },
+      {
+        "label": "Days planned",
+        "value": "2"
+      },
+      {
+        "label": "Unplanned places",
+        "value": "0"
+      }
+    ],
+    "width": 320
+  },
+  "cleanup": {
+    "emptyAfterRefresh": true,
+    "summaryHidden": true
+  },
+  "logs": [],
+  "testedAt": "2026-10-18T02:20:14.063Z",
+  "layout": [
+    {
+      "width": 390,
+      "client": 375,
+      "scroll": 375
+    },
+    {
+      "width": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  ]
+}

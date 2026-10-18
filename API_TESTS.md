@@ -523,3 +523,23 @@ node scripts/test-sort-filters-api.mjs
 ```
 
 The optional TEST_REPORT_PATH now preserves the older search examples in this file when the search suite runs. API errors and empty searches are expected cases, not test failures. Screenshots: [phone Explore](docs/search-rework/final-phone.png), [trip summary](docs/search-rework/final-trip-phone.png), [saving link](docs/search-rework/final-save-wait.png).
+
+## Production search-rework verification - 18 October 2026
+
+Public site: https://tripwise-lime.vercel.app. Deployed application: d118698983ff3dbd0da83e0a2211c23464a0ae9e, deployment dpl_DeNo7CbXVCGK1dGfMY3a7FodqrSc (READY).
+
+| Live suite | Result | Recorded evidence |
+| --- | --- | --- |
+| Search, Details, saved trip, duplicate/visitor handling, days, fresh reads, removal and errors | 59 HTTP cases passed | [General regression](docs/search-rework/live-regression-tests.md) |
+| Country/city in India, France, Japan; famous/common/misspelled/nonexistent names; validation; name Details/save/remove | 32 HTTP cases passed | [Search responses](docs/search-rework/live-search-tests.md) |
+| All nine category selections and combinations across four cities | 13 searches passed | [Category results](docs/search-rework/live-category-tests.json) |
+| Conditional sorts, names, distances, details scores, groups, category/radius combinations, invalid options | 56 HTTP requests and 237 independent order/group checks passed | [Sort/filter matrix](docs/search-rework/live-sort-filter-tests.json) |
+| Public-site phone walkthrough, badges, chips, days, summary, refresh, cleanup | Passed at 390px and 320px; no horizontal overflow or browser warnings/errors | [Browser evidence](docs/search-rework/live-browser-checks.json) |
+| Production build/settings and history scan | Passed; three variables remain Secret / Production / Hidden | [Release status](docs/search-rework/live-release-checks.json) |
+| Live HTML and browser scripts | 17 responses checked; no saved credential values or credential patterns found | [Public asset scan](docs/search-rework/live-browser-secret-scan.json) |
+
+All 160 live API cases passed. The first general-suite run was interrupted by a client connection reset after two validation requests, before it created test rows; the full rerun passed. Only disposable test trips were changed, and all their items were removed. Isolated tests cover private 500-error redaction without breaking a live service.
+
+For another production run, use the final-regression repeat commands above with TEST_BASE_URL set to https://tripwise-lime.vercel.app and TEST_REPORT_PATH set to the corresponding live-* report. Run `node scripts/check-live-secrets.mjs` for the public asset check. All requests go through the app's own routes; no Geoapify key is included in request examples.
+
+Screenshots: [phone filters/results](docs/search-rework/live-phone-explore.png), [phone test-trip summary](docs/search-rework/live-phone-trip.png). The screenshot's test places have since been removed; the final refreshed trip was empty.

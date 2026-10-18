@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-10-18T02:14:45.444Z",
+  "applicationCommit": "d118698983ff3dbd0da83e0a2211c23464a0ae9e",
+  "branch": "main",
+  "productionUrl": "https://tripwise-lime.vercel.app",
+  "deploymentUrl": "https://tripwise-bkuvxxrig-markan2.vercel.app",
+  "deploymentId": "dpl_DeNo7CbXVCGK1dGfMY3a7FodqrSc",
+  "readyState": "READY",
+  "build": "PASS",
+  "environmentVariables": [
+    {
+      "name": "GEOAPIFY_API_KEY",
+      "present": true,
+      "value": "Hidden",
+      "type": "Secret",
+      "environment": "Production"
+    },
+    {
+      "name": "SUPABASE_URL",
+      "present": true,
+      "value": "Hidden",
+      "type": "Secret",
+      "environment": "Production"
+    },
+    {
+      "name": "SUPABASE_SECRET_KEY",
+      "present": true,
+      "value": "Hidden",
+      "type": "Secret",
+      "environment": "Production"
+    }
+  ],
+  "historySecretScan": "PASS: all 406 Git objects at deployed commit, including reachable and dangling history; private environment files absent; .env.local ignored",
+  "initialRegressionInterruption": "First run stopped after two validation requests due to a client TLS ECONNRESET; complete 59-request rerun passed; no test trip rows were created by interrupted run."
+}

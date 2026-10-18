@@ -1,0 +1,566 @@
+{
+  "testedAt": "2026-10-18T02:14:25.088Z",
+  "requests": 56,
+  "orderChecks": 237,
+  "evidence": [
+    {
+      "city": "Chennai",
+      "category": "all",
+      "within": 1,
+      "count": 49,
+      "withDetails": 4,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "all",
+      "within": 5,
+      "count": 100,
+      "withDetails": 8,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "all",
+      "within": 10,
+      "count": 100,
+      "withDetails": 8,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "all",
+      "within": 25,
+      "count": 100,
+      "withDetails": 8,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "all",
+      "within": null,
+      "count": 100,
+      "withDetails": 8,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "museums",
+      "within": 1,
+      "count": 0,
+      "withDetails": 0,
+      "availableSorts": [
+        "relevance"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "museums",
+      "within": 5,
+      "count": 11,
+      "withDetails": 3,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "museums",
+      "within": 10,
+      "count": 13,
+      "withDetails": 4,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "museums",
+      "within": 25,
+      "count": 16,
+      "withDetails": 4,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "museums",
+      "within": null,
+      "count": 16,
+      "withDetails": 4,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "parks,restaurants",
+      "within": 1,
+      "count": 7,
+      "withDetails": 0,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "parks,restaurants",
+      "within": 5,
+      "count": 100,
+      "withDetails": 0,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "parks,restaurants",
+      "within": 10,
+      "count": 100,
+      "withDetails": 0,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "parks,restaurants",
+      "within": 25,
+      "count": 100,
+      "withDetails": 0,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "city": "Chennai",
+      "category": "parks,restaurants",
+      "within": null,
+      "count": 100,
+      "withDetails": 0,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "all",
+      "within": 1,
+      "count": 100,
+      "withDetails": 39,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "all",
+      "within": 5,
+      "count": 100,
+      "withDetails": 39,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "all",
+      "within": 10,
+      "count": 100,
+      "withDetails": 39,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "all",
+      "within": 25,
+      "count": 100,
+      "withDetails": 39,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "all",
+      "within": null,
+      "count": 100,
+      "withDetails": 39,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "museums",
+      "within": 1,
+      "count": 21,
+      "withDetails": 21,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "museums",
+      "within": 5,
+      "count": 100,
+      "withDetails": 98,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "museums",
+      "within": 10,
+      "count": 100,
+      "withDetails": 98,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "museums",
+      "within": 25,
+      "count": 100,
+      "withDetails": 98,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "museums",
+      "within": null,
+      "count": 100,
+      "withDetails": 98,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "parks,restaurants",
+      "within": 1,
+      "count": 32,
+      "withDetails": 15,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "parks,restaurants",
+      "within": 5,
+      "count": 99,
+      "withDetails": 33,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "parks,restaurants",
+      "within": 10,
+      "count": 99,
+      "withDetails": 33,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "parks,restaurants",
+      "within": 25,
+      "count": 99,
+      "withDetails": 33,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "city": "Paris",
+      "category": "parks,restaurants",
+      "within": null,
+      "count": 99,
+      "withDetails": 33,
+      "availableSorts": [
+        "relevance",
+        "distance",
+        "distance-desc",
+        "name",
+        "name-desc",
+        "category",
+        "details"
+      ]
+    },
+    {
+      "name": "Central Park",
+      "category": "all",
+      "count": 11,
+      "availableSorts": [
+        "relevance",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "name": "Central Park",
+      "category": "parks",
+      "count": 10,
+      "availableSorts": [
+        "relevance",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "name": "Central Park",
+      "category": "museums,parks",
+      "count": 10,
+      "availableSorts": [
+        "relevance",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "name": "Eiffel Tower",
+      "category": "all",
+      "count": 2,
+      "availableSorts": [
+        "relevance",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "name": "Eiffel Tower",
+      "category": "parks",
+      "count": 1,
+      "availableSorts": [
+        "relevance"
+      ]
+    },
+    {
+      "name": "Eiffel Tower",
+      "category": "museums,parks",
+      "count": 1,
+      "availableSorts": [
+        "relevance"
+      ]
+    },
+    {
+      "name": "Museum",
+      "category": "all",
+      "count": 7,
+      "availableSorts": [
+        "relevance",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    },
+    {
+      "name": "Museum",
+      "category": "parks",
+      "count": 1,
+      "availableSorts": [
+        "relevance"
+      ]
+    },
+    {
+      "name": "Museum",
+      "category": "museums,parks",
+      "count": 2,
+      "availableSorts": [
+        "relevance",
+        "name",
+        "name-desc",
+        "category"
+      ]
+    }
+  ]
+}
