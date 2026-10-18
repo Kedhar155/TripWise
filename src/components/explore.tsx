@@ -135,11 +135,11 @@ function RestoredExplore() {
       <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-sm"><span className="text-slate-500">{place.distance === undefined ? "" : `${(place.distance / 1000).toFixed(1)} km away`}</span><Link className="font-semibold text-teal-700 after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none focus-visible:after:outline-3 focus-visible:after:outline-teal-600 focus-visible:after:outline-offset-4" onNavigate={rememberDeparture} href={`/places/${encodeURIComponent(place.id)}`}>View details <span aria-hidden="true">↗</span><span className="sr-only"> for {place.name}</span></Link></div>
     </Card>)}</div>;
   }
-  return <>
+  return <div className="explore-page">
     <section aria-labelledby="explore-heading" className="mt-6 rounded-3xl bg-linear-to-br from-teal-900 to-teal-700 px-5 py-8 text-white sm:mt-8 sm:px-10 sm:py-12">
       <BackgroundArt />
       <p className="text-xs font-semibold uppercase tracking-widest text-teal-100">Small plans. Great adventures.</p>
-      <h1 id="explore-heading" className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">Plan your next trip</h1>
+      <h1 id="explore-heading" className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">Where to next?</h1>
       <p className="mt-4 max-w-xl text-base leading-7 text-teal-50 sm:text-lg">Find places worth a detour. Save your favorites and make room for discovery.</p>
     </section>
     <section aria-label="Search tools" className="mt-5">
@@ -202,5 +202,5 @@ function RestoredExplore() {
         {!places.length ? <Feedback>{currentResults.state ? "No places found in this state with these filters. Try another category or Clear all." : currentResults.city ? "No places found with these filters. Try a larger distance, another category, or Clear all." : "No places found, try a different name"}</Feedback> : activeSort === "category" ? <div className="space-y-8">{groupPlaces(places).map(group => <section key={group.category} aria-label={`${categories[group.category as Category].label} results`}><h3 className="mb-4 text-xl font-semibold">{categories[group.category as Category].label} <span className="text-sm font-normal text-slate-500">({group.places.length})</span></h3>{cards(group.places)}</section>)}</div> : cards(places)}
       </>}
     </section>
-  </>;
+  </div>;
 }

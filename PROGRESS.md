@@ -755,3 +755,14 @@ Vercel deployment ID: dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz (READY, production).
 - All 59 real API checks PASS (search, Details, add/persistence, day moves/clearing, remove, duplicates and visitor isolation), disposable records cleaned up. Report design/design-system-api-tests.md. Explore session and keyboard drag isolated tests PASS.
 - Local preview http://127.0.0.1:3045/design-system. No push or deployment.
 
+
+## Retro redesign - requested Step 2: Explore (18 October 2026)
+- Restyled Explore with Georgia Where to next?, existing exact animated BackgroundArt, stamp navigation and real three-stripe header/footer motifs. Cream/navy search fields, orange Search, navy selected tabs; all existing location/name/popular-city controls retained.
+- Added src/app/explore.css scoped to Explore, plus shared header/footer/toast presentation. Filters, Sort, count, category rows and active chips use Courier; search/control layouts use wrapping flex at all sizes. Ticket cards have cream/navy borders, hard hover/pressed shadows, Georgia names, Courier addresses/badges and dashed separators; stretched whole-card links unchanged.
+- Category catalog/logic/icons untouched. Badge only gains a presentation class/data label; CSS supplies nine distinct palette-compatible text/tint pairs. Contrast 5.77-9.26:1. Search uses darker navy #122B46 on original orange for 4.65:1. Full report design/explore-step2/contrast.json.
+- Paper skeletons, styled empty results, stamp Retry and ticket toasts verified with existing local fixture. Footer preserves links/credits. Shared shell changes apply across routes, without restyling Details/My Trip content.
+- Lint and production webpack build including TypeScript PASS. Search/category/session suites PASS. Exact source comparison confirms every Explore logic/state/effect/handler/request expression unchanged; APIs, lib, location form, combobox and category filter files unchanged.
+- All 59 real API checks PASS, including search, Details, add/persistence, day moves/clearing and removal; own disposable records cleaned up. Report design/explore-step2/api-tests.md.
+- Real phone flow: India/Tamil Nadu/Chennai suggestions, Museums+Parks, 10km, Name Z to A, whole-card Details, Back to Explore restores identical ordered 100 cards and all controls/chips. Name search Eiffel Tower, distance hidden, filter-empty/Clear all recovery, sort, Details/browser Back and refresh restore identical two results/query/sort. Narrow category menu rows remain >=44px.
+- No horizontal overflow at tested 390px (375/375) and 320px (305/305), including category menu. Desktop fixture inspected at 1265px. Final real browser warning/error log empty; viewport reset requested. Evidence/limits and screenshots: design/explore-step2/README.md.
+- Local preview http://127.0.0.1:3046. No push or deployment.

@@ -1,0 +1,185 @@
+/* Explore presentation only. Search controls retain their existing semantics,
+   handlers, visibility rules, cached values and request paths. */
+.explore-page { --action-ink: #122b46; padding-bottom: 24px; }
+.retro-navigation > div::after { content: none; }
+.retro-navigation .nav-stripe-row { flex-basis: 100%; margin-top: 12px; }
+.retro-navigation .retro-stripes { margin: 0; }
+.retro-navigation nav a { min-height: 44px; font: bold 13px/1.5 var(--font-label); }
+.retro-navigation nav a:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--navy); }
+.explore-page section[aria-labelledby="explore-heading"] {
+  min-height: 380px;
+  padding: 32px 0 100px;
+  border: 0;
+  border-radius: 0;
+}
+.explore-page #explore-heading { font: 400 clamp(40px, 6vw, 72px)/1.1 var(--font-body); margin: 20px 0; }
+.explore-page section[aria-labelledby="explore-heading"] > p { max-width: 42rem; }
+.explore-page section[aria-labelledby="explore-heading"] > p:first-of-type {
+  font: bold 12px/1.8 var(--font-label);
+  color: #79431e;
+  letter-spacing: 0.12em;
+}
+.explore-page section[aria-label="Search tools"] { margin-top: 0; }
+.explore-page section[aria-label="Search tools"] > div:first-child,
+.explore-page #explore-filters {
+  border: 1.5px solid var(--navy);
+  border-radius: 6px;
+  padding: clamp(16px, 3vw, 28px);
+  background: var(--card);
+  box-shadow: 2px 2px 0 var(--navy);
+}
+.explore-page [role="tablist"] { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; background: none; border-radius: 0; }
+.explore-page [role="tab"] {
+  flex: 1 1 13rem;
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 1px solid var(--navy);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--navy);
+  font: bold 13px/1.6 var(--font-label);
+  box-shadow: 2px 2px 0 var(--navy);
+}
+.explore-page [role="tab"][aria-selected="true"] { background: var(--navy); color: var(--card); }
+.explore-page [role="tabpanel"] form > .grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+}
+.explore-page [role="tabpanel"] form > .grid > div { flex: 1 1 14rem; min-width: min(100%, 14rem); }
+.explore-page [role="tabpanel"] form > .grid > button { flex: 0 1 auto; width: auto; margin-top: 28px; }
+.explore-page label, .explore-page [role="tabpanel"] [role="status"],
+.explore-page [role="tabpanel"] p, .explore-page [role="listbox"],
+.explore-page [aria-label="Result controls"], .explore-page #explore-filters,
+.explore-page [aria-label="Popular cities"], .explore-page [aria-label="Active filters"] {
+  font-family: var(--font-label);
+}
+.explore-page label { font-size: 12px; letter-spacing: 0.04em; }
+.explore-page .field {
+  border: 1px solid var(--navy);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--navy);
+  min-height: 52px;
+  font-family: var(--font-body);
+}
+.explore-page .field:disabled { background: var(--paper); color: #53637a; }
+.explore-page .button, .explore-page .retry {
+  min-height: 48px;
+  border: 1px solid var(--navy);
+  border-radius: 4px;
+  background: var(--orange);
+  color: var(--action-ink);
+  font: bold 14px/1.5 var(--font-label);
+  box-shadow: 2px 2px 0 var(--navy);
+}
+.explore-page .button:active, .explore-page .retry:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--navy); }
+.explore-page #search-panel-name form > div {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0;
+  border: 1px solid var(--navy);
+  border-radius: 5px;
+  background: var(--card);
+  overflow: hidden;
+}
+.explore-page #place-name { flex: 1 1 18rem; width: auto; min-width: min(100%, 18rem); border: 0; border-radius: 0; }
+.explore-page #search-panel-name .button { flex: 1 0 8rem; border: 0; border-radius: 0; box-shadow: none; min-height: 52px; }
+.explore-page #search-panel-name .field:focus-visible { outline-offset: -4px; }
+.explore-page [aria-label="Popular cities"] button,
+.explore-page [aria-label="Active filters"] button:not(:last-child),
+.explore-page [aria-label="Result controls"] > button, .explore-page #sort,
+.explore-page #explore-filters .field {
+  border: 1px solid var(--navy);
+  border-radius: 3px;
+  background: var(--card);
+  color: var(--navy);
+  font: 600 12px/1.6 var(--font-label);
+  box-shadow: 2px 2px 0 var(--navy);
+}
+.explore-page [aria-label="Popular cities"] button { min-height: 44px; }
+.explore-page [aria-label="Result controls"] { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.explore-page [aria-label="Result controls"] > p { padding: 8px 0; color: #42556c; font-size: 12px; }
+.explore-page [aria-label="Result controls"] > button[aria-expanded="true"] { background: var(--navy); color: var(--card); }
+.explore-page [aria-label="Result controls"] > button > span { background: var(--paper); color: var(--navy); border-radius: 2px; }
+.explore-page #category-options { border: 1px solid var(--navy); border-radius: 5px; box-shadow: 3px 3px 0 var(--navy); }
+.explore-page #category-options label {
+  min-height: 44px;
+  border-radius: 3px;
+  font: 13px/1.6 var(--font-label);
+  color: var(--navy);
+  border-color: transparent;
+}
+.explore-page #category-options label:has(:checked) { background: #eee0c2; border-color: var(--navy); }
+.explore-page #category-options input { accent-color: var(--navy); }
+.explore-page [role="listbox"] { color: var(--navy); }
+.explore-page [role="listbox"] [role="option"] { font-size: 13px; border-radius: 3px; }
+.explore-page [role="listbox"] [aria-selected="true"] { background: var(--paper); color: var(--navy); outline: 1px solid var(--navy); }
+.explore-page [aria-label="Search results"] > .py-12,
+.explore-page [aria-label="Search results"] > [role="status"]:not(:has(.skeleton)) {
+  border: 1px dashed var(--navy);
+  border-radius: 6px;
+  background: var(--card);
+  padding: 32px 24px;
+  color: var(--navy);
+}
+.explore-page [aria-label="Search results"] .retry { background: #f8dfd4; border: 1px dashed var(--stamp); color: #86331f; padding: 16px 24px; }
+.explore-page .place-card,
+.explore-page [aria-label="Search results"] [data-slot="card"] {
+  border: 1.5px solid var(--navy);
+  border-radius: 5px;
+  background: var(--card);
+  box-shadow: 2px 2px 0 var(--navy);
+  padding: 20px;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.explore-page .place-card > div:last-child { border-top: 1px dashed #8b7049; margin-top: auto; padding-top: 16px; }
+.explore-page [data-slot="card-title"] { font: 400 24px/1.25 var(--font-body); }
+.explore-page [data-slot="card-description"] { font: 13px/1.8 var(--font-label); }
+.explore-page .place-card > div:last-child, .explore-page .category-badge { font: 12px/1.6 var(--font-label); }
+.explore-page .category-badge {
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 5px 8px;
+  text-transform: none;
+  /* Overrides the catalog's original inline presentation colors only. */
+  color: var(--category-ink) !important;
+  background-color: var(--category-paper) !important;
+}
+.explore-page :is([data-category="Sights and Tourism"], [for="category-sights"]) { --category-ink: #8a3b12; --category-paper: #fbe2c6; }
+.explore-page :is([data-category="Museums and Culture"], [for="category-museums"]) { --category-ink: #1b3a5c; --category-paper: #e0e6ee; }
+.explore-page :is([data-category="Parks and Nature"], [for="category-parks"]) { --category-ink: #17645c; --category-paper: #dceee3; }
+.explore-page :is([data-category="Restaurants and Cafes"], [for="category-restaurants"]) { --category-ink: #7d431b; --category-paper: #f0ddbf; }
+.explore-page :is([data-category="Beaches"], [for="category-beaches"]) { --category-ink: #1b5268; --category-paper: #dcebed; }
+.explore-page :is([data-category="Entertainment"], [for="category-entertainment"]) { --category-ink: #9a321f; --category-paper: #f8dfd4; }
+.explore-page :is([data-category="Shopping"], [for="category-shopping"]) { --category-ink: #654d21; --category-paper: #ece2bd; }
+.explore-page :is([data-category="Accommodation"], [for="category-accommodation"]) { --category-ink: #233652; --category-paper: #dddde7; }
+.explore-page :is([data-category="Other"], [for="category-other"]) { --category-ink: #46535d; --category-paper: #eee9df; }
+.explore-page #category-options label svg { color: var(--category-ink, var(--navy)) !important; }
+.explore-page .skeleton { background: #e5d6b5; border-radius: 3px; }
+@media (hover: hover) {
+  .explore-page .place-card:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--navy); }
+  .explore-page [role="tab"]:not([aria-selected="true"]):hover,
+  .explore-page [aria-label="Popular cities"] button:hover,
+  .explore-page [aria-label="Active filters"] button:not(:last-child):hover { background: var(--paper); }
+}
+.explore-page .place-card:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--navy); }
+.retro-footer .retro-stripes { margin-bottom: 24px; }
+.retro-footer { background: var(--card); }
+.retro-footer > div { padding-right: 20px; padding-bottom: 32px; }
+.retro-footer::after { content: none; }
+[data-sonner-toaster] [data-sonner-toast] {
+  border: 1.5px dashed var(--navy) !important;
+  box-shadow: 3px 3px 0 var(--navy) !important;
+  border-radius: 4px !important;
+  background: var(--card) !important;
+  font-family: var(--font-label) !important;
+  color: var(--navy) !important;
+}
+[data-sonner-toaster] [data-sonner-toast] [data-description] { color: #42556c !important; }
+[data-sonner-toaster] [data-sonner-toast][data-type="error"] { border-color: var(--stamp) !important; }
+@media (prefers-reduced-motion: reduce) {
+  .explore-page .place-card { transition: none; }
+  .explore-page .place-card:hover, .explore-page .place-card:active { transform: none; }
+}

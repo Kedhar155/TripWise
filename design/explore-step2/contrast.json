@@ -1,0 +1,56 @@
+{
+  "badgeColors": [
+    {
+      "ink": "#8a3b12",
+      "background": "#fbe2c6",
+      "contrast": 6.19
+    },
+    {
+      "ink": "#1b3a5c",
+      "background": "#e0e6ee",
+      "contrast": 9.26
+    },
+    {
+      "ink": "#17645c",
+      "background": "#dceee3",
+      "contrast": 5.77
+    },
+    {
+      "ink": "#7d431b",
+      "background": "#f0ddbf",
+      "contrast": 5.87
+    },
+    {
+      "ink": "#1b5268",
+      "background": "#dcebed",
+      "contrast": 6.99
+    },
+    {
+      "ink": "#9a321f",
+      "background": "#f8dfd4",
+      "contrast": 5.79
+    },
+    {
+      "ink": "#654d21",
+      "background": "#ece2bd",
+      "contrast": 6.14
+    },
+    {
+      "ink": "#233652",
+      "background": "#dddde7",
+      "contrast": 9.05
+    },
+    {
+      "ink": "#46535d",
+      "background": "#eee9df",
+      "contrast": 6.54
+    }
+  ],
+  "searchButton": {
+    "ink": "#122b46",
+    "background": "#e8702a",
+    "contrast": 4.65
+  },
+  "navyOnCard": 11.26,
+  "mutedOnCard": 7.4
+}

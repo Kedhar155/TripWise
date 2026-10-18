@@ -238,3 +238,8 @@ Only src/app/globals.css is changed in the existing application source.
 - Allowed presentation files: src/app/design-system.css, src/app/background-art.css, src/components/background-art.tsx, src/app/design-system/page.tsx.
 - Explicitly requested Explore art integration: two additive presentation lines in src/components/explore.tsx (import and component placement); all existing business logic remains protected and unchanged.
 - Documentation/evidence: design/DESIGN-SYSTEM.md, design/design-system-api-tests.md, design/design-system-art.png, design/design-system-styles.png, PROGRESS.md.
+
+## Requested Explore Step 2 presentation scope
+- Added src/app/explore.css; globals.css imports it.
+- Explicit presentation-only edits allowed by Step 2: Explore wrapper/heading; CategoryBadge class/data label; navigation/footer stripe markup and classes. No business logic changes.
+- Protected catalog/category matching and all API, lib, location, combobox, filter/state/handler code remain unchanged. Evidence: design/explore-step2/.

@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 export function Footer() {
-  return <footer className="border-t border-teal-100 bg-teal-50/40">
+  return <footer className="retro-footer border-t border-teal-100 bg-teal-50/40">
     <div className="mx-auto max-w-6xl space-y-6 px-5 py-8">
+      <div className="retro-stripes" aria-hidden="true"><span /><span /><span /></div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div><Link href="/" className="text-lg font-semibold text-teal-800">TripWise</Link><p className="mt-2 text-sm text-slate-600">Small plans. Great adventures.</p></div>
         <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-teal-800"><Link href="/" className="py-3 hover:underline">Explore</Link><Link href="/trip" className="py-3 hover:underline">My Trip</Link></nav>
