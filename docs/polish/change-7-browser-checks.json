@@ -1,0 +1,59 @@
+{
+  "library": "@dnd-kit/core 6.3.1; PointerSensor (8px activation) + KeyboardSensor",
+  "desktop": {
+    "viewport": [
+      1440,
+      1300
+    ],
+    "pointer": [
+      "Unplanned -> empty Day 1",
+      "Day 1 -> empty Day 2"
+    ],
+    "keyboard": [
+      "Space pick up",
+      "ArrowDown/Up selects entire day sections",
+      "Space drop into Day 2",
+      "Escape cancels without changing saved Day 1"
+    ],
+    "highlight": "teal Day 1 ring/background while keyboard drag over it",
+    "failedSave": "drag Day 1 -> Unplanned failed; original Day 1/dropdown/summary restored, error toast",
+    "dropdown": "day selection stays independent, then Remove works without drag"
+  },
+  "phone": {
+    "viewport": [
+      390,
+      844
+    ],
+    "pointer": [
+      "Day 2 -> Day 1",
+      "Day 1 -> Unplanned",
+      "Unplanned -> empty Day 1"
+    ],
+    "slowSave": "card section=Day 1, dropdown=1 disabled, summary plannedDays=1 / unplanned=0 before 2.5-second save finished",
+    "failedSave": "Day 1 -> Day 2 failed; original Day 1 and summary restored; error toast shown; refresh still Day 1",
+    "touchAction": {
+      "handle": "none",
+      "card": "auto",
+      "select": "auto"
+    },
+    "handlePx": [
+      44,
+      44
+    ],
+    "overflow": [
+      375,
+      375
+    ]
+  },
+  "realBrowser": {
+    "flow": "Paris search -> first card -> Details -> Add Point zéro des Routes de France -> drag to empty Day 1 on desktop -> normal page scroll -> drag to Day 2 at 390px -> success toast -> refresh retains Day 2, dropdown 2 and summary location/day -> remove own item",
+    "outsideDrop": "outside day sections: No move made, remains Unplanned",
+    "narrow320": {
+      "clientWidth": 305,
+      "scrollWidth": 305,
+      "handleWidth": 44
+    }
+  },
+  "fixture": "local-only slow/failure simulation, no Supabase/Geoapify calls",
+  "ordering": "unchanged; no within-day reordering or schema/API changes"
+}

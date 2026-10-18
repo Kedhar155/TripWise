@@ -654,3 +654,26 @@ Validation: PASS
 - Real browser: Paris search > whole card > Details > Add Point zéro des Routes de France > My Trip shows France/Ile-de-France/Paris > Day 1 > refresh retains location and day > remove only disposable item > empty trip and summary hidden. Evidence: docs/polish/change-6-browser-checks.json.
 
 Change 6 complete. Local updated preview: http://127.0.0.1:3029. Supabase schema change is applied; application code remains local. No merge, push or Vercel deployment. Change 7 awaits separate instructions.
+
+
+## Polish - Change 7 of 7: drag saved places between days (18 October 2026)
+
+Completed:
+- Read progress first; continued on polish after 070a9c8. Read installed Next client-component guide and official dnd-kit Pointer/Keyboard sensor docs before implementation.
+- Added @dnd-kit/core 6.3.1 with Pointer and Keyboard sensors, a visible 44px GripVertical handle on every trip card, a compact drag overlay and whole-section drop zones. Empty days and Unplanned accept drops and highlight teal while targeted.
+- Only the handle starts dragging, after 8px pointer movement. Touch action is disabled only on the handle; card content/dropdown retain normal scrolling. Remove, dropdown and Details link are outside drag listeners. Preserved current cards, colors and summary. No within-day reordering, position column, schema change or API change.
+- Shared move function now optimistically changes the day for both drag and dropdown; card location, dropdown and summary update immediately. Existing PATCH verifies/persists the day. Success replaces the row with the server response and shows a short toast. Failure restores the original row/day/summary and shows an error toast.
+- Serialized mutations guard against overlapping move/remove saves. During a drag the day dropdown and Remove are disabled; they become available after dropping/cancelling/saving. Focus returns to the moved handle/dropdown after save or rollback.
+- Keyboard supports Tab to handle, Space/Enter pickup/drop, arrows between entire sections, Escape cancel, and screen-reader section announcements. No-op same-day/outside/cancel does not call PATCH. Add day retains existing browser persistence and 14-day cap.
+- Extended local fixture with a one-place drag scenario and ready/slow/failing PATCH responses; fixture does not contact Supabase/Geoapify. Added focused keyboard-navigation tests and updated API_TESTS.md.
+
+Validation: PASS
+- Production webpack build including TypeScript, typecheck, lint, whitespace and secret/history checks. Existing trip-summary, itinerary-location and Explore-session tests passed. New keyboard tests verify source fallback, whole-section coordinates, reverse arrows, bounds and unrelated keys.
+- Desktop 1440x1300 fixture: pointer dragged Unplanned to empty Day 1, then Day 1 to empty Day 2; dropdown and summary matched immediately. Keyboard picked up with Space, moved between sections, dropped in Day 2 and cancelled another move with Escape. Target highlight/overlay visible; screenshot docs/polish/change-7-highlight.jpg.
+- Phone-sized 390x844: pointer dragged Day 2 to Day 1, Day 1 to Unplanned, then Unplanned to an empty Day 1. Handle measured 44x44px; computed touch-action was none on handle, auto on card/select. Normal page scrolling remained available. Tested viewport interactions, not a physical touch device.
+- Slow fixture (2.5 seconds) confirmed Day 1 card placement, dropdown value 1 and summary 1 planned / 0 unplanned before save finished. Failed saves on desktop and phone returned the card to Day 1 and showed Could not move this place with the error detail. Refresh after failure retained original Day 1. Screenshot: docs/polish/change-7-phone.jpg.
+- Dropdown changed day without starting a drag, and Remove removed the test fixture card without starting a drag. Outside drop in real preview announced No move made and retained Unplanned.
+- Real browser flow: Paris search > whole card > Details > Add Point zéro des Routes de France > pointer drop into empty Day 1 on desktop > pointer drop into Day 2 at 390px > success toast > refresh confirms section Day 2, dropdown 2, 1 planned day and France/Ile-de-France/Paris still present > remove only own disposable item. No overflow at 390 (375/375) or 320 (305/305); narrow handle stayed 44px. Viewport override reset after testing.
+- All 59 real API regression checks passed for search, Details, add/read persistence, duplicates/visitor isolation, day changes/clearing/validation and removal. Report: docs/polish/change-7-api-tests.md. Browser evidence: docs/polish/change-7-browser-checks.json.
+
+All seven requested polish changes complete. Local updated preview: http://127.0.0.1:3031. Supabase location columns from Change 6 remain applied; app changes are local commits on polish. No merge, push or Vercel deployment.

@@ -593,3 +593,20 @@ Repeatable validation:
 - General suite: 59 successful requests in `docs/polish/change-6-api-tests.md`. Additional location report: `docs/polish/change-6-location-api-tests.json`.
 
 Backfill recommendation: reuse verified location data when an old saved place's Details is already fetched, filling only null fields for that visitor. This can avoid additional provider calls; no bulk backfill or automatic address guessing was performed in this change.
+
+
+## Polish change 7: drag places between days
+
+My Trip uses `@dnd-kit/core` 6.3.1 with Pointer and Keyboard sensors. Only the visible 44px handle starts a drag; it has touch-action:none and an 8px activation threshold. Card content, dropdowns and Remove remain ordinary controls/scroll areas. No database or API changes, and no within-day ordering.
+
+Drop onto any existing Day or Unplanned section, including empty sections. Pointer targets highlight in teal; an overlay follows the drag. Both dropdown and drop invoke the existing visitor-scoped PATCH `/api/itinerary/:id` with `{ "day": 1 }` or `{ "day": null }`. Card placement, dropdown and summary update immediately, then use the response on success. Failed requests restore the previous row/day and show an error toast. Mutations are serialized to prevent overlapping saves from corrupting rollback. A drop in the same section, outside a section, or Escape cancellation makes no save.
+
+Keyboard: Tab to a handle, Space/Enter to pick up, Up/Left or Down/Right to choose a whole section, Space/Enter to drop, Escape to cancel. Announcements name the active section. Focus returns to the moved handle/dropdown after saving or rollback.
+
+Validation:
+- `node scripts/test-trip-drag.mjs`: keyboard section navigation, bounds, initial/source-day fallback, unrelated keys.
+- Full real API suite: `docs/polish/change-7-api-tests.md` (59 checks).
+- Local-only failure/slow fixture: start preview on 3031, then set PREVIEW_UPSTREAM_PORT=3031 and PREVIEW_PORT=3032 before running `node scripts/preview-trip-locations.mjs`. `.next/location-qa-state.txt` = drag gives one located place; `.next/trip-qa-save.txt` = ready / slow / fail controls PATCH. Fail leaves server fixture state unchanged; slow delays 2.5 seconds. Fixture rows persist across page refresh during the process and do not touch Geoapify/Supabase.
+- Browser evidence: `docs/polish/change-7-browser-checks.json`, `change-7-highlight.jpg`, `change-7-phone.jpg`.
+
+Library reference: [dnd-kit Pointer Sensor and handle touch behavior](https://dndkit.com/legacy/api-documentation/sensors/pointer/), [Keyboard Sensor](https://dndkit.com/legacy/api-documentation/sensors/keyboard/).
