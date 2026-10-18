@@ -1,0 +1,80 @@
+/* Art geometry, SVG presentation and animation values are copied from the template.
+   The wrapper clips artwork at the hero boundary and passes through all input. */
+.retro-art { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.retro-art * { pointer-events: none; }
+.retro-art-host { position: relative; isolation: isolate; overflow: hidden; }
+.retro-art-content { position: relative; z-index: 1; }
+  /* ---------- Background artwork (all decorative) ---------- */
+  .retro-art .art { position: absolute; pointer-events: none; z-index: 0; }
+
+  /* Compass: top-right, bleeding off the right edge, tilted 15deg.
+     Move it with --cx / --cy (centre point as % of the hero); resize with --cw. */
+  .retro-art .compass {
+    --cw: clamp(250px, 26vw, 420px);
+    --cx: 84%;
+    --cy: 26%;
+    width: var(--cw);
+    left: calc(var(--cx) - var(--cw) / 2);
+    top: calc(var(--cy) - var(--cw) / 2);
+    transform: rotate(15deg);
+    animation: compass-rotate 30s linear infinite;
+  }
+
+  @keyframes compass-rotate {
+    from { transform: rotate(15deg); }
+    to   { transform: rotate(375deg); }
+  }
+
+  /* Globe with dashed orbit: bottom-left */
+  .retro-art .globe { left: 3%; bottom: 5%; width: clamp(150px, 15vw, 220px); }
+  .retro-art .globe .meridian {
+    animation: globe-meridian 15s linear infinite;
+  }
+  .retro-art .globe .m1 { animation-delay: -5s; }
+  .retro-art .globe .m2 { animation-delay: -10s; }
+
+  @keyframes globe-meridian {
+    0%   { transform: scaleX(-1);     opacity: 0; }
+    8%   { transform: scaleX(-0.969); opacity: 1; }
+    10%  { transform: scaleX(-0.951); }
+    20%  { transform: scaleX(-0.809); }
+    30%  { transform: scaleX(-0.588); }
+    40%  { transform: scaleX(-0.309); }
+    50%  { transform: scaleX(0); }
+    60%  { transform: scaleX(0.309); }
+    70%  { transform: scaleX(0.588); }
+    80%  { transform: scaleX(0.809); }
+    90%  { transform: scaleX(0.951); }
+    92%  { transform: scaleX(0.969);  opacity: 1; }
+    100% { transform: scaleX(1);      opacity: 0; }
+  }
+
+  /* Passport stamp: pinned to the south-east corner */
+  .retro-art .stamp { right: 2.5%; bottom: 2%; width: clamp(64px, 7vw, 96px); }
+
+  /* Coordinates line between globe and stamp */
+  .retro-art .coords {
+    position: absolute; z-index: 0; left: 40%; bottom: 3%;
+    font: 11px/1 "Courier New", monospace; color: var(--navy); opacity: .4;
+    pointer-events: none;
+  }
+
+  /* Dashed flight route with a small plane */
+  .retro-art .route { left: 0; right: 0; top: 40%; height: clamp(60px, 10vw, 120px); }
+  .retro-art .route svg { width: 100%; height: 100%; display: block; }
+  .retro-art .route .plane { position: absolute; left: 50%; top: 17%; width: 22px; transform: translate(-50%, -50%) rotate(-4deg); }
+
+  /* Small diamond stars */
+  .retro-art .dia { position: absolute; z-index: 0; width: 8px; height: 8px; background: rgba(27, 58, 92, .25); transform: rotate(45deg); pointer-events: none; }
+
+
+@media (max-width: 600px) {
+  .retro-art .compass { --cw: 240px; --cx: 88%; --cy: 22%; }
+  .retro-art .coords { display: none; }
+}
+
+/* The full component replaces the previous static hero approximations only. */
+main section[aria-labelledby="explore-heading"]::before,
+main section[aria-labelledby="explore-heading"]::after { content: none; }
+section[aria-labelledby="explore-heading"] { overflow: hidden; }
+section[aria-labelledby="explore-heading"] > :not(.retro-art) { position: relative; z-index: 1; }

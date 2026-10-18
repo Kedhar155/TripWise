@@ -233,3 +233,8 @@ All tracked project files are listed below. Generated/ignored node_modules, .nex
 Styling/assets: public/retro/compass.svg, public/retro/globe.svg, public/retro/stamp.svg. Each is decorative SVG extracted from the supplied template.
 Design/reference and documentation: design/tripwise_retro_airline_template.html, this inventory, baseline-api-tests.md, retro-api-tests.md, browser-checks.md and screenshots. PROGRESS.md is the requested running log.
 Only src/app/globals.css is changed in the existing application source.
+
+## Requested design-system Step 1 additions
+- Allowed presentation files: src/app/design-system.css, src/app/background-art.css, src/components/background-art.tsx, src/app/design-system/page.tsx.
+- Explicitly requested Explore art integration: two additive presentation lines in src/components/explore.tsx (import and component placement); all existing business logic remains protected and unchanged.
+- Documentation/evidence: design/DESIGN-SYSTEM.md, design/design-system-api-tests.md, design/design-system-art.png, design/design-system-styles.png, PROGRESS.md.

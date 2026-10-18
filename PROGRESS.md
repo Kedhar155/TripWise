@@ -743,3 +743,15 @@ Vercel deployment ID: dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz (READY, production).
 - Baseline checkpoint b2b6919 uses the prior project's author identity because no local identity was configured. The branch was created before that checkpoint commit after the first commit attempt failed; original main remains a45ee15, and the complete baseline application is preserved in both commits.
 - Full file inventory and protected-file grouping: design/FILE-INVENTORY.md. Local final preview: http://127.0.0.1:3043. No push or deployment; live Vercel site unchanged.
 
+
+## Retro design system - requested Step 1 (18 October 2026)
+- Read the original template carefully; preserved the existing prior restyle and did not migrate page styling in this step.
+- Added all seven palette variables in global CSS and named Tailwind colors, Georgia/Courier families and standard shadcn semantic color/radius tokens in src/app/design-system.css. No font download or dependency.
+- Added opt-in retro-card, button main/secondary/neutral/danger variants, input, chip, dropdown, badge, label/nav and three-stripe primitives with compact borders, hard offset shadows, hover/press, focus and disabled styles.
+- Added one reusable BackgroundArt with exact template SVG geometry, fills/strokes/opacities, compass/globe keyframes, timings, delays, positions and 600px breakpoint. Unique SVG reference IDs prevent collisions. Clipped, aria-hidden artwork and all descendants have pointer-events:none.
+- Explore only adds the visual component import/element (two added lines); no existing search, state, data or event code changed. Replaced its old static pseudo-art. No further existing page restyle.
+- Added /design-system preview of the full artwork, palette, controls and semantic tokens. Usage/evidence: design/DESIGN-SYSTEM.md; screenshots design/design-system-art.png and design-system-styles.png.
+- Lint and production webpack build including TypeScript PASS. Both full keyframe blocks and SVG geometry/transforms/colors compared to template PASS. Browser confirms exact seven swatches, font families, animation durations/delays, no horizontal overflow at tested 1265px, and click-through art. Preview input/dropdown work and Explore Paris chip starts search.
+- All 59 real API checks PASS (search, Details, add/persistence, day moves/clearing, remove, duplicates and visitor isolation), disposable records cleaned up. Report design/design-system-api-tests.md. Explore session and keyboard drag isolated tests PASS.
+- Local preview http://127.0.0.1:3045/design-system. No push or deployment.
+

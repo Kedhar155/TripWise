@@ -1,0 +1,121 @@
+/* Semantic tokens consumed by shadcn/ui and named Tailwind utilities.
+   Raw palette values live in globals.css; no external fonts are loaded. */
+:root {
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-label: "Courier New", monospace;
+  --card-foreground: var(--navy);
+  --popover: var(--card);
+  --popover-foreground: var(--navy);
+  --primary-foreground: var(--navy);
+  --secondary: var(--teal);
+  --secondary-foreground: var(--navy);
+  --muted: var(--paper);
+  --muted-foreground: #42556c;
+  --accent: var(--paper);
+  --accent-foreground: var(--navy);
+  --destructive: var(--stamp);
+  --destructive-foreground: var(--card);
+  --border: var(--navy);
+  --input: var(--navy);
+  --ring: var(--navy);
+  --radius: 5px;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-navy: var(--navy);
+  --color-orange: var(--orange);
+  --color-teal: var(--teal);
+  --color-earth: var(--earth);
+  --color-stamp: var(--stamp);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-serif: var(--font-body);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-label);
+  --radius-sm: 3px;
+  --radius-md: var(--radius);
+  --radius-lg: 6px;
+}
+
+/* Opt-in primitives: pages adopt these in a later step. */
+.retro-card, .retro-button, .retro-input, .retro-dropdown, .retro-chip, .retro-badge {
+  border: 1.5px solid var(--navy);
+  border-radius: 5px;
+  color: var(--navy);
+  background: var(--card);
+}
+.retro-card, .retro-button, .retro-chip {
+  box-shadow: 2px 2px 0 var(--navy);
+  transition: background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+.retro-card { padding: 24px; }
+.retro-button, .retro-chip, .retro-badge, .retro-label, .retro-nav {
+  font-family: var(--font-label);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.retro-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 18px;
+  background: var(--orange);
+  font-weight: bold;
+  text-decoration: none;
+}
+.retro-button-secondary { background: var(--teal); }
+.retro-button-neutral { background: transparent; }
+.retro-button-danger { background: var(--stamp); color: var(--card); }
+.retro-button:disabled, .retro-input:disabled, .retro-dropdown:disabled, .retro-chip:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.retro-input, .retro-dropdown {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 14px;
+  font: 16px var(--font-body);
+}
+.retro-input::placeholder { color: var(--muted-foreground); opacity: 1; }
+.retro-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 3px; }
+.retro-chip[aria-pressed="true"], .retro-chip-on { background: var(--navy); color: var(--paper); }
+.retro-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 3px; }
+.retro-label { display: block; margin-bottom: 8px; font-weight: bold; }
+.retro-card:focus-visible, .retro-button:focus-visible, .retro-chip:focus-visible,
+.retro-input:focus-visible, .retro-dropdown:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; }
+@media (hover: hover) {
+  .retro-card:hover, .retro-button:not(:disabled):hover, .retro-chip:not(:disabled):hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--navy);
+  }
+}
+.retro-card:active, .retro-button:not(:disabled):active, .retro-chip:not(:disabled):active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--navy);
+}
+.retro-stripes { display: flex; gap: 3px; max-width: 300px; margin-bottom: clamp(28px, 6vw, 70px); }
+.retro-stripes span { height: 5px; }
+.retro-stripes span:nth-child(1) { flex: 3; background: var(--orange); }
+.retro-stripes span:nth-child(2) { flex: 2; background: var(--teal); }
+.retro-stripes span:nth-child(3) { flex: 1; background: var(--navy); }
+@media (prefers-reduced-motion: reduce) {
+  .retro-card, .retro-button, .retro-chip { transition: none; }
+}
