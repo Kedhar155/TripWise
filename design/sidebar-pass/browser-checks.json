@@ -1,0 +1,31 @@
+{
+  "viewports": [
+    {
+      "addHeight": 48,
+      "client": 320,
+      "scroll": 320,
+      "tripLinkHeight": 44,
+      "width": 320
+    },
+    {
+      "client": 768,
+      "scroll": 768,
+      "width": 768
+    }
+  ],
+  "console": [],
+  "flows": [
+    "Eiffel Tower search: two results",
+    "New header/body/icon/footer shown; metadata and Back unchanged",
+    "Add stays on Details; Saving button and trip link disabled",
+    "Saved button persists on refresh",
+    "Footer View My Trip navigates correctly",
+    "Unplanned to Day 1; refresh persists; return to Unplanned",
+    "Remove own test record and refresh empty",
+    "Back to Explore retains Eiffel Tower query and two results"
+  ],
+  "limits": [
+    "New drag/touch walkthrough not exercised; drag components unchanged",
+    "Error paths source-equivalent; no new error fixture exercised"
+  ]
+}

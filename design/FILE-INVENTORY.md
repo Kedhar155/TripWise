@@ -284,3 +284,8 @@ Only src/app/globals.css is changed in the existing application source.
 ## Explicitly requested Any distance default
 - Authorized behavior exception: only the defaultWithin constant in src/lib/place-sorting.ts changes from 5 to null. Existing saved choices, fetching, APIs, database and component handlers stay unchanged.
 - Verification: scripts/test-explore-session.mjs adds fresh-default/omitted-query/saved-5-km assertions; design/any-distance/ holds API report and browser screenshot. PROGRESS.md records results.
+
+## Textured Boarding-Pass Stub sidebar
+- Styling/layout: src/app/sidebar-pass.css and globals.css import; colorful-tickets.css removes superseded teal sidebar action rules.
+- Presentation wrappers only: src/components/destination.tsx adds header/body/bookmark/footer containers. All state, handlers, requests and link guards remain exactly unchanged; main card/Back/brown metadata untouched.
+- Evidence/source comparison/API report/screenshots: design/sidebar-pass/ and PROGRESS.md.

@@ -1,0 +1,110 @@
+/* Presentation only: existing save state, errors and navigation stay intact. */
+.destination-page .destination-layout .destination-aside {
+  padding: 0;
+  border: 1.5px solid #1b3a5c;
+  border-radius: 8px;
+  overflow: hidden;
+  color: #1b3a5c;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 10px 22px -8px rgba(27, 58, 92, 0.22), 3px 3px 0 #1b3a5c;
+}
+.itinerary-pass-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px;
+  background: linear-gradient(90deg, #1e7268 0%, #2a9d8f 55%, #1b3a5c 100%);
+  border-bottom: 1.5px dashed rgba(27, 58, 92, 0.65);
+  font: bold 10.5px/1.5 "Courier New", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fffbf2;
+}
+.itinerary-pass-body {
+  padding: 20px 22px 18px;
+  background-color: #d4ebe4;
+  background-image: radial-gradient(rgba(27, 58, 92, 0.13) 1px, transparent 1px), linear-gradient(155deg, #e2f2ed 0%, #cbe6de 55%, #b6d8ce 100%);
+  background-size: 10px 10px, 100% 100%;
+  box-shadow: inset 0 2px 6px rgba(27, 58, 92, 0.08);
+}
+.itinerary-pass-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #fffbf2;
+  color: #1a665d;
+  border: 1px solid rgba(27, 58, 92, 0.45);
+  box-shadow: 1.5px 1.5px 0 rgba(27, 58, 92, 0.25);
+  margin-bottom: 14px;
+}
+.itinerary-pass-icon > svg { width: 20px; height: 20px; color: inherit; }
+.destination-page .itinerary-pass-body > h2 {
+  font: normal 22px/1.22 Georgia, serif;
+  color: #1b3a5c;
+  margin: 0 0 10px;
+}
+.itinerary-pass-body > p {
+  font: 13px/1.55 Georgia, serif;
+  color: rgba(27, 58, 92, 0.88);
+  margin: 0 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px dashed rgba(27, 58, 92, 0.25);
+}
+.destination-page .itinerary-pass-body > .button {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #f2823f 0%, #e8702a 100%);
+  border: 1.5px solid #1b3a5c;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 2px 2px 0 #1b3a5c;
+  font: bold 13px/1.5 "Courier New", monospace;
+  letter-spacing: 0.04em;
+  color: #1b3a5c;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.destination-page .itinerary-pass-body > .button:disabled {
+  background: var(--paper);
+  color: #42556c;
+  opacity: 1;
+}
+.itinerary-pass-body > .button + div { margin-top: 16px; }
+.itinerary-pass-footer {
+  padding: 12px 22px;
+  text-align: center;
+  background: linear-gradient(95deg, #1b3a5c 0%, #21496e 55%, #235e63 100%);
+  border-top: 2px solid #e8702a;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.destination-page .itinerary-pass-footer > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  font: bold 12px/1.5 "Courier New", monospace;
+  color: #fffbf2;
+  border-bottom: 1px dashed #e8702a;
+  padding-bottom: 2px;
+  overflow-wrap: anywhere;
+}
+.itinerary-pass-body > .button:focus-visible,
+.itinerary-pass-footer > a:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+@media (hover: hover) {
+  .destination-page .itinerary-pass-body > .button:not(:disabled):hover {
+    transform: translate(-1px, -1px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 3px 3px 0 #1b3a5c;
+  }
+  .destination-page .itinerary-pass-footer > a:not([aria-disabled="true"]):hover { color: #e8702a; border-bottom-style: solid; }
+}
+.destination-page .itinerary-pass-body > .button:not(:disabled):active {
+  transform: translate(1px, 1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 1px 1px 0 #1b3a5c;
+}
+@media (prefers-reduced-motion: reduce) {
+  .destination-page .itinerary-pass-body > .button { transition: none; }
+  .destination-page .itinerary-pass-body > .button:not(:disabled):is(:hover, :active) { transform: none; }
+}

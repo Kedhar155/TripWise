@@ -1,0 +1,6 @@
+{
+  "base": "5efc101",
+  "destination": "Exact previous source after removing only header/body/icon/footer presentation wrappers",
+  "apiDatabaseHelpersDependenciesScripts": "Unchanged",
+  "handlersStateRequestsSavedStatusErrorsAndNavigationGuards": "Unchanged"
+}

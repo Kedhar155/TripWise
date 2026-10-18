@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+const git = args => execFileSync('git', args, { encoding: 'utf8', windowsHide: true });
+const clean = value => value.replaceAll('\r', '').trimEnd();
+const before = clean(git(['show', '5efc101:src/components/destination.tsx']));
+let after = clean(await readFile('src/components/destination.tsx', 'utf8'));
+after = after.replace('<aside className="destination-aside h-fit"><div className="itinerary-pass-header"><span>ITINERARY PASS</span><span aria-hidden="true">✦</span></div><div className="itinerary-pass-body"><span className="itinerary-pass-icon" aria-hidden="true"><Bookmark className="text-teal-700" aria-hidden="true"/></span>', '<aside className="destination-aside h-fit space-y-5 rounded-3xl bg-teal-50 p-6 sm:p-8"><Bookmark className="text-teal-700" aria-hidden="true"/>');
+after = after.replace('</div><div className="itinerary-pass-footer"><Link href="/trip" aria-disabled={saving || undefined}', '<Link href="/trip" aria-disabled={saving || undefined}');
+after = after.replace('</Link></div></aside></div>', '</Link></aside></div>');
+assert.equal(after, before, 'Only the documented sidebar presentation wrappers may change');
+assert.equal(git(['diff', '5efc101', '--name-only', '--', 'src/app/api', 'src/lib', 'supabase', 'scripts', 'package.json', 'package-lock.json']).trim(), '');
+const report = { base: '5efc101', destination: 'Exact previous source after removing only header/body/icon/footer presentation wrappers', apiDatabaseHelpersDependenciesScripts: 'Unchanged', handlersStateRequestsSavedStatusErrorsAndNavigationGuards: 'Unchanged' };
+await writeFile('design/sidebar-pass/source-audit.json', JSON.stringify(report, null, 2) + '\n');
+console.log('PASS: sidebar presentation-only; all previous state/handlers/requests/guards and API/data code unchanged');
