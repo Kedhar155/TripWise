@@ -45,5 +45,5 @@ try {
 } finally {
  for(const id of owned) await call('/api/itinerary/'+id,{method:'DELETE'});
  const {items}=await call('/api/itinerary'); assert.equal(items.length,0);
- await writeFile('docs/polish/change-6-location-api-tests.json',JSON.stringify({checks,cleanup:'own random visitor empty'},null,2)+'\n');
+ await writeFile(process.env.TEST_REPORT_PATH ?? 'docs/polish/change-6-location-api-tests.json',JSON.stringify({checks,cleanup:'own random visitor empty'},null,2)+'\n');
 }

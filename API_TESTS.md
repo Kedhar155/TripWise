@@ -610,3 +610,16 @@ Validation:
 - Browser evidence: `docs/polish/change-7-browser-checks.json`, `change-7-highlight.jpg`, `change-7-phone.jpg`.
 
 Library reference: [dnd-kit Pointer Sensor and handle touch behavior](https://dndkit.com/legacy/api-documentation/sensors/pointer/), [Keyboard Sensor](https://dndkit.com/legacy/api-documentation/sensors/keyboard/).
+
+
+## Final seven-change polish regression (18 October 2026)
+
+Final local preview: http://127.0.0.1:3033. Branch: polish; no merge, push or Vercel deployment.
+
+Repeat all six real-service suites with `node scripts/test-polish-api.mjs` (override TEST_BASE_URL for another local port). The runner executes sequentially to avoid provider bursts, uses isolated disposable visitors, and saves fresh reports under `docs/polish/final/`. Both State and itinerary-location suites now honor TEST_REPORT_PATH. All 223 HTTP checks passed: general 59, State 33, sort/filter 56, name 32, category 13, saved location 30. Sort/filter additionally passed 237 ordering/grouping checks. Status index: `docs/polish/final/api-summary.json`.
+
+Build / lint / TypeScript and twelve focused suites passed. Full phone walkthrough: `docs/polish/final/browser-checks.json`. Exact Back/refresh scroll was 2170.39990234375px with the same ordered cards. It covers the three State combinations and auto-fill, two category selections, whole-row text/icon/space/keyboard/All toggles, whole-card navigation, Add from Details, separate always-visible Sort at 390/320px, every applicable location/name sort, two-country/state summary, dropdown/drag/keyboard moves, refresh persistence, removal and empty-summary hiding. Failure simulation is isolated from real services.
+
+Fixed regression case to keep in future manual checks: on a phone, choose Country+City, Search (State auto-fills), clear City, then tap Search once. The shared combobox must show an inline empty prompt and no floating empty panel above Search; State-only loading/results must begin on that first tap. Inline loading/error/no-match feedback remains announced by its status/alert; a floating list and expanded ARIA state appear only when selectable options exist.
+
+Key checks: `node scripts/check-secret-leaks.mjs` scans source/tests/docs/SQL/browser bundles for saved credential values; `node scripts/check-git-secrets.mjs` scans all Git objects (including dangling objects), credential patterns, tracked/history environment filenames and .env.local ignore status. Both passed. Private .env.local remains local and ignored.

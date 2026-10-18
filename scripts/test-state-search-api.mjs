@@ -41,5 +41,5 @@ await get('/api/places',{country:'us'},400);
 await get('/api/states',{country:'xx',q:'Illinois'},400);
 await get('/api/states',{country:'us',q:'Il'},400);
 assert.deepEqual((await get('/api/states',{country:'us',q:'zzzzzzzzzzzz'})).states,[]);
-writeFileSync('docs/polish/change-5-state-api-tests.json',JSON.stringify(checks,null,2));
+writeFileSync(process.env.TEST_REPORT_PATH ?? 'docs/polish/change-5-state-api-tests.json',JSON.stringify(checks,null,2));
 console.log(`PASS ${checks.length} state/city API checks`);

@@ -1,0 +1,330 @@
+[
+  {
+    "count": 100,
+    "fields": [
+      [
+        "country",
+        "India"
+      ],
+      [
+        "state",
+        "Tamil Nadu"
+      ],
+      [
+        "city",
+        ""
+      ]
+    ],
+    "heading": "Tamil Nadu, India",
+    "sorts": [
+      "relevance",
+      "name",
+      "name-desc",
+      "category",
+      "details"
+    ],
+    "test": "State only restored",
+    "within": false
+  },
+  {
+    "count": 100,
+    "fields": [
+      [
+        "country",
+        "India"
+      ],
+      [
+        "state",
+        "Tamil Nadu"
+      ],
+      [
+        "city",
+        "Chennai, Tamil Nadu, India"
+      ]
+    ],
+    "heading": "Chennai, India",
+    "test": "All three"
+  },
+  {
+    "test": "Phone location sort",
+    "sort": "relevance",
+    "count": 100,
+    "sameIds": true,
+    "nameOrder": null,
+    "distanceOrder": null,
+    "groups": 0
+  },
+  {
+    "test": "Phone location sort",
+    "sort": "distance",
+    "count": 100,
+    "sameIds": true,
+    "nameOrder": null,
+    "distanceOrder": true,
+    "groups": 0
+  },
+  {
+    "test": "Phone location sort",
+    "sort": "distance-desc",
+    "count": 100,
+    "sameIds": true,
+    "nameOrder": null,
+    "distanceOrder": true,
+    "groups": 0
+  },
+  {
+    "test": "Phone location sort",
+    "sort": "name",
+    "count": 100,
+    "sameIds": true,
+    "nameOrder": true,
+    "distanceOrder": null,
+    "groups": 0
+  },
+  {
+    "test": "Phone location sort",
+    "sort": "name-desc",
+    "count": 100,
+    "sameIds": true,
+    "nameOrder": true,
+    "distanceOrder": null,
+    "groups": 0
+  },
+  {
+    "test": "Phone location sort",
+    "sort": "category",
+    "count": 100,
+    "sameIds": true,
+    "nameOrder": null,
+    "distanceOrder": null,
+    "groups": 4
+  },
+  {
+    "test": "Phone location sort",
+    "sort": "details",
+    "count": 100,
+    "sameIds": true,
+    "nameOrder": null,
+    "distanceOrder": null,
+    "groups": 0
+  },
+  {
+    "loading": "true",
+    "test": "State-only first tap after clearing City",
+    "within": false
+  },
+  {
+    "city": "Chennai, Tamil Nadu, India",
+    "state": "Tamil Nadu",
+    "test": "City-only auto-fill"
+  },
+  {
+    "checked": [
+      "Museums and Culture",
+      "Parks and Nature",
+      "Within 10 km",
+      "Name Z to A",
+      "Clear all"
+    ],
+    "scroll": 375,
+    "sortCount": 1,
+    "sortOutsideFilters": true,
+    "test": "Category rows and separate toolbar",
+    "toolbar": "Filters3Sort byBest matchNearest firstFarthest firstName A to ZName Z to ACategory (grouped)Most details first100 results",
+    "width": 375
+  },
+  {
+    "test": "Back to Explore",
+    "sameCards": true,
+    "sameFields": true,
+    "sort": "name-desc",
+    "within": "10",
+    "beforeScroll": 2170.39990234375,
+    "afterScroll": 2170.39990234375
+  },
+  {
+    "test": "Browser Back",
+    "sameCards": true,
+    "sameFields": true,
+    "sort": "name-desc",
+    "within": "10",
+    "beforeScroll": 2170.39990234375,
+    "afterScroll": 2170.39990234375
+  },
+  {
+    "cards": 100,
+    "fields": [
+      [
+        "country",
+        "India"
+      ],
+      [
+        "state",
+        "Tamil Nadu"
+      ],
+      [
+        "city",
+        "Chennai, Tamil Nadu, India"
+      ]
+    ],
+    "scrollY": 2170.39990234375,
+    "sort": "name-desc",
+    "test": "Refresh search",
+    "within": "10"
+  },
+  {
+    "test": "Add on Details",
+    "place": "Egmore Government Museum",
+    "stayedOnDetails": true
+  },
+  {
+    "scroll": 305,
+    "sortHeight": 52,
+    "sortOutsideFilters": true,
+    "sorts": 1,
+    "test": "Narrow Explore",
+    "width": 305
+  },
+  {
+    "cards": 11,
+    "names": [
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Garfield Park"
+    ],
+    "sort": "relevance",
+    "test": "Phone name sort",
+    "within": false
+  },
+  {
+    "cards": 11,
+    "names": [
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Garfield Park"
+    ],
+    "sort": "name",
+    "test": "Phone name sort",
+    "within": false
+  },
+  {
+    "cards": 11,
+    "names": [
+      "Garfield Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park"
+    ],
+    "sort": "name-desc",
+    "test": "Phone name sort",
+    "within": false
+  },
+  {
+    "cards": 11,
+    "names": [
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Central Park",
+      "Garfield Park"
+    ],
+    "sort": "category",
+    "test": "Phone name sort",
+    "within": false
+  },
+  {
+    "cards": 11,
+    "name": "Central Park",
+    "sort": "name-desc",
+    "tab": "Search by place name",
+    "test": "Name search Back to Explore"
+  },
+  {
+    "cards": 11,
+    "name": "Central Park",
+    "sort": "name-desc",
+    "tab": "Search by place name",
+    "test": "Name search browser Back"
+  },
+  {
+    "test": "Two-country trip summary",
+    "text": "Your trip at a glance\nTotal places\n2\nDays planned\n0\nUnplanned places\n2\nStates\n2\nCities\n2\nPlaces by location\nFrance\nIle-de-France (1 place): Paris (1)\nIndia\nTamil Nadu (1 place): Chennai (1)\nPlaces by category\n1 Museum Or Cultural Place\n1 Sight"
+  },
+  {
+    "test": "Phone drag optimistic",
+    "movingVisible": true
+  },
+  {
+    "test": "Trip refresh after drag",
+    "values": [
+      {
+        "label": "Plan for Tour Eiffel",
+        "value": ""
+      },
+      {
+        "label": "Plan for Egmore Government Museum",
+        "value": "2"
+      }
+    ]
+  },
+  {
+    "test": "Keyboard drop to Unplanned",
+    "summary": "Your trip at a glance\nTotal places\n2\nDays planned\n0\nUnplanned places\n2\nStates\n2\nCities\n2\nPlaces by location\nFrance\nIle-de-France (1 place): Paris (1)\nIndia\nTamil Nadu (1 place): Chennai (1)\nPlaces by category\n1 Museum Or Cultural Place\n1 Sight"
+  },
+  {
+    "test": "Summary after one removal",
+    "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nStates\n1\nCities\n1\nPlaces by location\nFrance\nIle-de-France (1 place): Paris (1)\nPlaces by category\n1 Sight"
+  },
+  {
+    "test": "Refresh after removal",
+    "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nStates\n1\nCities\n1\nPlaces by location\nFrance\nIle-de-France (1 place): Paris (1)\nPlaces by category\n1 Sight"
+  },
+  {
+    "test": "Final real cleanup",
+    "summaryCount": 0,
+    "console": []
+  },
+  {
+    "scroll": 305,
+    "test": "Narrow Trip",
+    "width": 305
+  },
+  {
+    "day": "",
+    "error": [
+      "Could not move this placeTest save failed. Try again."
+    ],
+    "section": "Unplanned",
+    "summary": "Your trip at a glanceTotal places1Days planned0Unplanned places1States1Cities1Places by locationIndiaTamil Nadu (1 place): Chennai (1)Places by category1 museum or cultural place",
+    "test": "Failed drop rollback on phone"
+  }
+]

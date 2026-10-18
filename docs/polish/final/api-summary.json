@@ -1,0 +1,35 @@
+{
+  "base": "http://127.0.0.1:3033",
+  "results": [
+    {
+      "suite": "general",
+      "status": "PASS",
+      "report": "docs/polish/final/general-api-tests.md"
+    },
+    {
+      "suite": "state",
+      "status": "PASS",
+      "report": "docs/polish/final/state-api-tests.json"
+    },
+    {
+      "suite": "sort",
+      "status": "PASS",
+      "report": "docs/polish/final/sort-api-tests.json"
+    },
+    {
+      "suite": "name",
+      "status": "PASS",
+      "report": "docs/polish/final/name-api-tests.md"
+    },
+    {
+      "suite": "category",
+      "status": "PASS",
+      "report": "docs/polish/final/category-api-tests.json"
+    },
+    {
+      "suite": "location",
+      "status": "PASS",
+      "report": "docs/polish/final/location-api-tests.json"
+    }
+  ]
+}

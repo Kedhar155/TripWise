@@ -1,0 +1,155 @@
+{
+  "checks": [
+    {
+      "path": "/api/places?city=Chennai&country=in&category=museums",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/places/51f86d64725712544059aa2c5787142c2a40f00102f90170bdce41000000009203184d6164726173204869676820436f757274204d757365756d",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/places?city=Bengaluru&country=in&category=museums",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/places/5137250dc1216653405934c97e641df32940f00102f901d3f319030000000092031b4b61726e6174616b6120476f7665726e6d656e74204d757365756d",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/places?city=Springfield%2C+Illinois&country=us&category=museums",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/places/51504c54d57a6956c0595727dadd70e64340f00102f901fbd2be070000000092031a4c696e636f6c6e204865726e646f6e204c6177204f6666696365",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "path": "/api/itinerary/07e43210-8735-4963-8632-b9efbb7790eb",
+      "method": "PATCH",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary/5cec7e14-dc8d-4113-a37b-5d1a85a1930b",
+      "method": "PATCH",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary/91029dc7-740f-4819-8d48-8633e981af00",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary/07e43210-8735-4963-8632-b9efbb7790eb",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary/34da3f86-fda5-44ad-bea0-370e12df8baa",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary/5cec7e14-dc8d-4113-a37b-5d1a85a1930b",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/api/itinerary",
+      "method": "GET",
+      "status": 200
+    }
+  ],
+  "cleanup": "own random visitor empty"
+}
