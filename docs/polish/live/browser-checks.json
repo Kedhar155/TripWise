@@ -1,0 +1,113 @@
+[
+  {
+    "loading": "true",
+    "state": "Tamil Nadu",
+    "test": "Country and City search"
+  },
+  {
+    "count": 100,
+    "fields": [
+      [
+        "country",
+        "India"
+      ],
+      [
+        "state",
+        "Tamil Nadu"
+      ],
+      [
+        "city",
+        "Chennai, Tamil Nadu, India"
+      ]
+    ],
+    "test": "Location results"
+  },
+  {
+    "count": 11,
+    "sort": "relevance",
+    "sortOutsidePanel": true,
+    "test": "Live sort"
+  },
+  {
+    "count": 11,
+    "sort": "distance",
+    "sortOutsidePanel": true,
+    "test": "Live sort"
+  },
+  {
+    "count": 11,
+    "sort": "distance-desc",
+    "sortOutsidePanel": true,
+    "test": "Live sort"
+  },
+  {
+    "count": 11,
+    "sort": "name",
+    "sortOutsidePanel": true,
+    "test": "Live sort"
+  },
+  {
+    "count": 11,
+    "sort": "name-desc",
+    "sortOutsidePanel": true,
+    "test": "Live sort"
+  },
+  {
+    "count": 11,
+    "sort": "category",
+    "sortOutsidePanel": true,
+    "test": "Live sort"
+  },
+  {
+    "count": 11,
+    "sort": "details",
+    "sortOutsidePanel": true,
+    "test": "Live sort"
+  },
+  {
+    "test": "Trip baseline",
+    "names": []
+  },
+  {
+    "count": 2,
+    "query": "Eiffel Tower",
+    "scroll": 375,
+    "sorts": [
+      "relevance",
+      "name",
+      "name-desc",
+      "category"
+    ],
+    "test": "Place-name search",
+    "width": 375
+  },
+  {
+    "test": "Details and weather",
+    "place": "Tour Eiffel",
+    "weather": "Weather at your destination\n\n13°C\n\nPartly cloudy · Now\n\nNext 3 days\nMon, Oct 19\n\nHigh 13°C\n\nLow 6°C\n\nTue, Oct 20\n\nHigh 14°C\n\nLow 10°C\n\nWed, Oct 21\n\nHigh 15°C\n\nLow 8°C\n\nWeather data by Open-Meteo.com"
+  },
+  {
+    "test": "Add to Trip",
+    "stayedOnDetails": true
+  },
+  {
+    "test": "My Trip",
+    "summary": "Your trip at a glance\nTotal places\n1\nDays planned\n0\nUnplanned places\n1\nStates\n1\nCities\n1\nPlaces by location\nFrance\nIle-de-France (1 place): Paris (1)\nPlaces by category\n1 Sight"
+  },
+  {
+    "section": "Day 2",
+    "test": "Day moves",
+    "value": "2"
+  },
+  {
+    "day": "2",
+    "section": "Day 2",
+    "summary": "Your trip at a glanceTotal places1Days planned1Unplanned places0States1Cities1Places by locationFranceIle-de-France (1 place): Paris (1)Places by category1 sight",
+    "test": "Refresh persistence"
+  },
+  {
+    "test": "Removal and refresh",
+    "summaryCount": 0,
+    "console": []
+  }
+]

@@ -702,3 +702,23 @@ Validation: PASS
 - Source/docs/browser bundle secret scan passed. Git scan includes reachable and dangling objects, checks saved credential values plus credential patterns, private environment filenames in tracked files/history, and ignored .env.local. No keys printed and no private environment files staged. Scans rerun after final documentation and commit.
 
 Updated API_TESTS.md and added final evidence/readme. Local preview: http://127.0.0.1:3033. Current look preserved. No merge, push or deployment; the Supabase location columns applied during Change 6 are unchanged.
+
+
+## Polish production release and live verification (18 October 2026)
+
+Application commit: ba5163e92cc327713a36a1290255388ee36c15e6 (main and origin/main at release).
+Public alias: https://tripwise-lime.vercel.app
+Deployment: https://tripwise-dw48wc6ur-markan2.vercel.app
+Vercel deployment ID: dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz (READY, production).
+
+- Initial check found the old d118698 deployment still serving production. Vercel's dashboard showed Git is not connected, so pushing main had not started a deployment. Reported this accurately and received explicit user approval: Deploy main ba5163e, then test live.
+- Deployed the approved main application through the official Vercel CLI, existing markan2/tripwise project and existing login. No environment values, domains, Git integration, permissions or dependencies were changed in the repository. Vercel's Next.js 16.4.2 Turbopack production build and TypeScript passed; outputs deployed and the public alias was assigned successfully.
+- Confirmed Ready / Production / main / ba5163e in the Vercel deployment dashboard and the CLI result. Dashboard evidence: docs/polish/live/vercel-ready.jpg; initial old deployment: vercel-before.jpg. All seven polish changes plus the final phone Search-button fix are now live. Future pushes still require a manual deployment until Git integration is separately configured.
+- Confirmed all three variables through both the dashboard and vercel env ls production: GEOAPIFY_API_KEY, SUPABASE_URL, SUPABASE_SECRET_KEY. Each remains Secret / Production / Hidden. Did not reveal, pull or print values or edit settings. Evidence: docs/polish/live/vercel-env.jpg and release-checks.json.
+- Live real-service API suite passed all 59 requests: validation, search, sort, Details, add/read persistence, duplicates, visitor isolation, day validation/boundaries/clearing and removal. All disposable API trips cleaned up. Report: docs/polish/live/api-tests.md.
+- Public browser-response leak scan passed across 18 live responses: a real place-name search response, Explore, My Trip, Details and fourteen browser script files. No saved credential values or credential patterns appeared; responses were scanned in memory and only counts/status were saved. Report: docs/polish/live/browser-secret-scan.json.
+- Live browser at 390x844: selected India, then Chennai, Tamil Nadu, India; Search auto-filled State as Tamil Nadu and returned 100 places. Museum row filtering returned 11 museums. Exercised all seven applicable sorts with the separate Sort control outside Filters, then Name A to Z. Country/City suggestions, full-row category selection and result loading all worked on the actual public alias.
+- Cleared filters and ran worldwide place-name search Eiffel Tower: two matches, with non-distance sorts and no Within field. Selected Name Z to A and opened the Paris card. Details resolved the canonical name Tour Eiffel and showed current weather (13 degrees C, partly cloudy at verification) plus three forecast days from Open-Meteo.
+- Verified a fresh empty browser trip before adding. Add to Trip saved Tour Eiffel while the Details URL stayed unchanged. My Trip showed one place, France > Ile-de-France > Paris, and one state/city with the existing category summary. Dropdown moved it to Day 1; keyboard handle drag moved it to empty Day 2; refresh confirmed dropdown value 2, Day 2 section, one occupied day and retained location data.
+- Removed only that disposable browser test place. A final refresh confirmed an empty trip and hidden summary. Browser warning/error log was empty. Temporary viewport reset. Evidence: docs/polish/live/browser-checks.json, live-explore.jpg, live-details.jpg and live-trip.jpg.
+- Source/document/browser-bundle and Git-object secret scans passed before the release-notes commit. Private .env.local and Vercel auth/config files remain ignored. The release notes and evidence are committed locally afterward; no second deployment or push is needed for this documentation-only follow-up. The deployed application remains exactly ba5163e.

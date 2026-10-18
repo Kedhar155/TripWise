@@ -1,0 +1,37 @@
+{
+  "applicationCommit": "ba5163e92cc327713a36a1290255388ee36c15e6",
+  "productionUrl": "https://tripwise-lime.vercel.app",
+  "deploymentUrl": "https://tripwise-dw48wc6ur-markan2.vercel.app",
+  "deploymentId": "dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz",
+  "status": "READY",
+  "target": "production",
+  "build": "Vercel Next.js 16.4.2 Turbopack build and TypeScript passed; dashboard duration 25s",
+  "verification": "CLI successful deployment/alias result and Vercel dashboard source main / ba5163e",
+  "initialFinding": "Git is not connected; pushed commit had not auto-deployed. Old deployment d118698 was still active.",
+  "authorization": "User explicitly approved Deploy main ba5163e, then test live.",
+  "environment": [
+    {
+      "name": "GEOAPIFY_API_KEY",
+      "value": "Hidden",
+      "type": "Secret",
+      "target": "Production",
+      "present": true
+    },
+    {
+      "name": "SUPABASE_URL",
+      "value": "Hidden",
+      "type": "Secret",
+      "target": "Production",
+      "present": true
+    },
+    {
+      "name": "SUPABASE_SECRET_KEY",
+      "value": "Hidden",
+      "type": "Secret",
+      "target": "Production",
+      "present": true
+    }
+  ],
+  "environmentVerification": "Dashboard plus vercel env ls production; values not revealed or changed.",
+  "secretValuesPrintedOrSaved": false
+}
