@@ -543,3 +543,23 @@ All 160 live API cases passed. The first general-suite run was interrupted by a 
 For another production run, use the final-regression repeat commands above with TEST_BASE_URL set to https://tripwise-lime.vercel.app and TEST_REPORT_PATH set to the corresponding live-* report. Run `node scripts/check-live-secrets.mjs` for the public asset check. All requests go through the app's own routes; no Geoapify key is included in request examples.
 
 Screenshots: [phone filters/results](docs/search-rework/live-phone-explore.png), [phone test-trip summary](docs/search-rework/live-phone-trip.png). The screenshot's test places have since been removed; the final refreshed trip was empty.
+
+
+## Polish change 5: Country / State / City
+
+All requests below use the app's own origin. Geoapify credentials stay in server-only code.
+
+- `GET /api/states?country=us&q=Ill`: state autocomplete, 3–120 characters, supported lowercase country code required. Returns `{ states: [{ id, name, label, country }] }`. Example: Illinois, United States.
+- `GET /api/cities?country=us&q=Springfield&state=Illinois&stateId=STATE_ID`: optional State name and ID restrict city autocomplete to that state's boundary. Use the ID returned by `/api/states`; `stateId` requires `state`. City labels include the full state and country; each city also has `state` when supplied by Geoapify.
+- `GET /api/places?country=us&state=Illinois&stateId=STATE_ID&category=museums,parks&sort=name`: search the state without a city. `stateId` is optional when the exact state name is supplied; the server resolves/validates the state against the country. Uses Geoapify `filter=place:STATE_ID`, capped at 100 upstream places (fewer after category deduplication/filtering). Returns `state: { name }` and `meta.distanceFrom: null`. This is a limited sample, not an exhaustive list of a state's places.
+- `GET /api/places?country=in&city=Chennai&cityId=CITY_ID`: city search without State. Returns `resolvedState` (Tamil Nadu in this example); the form fills State from the selected city's Geoapify metadata on Search, or from this response when necessary.
+- `GET /api/places?country=in&state=Tamil%20Nadu&city=Chennai&cityId=CITY_ID&within=5`: country, state and city. The server validates that the city belongs to both the country and state. Existing city distance/category/sort behavior applies.
+- Every normalized search/Details place includes `city`, `state`, `country` as strings or `null` when upstream address data is unavailable. No guessed city is used for rural places. Existing IDs and trip schema are unchanged.
+- State-only requests reject `within`, `sort=distance`, and `sort=distance-desc` with 400. The UI hides these controls/options. Other supported sorts and categories still apply.
+- Country without a city or state returns 400. Mismatched country/state, mismatched city/state, invalid IDs, short queries, and unsupported countries return clear private errors. An empty suggestion/search result is a successful empty array; upstream failures use the existing redacted 500 response.
+- State and City suggestions both use a 400 ms debounce, three-character minimum, bounded 100-entry / 10-minute browser caches and 24-hour upstream server caching. City cache keys include the selected state. State resolution is also server-cached for 24 hours. Failed/aborted client responses are not cached.
+- State drafts, selected metadata, submitted parameters and exact state results use the existing session snapshot. Old snapshots without State remain compatible. Matching cached results restore through both Back paths and refresh without another search.
+
+Repeatable checks: `node scripts/test-state-search.mjs` (isolated validation/cache/errors); `node scripts/test-state-search-api.mjs` (real local preview, defaults to port 3028; override TEST_BASE_URL). Real report: `docs/polish/change-5-state-api-tests.json` (33 requests, US/India/Germany); full trip regression: `docs/polish/change-5-api-tests.md` (59 requests).
+
+Geoapify references: [Autocomplete](https://apidocs.geoapify.com/docs/geocoding/address-autocomplete/), [Places boundary filters](https://apidocs.geoapify.com/docs/places/).

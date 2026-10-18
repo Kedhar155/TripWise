@@ -1,0 +1,30 @@
+{
+  "preview": "http://127.0.0.1:3028",
+  "countryOnly": "India with neither State nor City shows Choose a country and at least a state or a city.",
+  "cityOnly": "Chennai suggestion includes Tamil Nadu; Search fills State with Tamil Nadu; loading shown; 100 results.",
+  "stateOnly": "Clear City after auto-fill: Tamil Nadu state search returns 100; no distance control or distance sort options.",
+  "restoration": "Tamil Nadu, empty City, Name A to Z, identical ordered 100-card text through Back to Explore, browser Back, refresh.",
+  "countryChange": "Typing United States clears State/City and disables both until country is selected.",
+  "allThree": "United States > Illinois suggestion > Springfield, Illinois, United States: 100 results; no error.",
+  "mobile": [
+    {
+      "viewport": 390,
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "fieldHeight": 52
+    },
+    {
+      "viewport": 320,
+      "clientWidth": 305,
+      "scrollWidth": 305
+    }
+  ],
+  "trip": "Opened 311 in Springfield, added, moved to Day 1, refreshed (Day 1 persisted), removed own item, refreshed (0 saved places).",
+  "consoleWarningsErrors": [],
+  "viewport": "Temporary override reset",
+  "apiCountries": [
+    "United States / Illinois / Springfield",
+    "India / Tamil Nadu / Chennai",
+    "Germany / Bavaria / Munich"
+  ]
+}

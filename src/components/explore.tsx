@@ -46,13 +46,15 @@ function RestoredExplore() {
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
   const locationMode = search?.kind !== "name";
-  const withinQuery = locationMode ? within : null;
-  const currentResults = results && (!!results.city === locationMode) ? results : null;
+  const stateOnly = search?.kind === "location" && !search.value.city && !!search.value.state;
+  const distanceEnabled = locationMode && !stateOnly;
+  const withinQuery = distanceEnabled ? within : null;
+  const currentResults = results && (!!(results.city || results.state) === locationMode) ? results : null;
   const options = availableSorts(currentResults?.places ?? []);
   const activeSort = options.some(option => option.value === sort) ? sort : "relevance";
   const places = sortPlaces(currentResults?.places ?? [], activeSort);
-  const activeFilters = selected.length > 0 || (locationMode && within !== null) || activeSort !== "relevance";
-  const filterCount = selected.length + (mode === "location" && within !== null ? 1 : 0);
+  const activeFilters = selected.length > 0 || (distanceEnabled && within !== null) || activeSort !== "relevance";
+  const filterCount = selected.length + (mode === "location" && distanceEnabled && within !== null ? 1 : 0);
   function switchMode(next: "location" | "name") {
     if (next === mode) return;
     setMode(next); setFiltersOpen(false);
@@ -72,6 +74,11 @@ function RestoredExplore() {
       .then(data => { if (!controller.signal.aborted) {
         cache.current = { key: url, results: data };
         setResults(data); setResultsKey(url);
+        if (search.kind === "location" && data.resolvedState) setLocation(draft => {
+          // Do not overwrite edits made while the request was in flight.
+          if (draft.country !== search.value.country || draft.city?.label !== search.value.city || draft.state || draft.stateText) return draft;
+          return { ...draft, stateText: data.resolvedState!, state: { id: "", name: data.resolvedState!, label: data.resolvedState!, country: draft.country } };
+        });
       } }).catch(e => { if (!controller.signal.aborted) setError(message(e)); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
@@ -111,7 +118,7 @@ function RestoredExplore() {
     begin(); setSearch({ kind: "name", name });
   }
   function clearFilters() {
-    if (search && (selected.length || (locationMode && within !== null))) begin();
+    if (search && (selected.length || (distanceEnabled && within !== null))) begin();
     setSelected([]); setWithin(null); setSort("relevance");
   }
   function rememberDeparture() {
@@ -147,7 +154,7 @@ function RestoredExplore() {
         <LocationSearch key={locationVersion} draft={location} onDraftChange={setLocation} onSearch={searchLocation}/>
         <div className="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Popular cities">
           <span className="mr-1 text-xs text-slate-500">Try</span>
-          {popularCities.map(value => <button key={value.city} type="button" onClick={() => { setLocationVersion(value => value + 1); setLocation({ countryText: countries.find(item => item.code === value.country)!.name, country: value.country, cityText: value.city, city: { id: "", name: value.city, label: value.city, country: value.country } }); searchLocation(value); }} className="min-h-10 rounded-full border border-teal-100 bg-teal-50/50 px-3 py-2 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-50">{value.city}</button>)}
+          {popularCities.map(value => <button key={value.city} type="button" onClick={() => { setLocationVersion(value => value + 1); setLocation({ countryText: countries.find(item => item.code === value.country)!.name, country: value.country, stateText: "", state: null, cityText: value.city, city: { id: "", name: value.city, label: value.city, country: value.country } }); searchLocation(value); }} className="min-h-10 rounded-full border border-teal-100 bg-teal-50/50 px-3 py-2 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-50">{value.city}</button>)}
         </div>
       </div>
       <div id="search-panel-name" role="tabpanel" aria-labelledby="search-tab-name" hidden={mode !== "name"}>
@@ -172,25 +179,25 @@ function RestoredExplore() {
       </div>
       <div id="explore-filters" className={`${filtersOpen ? "flex" : "hidden"} mt-5 flex-wrap items-start gap-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm`}>
         <div className="min-w-0 max-w-full flex-[1_1_14rem]"><CategoryFilter selected={selected} onChange={value => { if (value.join(",") === selected.join(",")) return; if (search) begin(); setSelected(value); }}/></div>
-        {mode === "location" && <div className="min-w-0 max-w-full flex-[1_1_14rem]"><label htmlFor="within" className="mb-2 block text-sm font-semibold">Within</label><select id="within" className="field h-13 w-full" value={within ?? "all"} onChange={event => { if (search) begin(); setWithin(event.target.value === "all" ? null : Number(event.target.value)); }}><option value="all">Any distance</option>{withinOptions.map(value => <option key={value} value={value}>{value} km</option>)}</select><p className="mt-2 text-xs text-slate-500">From the city center</p></div>}
+        {mode === "location" && distanceEnabled && <div className="min-w-0 max-w-full flex-[1_1_14rem]"><label htmlFor="within" className="mb-2 block text-sm font-semibold">Within</label><select id="within" className="field h-13 w-full" value={within ?? "all"} onChange={event => { if (search) begin(); setWithin(event.target.value === "all" ? null : Number(event.target.value)); }}><option value="all">Any distance</option>{withinOptions.map(value => <option key={value} value={value}>{value} km</option>)}</select><p className="mt-2 text-xs text-slate-500">From the city center</p></div>}
         <button type="button" className="button min-h-13" onClick={() => { setFiltersOpen(false); filterTrigger.current?.focus(); }}>Done</button>
       </div>
     </section>
     <section aria-label="Search results" aria-busy={loading} className="mt-8">
-      {currentResults && !loading && !error && <div className="mb-4"><p className="eyebrow">Explore your way</p><h2 className="mt-2 break-words text-2xl font-semibold">{currentResults.city?.name ?? `Places matching “${currentResults.query}”`}</h2>
-        <p className="mt-2 text-sm text-slate-500">{currentResults.city ? `Up to 100 results · ${within === null ? "Distances" : `Within ${within} km`} from city center` : "Up to 20 worldwide matches"}</p>
+      {currentResults && !loading && !error && <div className="mb-4"><p className="eyebrow">Explore your way</p><h2 className="mt-2 break-words text-2xl font-semibold">{currentResults.state?.name ?? currentResults.city?.name ?? `Places matching “${currentResults.query}”`}</h2>
+        <p className="mt-2 text-sm text-slate-500">{currentResults.state ? "Up to 100 places across the state · Choose a city to narrow your search" : currentResults.city ? `Up to 100 results · ${within === null ? "Distances" : `Within ${within} km`} from city center` : "Up to 20 worldwide matches"}</p>
       </div>}
       {activeFilters && search && <div role="group" aria-label="Active filters" className="mb-6 flex flex-wrap items-center gap-2">
         {selected.map(key => { const Icon = categories[key].icon; return <button type="button" key={key} aria-label={`Remove ${categories[key].label} filter`} className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full bg-teal-50 px-3 py-2 text-xs font-medium text-teal-900" onClick={() => { if (search) begin(); setSelected(value => value.filter(item => item !== key)); }}><Icon size={14} className="shrink-0" aria-hidden="true"/>{categories[key].label}<X size={14} className="shrink-0" aria-hidden="true"/></button>; })}
-        {locationMode && within !== null && <button type="button" aria-label="Remove distance filter" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-teal-50 px-3 py-2 text-xs font-medium text-teal-900" onClick={() => { if (search) begin(); setWithin(null); }}>Within {within} km<X size={14} aria-hidden="true"/></button>}
+        {distanceEnabled && within !== null && <button type="button" aria-label="Remove distance filter" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-teal-50 px-3 py-2 text-xs font-medium text-teal-900" onClick={() => { if (search) begin(); setWithin(null); }}>Within {within} km<X size={14} aria-hidden="true"/></button>}
         {activeSort !== "relevance" && <button type="button" aria-label="Remove sort filter" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-teal-50 px-3 py-2 text-xs font-medium text-teal-900" onClick={() => setSort("relevance")}>{sortOptions.find(option => option.value === activeSort)!.label}<X size={14} aria-hidden="true"/></button>}
         <button type="button" className="min-h-11 px-2 text-sm font-semibold text-teal-700 underline" onClick={clearFilters}>Clear all</button>
       </div>}
       {loading && <PlaceSkeletons />}
       {error && <ErrorFeedback title="Could not search places" detail={error} onRetry={search ? () => { begin(); setAttempt(a => a + 1); } : undefined} />}
-      {!search && !error && <div className="py-12 text-center"><Compass className="mx-auto mb-4 text-teal-700" size={32}/><h2 className="text-xl font-semibold">Your next adventure starts here</h2><p className="mt-3 text-slate-500">Choose a country and city, or find a place by name.</p></div>}
+      {!search && !error && <div className="py-12 text-center"><Compass className="mx-auto mb-4 text-teal-700" size={32}/><h2 className="text-xl font-semibold">Your next adventure starts here</h2><p className="mt-3 text-slate-500">Choose a country and a state or city, or find a place by name.</p></div>}
       {currentResults && !loading && !error && <>
-        {!places.length ? <Feedback>{currentResults.city ? "No places found with these filters. Try a larger distance, another category, or Clear all." : "No places found, try a different name"}</Feedback> : activeSort === "category" ? <div className="space-y-8">{groupPlaces(places).map(group => <section key={group.category} aria-label={`${categories[group.category as Category].label} results`}><h3 className="mb-4 text-xl font-semibold">{categories[group.category as Category].label} <span className="text-sm font-normal text-slate-500">({group.places.length})</span></h3>{cards(group.places)}</section>)}</div> : cards(places)}
+        {!places.length ? <Feedback>{currentResults.state ? "No places found in this state with these filters. Try another category or Clear all." : currentResults.city ? "No places found with these filters. Try a larger distance, another category, or Clear all." : "No places found, try a different name"}</Feedback> : activeSort === "category" ? <div className="space-y-8">{groupPlaces(places).map(group => <section key={group.category} aria-label={`${categories[group.category as Category].label} results`}><h3 className="mb-4 text-xl font-semibold">{categories[group.category as Category].label} <span className="text-sm font-normal text-slate-500">({group.places.length})</span></h3>{cards(group.places)}</section>)}</div> : cards(places)}
       </>}
     </section>
   </>;

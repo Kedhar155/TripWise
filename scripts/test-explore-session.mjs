@@ -47,6 +47,15 @@ raw = JSON.stringify({ ...saved, scrollY: -1 });
 assert.equal(fresh.readExploreSession().scrollY, 0);
 assert.notEqual(searchUrl({ kind: 'location', value: { country: 'in', city: 'Chennai', cityId: 'id' } }, 'culture', 5), searchUrl({ kind: 'location', value: { country: 'in', city: 'Chennai', cityId: 'id' } }, 'culture', 10));
 assert.equal(searchUrl(saved.search, 'all', 5), searchUrl(saved.search, 'all', null));
+const stateSaved = { ...defaultExploreSession(), location: { countryText: 'United States', country: 'us', stateText: 'Illinois', state: { id: 'illinois', name: 'Illinois', label: 'Illinois, United States', country: 'us' }, cityText: '', city: null }, search: { kind: 'location', value: { country: 'us', city: '', state: 'Illinois', stateId: 'illinois' } }, results: { state: { name: 'Illinois, United States' }, places: [] } };
+stateSaved.resultsKey = searchUrl(stateSaved.search, 'all', 5);
+assert.ok(!stateSaved.resultsKey.includes('within='));
+fresh.saveExploreSession(stateSaved); assert.deepEqual(fresh.readExploreSession(), stateSaved);
+cache.delete(resolve('src/lib/explore-session.ts'));
+assert.deepEqual(load('src/lib/explore-session.ts').readExploreSession(), stateSaved);
+raw = JSON.stringify({ ...stateSaved, location: { ...stateSaved.location, state: { id: 42 } } });
+assert.equal(fresh.readExploreSession().search, null);
+
 globalThis.sessionStorage = { getItem() { throw Error('blocked'); }, setItem() { throw Error('full'); } };
 fresh.saveExploreSession(saved); assert.deepEqual(fresh.readExploreSession(), saved);
 console.log('PASS: session round trip, fresh-document restoration, drafts/region/tab/filters/sort/radius/results/scroll, invalid cache/settings, request identity, blocked/full storage fallback');

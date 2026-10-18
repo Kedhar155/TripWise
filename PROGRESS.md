@@ -606,3 +606,27 @@ Validation: PASS
 - Evidence: docs/polish/change-4-browser-checks.json, change-4-desktop.jpg, and change-4-phone.jpg. git diff --exit-code confirmed shared helpers, APIs, destination.tsx, and trip.tsx are unchanged.
 
 Change 4 complete. Local preview: http://127.0.0.1:3026. No merge, push, or deployment. Changes 5-7 await separate instructions.
+
+
+## Polish - Change 5 of 7: optional State in location search (18 October 2026)
+
+Completed:
+- Read progress first; continued on polish after 213bd75. Read installed Next route-handler docs and official Geoapify autocomplete/Places documentation before implementation.
+- Added optional State between Country and City, disabled until a country is selected. Uses the existing accessible combobox, 400 ms delay, three-character minimum, bounded 10-minute browser cache, and 24-hour server cache. Loading, empty suggestions, safe errors and retry are supported; shared loading wording now works for either field.
+- Added GET /api/states through server-only Geoapify code with type=state and country filtering. Extended /api/cities with state/stateId; a validated state boundary restricts suggestions and full state names appear in city labels.
+- Search accepts Country+State, Country+City, or all three. The form requires a selected suggestion and clearly explains when both State and City are missing. Country changes clear State and City; State changes clear stale City selections. City-only submission fills State from Geoapify city metadata; server resolvedState also covers shortcuts/older selected cities without that metadata.
+- Chose Geoapify's place:STATE_ID boundary filter rather than a bounding box, avoiding neighboring areas inside a rectangular box. State-only searches request at most 100 places, show this limit, retain categories and applicable sorts, and omit proximity bias, distance values, Within, and distance sorts. Server validation rejects state-only distance parameters and mismatched city/state/country combinations.
+- Search and Details place objects now include city, state and country (null when upstream has no value). Existing place IDs, Details loading, trip storage and current look are preserved. No dependencies added.
+- Extended the existing session snapshot/cache to preserve State drafts, selection, submitted parameters, results and sort. Snapshots from before this change still work. Matching state results restore without refetching.
+- Updated API_TESTS.md with routes, parameters, examples, limits, errors, caching and references; added repeatable isolated and real-service State tests.
+
+Validation:
+- Production build including TypeScript, lint, existing search/category/sort/session checks; new state tests cover boundary/country validation, mismatched IDs, result metadata, 100 cap, no distances, empty/errors, safe upstream errors, debounce minimum, normalized/expiring/retry cache and city cache isolation by State.
+- Real API checks: 33 passed across US (Illinois/Springfield), India (Tamil Nadu/Chennai), Germany (Bavaria/Munich). Each tested State only, City only/resolvedState, all three, categories/sort, country mismatch and state-only distance rejection. Wrong city/state (Boston/Illinois), invalid/short input and empty suggestions also passed. Report: docs/polish/change-5-state-api-tests.json.
+- All 59 existing real API regressions passed: search, Details, add/read persistence, duplicates/visitor isolation, day assignment/clearing/validation, and remove. Report: docs/polish/change-5-api-tests.md.
+- Browser: India alone shows clear validation; Chennai without State fills Tamil Nadu on Search and shows loading, then 100 results. Clearing City searches all Tamil Nadu with 100 results and no distance controls/options. Name A to Z and the identical ordered cards survive Back to Explore, browser Back and refresh with State retained.
+- Browser: switching Country clears/disables State and City until selection; US > Illinois autocomplete > Springfield with the full state label returns 100 results with all three fields. At 390px and 320px no horizontal overflow (375/375 and 305/305); fields are 52px tall.
+- Browser full trip flow: Springfield place 311 > Details > Add > Day 1 > refresh confirms Day 1 > remove only that disposable item > refresh confirms 0 saved places. No browser warnings/errors; viewport override reset. Evidence: docs/polish/change-5-browser-checks.json.
+- Secret scans and git diff --check passed; keys remain server-only and private environment files remain ignored.
+
+Change 5 complete. Local updated preview: http://127.0.0.1:3028. No merge, push, or deployment. Changes 6-7 await separate instructions.

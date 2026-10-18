@@ -5,12 +5,16 @@ export type Place = {
   category: string;
   latitude: number;
   longitude: number;
+  city?: string | null;
+  state?: string | null;
+  country?: string | null;
   distance?: number;
   website?: string;
   phone?: string;
   openingHours?: string;
 };
-export type CitySuggestion = { id: string; name: string; label: string; country: string };
+export type StateSuggestion = { id: string; name: string; label: string; country: string };
+export type CitySuggestion = StateSuggestion & { state?: string };
 export type ItineraryItem = {
   id: string;
   visitor_id: string;

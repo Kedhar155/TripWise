@@ -7,7 +7,7 @@ import { isPlaceSort, sortPlaces, withinOptions } from "./place-sorting";
 type Properties = {
   place_id?: string; name?: string; formatted?: string; address_line1?: string;
   lat?: number; lon?: number; categories?: string[]; category?: string; distance?: number;
-  country_code?: string; city?: string; result_type?: string;
+  country_code?: string; country?: string; state?: string; city?: string; result_type?: string;
   website?: string; opening_hours?: string;
   contact?: { phone?: string; website?: string };
   datasource?: { raw?: { website?: string; phone?: string; opening_hours?: string } };
@@ -39,20 +39,26 @@ function selectedCategories(params: URLSearchParams): Category[] {
 }
 
 export function query(params: URLSearchParams) {
-  const city = params.get("city")?.trim();
+  const city = params.get("city")?.trim() ?? "";
+  const state = params.has("state") ? searchText(params.get("state"), "state name") : undefined;
+  const stateId = params.has("stateId") ? placeId(params.get("stateId")) : undefined;
   const sort = params.get("sort") ?? "relevance";
   const withinValue = params.get("within");
   if (withinValue !== null && !withinOptions.some(value => String(value) === withinValue)) throw new ApiError(400, "INVALID_WITHIN", "Within must be 1, 5, 10, or 25 km.");
   const within = withinValue === null ? undefined : Number(withinValue);
   const country = params.has("country") ? countryCode(params.get("country")) : undefined;
   const cityId = params.has("cityId") ? placeId(params.get("cityId")) : undefined;
+  if ((state || stateId) && !country) throw new ApiError(400, "INVALID_COUNTRY", "Choose a country for this state.");
+  if (stateId && !state) throw new ApiError(400, "INVALID_STATE", "Choose a state name with its ID.");
+  if (!city && state && (within !== undefined || sort === "distance" || sort === "distance-desc")) throw new ApiError(400, "INVALID_STATE_FILTER", "Distance filters and sorts require a city.");
+  if (cityId && !city) throw new ApiError(400, "INVALID_CITY", "Choose a city name with its ID.");
   if (cityId && !country) throw new ApiError(400, "INVALID_COUNTRY", "Choose a country for this city.");
-  if (!city || city.length < (country ? 3 : 2) || city.length > 120 || /[\u0000-\u001f]/.test(city)) {
+  if ((!city && !state) || (city && (city.length < (country ? 3 : 2) || city.length > 120 || /[\u0000-\u001f]/.test(city)))) {
     throw new ApiError(400, "INVALID_CITY", `Enter a city name between ${country ? 3 : 2} and 120 characters.`);
   }
   const selected = selectedCategories(params);
   if (!isPlaceSort(sort)) throw new ApiError(400, "INVALID_SORT", "Choose a supported sort option.");
-  return { city, country, cityId, selected, sort, within };
+  return { city, country, cityId, state, stateId, selected, sort, within };
 }
 
 function normalize(p: Properties): Place | null {
@@ -66,6 +72,7 @@ function normalize(p: Properties): Place | null {
     address: (p.formatted ?? p.address_line1 ?? "Address unavailable").slice(0, 1000),
     category: getCategoryKey([...(p.categories ?? []), ...(p.category ? [p.category] : [])]),
     latitude: p.lat!, longitude: p.lon!,
+    city: p.city ?? null, state: p.state ?? null, country: p.country ?? p.country_code ?? null,
     website: validWebsite, phone: p.contact?.phone ?? raw?.phone,
     openingHours: p.opening_hours ?? raw?.opening_hours,
   };
@@ -78,18 +85,21 @@ function distance(lat1: number, lon1: number, lat2: number, lon2: number) {
 }
 
 export async function searchPlaces(params: URLSearchParams) {
-  const { city, country, cityId, selected, sort, within } = query(params);
-  const resolved = cityId
+  const { city, country, cityId, state, stateId, selected, sort, within } = query(params);
+  const region = state ? await resolveState(country!, state, stateId) : undefined;
+  const stateOnly = !city && !!region;
+  const resolved = stateOnly ? { results: [region!] } : cityId
     ? await geo("/v2/place-details", { id: cityId, features: "details" }, 86400)
-    : await geo("/v1/geocode/search", { text: city, type: "city", format: "json", limit: "1", ...(country ? { filter: `countrycode:${country}` } : {}) });
+    : await geo("/v1/geocode/search", { text: city, type: "city", format: "json", limit: "1", ...(country ? { filter: `countrycode:${country}${region ? `|place:${region.place_id}` : ""}` } : {}), lang: "en" });
   const center = cityId ? resolved.features?.[0]?.properties : resolved.results?.[0];
   if (country && center && center.country_code !== country) throw new ApiError(400, "CITY_COUNTRY_MISMATCH", "Choose a city in the selected country.");
+  if (region && !stateOnly && center && center.state?.toLowerCase() !== region.state?.toLowerCase()) throw new ApiError(400, "CITY_STATE_MISMATCH", "Choose a city in the selected state.");
   if (!center?.place_id || !Number.isFinite(center.lat) || !Number.isFinite(center.lon)) {
     throw new ApiError(404, "CITY_NOT_FOUND", "City not found. Try a city name with its country.");
   }
   const data = await geo("/v2/places", {
     categories: geoapifyCategories(selected), filter: `place:${cityId ?? center.place_id}${within === undefined ? "" : `|circle:${center.lon},${center.lat},${within * 1000}`}`,
-    bias: `proximity:${center.lon},${center.lat}`, limit: "100",
+    ...(stateOnly ? {} : { bias: `proximity:${center.lon},${center.lat}` }), limit: "100",
   });
   const seen = new Set<string>();
   const places = (data.features ?? []).flatMap(({ properties }) => {
@@ -98,6 +108,7 @@ export async function searchPlaces(params: URLSearchParams) {
     // the selected main groups after classification, before returning results.
     if (!place || !selected.includes(place.category as Category) || seen.has(place.id)) return [];
     seen.add(place.id);
+    if (stateOnly) return [place];
     const meters = distance(center.lat!, center.lon!, place.latitude, place.longitude);
     // Also enforce the displayed center-to-place distance: Geoapify can measure
     // from the nearest edge of a large park rather than its displayed point.
@@ -105,8 +116,10 @@ export async function searchPlaces(params: URLSearchParams) {
     return [{ ...place, distance: meters }];
   });
   return {
-    places: sortPlaces(places, sort), city: { name: center.formatted ?? city, latitude: center.lat, longitude: center.lon },
-    meta: { limit: 100, count: places.length, within: within ?? null, distanceFrom: "city center", attribution: "Powered by Geoapify | © OpenStreetMap contributors" },
+    places: sortPlaces(places, sort),
+    ...(stateOnly ? { state: { name: center.formatted ?? state } } : { city: { name: center.formatted ?? city, latitude: center.lat, longitude: center.lon } }),
+    resolvedState: center.state,
+    meta: { limit: 100, count: places.length, within: within ?? null, distanceFrom: stateOnly ? null : "city center", attribution: "Powered by Geoapify | © OpenStreetMap contributors" },
   };
 }
 
@@ -137,12 +150,15 @@ function searchText(value: string | null, label: string) {
 export async function suggestCities(params: URLSearchParams) {
   const country = countryCode(params.get("country"));
   const text = searchText(params.get("q"), "city name");
-  const data = await geo("/v1/geocode/autocomplete", { text: text.toLowerCase(), type: "city", filter: `countrycode:${country}`, lang: "en", format: "json", limit: "6" }, 86400);
+  const region = params.has("state") ? await resolveState(country, searchText(params.get("state"), "state name"), params.has("stateId") ? placeId(params.get("stateId")) : undefined) : undefined;
+  if (params.has("stateId") && !region) throw new ApiError(400, "INVALID_STATE", "Choose a state name with its ID.");
+  const data = await geo("/v1/geocode/autocomplete", { text: text.toLowerCase(), type: "city", filter: `countrycode:${country}${region ? `|place:${region.place_id}` : ""}`, lang: "en", format: "json", limit: "6" }, 86400);
   const seen = new Set<string>();
   const cities = (data.results ?? []).flatMap(p => {
     if (!p.place_id || p.country_code !== country || !Number.isFinite(p.lat) || !Number.isFinite(p.lon) || seen.has(p.place_id)) return [];
+    if (region && p.state?.toLowerCase() !== region.state?.toLowerCase()) return [];
     seen.add(p.place_id);
-    return [{ id: p.place_id, name: p.city ?? p.name ?? p.address_line1 ?? p.formatted ?? text, label: p.formatted ?? p.name ?? text, country }];
+    return [{ id: p.place_id, name: p.city ?? p.name ?? p.address_line1 ?? p.formatted ?? text, label: [p.city ?? p.name ?? p.address_line1 ?? text, p.state, p.country].filter(Boolean).join(", "), country, state: p.state }];
   });
   return { cities };
 }
@@ -173,4 +189,24 @@ export async function searchPlaceNames(params: URLSearchParams) {
   }));
   const filtered = enriched.filter(place => selected.includes(place.category as Category));
   return { places: sortPlaces(filtered, sort), query: name, meta: { limit: 20, count: filtered.length, distanceFrom: null, attribution: "Powered by Geoapify | © OpenStreetMap contributors" } };
+}
+
+async function resolveState(country: string, name: string, id?: string) {
+  const data = await geo("/v1/geocode/search", { text: name.toLowerCase(), type: "state", filter: `countrycode:${country}`, lang: "en", format: "json", limit: "5" }, 86400);
+  const found = data.results?.find(p => p.result_type === "state" && p.country_code === country && p.place_id && (id ? p.place_id === id : (p.state ?? p.name)?.toLowerCase() === name.toLowerCase()));
+  if (!found) throw new ApiError(400, "INVALID_STATE", "Choose a state in the selected country from the suggestions.");
+  return found;
+}
+
+export async function suggestStates(params: URLSearchParams) {
+  const country = countryCode(params.get("country"));
+  const text = searchText(params.get("q"), "state name");
+  const data = await geo("/v1/geocode/autocomplete", { text: text.toLowerCase(), type: "state", filter: `countrycode:${country}`, lang: "en", format: "json", limit: "6" }, 86400);
+  const seen = new Set<string>();
+  return { states: (data.results ?? []).flatMap(p => {
+    if (!p.place_id || p.result_type !== "state" || p.country_code !== country || seen.has(p.place_id)) return [];
+    seen.add(p.place_id);
+    const name = p.state ?? p.name ?? p.address_line1 ?? text;
+    return [{ id: p.place_id, name, label: [name, p.country].filter(Boolean).join(", "), country }];
+  }) };
 }
