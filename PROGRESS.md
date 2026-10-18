@@ -731,3 +731,15 @@ Vercel deployment ID: dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz (READY, production).
 - Lint and production webpack build including TypeScript PASS. Normal permissions required after sandbox EPERM/EACCES. All 59 real API checks PASS: search, details, add/persistence, day moves and removal; disposable test records cleaned up. Keyboard drag suite PASS.
 - No application changes, push or deployment. Full baseline evidence: design/baseline-api-tests.md.
 
+
+## Retro redesign - Step 2: full visual theme (18 October 2026)
+- On retro-ui, restyled all routes through src/app/globals.css only. All mixed UI/logic components, API routes, database migrations/helpers, search state, fetching, saved settings, event handlers and drag implementation are byte-for-byte unchanged from a45ee15.
+- Applied template paper dots, cream surfaces, navy text, Georgia headings, Courier controls, orange action buttons, ticket navigation, three-color stripes, compact borders/shadows, decorative compass/globe/stamp and dashed flight motif. Original category meanings/colors and functional controls remain available.
+- Extracted three decorative SVG assets from the supplied template into public/retro; retained original template in design. Restricted Tailwind scanning to src so design/reference files do not become application classes.
+- Production lint and webpack build including TypeScript PASS. Resolved a Next CSS minifier incompatibility with a trailing-space attribute selector using an equivalent selector. No dependencies or configuration files changed.
+- All 59 real API regression requests PASS against final build: search, Details, add/list persistence, duplicate/visitor isolation, day changes/clearing/validation and remove. Report: design/retro-api-tests.md. Disposable records cleaned up.
+- Isolated search, Explore session, keyboard drag and trip summary suites PASS; source/docs/browser-bundle secret scan PASS; whitespace check PASS.
+- Final real browser flow PASS: Eiffel Tower search, Paris Details/weather, Add to Trip, Day 1 dropdown, keyboard drag to Unplanned, refresh persistence, remove and refresh empty state. Explore search restored afterward. No final browser warning/error logs. Explore/My Trip have no horizontal overflow at tested 475px content width. Evidence and limitations: design/browser-checks.md and design/retro-*.png.
+- Baseline checkpoint b2b6919 uses the prior project's author identity because no local identity was configured. The branch was created before that checkpoint commit after the first commit attempt failed; original main remains a45ee15, and the complete baseline application is preserved in both commits.
+- Full file inventory and protected-file grouping: design/FILE-INVENTORY.md. Local final preview: http://127.0.0.1:3043. No push or deployment; live Vercel site unchanged.
+

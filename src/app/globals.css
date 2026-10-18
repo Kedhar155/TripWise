@@ -1,4 +1,27 @@
-@import "tailwindcss";
+@import "tailwindcss" source("../");
+/* Retro airline palette from design/tripwise_retro_airline_template.html.
+   Map existing presentation utilities without touching stateful components. */
+@theme {
+  --color-white: #fffbf2;
+  --color-slate-50: #faf1df;
+  --color-slate-100: #eee0c2;
+  --color-slate-200: #c6b58f;
+  --color-slate-500: #53637a;
+  --color-slate-600: #42556c;
+  --color-slate-800: #1b3a5c;
+  --color-teal-50: #e9eee0;
+  --color-teal-100: #d5e2ce;
+  --color-teal-200: #a4c8b8;
+  --color-teal-400: #2a9d8f;
+  --color-teal-500: #248b7f;
+  --color-teal-600: #207c72;
+  --color-teal-700: #226b65;
+  --color-teal-800: #1b3a5c;
+  --color-teal-900: #1b3a5c;
+  --radius-xl: 5px;
+  --radius-2xl: 6px;
+  --radius-3xl: 8px;
+}
 :root { --background: #ffffff; --foreground: #172a2a; --primary: #0f766e; --radius: 1rem; }
 @theme inline { --color-background: var(--background); --color-foreground: var(--foreground); --color-primary: var(--primary); }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; }
@@ -20,7 +43,194 @@ main { overflow-wrap: anywhere; }
 @media (hover: hover) {
   .place-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px -12px rgb(15 118 110 / 0.25); }
 }
-.skeleton { border-radius: 0.5rem; background: #e2e8f0; animation: skeleton-pulse 1.8s ease-in-out infinite; }
+
+/* Unlayered rules intentionally take precedence over utility presentation. */
+:root {
+  --paper: #f6ead0;
+  --card: #fffbf2;
+  --navy: #1b3a5c;
+  --orange: #e8702a;
+  --background: var(--paper);
+  --foreground: var(--navy);
+  --primary: var(--navy);
+}
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background-image: radial-gradient(rgb(164 98 43 / 22%) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+::selection { background: #f5bc83; color: var(--navy); }
+h1, h2, h3 { font-weight: 400; letter-spacing: -0.025em; }
+h1 { line-height: 1.1; }
+button, select, label, .eyebrow, header nav, footer nav, dt {
+  font-family: "Courier New", monospace;
+}
+.eyebrow { color: #885024; letter-spacing: 0.12em; }
+.field {
+  border: 1px solid var(--navy);
+  border-radius: 5px;
+  background: var(--card);
+  color: var(--navy);
+  font-family: Georgia, "Times New Roman", serif;
+}
+.field:disabled { background: #eee4ce; color: #617082; }
+.field::placeholder { color: #677181; opacity: 1; }
+.button {
+  border: 1.5px solid var(--navy);
+  border-radius: 5px;
+  background: var(--orange);
+  color: #152e49;
+  box-shadow: 3px 3px 0 var(--navy);
+}
+.button:hover { background: #f18b49; }
+.button:active { box-shadow: 1px 1px 0 var(--navy); }
+:focus-visible { outline-color: var(--navy); }
+.retry { border-radius: 4px; background: var(--card); }
+body > header { border: 0; }
+body > header > div { padding-top: 24px; padding-bottom: 22px; }
+body > header > div::after {
+  content: "";
+  display: block;
+  flex-basis: 100%;
+  max-width: 300px;
+  height: 5px;
+  margin-top: 8px;
+  background: linear-gradient(to right, #e8702a 0 49%, transparent 49% 50%, #2a9d8f 50% 82%, transparent 82% 83%, #1b3a5c 83%);
+}
+header nav a {
+  position: relative;
+  border: 1.5px solid var(--navy);
+  border-radius: 5px;
+  background: var(--card);
+  color: var(--navy);
+  padding-left: 34px;
+  box-shadow: 2px 2px 0 var(--navy);
+  letter-spacing: 0.04em;
+}
+header nav { gap: 12px; }
+header nav a::before {
+  content: "✦";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 25px;
+  display: grid;
+  place-items: center;
+  border-right: 1px dashed var(--navy);
+  background: var(--orange);
+  color: var(--navy);
+}
+header nav a:nth-child(2)::before { content: "✈"; background: #2a9d8f; }
+header nav a[aria-current="page"] { background: #f1d8ae; }
+header nav a:hover { background: var(--paper); }
+section[aria-labelledby="explore-heading"] {
+  position: relative;
+  isolation: isolate;
+  background: none;
+  color: var(--navy);
+  margin-top: 0;
+  padding: 42px 0 46px;
+  border-bottom: 1px dashed #a4622b;
+}
+section[aria-labelledby="explore-heading"]::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -12px;
+  top: -25px;
+  width: clamp(180px, 27vw, 300px);
+  aspect-ratio: 1;
+  background: url('/retro/compass.svg') center / contain no-repeat;
+  opacity: 0.65;
+  pointer-events: none;
+}
+section[aria-labelledby="explore-heading"] p { color: var(--navy); }
+section[aria-labelledby="explore-heading"] > p:first-child {
+  font: bold 11px/1.8 "Courier New", monospace;
+  color: #885024;
+}
+#explore-heading { max-width: 700px; font-weight: 400; }
+section[aria-label="Search tools"] > div:first-child,
+#explore-filters, [data-slot="card"], main aside,
+main section.rounded-3xl:not([aria-labelledby]) {
+  border: 1px solid var(--navy);
+  background-color: var(--card);
+  box-shadow: 4px 4px 0 rgb(27 58 92 / 14%);
+}
+[role="tablist"] { background: #eee0c2; border-radius: 5px; }
+[role="tab"] { border-radius: 3px; }
+[role="tab"][aria-selected="true"] { background: var(--navy); color: var(--card); }
+[role="group"][aria-label="Popular cities"] button,
+[role="group"][aria-label="Active filters"] button:not(:last-child) {
+  border: 1px solid var(--navy);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--navy);
+  font-family: "Courier New", monospace;
+}
+[aria-label="Result controls"] > button, #sort {
+  border: 1px solid var(--navy);
+  border-radius: 5px;
+}
+[data-slot="card"] { border-radius: 6px; }
+.place-card { border-top: 4px solid var(--navy); }
+@media (hover: hover) {
+  .place-card:hover { box-shadow: 5px 6px 0 rgb(27 58 92 / 20%); }
+}
+main aside { border-top: 5px solid var(--orange); }
+main section[aria-label="Trip summary"] { border-top: 5px solid var(--orange); }
+main section[aria-label="Trip summary"] > dl > div { border: 1px dashed #a4622b; }
+main section[aria-label="Unplanned"] > h2,
+main section[aria-label^="Day"] > h2 {
+  border-bottom: 1px dashed #a4622b;
+  padding-bottom: 12px;
+}
+.skeleton { background: #e6d7b7; border-radius: 4px; }
+[data-sonner-toast] {
+  font-family: "Courier New", monospace !important;
+  background: var(--card) !important;
+  color: var(--navy) !important;
+  border: 1px solid var(--navy) !important;
+  border-radius: 5px !important;
+}
+footer {
+  position: relative;
+  border-top: 1px dashed #a4622b;
+  background: rgb(255 251 242 / 75%) url('/retro/globe.svg') right 7% bottom 20px / 150px no-repeat;
+}
+footer > div { padding-right: 180px; }
+footer::after {
+  content: "";
+  position: absolute;
+  right: 55px;
+  top: 16px;
+  width: 64px;
+  height: 64px;
+  background: url('/retro/stamp.svg') center / contain no-repeat;
+  pointer-events: none;
+}
+section[aria-labelledby="explore-heading"]::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto 0 12px;
+  height: 30px;
+  border-top: 1px dashed #2a9d8f;
+  border-radius: 50%;
+  opacity: 0.55;
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  body > header > div { gap: 12px; }
+  header nav a { font-size: 12px; padding-right: 9px; }
+  header nav { gap: 8px; }
+  section[aria-labelledby="explore-heading"] { padding-top: 25px; padding-bottom: 30px; }
+  section[aria-labelledby="explore-heading"]::before { width: 170px; top: -10px; opacity: 0.22; }
+  #explore-heading { font-size: clamp(36px, 9vw, 56px); }
+  footer { background-size: 95px; background-position: right 10px bottom 15px; }
+  footer > div { padding-right: 20px; padding-bottom: 100px; }
+  footer::after { top: auto; bottom: 25px; left: 20px; right: auto; }
+}
+.skeleton { border-radius: 4px; background: #e6d7b7; animation: skeleton-pulse 1.8s ease-in-out infinite; }
 @keyframes skeleton-pulse { 50% { opacity: 0.45; } }
 @media (prefers-reduced-motion: reduce) {
   .place-card { transition: none; }

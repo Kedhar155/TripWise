@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="art globe" viewBox="-64 -42 128 84" aria-hidden="true">
+    <g fill="none" stroke="#1B3A5C" stroke-opacity=".28" stroke-width="1.2">
+      <circle r="38"/>
+      <path class="meridian m1" d="M0-38A38 38 0 0 1 0 38" vector-effect="non-scaling-stroke"/>
+      <path class="meridian m2" d="M0-38A38 38 0 0 1 0 38" vector-effect="non-scaling-stroke"/>
+      <path class="meridian m3" d="M0-38A38 38 0 0 1 0 38" vector-effect="non-scaling-stroke"/>
+      <path d="M-38 0H38M-35 -15H35M-35 15H35"/>
+    </g>
+    <ellipse rx="60" ry="17" transform="rotate(-20)" fill="none" stroke="#E8702A" stroke-opacity=".55" stroke-width="1.4" stroke-dasharray="4 4"/>
+  </svg>

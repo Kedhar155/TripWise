@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="art compass" viewBox="-76 -76 152 152" aria-hidden="true">
+    <defs>
+      <g id="cp"><path d="M0-58L7-7L0 0Z" fill="#A4622B" fill-opacity=".3"/><path d="M0-58L-7-7L0 0Z"/></g>
+      <path id="ic" d="M0-40L4-4L0 0L-4-4Z"/>
+    </defs>
+    <g fill="none" stroke="#A4622B" stroke-opacity=".4" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+      <circle r="72" stroke-dasharray="2 5"/><circle r="60"/><circle r="54" stroke-dasharray="1 5.9"/><circle r="40"/>
+      <use href="#ic" transform="rotate(45)"/><use href="#ic" transform="rotate(135)"/><use href="#ic" transform="rotate(225)"/><use href="#ic" transform="rotate(315)"/>
+      <use href="#cp"/><use href="#cp" transform="rotate(90)"/><use href="#cp" transform="rotate(180)"/><use href="#cp" transform="rotate(270)"/>
+      <circle r="3.5" fill="#F6EAD0"/><circle r="1.4" fill="#A4622B" stroke="none"/>
+      <g stroke="none" fill="#A4622B" fill-opacity=".6" font-family="Georgia,serif" text-anchor="middle">
+        <text y="-64" font-size="10">N</text><text y="72" font-size="9">S</text>
+        <text x="66" y="3" font-size="9">E</text><text x="-66" y="3" font-size="9">W</text>
+      </g>
+    </g>
+  </svg>

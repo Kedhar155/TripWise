@@ -228,3 +228,8 @@ All tracked project files are listed below. Generated/ignored node_modules, .nex
 - supabase/migrations/002_itinerary_day.sql
 - supabase/migrations/003_itinerary_location.sql
 - tsconfig.json
+
+## Files added by the authorized redesign
+Styling/assets: public/retro/compass.svg, public/retro/globe.svg, public/retro/stamp.svg. Each is decorative SVG extracted from the supplied template.
+Design/reference and documentation: design/tripwise_retro_airline_template.html, this inventory, baseline-api-tests.md, retro-api-tests.md, browser-checks.md and screenshots. PROGRESS.md is the requested running log.
+Only src/app/globals.css is changed in the existing application source.
