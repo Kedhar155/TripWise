@@ -9,7 +9,7 @@ import { getVisitorId } from "@/lib/visitor";
 import { MAX_TRIP_DAYS, plannedDay, visibleDayCount } from "@/lib/trip-days";
 import { ErrorFeedback } from "./error-feedback";
 import { PlaceSkeletons } from "./place-skeletons";
-import { DndContext, DragOverlay, PointerSensor, KeyboardSensor, useSensor, useSensors, pointerWithin, closestCenter, type CollisionDetection, type DragEndEvent } from "@dnd-kit/core";
+import { DndContext, DragOverlay, PointerSensor, TouchSensor, KeyboardSensor, useSensor, useSensors, pointerWithin, closestCenter, type CollisionDetection, type DragEndEvent } from "@dnd-kit/core";
 import { TripDay, TripPlace, dayKeyboardCoordinates } from "./trip-drag";
 import { Card } from "./ui/card";
 import { TripSummary } from "./trip-summary";
@@ -28,7 +28,7 @@ export function Trip() {
   const [attempt, setAttempt] = useState(0);
   const [activeId, setActiveId] = useState<string | null>(null);
   const mutation = useRef(false);
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }), useSensor(KeyboardSensor, { coordinateGetter: dayKeyboardCoordinates }));
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }), useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 8 } }), useSensor(KeyboardSensor, { coordinateGetter: dayKeyboardCoordinates }));
   const activeItem = items.find(item => item.id === activeId);
   const busy = removing !== null || moving !== null;
 
@@ -109,7 +109,7 @@ export function Trip() {
         <p role="status" className="text-sm text-teal-800">{`${items.length} saved ${items.length === 1 ? "place" : "places"}`}</p>
         <div><button className="button" onClick={addDay} disabled={dayCount >= MAX_TRIP_DAYS || busy || activeId !== null}><Plus size={16} aria-hidden="true" />Add day</button><p className="mt-2 text-xs text-slate-500">{dayCount >= MAX_TRIP_DAYS ? "Maximum of 14 days reached." : "Plan up to 14 days."}</p></div>
       </div>
-      <p className="mb-4 text-xs text-slate-500">Drag a place by its handle to another day or Unplanned. Keyboard: focus the handle, press Space or Enter, use arrow keys to choose a section, then press again to drop. Escape cancels.</p>
+      <p className="mb-4 text-xs text-slate-500">Drag a place card to another day or Unplanned. On touch screens, press and hold the card before dragging. Keyboard: focus the card, press Space or Enter, use arrow keys to choose a section, then press again to drop. Escape cancels.</p>
       <DndContext id="trip-days" sensors={sensors} collisionDetection={dayCollision} onDragStart={({ active }) => setActiveId(String(active.id))} onDragCancel={() => setActiveId(null)} onDragEnd={drop}
         accessibility={{ screenReaderInstructions: { draggable: "Press Space or Enter to pick up a place. Use arrow keys to choose a day section. Press Space or Enter to drop, or Escape to cancel." }, announcements: {
           onDragStart: ({ active }) => `Picked up ${active.data.current?.name}. Use arrow keys to choose a day section.`,

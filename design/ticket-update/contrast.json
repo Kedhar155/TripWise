@@ -1,0 +1,74 @@
+[
+  {
+    "ink": "#102a43",
+    "paper": "#e1eee5",
+    "contrast": 12.25,
+    "kind": "text",
+    "minimum": 4.5,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#c2e0d3",
+    "contrast": 10.39,
+    "kind": "text",
+    "minimum": 4.5,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#fff0dc",
+    "contrast": 13.07,
+    "kind": "text",
+    "minimum": 4.5,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#f8d5ab",
+    "contrast": 10.53,
+    "kind": "text",
+    "minimum": 4.5,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#e4edf3",
+    "contrast": 12.35,
+    "kind": "text",
+    "minimum": 4.5,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#d0dee9",
+    "contrast": 10.67,
+    "kind": "text",
+    "minimum": 4.5,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#faeacc",
+    "contrast": 12.34,
+    "kind": "text",
+    "minimum": 4.5,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#2a9d8f",
+    "contrast": 4.4,
+    "kind": "decorative map-pin icon",
+    "minimum": 3,
+    "pass": true
+  },
+  {
+    "ink": "#102a43",
+    "paper": "#e8702a",
+    "contrast": 4.73,
+    "kind": "decorative map-pin icon",
+    "minimum": 3,
+    "pass": true
+  }
+]

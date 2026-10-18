@@ -1,7 +1,6 @@
 "use client";
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { GripVertical } from "lucide-react";
 import { useDraggable, useDroppable, type KeyboardCoordinateGetter } from "@dnd-kit/core";
 import type { ItineraryItem } from "@/lib/types";
 import { plannedDay } from "@/lib/trip-days";
@@ -34,17 +33,24 @@ export function TripDay({ day, children }: { day: number | null; children: React
 type Props = { item: ItineraryItem; index: number; dayCount: number; busy: boolean; controlsBusy: boolean; moving: string | null; removing: string | null;
   onMove: (item: ItineraryItem, day: number | null) => Promise<void>; onRemove: (item: ItineraryItem) => Promise<void> };
 export function TripPlace({ item, index, dayCount, busy, controlsBusy, moving, removing, onMove, onRemove }: Props) {
-  const { attributes, listeners, setNodeRef, setActivatorNodeRef, isDragging } = useDraggable({ id: item.id, data: { day: plannedDay(item.day), name: item.name }, disabled: busy });
-    return <Card ref={setNodeRef} className={`place-card gap-5 sm:flex-row sm:items-center ${isDragging ? "opacity-40" : ""}`} >
-      <div className="flex items-center gap-3 sm:flex-col">
-        <button id={`drag-${item.id}`} ref={setActivatorNodeRef} {...listeners} {...attributes} disabled={busy} aria-label={`Move ${item.name}`} className="inline-flex min-h-11 min-w-11 touch-none items-center justify-center rounded-xl border border-slate-200 text-slate-500 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 active:cursor-grabbing disabled:opacity-50 cursor-grab"><GripVertical size={20} aria-hidden="true"/></button>
-      <span className="text-2xl font-semibold text-teal-700">{String(index + 1).padStart(2, "0")}</span></div>
-      <div className="min-w-0 flex-1">
+  const { attributes, listeners, setNodeRef, setActivatorNodeRef, isDragging } = useDraggable({ id: item.id, data: { day: plannedDay(item.day), name: item.name }, disabled: busy, attributes: { role: "group", roleDescription: "draggable place" } });
+    return <Card ref={node => { setNodeRef(node); setActivatorNodeRef(node); }} {...attributes} id={`drag-${item.id}`} role="group" aria-roledescription="draggable place" aria-label={`Move ${item.name}`}
+      onPointerDown={event => {
+        if (event.pointerType === "touch" || (event.target as Element).closest("button, select, input, textarea, label, option")) return;
+        listeners?.onPointerDown?.(event);
+      }}
+      onTouchStart={event => {
+        if ((event.target as Element).closest("button, select, input, textarea, label, option")) return;
+        listeners?.onTouchStart?.(event);
+      }}
+      onKeyDown={event => { if (event.target === event.currentTarget) listeners?.onKeyDown?.(event); }}
+      className={`place-card gap-5 sm:flex-row sm:items-center ${isDragging ? "opacity-40" : ""}`} >
+      <div className="trip-place-main min-w-0 flex-1">
         <div className="mb-2"><CategoryBadge category={item.category} /></div>
-        <h3 className="break-words text-lg font-semibold"><Link href={`/places/${encodeURIComponent(item.place_id)}`} className="hover:underline">{item.name}</Link></h3>
+        <h3 className="break-words text-lg font-semibold"><span className="trip-place-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><Link draggable={false} href={`/places/${encodeURIComponent(item.place_id)}`} className="hover:underline">{item.name}</Link></h3>
         <p className="mt-2 text-sm leading-6 text-slate-600">{item.address}</p>
       </div>
-      <div className="flex min-w-0 flex-col gap-3 sm:w-40 sm:shrink-0">
+      <div className="trip-place-controls flex min-w-0 flex-col gap-3 sm:w-40 sm:shrink-0">
         <label htmlFor={`day-${item.id}`} className="text-xs font-semibold text-slate-600">{moving === item.id ? "Moving…" : "Plan for"}<span className="sr-only"> {item.name}</span></label>
         <select id={`day-${item.id}`} value={plannedDay(item.day) ?? ""} disabled={controlsBusy} onChange={event => void onMove(item, event.target.value === "" ? null : Number(event.target.value))} className="field w-full text-sm disabled:opacity-50">
           <option value="">Unplanned</option>

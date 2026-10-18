@@ -265,3 +265,8 @@ Only src/app/globals.css is changed in the existing application source.
 - Styling: src/app/retro-refinements.css and its globals.css import.
 - Presentation markup: Explore hero in src/components/explore.tsx; existing decorative BackgroundArt moves to a page-wide layer in src/app/layout.tsx. No state, handlers, requests or SVG/animation changes.
 - Documentation/evidence: design/refinements/ and PROGRESS.md. Existing protected logic remains unchanged.
+
+## Colorful tickets and explicitly requested whole-card dragging
+- Styling/layout: src/app/colorful-tickets.css, globals.css import, Explore sort-group/label markup.
+- Explicit user-authorized interaction exception: src/components/trip-drag.tsx moves listeners/activation to the card, guards controls, removes the grip and aligns numbering; src/components/trip.tsx adds delayed touch activation and updates instructions. Existing day/drop/keyboard coordinates, API requests and save/remove behavior remain protected and unchanged.
+- Documentation/tests/evidence: design/ticket-update/ and PROGRESS.md. APIs, lib, database, dependencies and original scripts remain unchanged.

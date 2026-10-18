@@ -1,0 +1,71 @@
+/* Teal, orange and blue ticket stock, with ink that stays dark and legible. */
+:is(.explore-page, .trip-page) .place-card {
+  --ticket-paper: #e1eee5;
+  --ticket-band: var(--teal);
+  --ticket-stub: #c2e0d3;
+}
+:is(.explore-page, .trip-page) .place-card:has(:is([data-category="Sights and Tourism"], [data-category="Restaurants and Cafes"], [data-category="Entertainment"])) {
+  --ticket-paper: #fff0dc;
+  --ticket-band: var(--orange);
+  --ticket-stub: #f8d5ab;
+}
+:is(.explore-page, .trip-page) .place-card:has(:is([data-category="Museums and Culture"], [data-category="Accommodation"])) {
+  --ticket-paper: #e4edf3;
+  --ticket-band: var(--navy);
+  --ticket-stub: #d0dee9;
+}
+:is(.explore-page, .trip-page) .place-card:has([data-category="Shopping"]) {
+  --ticket-paper: #faeacc;
+  --ticket-band: var(--orange);
+  --ticket-stub: #f8d5ab;
+}
+.explore-page [aria-label="Search results"] .place-card { background: var(--ticket-paper); }
+.explore-page .place-card > div:first-child { background: var(--ticket-band); border-bottom: 1px solid var(--navy); }
+.explore-page .place-card > div:first-child > svg { color: #102a43; }
+.explore-page .place-card:has([data-category="Accommodation"]) > div:first-child > svg,
+.explore-page .place-card:has([data-category="Museums and Culture"]) > div:first-child > svg { color: var(--card); }
+.explore-page .place-card [data-slot="card-title"] { color: #102a43; font-size: 29px; }
+.explore-page .place-card [data-slot="card-description"] { color: #102a43; font-size: 14px; font-weight: 600; line-height: 1.8; }
+.explore-page .place-card > div:last-child { background: var(--ticket-stub); }
+.explore-page .place-card > div:last-child :is(span, a) { color: #102a43; font-size: 13px; font-weight: bold; }
+
+/* Keep results with Filters, and give Sort By its own right-aligned group. */
+.explore-page [aria-label="Result controls"] > p { order: 1; color: #102a43; font-weight: bold; }
+.explore-page [aria-label="Result controls"] > .sort-control {
+  order: 2;
+  margin-left: auto;
+  flex: 0 1 17rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.explore-page .sort-control > .sort-label { flex-shrink: 0; color: #102a43; font: bold 13px/1.5 var(--font-label); }
+.explore-page .sort-control > #sort { flex: 1; width: auto; min-width: 0; }
+
+.retro-navigation > div > a { font: bold clamp(30px, 3vw, 38px)/1.2 var(--font-body); gap: 10px; color: var(--navy); letter-spacing: -.025em; }
+.retro-navigation > div > a > svg { width: 32px; height: 32px; flex-shrink: 0; }
+
+/* The whole ticket is the activator. Native controls stay independent. */
+.trip-page .place-card {
+  background: var(--ticket-paper);
+  border-left: 6px solid var(--ticket-band);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+.trip-page .place-card:active { cursor: grabbing; }
+.trip-page .place-card[aria-disabled="true"] { cursor: default; }
+.trip-page .place-card > div.trip-place-main { flex: 1 1 18rem; min-width: 0; display: block; }
+.trip-page .place-card > div.trip-place-controls { flex: 0 1 13rem; width: 100%; min-width: min(100%, 13rem); display: flex; flex-direction: column; }
+.trip-page .place-card h3 { display: flex; align-items: baseline; gap: 12px; color: #102a43; font-size: 25px; line-height: 1.35; }
+.trip-page .place-card h3 > a { min-width: 0; }
+.trip-page .place-card .trip-place-number { flex-shrink: 0; color: #102a43; font: bold 20px/1.35 var(--font-label); }
+.trip-page .place-card p { color: #102a43; font-size: 14px; font-weight: 600; }
+.trip-page .place-card :is(select, button, a) { touch-action: auto; }
+.trip-page .place-card a { cursor: grab; }
+.trip-page .place-card :is(select, button) { cursor: pointer; }
+
+.destination-page .destination-layout .destination-card { background: #e1eee5; border-top-color: var(--teal); }
+.destination-page .destination-meta > div { background: #fff0dc; border-color: #946229; }
+.destination-page .destination-address { color: #102a43; font-size: 14px; font-weight: 600; }
+.destination-page .destination-meta dd { color: #102a43; font-weight: 600; }

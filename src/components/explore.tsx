@@ -175,8 +175,8 @@ function RestoredExplore() {
       </div>
       <div aria-label="Result controls" className="mt-5 flex flex-wrap items-center gap-2">
         <button ref={filterTrigger} type="button" aria-expanded={filtersOpen} aria-controls="explore-filters" onClick={() => setFiltersOpen(value => !value)} className="inline-flex min-h-13 shrink-0 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-teal-800"><SlidersHorizontal size={17} aria-hidden="true"/>Filters{filterCount > 0 && <span className="rounded-full bg-teal-50 px-2 py-0.5 text-xs">{filterCount}</span>}<ChevronDown size={17} className={`transition-transform ${filtersOpen ? "rotate-180" : ""}`} aria-hidden="true"/></button>
-        <div className="min-w-0 max-w-full flex-[0_1_11rem]">
-          <label htmlFor="sort" className="sr-only">Sort by</label>
+        <div className="sort-control min-w-0 max-w-full flex-[0_1_11rem]">
+          <label htmlFor="sort" className="sort-label">Sort By</label>
           <select id="sort" className="min-h-13 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-teal-800" value={activeSort} onChange={event => setSort(event.target.value as PlaceSort)}>{options.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select>
         </div>
         <p role="status" className="min-w-0 text-sm text-slate-500">{loading ? "Finding places…" : error ? "Search unavailable" : `${places.length} ${places.length === 1 ? "result" : "results"}`}</p>

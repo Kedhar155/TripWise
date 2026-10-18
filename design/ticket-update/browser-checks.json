@@ -1,0 +1,202 @@
+{
+  "flows": {
+    "addressDrag": "1",
+    "nameDrag": {
+      "day": "",
+      "stillOnTrip": true
+    },
+    "dragAfterRefresh": "",
+    "keyboardDay1": "1",
+    "focusAfterDrag": "drag-22a6b73f-61cc-44fd-a38c-15119c279cd9",
+    "linkClickWorks": true,
+    "cancelledDay": "",
+    "removedAfterRefresh": true,
+    "productionLocationCount": 100,
+    "backRestored": true,
+    "productionDragAfterRefresh": "1",
+    "dragGroupAria": {
+      "pressed": null,
+      "role": "group"
+    },
+    "productionRemovedAfterRefresh": true
+  },
+  "viewports": [
+    {
+      "cards": [
+        {
+          "color": "rgb(225, 238, 229)",
+          "cursor": "grab",
+          "number": "01",
+          "numberTop": 341.1125183105469,
+          "titleTop": 333.9125061035156,
+          "touchAction": "pan-y"
+        },
+        {
+          "color": "rgb(255, 240, 220)",
+          "cursor": "grab",
+          "number": "02",
+          "numberTop": 542.5125122070312,
+          "titleTop": 535.3125,
+          "touchAction": "pan-y"
+        }
+      ],
+      "client": 1265,
+      "page": "My Trip",
+      "scroll": 1265,
+      "width": 1280
+    },
+    {
+      "cards": [
+        {
+          "color": "rgb(225, 238, 229)",
+          "cursor": "grab",
+          "number": "01",
+          "numberTop": 328.88751220703125,
+          "titleTop": 321.6875,
+          "touchAction": "pan-y"
+        },
+        {
+          "color": "rgb(255, 240, 220)",
+          "cursor": "grab",
+          "number": "02",
+          "numberTop": 530.2875366210938,
+          "titleTop": 523.0875244140625,
+          "touchAction": "pan-y"
+        }
+      ],
+      "client": 753,
+      "page": "My Trip",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "cards": [
+        {
+          "color": "rgb(225, 238, 229)",
+          "cursor": "grab",
+          "number": "01",
+          "numberTop": 620.7374877929688,
+          "titleTop": 613.5375366210938,
+          "touchAction": "pan-y"
+        },
+        {
+          "color": "rgb(255, 240, 220)",
+          "cursor": "grab",
+          "number": "02",
+          "numberTop": 969.5375366210938,
+          "titleTop": 962.3375244140624,
+          "touchAction": "pan-y"
+        }
+      ],
+      "client": 375,
+      "page": "My Trip",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "cards": [
+        {
+          "color": "rgb(225, 238, 229)",
+          "cursor": "grab",
+          "number": "01",
+          "numberTop": 675.5250244140625,
+          "titleTop": 668.3250122070312,
+          "touchAction": "pan-y"
+        },
+        {
+          "color": "rgb(255, 240, 220)",
+          "cursor": "grab",
+          "number": "02",
+          "numberTop": 1049.5250244140625,
+          "titleTop": 1042.3250732421875,
+          "touchAction": "pan-y"
+        }
+      ],
+      "client": 305,
+      "page": "My Trip",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "address": {
+        "color": "rgb(16, 42, 67)",
+        "size": "14px",
+        "weight": "600"
+      },
+      "cardColors": [
+        "rgb(228, 237, 243)",
+        "rgb(255, 240, 220)",
+        "rgb(225, 238, 229)"
+      ],
+      "client": 1265,
+      "logoSize": "38px",
+      "page": "Production Explore",
+      "scroll": 1265,
+      "sortLabel": "Sort By",
+      "sortRightGap": -0.00002288818359375,
+      "width": 1280
+    },
+    {
+      "address": {
+        "color": "rgb(16, 42, 67)",
+        "size": "14px",
+        "weight": "600"
+      },
+      "cardColors": [
+        "rgb(228, 237, 243)",
+        "rgb(255, 240, 220)",
+        "rgb(225, 238, 229)"
+      ],
+      "client": 753,
+      "logoSize": "30px",
+      "page": "Production Explore",
+      "scroll": 753,
+      "sortLabel": "Sort By",
+      "sortRightGap": 0,
+      "width": 768
+    },
+    {
+      "address": {
+        "color": "rgb(16, 42, 67)",
+        "size": "14px",
+        "weight": "600"
+      },
+      "cardColors": [
+        "rgb(228, 237, 243)",
+        "rgb(255, 240, 220)",
+        "rgb(225, 238, 229)"
+      ],
+      "client": 375,
+      "logoSize": "30px",
+      "page": "Production Explore",
+      "scroll": 375,
+      "sortLabel": "Sort By",
+      "sortRightGap": 0.0000152587890625,
+      "width": 390
+    },
+    {
+      "address": {
+        "color": "rgb(16, 42, 67)",
+        "size": "14px",
+        "weight": "600"
+      },
+      "cardColors": [
+        "rgb(228, 237, 243)",
+        "rgb(255, 240, 220)",
+        "rgb(225, 238, 229)"
+      ],
+      "client": 305,
+      "logoSize": "30px",
+      "page": "Production Explore",
+      "scroll": 305,
+      "sortLabel": "Sort By",
+      "sortRightGap": 0.0000152587890625,
+      "width": 320
+    }
+  ],
+  "logo": {
+    "centerDifference": 0,
+    "size": "38px"
+  },
+  "console": []
+}

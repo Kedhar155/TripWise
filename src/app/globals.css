@@ -5,6 +5,7 @@
 @import "./destination.css";
 @import "./trip.css";
 @import "./retro-refinements.css";
+@import "./colorful-tickets.css";
 /* Retro airline palette from design/tripwise_retro_airline_template.html.
    Map existing presentation utilities without touching stateful components. */
 @theme {
