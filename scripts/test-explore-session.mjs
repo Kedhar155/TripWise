@@ -23,6 +23,8 @@ const { readExploreSession, saveExploreSession, defaultExploreSession, searchUrl
 let raw = null;
 globalThis.sessionStorage = { getItem: () => raw, setItem: (key, value) => { assert.equal(key, exploreSessionKey); raw = value; } };
 assert.equal(readExploreSession().search, null);
+assert.equal(readExploreSession().within, null);
+assert.ok(!searchUrl({ kind: 'location', value: { country: 'fr', city: 'Paris' } }, 'all', defaultExploreSession().within).includes('within='));
 raw = '{broken'; assert.equal(readExploreSession().mode, 'location');
 const saved = { ...defaultExploreSession(), mode: 'name', nameDraft: 'Eiffel Tower', location: { countryText: 'India', country: 'in', cityText: 'Chennai, Tamil Nadu, India', city: { id: 'city-id', name: 'Chennai', label: 'Chennai, Tamil Nadu, India', country: 'in' } }, selected: ['culture', 'nature'], sort: 'name-desc', within: 10, scrollY: 1678, search: { kind: 'name', name: 'Eiffel Tower' }, results: { query: 'Eiffel Tower', places: [] } };
 // Use actual catalog IDs to exercise validation too.
@@ -36,6 +38,8 @@ saveExploreSession(saved); assert.deepEqual(readExploreSession(), saved);
 cache.delete(resolve('src/lib/explore-session.ts'));
 const fresh = load('src/lib/explore-session.ts');
 assert.deepEqual(fresh.readExploreSession(), saved);
+raw = JSON.stringify({ ...saved, within: 5 });
+assert.equal(fresh.readExploreSession().within, 5);
 raw = JSON.stringify({ ...saved, results: { places: 'broken' } });
 assert.equal(fresh.readExploreSession().results, null);
 assert.deepEqual(fresh.readExploreSession().selected, saved.selected);

@@ -280,3 +280,7 @@ Only src/app/globals.css is changed in the existing application source.
 - Styling/layout only: src/app/colorful-tickets.css applies the specified paper texture, gradient stitched spine, badge/pin presentation, shaded footer, and matching Details with a teal Add action.
 - No component/content/props/handlers/API/data changes. Brown metadata and Back/Add positioning retained. Existing pin remains decorative.
 - Documentation/verification/screenshots: design/textured-airline/ and PROGRESS.md.
+
+## Explicitly requested Any distance default
+- Authorized behavior exception: only the defaultWithin constant in src/lib/place-sorting.ts changes from 5 to null. Existing saved choices, fetching, APIs, database and component handlers stay unchanged.
+- Verification: scripts/test-explore-session.mjs adds fresh-default/omitted-query/saved-5-km assertions; design/any-distance/ holds API report and browser screenshot. PROGRESS.md records results.

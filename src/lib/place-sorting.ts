@@ -12,7 +12,7 @@ export const sortOptions = [
 ] as const;
 export type PlaceSort = typeof sortOptions[number]["value"];
 export const withinOptions = [1, 5, 10, 25] as const;
-export const defaultWithin = 5;
+export const defaultWithin: number | null = null;
 
 export function isPlaceSort(value: string): value is PlaceSort {
   return sortOptions.some(option => option.value === value);
