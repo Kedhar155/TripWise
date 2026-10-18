@@ -249,3 +249,9 @@ Only src/app/globals.css is changed in the existing application source.
 - Explicit Destination presentation-only edits: style classes, decorative Back stub, coordinate display, empty-row markers. Data reads, save logic, state/effects and all handlers remain unchanged.
 - explore.css only shares its category palette selectors with Destination. WeatherBox, API/data/helper source remains protected and unchanged.
 - Documentation/evidence: design/details-step3/ and PROGRESS.md.
+
+## Requested My Trip Step 4 presentation scope
+- Added src/app/trip.css and its globals.css import. Category CSS scope in explore.css also includes My Trip.
+- Explicit looks-only markup: Trip root style class and a span around the existing summary city text. Removing those markers reproduces the previous components exactly.
+- trip-drag.tsx, day/summary helpers, event handlers, API/database code and persistence logic remain protected and unchanged.
+- Documentation/evidence: design/trip-step4/ and PROGRESS.md.

@@ -99,7 +99,7 @@ export function Trip() {
     void move(item, day, true);
   }
 
-  return <section className="py-8 sm:py-12">
+  return <section className="trip-page py-8 sm:py-12">
     <p className="eyebrow">A little planning. A lot to look forward to.</p>
     <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">My Trip</h1>
     <p className="mt-5 mb-8 max-w-xl leading-7 text-slate-600">Your favorite places, all in one place. Saved for this browser, even after a refresh. Clearing browser data starts a new trip.</p>

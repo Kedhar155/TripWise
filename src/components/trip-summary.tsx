@@ -24,7 +24,7 @@ export function TripSummary({ items }: { items: ItineraryItem[] }) {
           {country.country && <h4 className="mb-2 break-words font-semibold text-teal-900">{country.country}</h4>}
           <ul className="space-y-2 text-slate-600">{country.states.map(region => <li key={region.state ?? ""} className="break-words leading-6">
             {region.state && <><span className="font-semibold text-slate-800">{region.state}</span> <span>({region.count} {region.count === 1 ? "place" : "places"})</span>{region.cities.length > 0 && ": "}</>}
-            {region.cities.map(city => `${city.city} (${city.count})`).join(", ")}
+            <span className="trip-city-stamp">{region.cities.map(city => `${city.city} (${city.count})`).join(", ")}</span>
           </li>)}</ul>
         </div>)}
       </div>

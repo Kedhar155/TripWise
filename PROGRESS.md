@@ -777,3 +777,14 @@ Vercel deployment ID: dpl_FdiC4hCYNU6wnujxoqArD4YYBtcz (READY, production).
 - Local fixture: missing hours/phone/website all hidden; long names/addresses wrap; eight-second save disables button/trip link and prevents navigation; Details and saved-status errors both recover with Retry. Fixture APIs do not reach real services.
 - No overflow at 390px (375/375), 320px (305/305) or reset 475px (475/475); viewport reset. Final real warning/error log empty. Secret/whitespace scans PASS. Screenshots and full checks: design/details-step3/README.md.
 - Local preview http://127.0.0.1:3048. No push or deployment.
+
+## Retro redesign - requested Step 4: My Trip (18 October 2026)
+- Added scoped src/app/trip.css: passport summary with stamp-style totals/categories/location chips, navy Courier boarding-pass day headers, dashed dividers, a warm dashed Unplanned panel, compact saved-place tickets, Courier day dropdowns, stamp-red Remove, and matching empty state.
+- Existing category presentation scope now includes My Trip. Remove cream/red contrast 4.75:1. No category matching/icon/data changes.
+- Only Trip root class and one summary city-string span changed in component markup. Exact source comparison after undoing those presentation markers PASS; all original computations, effects, handlers and strings remain unchanged. trip-drag.tsx byte-for-byte unchanged; src/lib and src/app/api have no diff.
+- Lint and production webpack build including TypeScript PASS; normal permissions needed after sandbox EPERM in generated .next trip folder. Summary/drag/itinerary-location isolated suites PASS.
+- All 59 real API checks PASS (search, Details, add/persist, day moves/clearing, isolation and removal); own disposable rows cleaned up. Report design/trip-step4/api-tests.md.
+- Real browser: add Tour Eiffel from Details, summary/location chips; dropdown Unplanned -> Day 1 -> Day 2, refresh confirms Day 2, then back to Day 1. Pointer drag Day 1 -> Day 2 -> Day 1 passed. Phone keyboard drag Day 1 -> Unplanned passed and persisted after refresh. Remove and refresh confirmed empty trip and hidden summary.
+- Original target highlight preserved. Handle 44x44px / touch-action:none; card touch-action:auto. No overflow at desktop 1280px test viewport (1265px document), phone 390px (375/375) or 320px (305/305). Viewport reset afterward.
+- Local fixture verified 7 places / 3 states / 4 cities, 40 long city stamp groups with retained 256px scroll region, and legacy rows hiding absent location sections. Fixture APIs do not contact real services. Final real browser warning/error log empty.
+- Secret/whitespace checks PASS. Evidence/screenshots: design/trip-step4/README.md. Real preview http://127.0.0.1:3050/trip. No push or deployment.

@@ -1,0 +1,135 @@
+/* My Trip presentation only. Drag sensors, drop targets, listeners, touch-action,
+   optimistic updates, persistence and API requests remain untouched. */
+.trip-page { --action-ink: #122b46; }
+.trip-page > h1 { font: 400 clamp(40px, 5vw, 60px)/1.1 var(--font-body); }
+.trip-page > p:not(.eyebrow) { color: #42556c; }
+.trip-page .button, .trip-page .retry {
+  min-height: 48px;
+  border: 1px solid var(--navy);
+  border-radius: 4px;
+  background: var(--orange);
+  color: var(--action-ink);
+  box-shadow: 2px 2px 0 var(--navy);
+  font: bold 13px/1.6 var(--font-label);
+}
+.trip-page .button:disabled { background: var(--paper); color: #42556c; opacity: 1; }
+.trip-page .button:active:not(:disabled), .trip-page .retry:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--navy); }
+
+/* Passport summary: the existing semantic groups become small stamp chips. */
+.trip-page [aria-label="Trip summary"] {
+  border: 1.5px solid var(--navy);
+  border-left: 5px solid var(--teal);
+  border-radius: 5px;
+  background: var(--card) url('/retro/stamp.svg') right 16px top 16px / 64px no-repeat;
+  box-shadow: 2px 2px 0 var(--navy);
+  padding: clamp(18px, 3vw, 28px);
+}
+.trip-page [aria-label="Trip summary"] > h2 { padding-right: 64px; font: 400 28px/1.2 var(--font-body); color: var(--navy); }
+.trip-page [aria-label="Trip summary"] > dl { display: flex; flex-wrap: wrap; gap: 12px; }
+.trip-page [aria-label="Trip summary"] > dl > div {
+  flex: 1 1 7rem;
+  min-width: 0;
+  border: 1px dashed #8d3e28;
+  border-radius: 3px;
+  background: var(--paper);
+  padding: 12px;
+}
+.trip-page [aria-label="Trip summary"] dt { font: bold 11px/1.6 var(--font-label); color: var(--navy); }
+.trip-page [aria-label="Trip summary"] > dl dd { font: 400 30px/1.2 var(--font-body); color: #8d3e28; }
+.trip-page [aria-label="Trip summary"] h3 {
+  border-top: 1px dashed #8b7049;
+  padding-top: 16px;
+  font: bold 11px/1.8 var(--font-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.trip-page [aria-label="Trip summary"] > div > dl { display: flex; flex-wrap: wrap; gap: 8px; }
+.trip-page [aria-label="Trip summary"] > div > dl > div,
+.trip-page [aria-label="Places by location"] h4,
+.trip-page [aria-label="Places by location"] li > span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  max-width: 100%;
+  border: 1px dashed #8d3e28;
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--navy);
+  padding: 5px 8px;
+  font: 12px/1.8 var(--font-label);
+}
+.trip-page [aria-label="Trip summary"] > div > dl dd { font: bold 13px/1.6 var(--font-label); color: #8d3e28; }
+.trip-page [aria-label="Places by location"] { background: transparent; padding: 0 4px 4px 0; border-radius: 3px; }
+.trip-page [aria-label="Places by location"] h4 { background: var(--card); border-style: solid; font-weight: bold; }
+.trip-page [aria-label="Places by location"] li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; font: 12px/1.8 var(--font-label); }
+.trip-page .trip-city-stamp:empty { display: none; }
+.trip-page .category-badge { font: 12px/1.6 var(--font-label); }
+
+/* Whole day sections remain the original drop zones, including empty days. */
+.trip-page section[aria-label] {
+  border: 1.5px solid var(--navy);
+  border-radius: 6px;
+  background: var(--card);
+  padding: 16px;
+}
+.trip-page section[aria-label] > h2 {
+  border-bottom: 1px dashed #c6b58f;
+  border-radius: 4px 4px 0 0;
+  margin: -16px -16px 18px;
+  padding: 14px 16px;
+  background: var(--navy);
+  color: var(--card);
+  font: bold 16px/1.6 var(--font-label);
+  letter-spacing: 0.06em;
+}
+.trip-page section[aria-label="Unplanned"] { border-style: dashed; border-color: #885024; background: var(--paper); }
+.trip-page section[aria-label="Unplanned"] > h2 { background: transparent; color: #79431e; border-bottom-color: #885024; }
+/* Preserve the original conditional target highlight rather than covering it. */
+.trip-page section[aria-label].bg-teal-50 { background: #dceee3; border-color: #17645c; }
+.trip-page section[aria-label] > p { border: 1px dashed #8b7049; border-radius: 4px; background: var(--paper); color: #42556c; font: 12px/1.8 var(--font-label); }
+
+/* Compact saved-place tickets, with the original 44px drag-only handle. */
+.trip-page .place-card {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--navy);
+  border-radius: 5px;
+  background: var(--card);
+  box-shadow: 2px 2px 0 var(--navy);
+  transition: box-shadow 150ms ease;
+}
+.trip-page .place-card > div:first-child { flex: 0 0 44px; display: flex; flex-direction: column; gap: 8px; }
+.trip-page .place-card > div:nth-child(2) { flex: 1 1 10rem; min-width: 0; }
+.trip-page .place-card > div:last-child { flex: 1 1 9rem; width: auto; min-width: 0; border-top: 1px dashed #8b7049; padding-top: 12px; }
+.trip-page .place-card h3 { font: 400 22px/1.3 var(--font-body); }
+.trip-page .place-card p { font: 12px/1.8 var(--font-label); color: #42556c; }
+.trip-page .place-card label { font: bold 11px/1.8 var(--font-label); color: var(--navy); }
+.trip-page .place-card .field { min-height: 48px; border: 1px solid var(--navy); border-radius: 3px; background: var(--card); color: var(--navy); font: 13px/1.6 var(--font-label); }
+.trip-page .place-card button[id] { min-width: 44px; min-height: 44px; border: 1px dashed var(--navy); border-radius: 4px; background: var(--paper); color: var(--navy); }
+.trip-page .place-card button[aria-label^="Remove"] {
+  min-height: 44px;
+  border: 1px solid var(--stamp);
+  border-radius: 3px;
+  background: var(--stamp);
+  color: var(--card);
+  box-shadow: 2px 2px 0 var(--navy);
+  font: bold 12px/1.8 var(--font-label);
+}
+.trip-page .place-card button[aria-label^="Remove"]:disabled { opacity: 1; background: #f8dfd4; color: #86331f; }
+.trip-page .place-card button[aria-label^="Remove"]:active:not(:disabled) { box-shadow: 1px 1px 0 var(--navy); }
+.trip-page .place-card:hover { transform: none; box-shadow: 3px 3px 0 var(--navy); }
+.trip-page [data-slot="card"].pointer-events-none { border: 1.5px solid var(--navy); border-radius: 5px; background: var(--card); box-shadow: 3px 3px 0 var(--navy); }
+.trip-page .skeleton { border-radius: 3px; background: #e5d6b5; }
+
+/* Friendly empty passport, retaining its existing Explore link and text. */
+.trip-page section[aria-label="Unplanned"] > .text-center { border: 1px dashed #885024; border-radius: 5px; background: var(--card); padding: 28px 18px; }
+.trip-page section[aria-label="Unplanned"] > .text-center h3 { font: 400 28px/1.2 var(--font-body); color: var(--navy); }
+.trip-page section[aria-label="Unplanned"] > .text-center p { color: #42556c; line-height: 1.8; }
+@media (prefers-reduced-motion: reduce) {
+  .trip-page .place-card { transition: none; }
+}
