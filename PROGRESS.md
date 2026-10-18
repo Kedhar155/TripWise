@@ -484,3 +484,11 @@ Validation: PASS
 - Evidence: final-browser-checks.json, final-phone.png, final-trip-phone.png, and final-save-wait.png in docs/search-rework/. Updated API_TESTS.md with repeat instructions and report links.
 
 Final local production preview: http://127.0.0.1:3025. No files deleted, no outside-project installs, no merge, no push, and no deployment. All walkthrough test trip items were removed.
+
+## Local merge into main - 18 October 2026
+
+- User authorized merging search-rework locally, building on main, then waiting for an explicit yes before pushing or deploying.
+- Started with a clean working folder. Fast-forward merged search-rework into main at f31e7d7 with no conflicts; all five search-rework commits and the existing checkpoint are included.
+- On main, npm run build -- --webpack completed successfully, including TypeScript and all pages/routes. npm run lint passed.
+- History secret scan passed across all 403 existing Git objects, including reachable and dangling history. Known local secret values, credential patterns, and private environment files were absent; .env.local remains ignored. No values were printed.
+- No push or deployment performed. Waiting for the user's explicit yes. After authorization and deployment, run the full live-site checks and verify GEOAPIFY_API_KEY, SUPABASE_URL, and SUPABASE_SECRET_KEY are still configured in Vercel, showing names/status only and hiding all values.
