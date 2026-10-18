@@ -1,0 +1,9 @@
+PASS in: Chennai, Tamil Nadu, India; 100 places
+PASS fr: Paris, Ile-de-France, France; 100 places
+PASS jp: Tokyo, Japan; 100 places
+PASS Eiffel Tower: 2 matches
+PASS Taj Mahal: 2 matches
+PASS zzzxxyyqqqnonexistentplace: 0 matches
+PASS Eifel Tower: 1 matches
+PASS Central Park: 11 matches
+PASS: 32 HTTP checks; saved route examples and full evidence.

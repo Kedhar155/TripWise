@@ -1,0 +1,1 @@
+PASS: keyboard jumps whole day sections, source-day fallback, reverse navigation, boundary clamps and unrelated keys

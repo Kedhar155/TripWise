@@ -1,0 +1,13 @@
+PASS Chennai / all: 100 places; {"sights":25,"parks":20,"entertainment":5,"accommodation":50}
+PASS Chennai / museums: 16 places; {"museums":16}
+PASS Chennai / museums,parks: 100 places; {"museums":10,"parks":90}
+PASS Paris / sights: 100 places; {"sights":100}
+PASS Paris / restaurants: 100 places; {"restaurants":100}
+PASS Paris / entertainment: 99 places; {"entertainment":99}
+PASS Paris / shopping: 100 places; {"shopping":100}
+PASS Tokyo / shopping: 0 places; {}
+PASS Tokyo / accommodation: 100 places; {"accommodation":100}
+PASS Tokyo / other: 0 places; {}
+PASS Dubai / beaches: 5 places; {"beaches":5}
+PASS Dubai / parks,restaurants: 43 places; {"parks":43}
+PASS Dubai / all: 100 places; {"sights":44,"parks":2,"accommodation":54}

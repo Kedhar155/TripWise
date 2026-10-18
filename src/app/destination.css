@@ -78,7 +78,15 @@
   padding-bottom: 20px;
   color: #42556c;
 }
-.destination-page .destination-aside > a { font: bold 12px/1.8 var(--font-label); color: var(--navy); }
+.destination-page .destination-aside > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  font: bold 12px/1.8 var(--font-label);
+  color: var(--navy);
+}
 .destination-page .button, .destination-page .retry {
   min-height: 48px;
   border: 1px solid var(--navy);

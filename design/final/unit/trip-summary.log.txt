@@ -1,0 +1,2 @@
+PASS: totals, distinct occupied days, Unplanned count, grouped categories, singular/plural labels, shared icons/colors, move/remove recalculation, source immutability, empty-trip hiding, and summary rendering.
+PASS: multi-country/state/city identities, city counts, whitespace/case normalization, legacy/null/partial data, sorted groups, move/remove updates, hidden empty sections and scrollable list

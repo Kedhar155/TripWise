@@ -255,3 +255,8 @@ Only src/app/globals.css is changed in the existing application source.
 - Explicit looks-only markup: Trip root style class and a span around the existing summary city text. Removing those markers reproduces the previous components exactly.
 - trip-drag.tsx, day/summary helpers, event handlers, API/database code and persistence logic remain protected and unchanged.
 - Documentation/evidence: design/trip-step4/ and PROGRESS.md.
+
+## Final verification scope
+- Styling fix: src/app/destination.css enlarges the existing View My Trip link tap area only.
+- Documentation/evidence: design/final/ contains the main diff stat, source/artwork/secret audit, existing-suite runner, API/unit reports, browser measurements and screenshots. PROGRESS.md records the final results.
+- All previously protected runtime logic remains unchanged from main.

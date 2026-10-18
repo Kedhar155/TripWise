@@ -1,0 +1,1 @@
+PASS: all seven orderings, stable ties, source immutability, zero/missing distances, contact-detail scoring, conditional options, grouped counts, strict radius validation/boundaries, cleared radius, and worldwide distance rejection.

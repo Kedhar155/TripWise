@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "suite": "categories",
+      "status": "PASS",
+      "report": "design/final/unit/categories.log.txt"
+    },
+    {
+      "suite": "place-sorting",
+      "status": "PASS",
+      "report": "design/final/unit/place-sorting.log.txt"
+    },
+    {
+      "suite": "search",
+      "status": "PASS",
+      "report": "design/final/unit/search.log.txt"
+    },
+    {
+      "suite": "state-search",
+      "status": "PASS",
+      "report": "design/final/unit/state-search.log.txt"
+    },
+    {
+      "suite": "explore-session",
+      "status": "PASS",
+      "report": "design/final/unit/explore-session.log.txt"
+    },
+    {
+      "suite": "trip-summary",
+      "status": "PASS",
+      "report": "design/final/unit/trip-summary.log.txt"
+    },
+    {
+      "suite": "trip-drag",
+      "status": "PASS",
+      "report": "design/final/unit/trip-drag.log.txt"
+    },
+    {
+      "suite": "itinerary-location",
+      "status": "PASS",
+      "report": "design/final/unit/itinerary-location.log.txt"
+    },
+    {
+      "suite": "weather",
+      "status": "PASS",
+      "report": "design/final/unit/weather.log.txt"
+    },
+    {
+      "suite": "visitor",
+      "status": "PASS",
+      "report": "design/final/unit/visitor.log.txt"
+    },
+    {
+      "suite": "client-errors",
+      "status": "PASS",
+      "report": "design/final/unit/client-errors.log.txt"
+    },
+    {
+      "suite": "errors",
+      "status": "PASS",
+      "report": "design/final/unit/errors.log.txt"
+    }
+  ]
+}

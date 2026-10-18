@@ -1,0 +1,333 @@
+[
+  {
+    "path": "/api/states",
+    "params": {
+      "country": "us",
+      "q": "Illinois"
+    },
+    "status": 200,
+    "count": 1
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973",
+      "category": "museums,parks",
+      "sort": "name"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/cities",
+    "params": {
+      "country": "us",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973",
+      "q": "Springfield"
+    },
+    "status": 200,
+    "count": 1
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "city": "Springfield, Illinois, United States",
+      "cityId": "51e4a08499366956c05941b7973446e64340f00101f90176ed010000000000c0020892030b537072696e676669656c64"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973",
+      "city": "Springfield, Illinois, United States",
+      "cityId": "51e4a08499366956c05941b7973446e64340f00101f90176ed010000000000c0020892030b537072696e676669656c64"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973",
+      "sort": "distance"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973",
+      "within": "5"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "in",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/cities",
+    "params": {
+      "country": "us",
+      "q": "Boston"
+    },
+    "status": 200,
+    "count": 5
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Illinois",
+      "stateId": "5155d57036c25b56c059cee38b51320a4440f00101f901dade010000000000c0020a920308496c6c696e6f6973",
+      "city": "Boston, Massachusetts, United States",
+      "cityId": "51f2cddb7db3c351c0595c5a6842ee2d4540f00101f901b855230000000000c00208920306426f73746f6e"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/states",
+    "params": {
+      "country": "in",
+      "q": "Tamil"
+    },
+    "status": 200,
+    "count": 1
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "in",
+      "state": "Tamil Nadu",
+      "stateId": "51b460980208a75340594e31bdb32caa2640f00101f901897a010000000000c0020a92030a54616d696c204e616475"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "in",
+      "state": "Tamil Nadu",
+      "stateId": "51b460980208a75340594e31bdb32caa2640f00101f901897a010000000000c0020a92030a54616d696c204e616475",
+      "category": "museums,parks",
+      "sort": "name"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/cities",
+    "params": {
+      "country": "in",
+      "state": "Tamil Nadu",
+      "stateId": "51b460980208a75340594e31bdb32caa2640f00101f901897a010000000000c0020a92030a54616d696c204e616475",
+      "q": "Chennai"
+    },
+    "status": 200,
+    "count": 1
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "in",
+      "city": "Chennai, Tamil Nadu, India",
+      "cityId": "51927538ba4a11544059d8bf46edd92a2a40f00101f901d6f31a0000000000c002089203074368656e6e6169"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "in",
+      "state": "Tamil Nadu",
+      "stateId": "51b460980208a75340594e31bdb32caa2640f00101f901897a010000000000c0020a92030a54616d696c204e616475",
+      "city": "Chennai, Tamil Nadu, India",
+      "cityId": "51927538ba4a11544059d8bf46edd92a2a40f00101f901d6f31a0000000000c002089203074368656e6e6169"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "in",
+      "state": "Tamil Nadu",
+      "stateId": "51b460980208a75340594e31bdb32caa2640f00101f901897a010000000000c0020a92030a54616d696c204e616475",
+      "sort": "distance"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "in",
+      "state": "Tamil Nadu",
+      "stateId": "51b460980208a75340594e31bdb32caa2640f00101f901897a010000000000c0020a92030a54616d696c204e616475",
+      "within": "5"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Tamil Nadu",
+      "stateId": "51b460980208a75340594e31bdb32caa2640f00101f901897a010000000000c0020a92030a54616d696c204e616475"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/states",
+    "params": {
+      "country": "de",
+      "q": "Bayern"
+    },
+    "status": 200,
+    "count": 1
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "de",
+      "state": "Bavaria",
+      "stateId": "51528f7e45c8ce2640598324a24e2f794840f00101f901f4bb200000000000c0020a92030742617661726961"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "de",
+      "state": "Bavaria",
+      "stateId": "51528f7e45c8ce2640598324a24e2f794840f00101f901f4bb200000000000c0020a92030742617661726961",
+      "category": "museums,parks",
+      "sort": "name"
+    },
+    "status": 200,
+    "count": 100
+  },
+  {
+    "path": "/api/cities",
+    "params": {
+      "country": "de",
+      "state": "Bavaria",
+      "stateId": "51528f7e45c8ce2640598324a24e2f794840f00101f901f4bb200000000000c0020a92030742617661726961",
+      "q": "Munich"
+    },
+    "status": 200,
+    "count": 3
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "de",
+      "city": "Munich, Bavaria, Germany",
+      "cityId": "51ac66e77e9826274059f9426dc08c114840f00101f901dcf3000000000000c002089203064d756e696368"
+    },
+    "status": 200,
+    "count": 99
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "de",
+      "state": "Bavaria",
+      "stateId": "51528f7e45c8ce2640598324a24e2f794840f00101f901f4bb200000000000c0020a92030742617661726961",
+      "city": "Munich, Bavaria, Germany",
+      "cityId": "51ac66e77e9826274059f9426dc08c114840f00101f901dcf3000000000000c002089203064d756e696368"
+    },
+    "status": 200,
+    "count": 99
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "de",
+      "state": "Bavaria",
+      "stateId": "51528f7e45c8ce2640598324a24e2f794840f00101f901f4bb200000000000c0020a92030742617661726961",
+      "sort": "distance"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "de",
+      "state": "Bavaria",
+      "stateId": "51528f7e45c8ce2640598324a24e2f794840f00101f901f4bb200000000000c0020a92030742617661726961",
+      "within": "5"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us",
+      "state": "Bavaria",
+      "stateId": "51528f7e45c8ce2640598324a24e2f794840f00101f901f4bb200000000000c0020a92030742617661726961"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/places",
+    "params": {
+      "country": "us"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/states",
+    "params": {
+      "country": "xx",
+      "q": "Illinois"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/states",
+    "params": {
+      "country": "us",
+      "q": "Il"
+    },
+    "status": 400
+  },
+  {
+    "path": "/api/states",
+    "params": {
+      "country": "us",
+      "q": "zzzzzzzzzzzz"
+    },
+    "status": 200,
+    "count": 0
+  }
+]

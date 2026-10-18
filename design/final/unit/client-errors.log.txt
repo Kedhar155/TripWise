@@ -1,0 +1,1 @@
+PASS: readable invalid-response/network errors, duplicate status, and timeout with a caller signal.

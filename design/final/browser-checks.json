@@ -1,0 +1,522 @@
+{
+  "viewports": [
+    {
+      "headingUnblocked": true,
+      "page": "Explore empty",
+      "requestedWidth": 768,
+      "scrollWidth": 753,
+      "targets": [
+        {
+          "height": 45.10000228881836,
+          "name": "Explore",
+          "width": 109.8499984741211
+        },
+        {
+          "height": 45.10000228881836,
+          "name": "My Trip",
+          "width": 109.8499984741211
+        },
+        {
+          "height": 48,
+          "name": "search-tab-location",
+          "width": 328.5625
+        },
+        {
+          "height": 48,
+          "name": "search-tab-name",
+          "width": 328.5625
+        },
+        {
+          "height": 52,
+          "name": "country",
+          "width": 324.5625
+        },
+        {
+          "height": 52,
+          "name": "state",
+          "width": 324.5625
+        },
+        {
+          "height": 52,
+          "name": "city",
+          "width": 532.1124877929688
+        },
+        {
+          "height": 49.79999923706055,
+          "name": "Search",
+          "width": 117.01250457763672
+        },
+        {
+          "height": 44,
+          "name": "Paris",
+          "width": 61.61249923706055
+        },
+        {
+          "height": 44,
+          "name": "Tokyo",
+          "width": 61.61249923706055
+        },
+        {
+          "height": 44,
+          "name": "Goa",
+          "width": 47.212501525878906
+        },
+        {
+          "height": 44,
+          "name": "Dubai",
+          "width": 61.61249923706055
+        },
+        {
+          "height": 44,
+          "name": "London",
+          "width": 68.8125
+        },
+        {
+          "height": 52,
+          "name": "Filters1",
+          "width": 157.22500610351562
+        },
+        {
+          "height": 52,
+          "name": "sort",
+          "width": 176
+        }
+      ],
+      "width": 753
+    },
+    {
+      "minCategoryRowHeight": 44,
+      "page": "Explore category menu",
+      "requestedWidth": 390,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "Details",
+      "requestedWidth": 390,
+      "scrollWidth": 375,
+      "targets": [
+        {
+          "height": 44,
+          "name": "✦← Back to Explore",
+          "width": 190.2250061035156
+        }
+      ],
+      "width": 375
+    },
+    {
+      "page": "Details loaded",
+      "requestedWidth": 390,
+      "scrollWidth": 375,
+      "targets": [
+        {
+          "height": 44,
+          "name": "✦← Back to Explore",
+          "width": 190.2250061035156
+        },
+        {
+          "height": 49.60000228881836,
+          "name": "Add to Trip",
+          "width": 293.6000061035156
+        },
+        {
+          "height": 21.600000381469727,
+          "name": "View My Trip →",
+          "width": 293.6000061035156
+        }
+      ],
+      "width": 375
+    },
+    {
+      "page": "Explore results",
+      "requestedWidth": 1024,
+      "scrollWidth": 1009,
+      "width": 1009
+    },
+    {
+      "page": "Details final CSS",
+      "requestedWidth": 1024,
+      "scrollWidth": 1009,
+      "targets": [
+        {
+          "height": 44,
+          "name": "✦← Back to Explore",
+          "width": 190.2250061035156
+        },
+        {
+          "height": 49.60000228881836,
+          "name": "Add to Trip",
+          "width": 251.9125061035156
+        },
+        {
+          "height": 44,
+          "name": "View My Trip →",
+          "width": 251.9125061035156
+        }
+      ],
+      "width": 1009
+    },
+    {
+      "addHeight": 49.60000228881836,
+      "backHeight": 44,
+      "page": "Details final CSS",
+      "requestedWidth": 768,
+      "scrollWidth": 753,
+      "viewTripHeight": 44,
+      "width": 753
+    },
+    {
+      "addHeight": 49.60000228881836,
+      "backHeight": 44,
+      "page": "Details final CSS",
+      "requestedWidth": 390,
+      "scrollWidth": 375,
+      "viewTripHeight": 44,
+      "width": 375
+    },
+    {
+      "addHeight": 49.60000228881836,
+      "backHeight": 44,
+      "page": "Details final CSS",
+      "requestedWidth": 320,
+      "scrollWidth": 305,
+      "viewTripHeight": 44,
+      "width": 305
+    },
+    {
+      "client": 305,
+      "page": "My Trip",
+      "scroll": 305,
+      "targets": [
+        {
+          "h": 49.60000228881836,
+          "name": "Add day",
+          "touch": "auto",
+          "w": 120.2125015258789
+        },
+        {
+          "h": 44,
+          "name": "Move Tour Eiffel",
+          "touch": "none",
+          "w": 44
+        },
+        {
+          "h": 48,
+          "name": "UnplannedDay 1",
+          "touch": "auto",
+          "w": 197.6000061035156
+        },
+        {
+          "h": 47.20000076293945,
+          "name": "Remove Tour Eiffel",
+          "touch": "auto",
+          "w": 197.6000061035156
+        }
+      ],
+      "width": 320
+    },
+    {
+      "client": 1009,
+      "page": "My Trip with day card",
+      "scroll": 1009,
+      "targets": [
+        {
+          "h": 49.60000228881836,
+          "name": "Add day",
+          "w": 120.2125015258789
+        },
+        {
+          "h": 44,
+          "name": "Move Tour Eiffel",
+          "w": 44
+        },
+        {
+          "h": 48,
+          "name": "UnplannedDay 1Day 2",
+          "w": 404.8000183105469
+        },
+        {
+          "h": 47.20000076293945,
+          "name": "Remove Tour Eiffel",
+          "w": 404.8000183105469
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "client": 753,
+      "page": "My Trip with day card",
+      "scroll": 753,
+      "targets": [
+        {
+          "h": 49.60000228881836,
+          "name": "Add day",
+          "w": 120.2125015258789
+        },
+        {
+          "h": 44,
+          "name": "Move Tour Eiffel",
+          "w": 44
+        },
+        {
+          "h": 48,
+          "name": "UnplannedDay 1Day 2",
+          "w": 276.8000183105469
+        },
+        {
+          "h": 47.20000076293945,
+          "name": "Remove Tour Eiffel",
+          "w": 276.8000183105469
+        }
+      ],
+      "width": 768
+    },
+    {
+      "client": 375,
+      "page": "My Trip with day card",
+      "scroll": 375,
+      "targets": [
+        {
+          "h": 49.60000228881836,
+          "name": "Add day",
+          "w": 120.2125015258789
+        },
+        {
+          "h": 44,
+          "name": "Move Tour Eiffel",
+          "w": 44
+        },
+        {
+          "h": 48,
+          "name": "UnplannedDay 1Day 2",
+          "w": 268
+        },
+        {
+          "h": 47.20000076293945,
+          "name": "Remove Tour Eiffel",
+          "w": 268
+        }
+      ],
+      "width": 390
+    },
+    {
+      "client": 305,
+      "page": "My Trip with day card",
+      "scroll": 305,
+      "targets": [
+        {
+          "h": 49.60000228881836,
+          "name": "Add day",
+          "w": 120.2125015258789
+        },
+        {
+          "h": 44,
+          "name": "Move Tour Eiffel",
+          "w": 44
+        },
+        {
+          "h": 48,
+          "name": "UnplannedDay 1Day 2",
+          "w": 197.6000061035156
+        },
+        {
+          "h": 47.20000076293945,
+          "name": "Remove Tour Eiffel",
+          "w": 197.6000061035156
+        }
+      ],
+      "width": 320
+    },
+    {
+      "client": 305,
+      "page": "Final Explore name results",
+      "scroll": 305,
+      "width": 320
+    },
+    {
+      "client": 375,
+      "page": "Final Explore name results",
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "client": 753,
+      "page": "Final Explore name results",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "client": 1009,
+      "page": "Final Explore name results",
+      "scroll": 1009,
+      "width": 1024
+    }
+  ],
+  "flows": {
+    "locationSorts": [
+      {
+        "selected": "Best match",
+        "sameResultSet": true,
+        "count": 100,
+        "first": [
+          "Zone 5 Royapuram",
+          "Zone 5 Royapuram",
+          "People's Park"
+        ]
+      },
+      {
+        "selected": "Nearest first",
+        "sameResultSet": true,
+        "count": 100,
+        "first": [
+          "Zone 5 Royapuram",
+          "Zone 5 Royapuram",
+          "Zone 5 Royapuram"
+        ]
+      },
+      {
+        "selected": "Farthest first",
+        "sameResultSet": true,
+        "count": 100,
+        "first": [
+          "Zone 8 Anna Nagar",
+          "Zone 9 Teynampet",
+          "Tondiarpet"
+        ]
+      },
+      {
+        "selected": "Name A to Z",
+        "sameResultSet": true,
+        "count": 100,
+        "first": [
+          "Alexander Park",
+          "Amma Museum",
+          "Anna Memorial"
+        ]
+      },
+      {
+        "selected": "Name Z to A",
+        "sameResultSet": true,
+        "count": 100,
+        "first": [
+          "Zone 9 Teynampet",
+          "Zone 9 Teynampet",
+          "Zone 9 Teynampet"
+        ]
+      },
+      {
+        "selected": "Category (grouped)",
+        "sameResultSet": true,
+        "count": 100,
+        "first": [
+          "Amma Museum",
+          "Chennai Government Museum",
+          "Dr. Maruthur Gopalan Ramachandran Museum"
+        ]
+      },
+      {
+        "selected": "Most details first",
+        "sameResultSet": true,
+        "count": 100,
+        "first": [
+          "Fort St. George Museum",
+          "Chennai Government Museum",
+          "Zone 5 Royapuram"
+        ]
+      }
+    ],
+    "locationBack": {
+      "fieldsMatch": true,
+      "chipsMatch": true,
+      "orderedResultsMatch": true,
+      "beforeScroll": 1349.5999755859375,
+      "afterScroll": 1349.5999755859375
+    },
+    "locationRefresh": {
+      "fieldsMatch": true,
+      "chipsMatch": true,
+      "orderedResultsMatch": true,
+      "scroll": 1349.5999755859375
+    },
+    "nameBack": {
+      "restoredExactly": true,
+      "results": 2
+    },
+    "nameRefresh": {
+      "restoredExactly": true
+    },
+    "rebuiltLocationSearch": {
+      "results": 100,
+      "note": "Cold Paris search exceeded the 20s browser wait but completed with 100 results; no Retry or code change needed."
+    },
+    "weather": "Weather at your destination\n\n13°C\n\nPartly cloudy · Now\n\nNEXT 3 DAYS\nMon, Oct 19\n\nHigh 13°C\n\nLow 5°C\n\nTue, Oct 20\n\nHigh 14°C\n\nLow 10°C\n\nWed, Oct 21\n\nHigh 15°C\n\nLow 8°C\n\nWeather data by Open-Meteo.com",
+    "add": {
+      "stayedOnDetails": true,
+      "savedButtonDisabled": true
+    },
+    "savedAfterRefresh": true,
+    "day2AfterRefresh": "2",
+    "pointerDay2": "2",
+    "pointerDay1": "1",
+    "keyboardUnplannedAfterRefresh": "",
+    "removeAfterRefresh": {
+      "empty": true,
+      "summaryHidden": true
+    }
+  },
+  "art": {
+    "start": {
+      "allPointerEventsNone": true,
+      "clipped": "hidden",
+      "compass": {
+        "animation": "30s linear infinite compass-rotate",
+        "cx": "84%",
+        "cy": "26%",
+        "transform": "matrix(0.992151, -0.125042, 0.125042, 0.992151, 0, 0)",
+        "width": "250px"
+      },
+      "hidden": "true",
+      "meridians": [
+        {
+          "animation": "15s linear -5s infinite globe-meridian",
+          "opacity": "1",
+          "transform": "matrix(-0.786693, 0, 0, 1, 0, 0)"
+        },
+        {
+          "animation": "15s linear -10s infinite globe-meridian",
+          "opacity": "1",
+          "transform": "matrix(0.134189, 0, 0, 1, 0, 0)"
+        },
+        {
+          "animation": "15s linear infinite globe-meridian",
+          "opacity": "1",
+          "transform": "matrix(0.917999, 0, 0, 1, 0, 0)"
+        }
+      ]
+    },
+    "end": {
+      "compassTransform": "matrix(0.621602, -0.783333, 0.783333, 0.621602, 0, 0)",
+      "meridians": [
+        {
+          "opacity": "0.456027",
+          "transform": "matrix(0.985863, 0, 0, 1, 0, 0)"
+        },
+        {
+          "opacity": "1",
+          "transform": "matrix(-0.594959, 0, 0, 1, 0, 0)"
+        },
+        {
+          "opacity": "1",
+          "transform": "matrix(0.393215, 0, 0, 1, 0, 0)"
+        }
+      ]
+    },
+    "mobile": {
+      "coordsDisplay": "none",
+      "cx": "88%",
+      "cy": "22%",
+      "width": "240px"
+    }
+  },
+  "console": []
+}

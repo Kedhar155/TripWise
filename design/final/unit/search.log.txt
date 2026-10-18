@@ -1,0 +1,1 @@
+PASS: offline countries, minimum input, country restrictions, city-ID preservation, worldwide name matches, categories, deduplication, missing-category enrichment, empty/error handling, private errors, and cache lifetime/isolation/retry.

@@ -1,0 +1,35 @@
+{
+  "base": "http://127.0.0.1:3052",
+  "results": [
+    {
+      "suite": "general",
+      "status": "PASS",
+      "report": "design/final/api/general.md"
+    },
+    {
+      "suite": "state",
+      "status": "PASS",
+      "report": "design/final/api/state.json"
+    },
+    {
+      "suite": "sort",
+      "status": "PASS",
+      "report": "design/final/api/sort.json"
+    },
+    {
+      "suite": "name",
+      "status": "PASS",
+      "report": "design/final/api/name.md"
+    },
+    {
+      "suite": "category",
+      "status": "PASS",
+      "report": "design/final/api/category.json"
+    },
+    {
+      "suite": "location",
+      "status": "PASS",
+      "report": "design/final/api/location.json"
+    }
+  ]
+}

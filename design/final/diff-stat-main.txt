@@ -1,0 +1,98 @@
+ PROGRESS.md                                  |   77 +
+ design/DESIGN-SYSTEM.md                      |   38 +
+ design/FILE-INVENTORY.md                     |  262 ++
+ design/baseline-api-tests.md                 |  911 +++++
+ design/browser-checks.md                     |   18 +
+ design/design-system-api-tests.md            |  911 +++++
+ design/design-system-art.png                 |  Bin 0 -> 95291 bytes
+ design/design-system-styles.png              |  Bin 0 -> 86343 bytes
+ design/details-step3/README.md               |   30 +
+ design/details-step3/add-panel.png           |  Bin 0 -> 29845 bytes
+ design/details-step3/api-tests.md            |  911 +++++
+ design/details-step3/error.png               |  Bin 0 -> 26490 bytes
+ design/details-step3/missing-fields.png      |  Bin 0 -> 37204 bytes
+ design/details-step3/narrow-320.png          |  Bin 0 -> 31996 bytes
+ design/details-step3/phone-details.png       |  Bin 0 -> 35183 bytes
+ design/details-step3/slow-save.png           |  Bin 0 -> 30761 bytes
+ design/details-step3/weather.png             |  Bin 0 -> 35490 bytes
+ design/explore-step2/README.md               |   36 +
+ design/explore-step2/api-tests.md            |  911 +++++
+ design/explore-step2/contrast.json           |   56 +
+ design/explore-step2/empty.png               |  Bin 0 -> 77616 bytes
+ design/explore-step2/error-toast.png         |  Bin 0 -> 89644 bytes
+ design/explore-step2/loading.png             |  Bin 0 -> 75932 bytes
+ design/explore-step2/narrow-320.png          |  Bin 0 -> 37512 bytes
+ design/explore-step2/phone-cards.png         |  Bin 0 -> 43485 bytes
+ design/explore-step2/phone-hero-320.png      |  Bin 0 -> 41000 bytes
+ design/final/README.md                       |   53 +
+ design/final/api/category.json               |  111 +
+ design/final/api/category.log.txt            |   13 +
+ design/final/api/general.log.txt             |    6 +
+ design/final/api/general.md                  |  911 +++++
+ design/final/api/location.json               |  155 +
+ design/final/api/location.log.txt            |    1 +
+ design/final/api/name.log.txt                |    9 +
+ design/final/api/name.md                     | 4740 ++++++++++++++++++++++++++
+ design/final/api/rebuilt-general.md          |  911 +++++
+ design/final/api/sort.json                   |  566 +++
+ design/final/api/sort.log.txt                |   31 +
+ design/final/api/state.json                  |  333 ++
+ design/final/api/state.log.txt               |   14 +
+ design/final/api/summary.json                |   35 +
+ design/final/audit-source.mjs                |   84 +
+ design/final/browser-checks.json             |  522 +++
+ design/final/build.log.txt                   |   38 +
+ design/final/diff-stat-main.txt              |   98 +
+ design/final/lint.log.txt                    |    3 +
+ design/final/phone-explore-results.png       |  Bin 0 -> 43180 bytes
+ design/final/phone-trip-summary.png          |  Bin 0 -> 44938 bytes
+ design/final/run-checks.mjs                  |   30 +
+ design/final/source-audit.json               |   53 +
+ design/final/tablet-details.png              |  Bin 0 -> 70091 bytes
+ design/final/tablet-explore.png              |  Bin 0 -> 93500 bytes
+ design/final/tablet-trip-days.png            |  Bin 0 -> 98742 bytes
+ design/final/unit/categories.log.txt         |    1 +
+ design/final/unit/client-errors.log.txt      |    1 +
+ design/final/unit/errors.log.txt             |    1 +
+ design/final/unit/explore-session.log.txt    |    1 +
+ design/final/unit/itinerary-location.log.txt |    1 +
+ design/final/unit/place-sorting.log.txt      |    1 +
+ design/final/unit/search.log.txt             |    1 +
+ design/final/unit/state-search.log.txt       |    1 +
+ design/final/unit/summary.json               |   64 +
+ design/final/unit/trip-drag.log.txt          |    1 +
+ design/final/unit/trip-summary.log.txt       |    2 +
+ design/final/unit/visitor.log.txt            |    1 +
+ design/final/unit/weather.log.txt            |    1 +
+ design/retro-api-tests.md                    |  911 +++++
+ design/retro-explore.png                     |  Bin 0 -> 39942 bytes
+ design/retro-trip.png                        |  Bin 0 -> 31178 bytes
+ design/trip-step4/README.md                  |   31 +
+ design/trip-step4/api-tests.md               |  911 +++++
+ design/trip-step4/day-ticket.png             |  Bin 0 -> 118769 bytes
+ design/trip-step4/empty.png                  |  Bin 0 -> 115974 bytes
+ design/trip-step4/location-stamps.png        |  Bin 0 -> 37479 bytes
+ design/trip-step4/narrow-ticket.png          |  Bin 0 -> 35544 bytes
+ design/trip-step4/phone-drag.png             |  Bin 0 -> 38750 bytes
+ design/trip-step4/phone-summary.png          |  Bin 0 -> 39908 bytes
+ design/trip-step4/summary.png                |  Bin 0 -> 112058 bytes
+ design/tripwise_retro_airline_template.html  |  259 ++
+ public/retro/compass.svg                     |   16 +
+ public/retro/globe.svg                       |   10 +
+ public/retro/stamp.svg                       |    8 +
+ src/app/background-art.css                   |   80 +
+ src/app/design-system.css                    |  121 +
+ src/app/design-system/page.tsx               |   54 +
+ src/app/destination.css                      |  147 +
+ src/app/explore.css                          |  185 +
+ src/app/globals.css                          |  224 +-
+ src/app/trip.css                             |  135 +
+ src/components/background-art.tsx            |   64 +
+ src/components/category-badge.tsx            |    2 +-
+ src/components/destination.tsx               |    2 +-
+ src/components/explore.tsx                   |    8 +-
+ src/components/footer.tsx                    |    3 +-
+ src/components/navigation.tsx                |    2 +-
+ src/components/trip-summary.tsx              |    2 +-
+ src/components/trip.tsx                      |    2 +-
+ 97 files changed, 16120 insertions(+), 12 deletions(-)
