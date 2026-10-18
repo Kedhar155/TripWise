@@ -582,3 +582,27 @@ Validation: PASS
 - git diff --exit-code confirmed no changes to destination.tsx, the Details page, or client request helpers. Browser evidence: docs/polish/change-3-browser-checks.json.
 
 Change 3 complete. Local preview: http://127.0.0.1:3026. No merge, push, or deployment. Changes 4-7 await separate instructions.
+
+
+## Polish - Change 4 of 7: shared Filters / Sort / count row (18 October 2026)
+
+Completed:
+- Read progress first and continued on polish after 275ea70. Read the installed Next CSS guide before editing.
+- Moved Sort outside the Filters panel into one always-visible row, ordered Filters button, Sort dropdown, result count. The native dropdown displays the selected sort name and keeps its Sort by accessible label.
+- The same row, DOM controls, classes, flex-wrap layout, and 52px control heights serve every screen size. Removed the old desktop/mobile visibility rules for Filters and Done. No viewport-detection logic or mobile-only component was added.
+- Kept the existing search forms in their white panel. Gave the controls row the full content width so it wraps onto two lines at narrow phone widths. The opening Filters panel uses the same wrapping layout everywhere, with categories, applicable distance control, and Done.
+- The Filters count badge now counts only selected categories plus an active location distance. Choosing a sort does not inflate it; with no filters, the badge is hidden. The result count lives beside Sort, with loading/error status when a count is unavailable.
+- Preserved all sort IDs, data-dependent available options, local sorting/grouping, category/distance behavior, active chips, and Clear all. Existing session settings also preserve the independent sort and panel state.
+- Source changes are limited to Explore's presentation and filter-badge count. Shared data/sorting helpers, APIs, Details, and My Trip are unchanged. No dependencies or redesign.
+
+Validation: PASS
+- Final production webpack build (including TypeScript), lint, separate typecheck, existing place-sorting/category/Explore-session tests, whitespace and secret/history checks.
+- Resized the same real Paris results through 1440, 1024, 768, 640, 390, and 320px, with Filters closed and open. No horizontal overflow at any width; exactly one Sort control remained outside Filters; both toolbar controls measured 52px tall. The row stays on one line at larger widths and wraps onto two lines on narrow phones. All controls remain available at every size.
+- Real location UI: all seven applicable sorts remained available. Category (grouped), including the longer label, worked across the resize matrix. Museums + Parks, 10km, Name Z to A returned 99 results with badge 3. Sort worked while Filters was closed, and changing it did not change the badge.
+- Back to Explore, browser Back, and refresh restored France/Paris, both categories, 10km, Name Z to A, the closed panel, the 99-result count, and identical ordered cards.
+- Name search Central Park returned 11 results with only Best match, Name A to Z, Name Z to A, and Category (grouped). Nearest/Farthest and Most details remained hidden when unsupported, and distance controls remained absent. Changing to Name Z to A with no filters left the Filters badge hidden.
+- Full browser trip flow: name search Eiffel Tower > Paris Details > Add > My Trip > move Tour Eiffel to Day 1 > refresh (Day 1 retained) > remove only the disposable item > refresh empty trip. Browser warnings/errors were empty. Restored the temporary viewport override.
+- Existing full real-service API regression: all 59 HTTP checks passed, including search/details/add, persistence, duplicates/visitor isolation, day changes/validation/clearing, and removal. Evidence: docs/polish/change-4-api-tests.md. API/data code did not change.
+- Evidence: docs/polish/change-4-browser-checks.json, change-4-desktop.jpg, and change-4-phone.jpg. git diff --exit-code confirmed shared helpers, APIs, destination.tsx, and trip.tsx are unchanged.
+
+Change 4 complete. Local preview: http://127.0.0.1:3026. No merge, push, or deployment. Changes 5-7 await separate instructions.

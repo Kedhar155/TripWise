@@ -52,7 +52,7 @@ function RestoredExplore() {
   const activeSort = options.some(option => option.value === sort) ? sort : "relevance";
   const places = sortPlaces(currentResults?.places ?? [], activeSort);
   const activeFilters = selected.length > 0 || (locationMode && within !== null) || activeSort !== "relevance";
-  const filterCount = selected.length + (mode === "location" && within !== null ? 1 : 0) + (activeSort !== "relevance" ? 1 : 0);
+  const filterCount = selected.length + (mode === "location" && within !== null ? 1 : 0);
   function switchMode(next: "location" | "name") {
     if (next === mode) return;
     setMode(next); setFiltersOpen(false);
@@ -133,7 +133,8 @@ function RestoredExplore() {
       <h1 id="explore-heading" className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">Plan your next trip</h1>
       <p className="mt-4 max-w-xl text-base leading-7 text-teal-50 sm:text-lg">Find places worth a detour. Save your favorites and make room for discovery.</p>
     </section>
-    <section aria-label="Search tools" className="mt-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+    <section aria-label="Search tools" className="mt-5">
+      <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
       <div role="tablist" aria-label="Search type" className="mb-5 grid grid-cols-2 gap-1 rounded-2xl bg-slate-100 p-1 sm:inline-flex" onKeyDown={event => {
         if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
         event.preventDefault();
@@ -160,17 +161,24 @@ function RestoredExplore() {
         {nameError && <p id="place-name-error" role="alert" className="mt-3 text-sm text-red-700">{nameError}</p>}
       </form>
       </div>
-      <button ref={filterTrigger} type="button" aria-expanded={filtersOpen} aria-controls="explore-filters" onClick={() => setFiltersOpen(value => !value)} className="mt-5 flex min-h-12 w-full items-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-teal-800 md:hidden"><SlidersHorizontal size={17} aria-hidden="true"/>Filters{filterCount > 0 && <span className="rounded-full bg-teal-50 px-2 py-0.5 text-xs">{filterCount}</span>}<ChevronDown size={17} className={`ml-auto transition-transform ${filtersOpen ? "rotate-180" : ""}`} aria-hidden="true"/></button>
-      <div id="explore-filters" className={`${filtersOpen ? "grid" : "hidden"} mt-5 gap-4 border-t border-slate-100 pt-5 md:grid ${mode === "location" ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
-        <CategoryFilter selected={selected} onChange={value => { if (value.join(",") === selected.join(",")) return; if (search) begin(); setSelected(value); }}/>
-        {mode === "location" && <div><label htmlFor="within" className="mb-2 block text-sm font-semibold">Within</label><select id="within" className="field h-13 w-full" value={within ?? "all"} onChange={event => { if (search) begin(); setWithin(event.target.value === "all" ? null : Number(event.target.value)); }}><option value="all">Any distance</option>{withinOptions.map(value => <option key={value} value={value}>{value} km</option>)}</select><p className="mt-2 text-xs text-slate-500">From the city center</p></div>}
-        <div><label htmlFor="sort" className="mb-2 block text-sm font-semibold">Sort by</label><select id="sort" className="field h-13 w-full" value={activeSort} onChange={event => setSort(event.target.value as PlaceSort)}>{options.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select></div>
-        <div className="md:hidden"><button type="button" className="button w-full" onClick={() => { setFiltersOpen(false); filterTrigger.current?.focus(); }}>Done</button></div>
+      </div>
+      <div aria-label="Result controls" className="mt-5 flex flex-wrap items-center gap-2">
+        <button ref={filterTrigger} type="button" aria-expanded={filtersOpen} aria-controls="explore-filters" onClick={() => setFiltersOpen(value => !value)} className="inline-flex min-h-13 shrink-0 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-teal-800"><SlidersHorizontal size={17} aria-hidden="true"/>Filters{filterCount > 0 && <span className="rounded-full bg-teal-50 px-2 py-0.5 text-xs">{filterCount}</span>}<ChevronDown size={17} className={`transition-transform ${filtersOpen ? "rotate-180" : ""}`} aria-hidden="true"/></button>
+        <div className="min-w-0 max-w-full flex-[0_1_11rem]">
+          <label htmlFor="sort" className="sr-only">Sort by</label>
+          <select id="sort" className="min-h-13 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-teal-800" value={activeSort} onChange={event => setSort(event.target.value as PlaceSort)}>{options.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select>
+        </div>
+        <p role="status" className="min-w-0 text-sm text-slate-500">{loading ? "Finding places…" : error ? "Search unavailable" : `${places.length} ${places.length === 1 ? "result" : "results"}`}</p>
+      </div>
+      <div id="explore-filters" className={`${filtersOpen ? "flex" : "hidden"} mt-5 flex-wrap items-start gap-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm`}>
+        <div className="min-w-0 max-w-full flex-[1_1_14rem]"><CategoryFilter selected={selected} onChange={value => { if (value.join(",") === selected.join(",")) return; if (search) begin(); setSelected(value); }}/></div>
+        {mode === "location" && <div className="min-w-0 max-w-full flex-[1_1_14rem]"><label htmlFor="within" className="mb-2 block text-sm font-semibold">Within</label><select id="within" className="field h-13 w-full" value={within ?? "all"} onChange={event => { if (search) begin(); setWithin(event.target.value === "all" ? null : Number(event.target.value)); }}><option value="all">Any distance</option>{withinOptions.map(value => <option key={value} value={value}>{value} km</option>)}</select><p className="mt-2 text-xs text-slate-500">From the city center</p></div>}
+        <button type="button" className="button min-h-13" onClick={() => { setFiltersOpen(false); filterTrigger.current?.focus(); }}>Done</button>
       </div>
     </section>
     <section aria-label="Search results" aria-busy={loading} className="mt-8">
       {currentResults && !loading && !error && <div className="mb-4"><p className="eyebrow">Explore your way</p><h2 className="mt-2 break-words text-2xl font-semibold">{currentResults.city?.name ?? `Places matching “${currentResults.query}”`}</h2>
-        <p role="status" className="mt-2 text-sm text-slate-500">{places.length} {places.length === 1 ? "result" : "results"} · {currentResults.city ? `Up to 100 results · ${within === null ? "Distances" : `Within ${within} km`} from city center` : "Up to 20 worldwide matches"}</p>
+        <p className="mt-2 text-sm text-slate-500">{currentResults.city ? `Up to 100 results · ${within === null ? "Distances" : `Within ${within} km`} from city center` : "Up to 20 worldwide matches"}</p>
       </div>}
       {activeFilters && search && <div role="group" aria-label="Active filters" className="mb-6 flex flex-wrap items-center gap-2">
         {selected.map(key => { const Icon = categories[key].icon; return <button type="button" key={key} aria-label={`Remove ${categories[key].label} filter`} className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full bg-teal-50 px-3 py-2 text-xs font-medium text-teal-900" onClick={() => { if (search) begin(); setSelected(value => value.filter(item => item !== key)); }}><Icon size={14} className="shrink-0" aria-hidden="true"/>{categories[key].label}<X size={14} className="shrink-0" aria-hidden="true"/></button>; })}

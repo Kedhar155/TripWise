@@ -1,0 +1,265 @@
+{
+  "preview": "http://127.0.0.1:3026",
+  "closedPanelResize": [
+    {
+      "clientWidth": 1425,
+      "controls": [
+        {
+          "height": 52,
+          "text": "Filters1",
+          "top": 458.9750061035156,
+          "width": 148.3000030517578
+        },
+        {
+          "height": 52,
+          "text": "Category (grouped)",
+          "top": 458.9750061035156,
+          "width": 176
+        },
+        {
+          "height": 20,
+          "text": "100 results",
+          "top": 474.9750061035156,
+          "width": 68.48750305175781
+        }
+      ],
+      "scrollWidth": 1425,
+      "sortInsideFilters": false,
+      "sortInstances": 1,
+      "width": 1440
+    },
+    {
+      "clientWidth": 1009,
+      "controls": [
+        {
+          "height": 52,
+          "text": "Filters1",
+          "top": 458.9750061035156,
+          "width": 148.3000030517578
+        },
+        {
+          "height": 52,
+          "text": "Category (grouped)",
+          "top": 458.9750061035156,
+          "width": 176
+        },
+        {
+          "height": 20,
+          "text": "100 results",
+          "top": 474.9750061035156,
+          "width": 68.48750305175781
+        }
+      ],
+      "scrollWidth": 1009,
+      "sortInsideFilters": false,
+      "sortInstances": 1,
+      "width": 1024
+    },
+    {
+      "clientWidth": 753,
+      "controls": [
+        {
+          "height": 52,
+          "text": "Filters1",
+          "top": 458.9750061035156,
+          "width": 148.3000030517578
+        },
+        {
+          "height": 52,
+          "text": "Category (grouped)",
+          "top": 458.9750061035156,
+          "width": 176
+        },
+        {
+          "height": 20,
+          "text": "100 results",
+          "top": 474.9750061035156,
+          "width": 68.48750305175781
+        }
+      ],
+      "scrollWidth": 753,
+      "sortInsideFilters": false,
+      "sortInstances": 1,
+      "width": 768
+    },
+    {
+      "clientWidth": 625,
+      "controls": [
+        {
+          "height": 52,
+          "text": "Filters1",
+          "top": 646.9625244140625,
+          "width": 148.3000030517578
+        },
+        {
+          "height": 52,
+          "text": "Category (grouped)",
+          "top": 646.9625244140625,
+          "width": 176
+        },
+        {
+          "height": 20,
+          "text": "100 results",
+          "top": 662.9625244140625,
+          "width": 68.48750305175781
+        }
+      ],
+      "scrollWidth": 625,
+      "sortInsideFilters": false,
+      "sortInstances": 1,
+      "width": 640
+    },
+    {
+      "clientWidth": 375,
+      "controls": [
+        {
+          "height": 52,
+          "text": "Filters1",
+          "top": 669.9625244140625,
+          "width": 148.3000030517578
+        },
+        {
+          "height": 52,
+          "text": "Category (grouped)",
+          "top": 669.9625244140625,
+          "width": 176
+        },
+        {
+          "height": 20,
+          "text": "100 results",
+          "top": 729.9625244140625,
+          "width": 68.48750305175781
+        }
+      ],
+      "scrollWidth": 375,
+      "sortInsideFilters": false,
+      "sortInstances": 1,
+      "width": 390
+    },
+    {
+      "clientWidth": 305,
+      "controls": [
+        {
+          "height": 52,
+          "text": "Filters1",
+          "top": 697.9500122070312,
+          "width": 148.3000030517578
+        },
+        {
+          "height": 52,
+          "text": "Category (grouped)",
+          "top": 757.9500122070312,
+          "width": 176
+        },
+        {
+          "height": 20,
+          "text": "100 results",
+          "top": 773.9500122070312,
+          "width": 68.48750305175781
+        }
+      ],
+      "scrollWidth": 305,
+      "sortInsideFilters": false,
+      "sortInstances": 1,
+      "width": 320
+    }
+  ],
+  "openPanelResize": [
+    {
+      "categoryVisible": 398.1000061035156,
+      "clientWidth": 1425,
+      "panelSorts": 0,
+      "scrollWidth": 1425,
+      "sortVisible": 52,
+      "width": 1440
+    },
+    {
+      "categoryVisible": 326.5,
+      "clientWidth": 1009,
+      "panelSorts": 0,
+      "scrollWidth": 1009,
+      "sortVisible": 52,
+      "width": 1024
+    },
+    {
+      "categoryVisible": 198.5,
+      "clientWidth": 753,
+      "panelSorts": 0,
+      "scrollWidth": 753,
+      "sortVisible": 52,
+      "width": 768
+    },
+    {
+      "categoryVisible": 180,
+      "clientWidth": 625,
+      "panelSorts": 0,
+      "scrollWidth": 625,
+      "sortVisible": 52,
+      "width": 640
+    },
+    {
+      "categoryVisible": 210,
+      "clientWidth": 375,
+      "panelSorts": 0,
+      "scrollWidth": 375,
+      "sortVisible": 52,
+      "width": 390
+    },
+    {
+      "categoryVisible": 139.60000610351562,
+      "clientWidth": 305,
+      "panelSorts": 0,
+      "scrollWidth": 305,
+      "sortVisible": 52,
+      "width": 320
+    }
+  ],
+  "controlOrder": [
+    "Filters",
+    "Sort",
+    "Result count"
+  ],
+  "controlHeights": 52,
+  "sortInstances": 1,
+  "sortInsideFilters": false,
+  "filterBadgeExcludesSort": true,
+  "restoredSettings": {
+    "country": "France",
+    "city": "Paris",
+    "sort": "Name Z to A",
+    "within": "10",
+    "filterButton": "Filters3",
+    "panel": "none",
+    "count": "99 results"
+  },
+  "backToExploreSameOrderedCards": true,
+  "browserBackSameOrderedCards": true,
+  "refreshRestoredSort": true,
+  "nameSearch": {
+    "query": "Central Park",
+    "count": 11,
+    "options": [
+      "Best match",
+      "Name A to Z",
+      "Name Z to A",
+      "Category (grouped)"
+    ],
+    "hiddenDistanceControl": true,
+    "sortAloneHasNoFilterBadge": true
+  },
+  "tripFlow": {
+    "place": "Tour Eiffel",
+    "details": true,
+    "add": true,
+    "day1": true,
+    "refreshDay1": true,
+    "removeOwnTestItem": true,
+    "refreshEmptyTrip": true
+  },
+  "consoleWarningsErrors": [],
+  "viewportReset": true,
+  "screenshots": [
+    "change-4-desktop.jpg",
+    "change-4-phone.jpg"
+  ]
+}
